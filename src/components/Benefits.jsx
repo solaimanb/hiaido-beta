@@ -4,17 +4,17 @@ import Section from "./Section";
 import azure from "../assets/images/azure.png";
 import gcp from "../assets/images/gcp.png";
 import "../index.css";
-import email from "../assets/images/email.png";
-import phone from "../assets/images/phone.png";
-import admin from "../assets/images/admin.png";
-import place from "../assets/images/place.png";
+// import email from "../assets/images/email.png";
+// import phone from "../assets/images/phone.png";
+// import admin from "../assets/images/admin.png";
+// import place from "../assets/images/place.png";
+
 const Benefits = () => {
   return (
     <Section id="features">
-      <div className="z-2 container relative">
+      <div className="z-2 md:mt-40 container relative mt-20">
         <div className="flex flex-col flex-wrap items-center justify-center gap-4 mb-8 font-bold">
-          <p className="font-Bungee md:text-3xl lg:text-5xl w-auto text-center">
-            {" "}
+          <p className="md:text-3xl lg:text-5xl w-auto text-center text-orange-400">
             Build Faster, Build Better, Build With AI
           </p>
           <p className=" type2 lg:text-3xl text-center">
@@ -22,23 +22,25 @@ const Benefits = () => {
             automate anything, almost, literally...
           </p>
         </div>
+
         <Heading
           className="md:max-w-md lg:max-w-2xl p-8 text-center"
           title="Our Cloud Partners"
         />
 
         <div className="flex flex-wrap items-center justify-center gap-10 mb-10">
-          <div className=" w-32">
+          <div className="group rounded-xl border-orange-400/40 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
             <img src={aws} alt="aws" />
           </div>
-          <div className=" w-32">
+          <div className="group rounded-xl border-orange-400/40 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
             <img src={azure} alt="azure" />
           </div>
-          <div className=" w-32">
+          <div className="group rounded-xl border-orange-400/40 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
             <img src={gcp} alt="gcp" />
           </div>
         </div>
-        <div className="isolate bg-n-8 relative h-auto">
+
+        {/* <div className="isolate bg-n-8 relative h-auto">
           <div className="max-w-7xl lg:grid-cols-2 grid grid-cols-1 mx-auto mt-16">
             <div className="bg-n-8 sm:pt-32 lg:static lg:px-8 lg:py-32 relative px-6 pt-24 pb-20">
               <div className="lg:mx-0 lg:max-w-lg max-w-xl mx-auto">
@@ -213,7 +215,7 @@ const Benefits = () => {
               </div>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
     </Section>
   );

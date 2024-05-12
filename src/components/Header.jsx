@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { NavLink } from "react-router-dom";
 
@@ -49,66 +49,124 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollTop]);
 
+  // Random Hover Text:
+  const letters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const [activeLink, setActiveLink] = useState(null);
+  const [displayTexts, setDisplayTexts] = useState(Array(3).fill(""));
+  const [interValIds, setIntervalIds] = useState(Array(3).fill(null));
+
+  const onMouseEnter = (e, index) => {
+    let iteration = 0;
+
+    clearInterval(interValIds[index]);
+
+    const newIntervalId = setInterval(() => {
+      const newText = e.target.dataset.value
+        .split("")
+        .map((letter, idx) => {
+          if (idx < iteration) {
+            return e.target.dataset.value[idx];
+          }
+
+          return letters[Math.floor(Math.random() * 26)];
+        })
+        .join("");
+
+      setDisplayTexts((prev) => {
+        const newTexts = [...prev];
+        newTexts[index] = newText;
+        return newTexts;
+      });
+
+      if (iteration >= e.target.dataset.value.length) {
+        clearInterval(newIntervalId);
+      }
+
+      iteration += 1 / 3;
+    }, 30);
+
+    setIntervalIds((prev) => {
+      const newIds = [...prev];
+      newIds[index] = newIntervalId;
+      return newIds;
+    });
+  };
+
+  const onMouseLeave = (index) => {
+    clearInterval(interValIds[index]);
+
+    setDisplayTexts((prev) => {
+      const newTexts = [...prev];
+      newTexts[index] = "";
+      return newTexts;
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      interValIds.forEach((id) => clearInterval(id));
+    };
+  }, [interValIds]);
+
+  const handleLinkClick = (index) => {
+    setActiveLink(index);
+  };
+
+  const navItems = [
+    { name: "Hiring" },
+    { name: "Contact Us" },
+    { name: "Pricing" },
+  ];
+
   return (
     <div
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md ${
         navBarVisible ? "" : "-translate-y-full "
       }`}
     >
-      <div className="flex items-center justify-between">
-        <div className="flex  md:gap-4 items-center mt-4 mb-2 px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-          <NavLink className="block w-[12rem] xl:mr-8" to="/">
-            <img src={hiaido} alt="hiaido" />
-          </NavLink>
+      <div className="flex justify-between md:gap-4 items-center mt-4 mb-2 px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
+        <NavLink className="xl:mr-8 w-fit block" to="/">
+          <img src={hiaido} alt="hiaido" className="md:w-32 w-24" />
+        </NavLink>
 
-          <nav
-            className={`${
-              openNavigation ? "flex" : "hidden"
-            } fixed top-[7rem] left-0 right-0 bottom-0  lg:static lg:flex  lg:bg-transparent`}
-          >
-            <div className="z-2 lg:flex-row relative flex flex-col items-center justify-center m-auto">
-              {navigation.map((item) => (
-                <NavLink
-                  key={item.id}
-                  href={item.url}
-                  onClick={handleClick}
-                  className={`block relative font-code text-2xl  text-n-1 transition-colors hover:text-color-1 ${
-                    item.onlyMobile ? "lg:hidden" : ""
-                  } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semibold ${
-                    item.url === pathname.hash
-                      ? "z-2 lg:text-n-1"
-                      : "lg:text-n-1/50"
-                  } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
-                >
-                  {item.title}
-                </NavLink>
-              ))}
+        {/* <div className="gap-x-4 flex">
+          {linkTexts.map((linkText, index) => (
+            <div
+              key={index}
+              style={{ fontFamily: "monospace" }}
+              onMouseEnter={() => onMouseEnter(index, linkText)}
+              onMouseLeave={() => onMouseLeave(index)}
+            >
+              {hoverTexts[index] || linkText}
             </div>
+          ))}
+        </div> */}
 
-            <HamburgerMenu />
-          </nav>
+        <nav className="lg:block hidden">
+          <ul className="gap-x-10 flex">
+            {navItems.map((item, index) => (
+              <li
+                key={index}
+                className="w-32 font-semibold text-center text-orange-400"
+              >
+                <Link
+                  to={`/${item?.name?.toLowerCase()}`}
+                  className={`link uppercase ${
+                    activeLink === index ? "active" : ""
+                  }`}
+                  onClick={() => handleLinkClick(index)}
+                  data-value={item?.name}
+                  onMouseOver={(e) => onMouseEnter(e, index)}
+                  onMouseOut={() => onMouseLeave(index)}
+                >
+                  {` ${displayTexts[index] || item?.name}`}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          {/* <NavLink
-            to="/hiring"
-            className=" fon text-n-1/50 hover:text-n-1 lg:block hidden mr-8 transition-colors"
-          >
-            Hiring
-          </NavLink>
-          <NavLink
-            to="/contact-us"
-            className=" text-n-1/50 hover:text-n-1 lg:block hidden mr-8 transition-colors"
-          >
-            Contact Us
-          </NavLink>
-          <NavLink
-            to="/Pricing"
-            className=" text-n-1/50 hover:text-n-1 lg:block hidden mr-8 transition-colors"
-          >
-            Pricing
-          </NavLink> */}
-        </div>
-
-        <div className="flex items-center justify-center gap-8 px-5">
+        <div className=" flex items-center justify-center gap-8 px-5">
           <Button className="lg:flex hidden" href="/login">
             Sign In
           </Button>
@@ -122,6 +180,34 @@ const Header = () => {
           </Button>
         </div>
       </div>
+
+      {/* Small Screen Toggle Nav */}
+      <nav
+        className={`${
+          openNavigation ? "flex" : "hidden"
+        } fixed top-[7rem] left-0 right-0 bottom-0  lg:static lg:flex  lg:bg-transparent`}
+      >
+        <div className="z-2 lg:flex-row relative flex flex-col items-center justify-center m-auto">
+          {navigation.map((item) => (
+            <NavLink
+              key={item.id}
+              href={item.url}
+              onClick={handleClick}
+              className={`block relative font-code text-2xl  text-n-1 transition-colors hover:text-color-1 ${
+                item.onlyMobile ? "lg:hidden" : ""
+              } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semibold ${
+                item.url === pathname.hash
+                  ? "z-2 lg:text-n-1"
+                  : "lg:text-n-1/50"
+              } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
+            >
+              {item.title}
+            </NavLink>
+          ))}
+        </div>
+
+        <HamburgerMenu />
+      </nav>
     </div>
   );
 };

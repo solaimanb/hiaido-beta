@@ -1,22 +1,16 @@
-import { curve, heroBackground, robot } from "../assets";
+import { curve, hiaido } from "../assets";
 import Section from "./Section";
 import "react-toastify/dist/ReactToastify.css";
-import { Suspense, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  OrbitControls,
-  PointMaterial,
-  Points,
-  // Preload,
-} from "@react-three/drei";
+import { PointMaterial, Points } from "@react-three/drei";
 import "../index.css";
 import * as random from "maath/random/dist/maath-random.esm";
+import { motion } from "framer-motion";
 
 function Stars(props) {
   const ref = useRef();
-  // const [sphere] = useState(() =>
-  //   random.inSphere(new Float32Array(5000), { radius: 1.5 })
-  // );
+
   const [sphere] = useState(() => {
     const positions = random.inSphere(new Float32Array(5000), { radius: 1.5 });
     const validPositions = Array.from(positions).filter((pos) => !isNaN(pos));
@@ -29,8 +23,6 @@ function Stars(props) {
   });
 
   return (
-    // <group rotation={[0, 0, Math.PI / 4]}>
-
     <Points
       ref={ref}
       positions={sphere}
@@ -46,7 +38,6 @@ function Stars(props) {
         depthWrite={false}
       />
     </Points>
-    // </group>
   );
 }
 
@@ -140,9 +131,24 @@ const Hero = () => {
         </form>
       </div> */}
 
-      <div className="flex flex-col items-center justify-center min-h-screen text-center">
+      <div className="flex flex-col items-center justify-center h-[80vh] md:min-h-screen text-center">
         <h1 className="text-[12vw] md:text-[10vw] text-center">
-          <span className="inline-block font-bold text-orange-500">HIAIDO</span>
+          <span className="text-[#e75a27] inline-block font-bold">
+            <motion.h1
+              initial={{ scale: 2 }}
+              animate={{ scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 90,
+                damping: 10,
+                duration: 1,
+                ease: "easeInOut",
+              }}
+              className="flex items-center"
+            >
+              HIAIDO
+            </motion.h1>
+          </span>
         </h1>
 
         <p className="lg:mt-20 lg:text-2xl text-white/80 mt-10 text-xl font-bold">

@@ -1,4 +1,4 @@
-import background from '../../assets/background.png';
+import background from "../../assets/background.png";
 
 export const Rings = () => {
   return (
@@ -30,8 +30,8 @@ export const BackgroundCircles = () => {
 
 export const HamburgerMenu = () => {
   return (
-    <div className="absolute inset-0 pointer-events-none lg:hidden">
-      <div className="absolute inset-0 ">
+    <div className="lg:hidden absolute inset-0 pointer-events-none">
+      <div className=" absolute inset-0">
         <img
           className="w-full bg-[#1] h-full object-cover"
           src={background}
