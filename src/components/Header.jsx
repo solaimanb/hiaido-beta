@@ -171,13 +171,13 @@ const Header = () => {
             Sign In
           </Button>
 
-          <Button
+          <button
             className="lg:hidden ml-auto"
-            px="px-3"
+            // px="px-3"
             onClick={toggleNavigation}
           >
             <MenuSvg openNavigation={openNavigation} />
-          </Button>
+          </button>
         </div>
       </div>
 
