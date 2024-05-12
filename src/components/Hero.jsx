@@ -1,77 +1,83 @@
 import { curve, heroBackground, robot } from "../assets";
-import Button from "./Button";
 import Section from "./Section";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Suspense, useRef, useState } from "react";
-import * as random from "maath/random/dist/maath-random.esm";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Points, Preload, Stars } from "@react-three/drei";
-// import { Points, PointsMaterial } from "three";
+import {
+  OrbitControls,
+  PointMaterial,
+  Points,
+  // Preload,
+} from "@react-three/drei";
 import "../index.css";
+import * as random from "maath/random/dist/maath-random.esm";
 
-const Hero = () => {
-  const parallaxRef = useRef(null);
-
-  const [data, setData] = useState({
-    request_email: "",
+function Stars(props) {
+  const ref = useRef();
+  // const [sphere] = useState(() =>
+  //   random.inSphere(new Float32Array(5000), { radius: 1.5 })
+  // );
+  const [sphere] = useState(() => {
+    const positions = random.inSphere(new Float32Array(5000), { radius: 1.5 });
+    const validPositions = Array.from(positions).filter((pos) => !isNaN(pos));
+    return new Float32Array(validPositions);
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+  useFrame((state, delta) => {
+    ref.current.rotation.x -= delta / 10;
+    ref.current.rotation.y -= delta / 15;
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Do something with the form data, for example, send it to a server
-    console.log(data);
-    // Reset form fields
-    setData({
-      data,
-    });
-  };
+  return (
+    // <group rotation={[0, 0, Math.PI / 4]}>
 
-  const refreshPage = () => {
-    toast("Details submitted Successfully");
-    window.location.href = "/";
-  };
+    <Points
+      ref={ref}
+      positions={sphere}
+      stride={3}
+      frustumCulled={false}
+      {...props}
+    >
+      <PointMaterial
+        transparent
+        color="#E17225"
+        size={0.003}
+        sizeAttenuation={true}
+        depthWrite={false}
+      />
+    </Points>
+    // </group>
+  );
+}
 
-  // Star Canvas:
-  // const Stars = (props) => {
-  //   const starRef = useRef(null);
-  //   const [sphere] = useState(() =>
-  //     random.inSphere(new Float32Array(5000), { radius: 0.5 })
-  //   );
+const Hero = () => {
+  // const parallaxRef = useRef(null);
 
-  //   useFrame((state, delta) => {
-  //     starRef.current.rotation.x -= delta / 10;
-  //     starRef.current.rotation.y -= delta / 10;
+  // const [data, setData] = useState({
+  //   request_email: "",
+  // });
+
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setData({
+  //     ...data,
+  //     [name]: value,
   //   });
+  // };
 
-  //   return (
-  //     // <group rotation={[0, 0, Math.PI / 4]}>
-  //     <group>
-  //       <Points
-  //         ref={starRef}
-  //         position={sphere}
-  //         stride={3}
-  //         frustumCulled
-  //         {...props}
-  //       >
-  //         <PointsMaterial
-  //           transparent
-  //           color="#dff3e5"
-  //           size={0.002}
-  //           sizeAttenaution={true}
-  //           depthWrite={false}
-  //         />
-  //       </Points>
-  //     </group>
-  //   );
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   // Do something with the form data, for example, send it to a server
+  //   console.log(data);
+  //   // Reset form fields
+  //   setData({
+  //     data,
+  //   });
+  // };
+
+  // const refreshPage = () => {
+  //   toast("Details submitted Successfully");
+  //   window.location.href = "/";
   // };
 
   return (
@@ -82,7 +88,7 @@ const Hero = () => {
       customPaddings
       id="hero"
     >
-      <div className="container relative" ref={parallaxRef}>
+      {/* <div className="container relative" ref={parallaxRef}>
         <div className="relative z-1 max-w-[55rem] mx-auto text-center">
           <h1 className="h1 mt-[4.5rem] mb-6">
             The Next Generation &nbsp;&nbsp;
@@ -132,9 +138,38 @@ const Hero = () => {
             </div>
           </div>
         </form>
+      </div> */}
+
+      <div className="flex flex-col items-center justify-center min-h-screen text-center">
+        <h1 className="text-[12vw] md:text-[10vw] text-center">
+          <span className="inline-block font-bold text-orange-500">HIAIDO</span>
+        </h1>
+
+        <p className="lg:mt-20 lg:text-2xl text-white/80 mt-10 text-xl font-bold">
+          The Next Generation &nbsp;&nbsp;
+          <span className="relative inline-block">
+            AI Powered
+            <img
+              src={curve}
+              className="top-full absolute left-0 w-full"
+              width={624}
+              height={28}
+              alt="Curve"
+            />
+          </span>
+          <br className="xl:hidden" />{" "}
+          <span className=" relative inline-block mt-2">
+            Cloud Automation Platform
+          </span>
+        </p>
       </div>
+
+      {/* Star Canvas */}
       <div className="absolute inset-0 w-full h-auto">
-        <Canvas className="canvas-container min-h-screen opacity-25">
+        <Canvas
+          camera={{ position: [0, 0, 1] }}
+          className="canvas-container min-h-screen opacity-75"
+        >
           <mesh>
             <OrbitControls />
             <Stars />
