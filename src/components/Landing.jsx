@@ -6,6 +6,7 @@ import Hero from "./Hero";
 // import FeaturedSlide from "./FeaturedSlide";
 import FeaturedHighlight from "./FeaturedHighlight";
 import HighlightStory from "./HighlightStory";
+// import FeatSlider from "./FeatSlider";
 
 const Landing = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const Landing = () => {
     <div className="bg-black/90 pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden min-h-screen">
       <Header />
       <Hero />
+      {/* <FeatSlider /> */}
       {/* <FeaturedSlide /> */}
       <FeaturedHighlight />
       <HighlightStory />

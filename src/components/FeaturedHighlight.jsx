@@ -5,7 +5,9 @@ import "../index.css";
 const FeaturedHighlight = () => {
   return (
     <div className="">
+      <div className=""></div>
       <HorizontalScrollCarousel />
+      <div className=""></div>
     </div>
   );
 };

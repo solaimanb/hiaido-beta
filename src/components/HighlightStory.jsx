@@ -5,14 +5,14 @@ import Hiaido from "../assets/hiaido-logo.png";
 const HighlightStory = () => {
   return (
     <div className="hs bg-black/90 flex items-center justify-center min-h-screen">
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center w-full">
         <img src={Hiaido} alt="hiaido-logo" className="w-[10vw] mb-4 -ml-4" />
         <div
           style={{
             backgroundImage: `url(${gridline})`,
             backgroundRepeat: "repeat",
           }}
-          className="bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/20 to-black border-orange-400/20 container relative p-20 mx-auto text-center border"
+          className="bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/20 to-black border-orange-400/20 container relative w-full p-20 mx-auto text-center border"
         >
           <p className="body-1 font max-w-4xl mx-auto font-mono text-2xl font-semibold">
             HIAIDO is a powerful AI platform designed to revolutionize your
