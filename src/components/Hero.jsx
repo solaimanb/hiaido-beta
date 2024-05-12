@@ -167,11 +167,11 @@ const Hero = () => {
       {/* Star Canvas */}
       <div className="absolute inset-0 w-full h-auto">
         <Canvas
+          events={false}
           camera={{ position: [0, 0, 1] }}
           className="canvas-container min-h-screen opacity-75"
         >
           <mesh>
-            <OrbitControls />
             <Stars />
           </mesh>
         </Canvas>
