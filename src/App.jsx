@@ -1,5 +1,4 @@
 import ButtonGradient from "./assets/svg/ButtonGradient";
-import Landing from "./components/Landing";
 import Hiring from "./components/Hiring";
 import Pricing from "./components/Pricing";
 
@@ -9,6 +8,7 @@ import Login from "./components/Login";
 import Privacy from "./components/Privacy";
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
+import Landing from "./pages/Landing";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);

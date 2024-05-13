@@ -3,7 +3,6 @@ import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { NavLink } from "react-router-dom";
 import { navigation } from "../constants";
 import MenuSvg from "../assets/svg/MenuSvg";
-import { HamburgerMenu } from "./design/Header";
 import { useEffect, useState } from "react";
 import AnimatedBtn from "./Buttons/AnimatedBtn";
 
@@ -14,12 +13,12 @@ const Header = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
 
   const toggleNavigation = () => {
-    if (openNavigation) {
-      setOpenNavigation(false);
-      enablePageScroll();
-    } else {
-      setOpenNavigation(true);
+    setOpenNavigation((prevState) => !prevState);
+
+    if (!openNavigation) {
       disablePageScroll();
+    } else {
+      enablePageScroll();
     }
   };
 
@@ -120,12 +119,12 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md ${
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md h-24 ${
         navBarVisible ? "" : "-translate-y-full "
       }`}
     >
       <div className="container flex justify-between md:gap-4 items-center mt-4 mb-2 px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-        <div className="flex items-center">
+        <div className="z-50 flex items-center">
           <NavLink className="xl:mr-8 w-fit block" to="/">
             <img src={hiaido} alt="hiaido" className="md:w-40 w-24" />
           </NavLink>
@@ -174,8 +173,7 @@ const Header = () => {
           </AnimatedBtn>
 
           <button
-            className="lg:hidden ml-auto"
-            // px="px-3"
+            className={`${openNavigation ? "hidden" : ""} lg:hidden ml-auto`}
             onClick={toggleNavigation}
           >
             <MenuSvg openNavigation={openNavigation} />
@@ -183,34 +181,57 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="horizon-bar opacity-30 containe h-[1px] mt-6 bg-orange-400" />
+      <div className="horizon-bar opacity-30 container h-[1px] mt-6 bg-orange-400" />
 
       {/* Small Screen Toggle Nav */}
       <nav
         className={`${
-          openNavigation ? "flex" : "hidden"
-        } fixed top-[7rem] left-0 right-0 bottom-0  lg:static lg:flex  lg:bg-transparent`}
+          openNavigation
+            ? "flex translate-x-0 transition-all duration-500 ease-in-out opacity-100"
+            : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0"
+        } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[85%] z-50 duration-300 ease-in-out transform backdrop-blur-md h-screen border-r border-orange-400/20 p-4`}
       >
-        <div className="z-2 lg:flex-row relative flex flex-col items-center justify-center m-auto">
-          {navigation.map((item) => (
-            <NavLink
-              key={item.id}
-              href={item.url}
-              onClick={handleClick}
-              className={`block relative font-code text-2xl  text-n-1 transition-colors hover:text-color-1 ${
-                item.onlyMobile ? "lg:hidden" : ""
-              } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semibold ${
-                item.url === pathname.hash
-                  ? "z-2 lg:text-n-1"
-                  : "lg:text-n-1/50"
-              } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
-            >
-              {item.title}
+        <div className="p-2">
+          {/* Brand Logo */}
+          <div className="flex items-center justify-between">
+            <NavLink className="xl:mr-8 w-fit block" to="/">
+              <img src={hiaido} alt="hiaido" className="md:w-40 w-24" />
             </NavLink>
-          ))}
+
+            <button className="lg:hidden ml-auto" onClick={toggleNavigation}>
+              <MenuSvg openNavigation={openNavigation} />
+            </button>
+          </div>
+
+          <div className="horizon-bar opacity-30 container h-[1px] mt-6 bg-orange-400" />
+
+          <div className="pt-4 space-y-6">
+            {navigation.map((item) => (
+              <NavLink
+                key={item?.id}
+                href={item?.url}
+                onClick={handleClick}
+                className={`block relative text-xl text-gray-300 border border-orange-400/10 p-2 rounded-md font-semibold ${
+                  item?.onlyMobile ? "lg:hidden" : ""
+                } ${
+                  item?.url === pathname.hash
+                    ? "font-bold text-orange-400/80"
+                    : "lg:text-n-1/50"
+                }`}
+              >
+                {item?.title}
+              </NavLink>
+            ))}
+          </div>
         </div>
 
-        <HamburgerMenu />
+        <div className="space-y-2">
+          <div className="horizon-bar opacity-30 containe h-[1px] mt-6 bg-orange-400" />
+
+          <p className=" lg:block text-sm text-white">
+            © {new Date().getFullYear()} HIAIDO. All rights reserved.
+          </p>
+        </div>
       </nav>
     </div>
   );
