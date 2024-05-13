@@ -106,7 +106,7 @@ const Header = () => {
       <nav
         className={`${
           openNavigation
-            ? "fixed top-0 left-0 flex translate-x-0 transition-all duration-500 ease-in-out opacity-100 min-h-screen"
+            ? "fixed top-0 bottom-0 left-0 flex translate-x-0 transition duration-500 ease-in-out opacity-100 h-[100vh]"
             : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0"
         } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[90%] h-screen md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
       >
@@ -130,7 +130,7 @@ const Header = () => {
                 key={item?.id}
                 href={item?.url}
                 onClick={handleClick}
-                className={`block relative text-xl text-gray-300 border border-orange-400/10 p-2 rounded-md font-semibold ${
+                className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold ${
                   item?.onlyMobile ? "lg:hidden" : ""
                 } ${
                   item?.url === pathname.hash
@@ -147,7 +147,7 @@ const Header = () => {
         <div className="space-y-2">
           <div className="horizon-bar opacity-30 h-[1px] bg-orange-400" />
 
-          <p className=" lg:block text-sm text-white">
+          <p className=" lg:block text-white/80 text-xs font-semibold">
             © {new Date().getFullYear()} HIAIDO All rights reserved.
           </p>
         </div>
