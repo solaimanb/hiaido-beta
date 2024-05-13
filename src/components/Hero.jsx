@@ -8,8 +8,6 @@ import "../index.css";
 import * as random from "maath/random/dist/maath-random.esm";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Button from "./Buttons/Button";
-import AnimatedBtn from "./Buttons/AnimatedBtn";
 
 function Stars(props) {
   const ref = useRef();
@@ -91,7 +89,7 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-50 absolute flex flex-col items-center justify-center h-[80vh] min-h-screen text-center space-y-6 md:space-y-8 max-w-5xl mx-auto w-full px-4 mt-20"
+          className="z-1 absolute flex flex-col items-center justify-center h-[80vh] min-h-screen text-center space-y-6 md:space-y-8 max-w-5xl mx-auto w-full px-4 mt-20"
         >
           <p className="lg:text-5xl md:px-0 md:text-4xl lg:pt-10 px-4 space-y-4 text-3xl font-bold">
             <div className="text-white">
@@ -132,7 +130,7 @@ const Hero = () => {
             <div
               value={data.request_email}
               name="request_email"
-              className="md:mt-10 flex flex-col items-center justify-center gap-4"
+              className="md:mt-10 md:flex-row flex flex-col items-center justify-center gap-4"
             >
               <input
                 onChange={handleInputChange}
