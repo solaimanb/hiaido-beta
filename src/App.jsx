@@ -13,14 +13,14 @@ import Loading from "./components/Loading";
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Smooth Scroll Trigger:
-    (async () => {
-      const LocomotiveScroll = (await import("locomotive-scroll")).default;
-      // eslint-disable-next-line no-unused-vars
-      const locomotiveScroll = new LocomotiveScroll();
-    })();
-  }, []);
+  // useEffect(() => {
+  //   // Smooth Scroll Trigger:
+  //   (async () => {
+  //     const LocomotiveScroll = (await import("locomotive-scroll")).default;
+  //     // eslint-disable-next-line no-unused-vars
+  //     const locomotiveScroll = new LocomotiveScroll();
+  //   })();
+  // }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
