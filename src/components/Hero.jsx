@@ -91,7 +91,7 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-50 absolute flex flex-col items-center justify-center h-[80vh] md:min-h-screen text-center space-y-8 max-w-5xl mx-auto w-full px-4 mt-20"
+          className="z-50 absolute flex flex-col items-center justify-center h-[80vh] min-h-screen text-center space-y-6 md:space-y-8 max-w-5xl mx-auto w-full px-4 mt-20"
         >
           <p className="lg:text-5xl md:px-0 md:text-4xl lg:pt-10 px-4 space-y-4 text-3xl font-bold">
             <div className="text-white">
@@ -114,7 +114,7 @@ const Hero = () => {
             </span>
           </p>
 
-          <p className="body-1 opacity-80 font w-[90%] mx-auto text-xl">
+          <p className="body-1 opacity-80 w-full md:w-[90%] mx-auto md:text-xl">
             HIAIDO is a powerful AI platform designed to revolutionize your
             cloud operations, seamlessly automating tasks and amplifying
             efficiency.
@@ -124,7 +124,7 @@ const Hero = () => {
             Experience efficiency like never before.
           </p>
 
-          <p className="body-1 type1 lg:text-2xl mx-auto mb-6 text-sm font-bold">
+          <p className="body-1 type1 lg:text-2xl mx-auto text-sm font-bold">
             &quot;welcome to the future of automation with HIAIDO&quot;
           </p>
 
@@ -132,7 +132,7 @@ const Hero = () => {
             <div
               value={data.request_email}
               name="request_email"
-              className="flex items-center justify-center gap-4 mt-10"
+              className="md:mt-10 flex flex-col items-center justify-center gap-4"
             >
               <input
                 onChange={handleInputChange}
