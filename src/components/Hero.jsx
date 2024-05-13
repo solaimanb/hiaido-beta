@@ -7,6 +7,7 @@ import { PointMaterial, Points } from "@react-three/drei";
 import "../index.css";
 import * as random from "maath/random/dist/maath-random.esm";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function Stars(props) {
   const ref = useRef();
@@ -132,7 +133,7 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="gradient-text lg:text-5xl text-white/80 md:px-0 px-4 text-3xl font-bold"
+          className="gradient-text lg:text-5xl text-white/80 md:px-0 md:text-4xl lg:pt-10 px-4 text-3xl font-bold"
         >
           The Next Generation &nbsp;&nbsp;
           <span className="relative inline-block">
@@ -151,12 +152,11 @@ const Hero = () => {
           </span>
         </motion.p>
 
-        <button
-          className="gradient-btn border-orange-400/60 px-10 py-2 mt-10 font-semibold border-2 rounded-full"
-          href="/login"
-        >
-          Get Started
-        </button>
+        <Link to={"/login"}>
+          <button className="gradient-border px-10 py-2 mt-10 font-semibold rounded-full">
+            Get Started
+          </button>
+        </Link>
       </div>
 
       {/* Star Canvas */}

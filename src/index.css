@@ -201,13 +201,33 @@ input[type="file"]::file-selector-button:active {
 
 /* ----------CUSTOM---------- */
 .gradient-text {
-  background: linear-gradient(270deg, #e75a27, rgba(255, 239, 220, 0.6));
+  background: linear-gradient(270deg, #e75a27, rgba(255, 228, 202, 0.6));
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: gradient 10s ease-in-out infinite;
+  animation: gradient 8s ease-in-out infinite;
+}
+
+/* Gradient Button */
+.gradient-border {
+  background: linear-gradient(270deg, #f58b6470, rgba(255, 239, 220, 0.185));
+  background-clip: border-box;
+  background-size: 200% 200%;
+  animation: gradient 3s ease-in-out infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes gradient {
