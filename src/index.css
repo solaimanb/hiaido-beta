@@ -250,3 +250,9 @@ input[type="file"]::file-selector-button:active {
   font-family: var(--font-sora);
   background: linear-gradient(to right, transparent, #ff7f50, transparent);
 }
+
+.input-placeholder::placeholder {
+  opacity: 0.4;
+  color: #ffffff;
+  font-weight: 500;
+}

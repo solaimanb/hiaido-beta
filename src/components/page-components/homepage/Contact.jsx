@@ -1,4 +1,4 @@
-import gridline from "../../../assets/gridline.svg";
+// import gridline from "../../../assets/gridline.svg";
 
 import email from "../../../assets/images/email.png";
 import phone from "../../../assets/images/phone.png";
@@ -13,24 +13,24 @@ const Contact = () => {
       //   backgroundImage: `url(${gridline})`,
       //   backgroundRepeat: "repeat",
       // }}
-      className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/5 to-black border-orange-400/5 lg:p-10 relative w-[95%] md:py-10 mx-auto text-center border"
+      className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/5 to-black border-orange-400/10 lg:p-10 relative w-[95%] py-10 mx-auto text-center border"
     >
       <div className="">
         <div className="relative flex items-center justify-center">
-          <h1 className="text-9xl opacity-10 font-bold text-orange-400 uppercase">
+          <h1 className="md:text-9xl opacity-10 text-7xl font-bold text-orange-400 uppercase">
             Contact
           </h1>
 
-          <h2 className="text-orange-500/90 absolute top-0 flex items-center justify-center w-full h-full mx-auto text-5xl font-bold">
+          <h2 className="text-orange-500/90 md:text-5xl absolute top-0 flex items-center justify-center w-full h-full mx-auto text-3xl font-bold">
             Get In Touch
           </h2>
         </div>
       </div>
 
       <div className="lg:grid-cols-2 grid grid-cols-1 mx-auto">
-        <div className="sm:pt-32 lg:static lg:px-8 lg:py-32 relative px-6 pt-24 pb-20">
+        <div className="lg:static lg:px-8 lg:py-32 relative px-6">
           <div className="lg:mx-0 lg:max-w-lg md:text-start max-w-xl mx-auto text-center">
-            <p className="text-white/80 mt-6 text-lg font-semibold leading-8">
+            <p className="text-white/80 text-lg font-semibold leading-8">
               Need to get in touch with us ? Either fill out the form with your
             </p>
 
@@ -97,8 +97,9 @@ const Contact = () => {
                     type="text"
                     id="first-name"
                     autoComplete="given-name"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
+                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="firstName"
+                    placeholder="Enter first name"
                   />
                 </div>
               </div>
@@ -115,8 +116,9 @@ const Contact = () => {
                     type="text"
                     id="last-name"
                     autoComplete="family-name"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
+                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="lastName"
+                    placeholder="Enter last name"
                   />
                 </div>
               </div>
@@ -133,8 +135,9 @@ const Contact = () => {
                     type="email"
                     id="email"
                     autoComplete="email"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
+                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="email"
+                    placeholder="hiaido@gmail.com"
                   />
                 </div>
               </div>
@@ -150,16 +153,17 @@ const Contact = () => {
                   <textarea
                     id="message"
                     rows="4"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
+                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="message"
+                    placeholder="Write your message here..."
                   ></textarea>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-end mt-8">
+            <div className="md:justify-end flex justify-center mt-8">
               <button
-                className="bg-orange-500/80 px-4 py-2 font-semibold rounded-full"
+                className="bg-orange-500/80 md:w-fit w-full px-4 py-2 font-semibold rounded-full"
                 onClick={() => SubmitEvent()}
                 type="submit"
               >
