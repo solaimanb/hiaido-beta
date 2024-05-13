@@ -119,7 +119,7 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md h-24 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md h-20 lg:h-24 ${
         navBarVisible ? "" : "-translate-y-full "
       }`}
     >
