@@ -6,7 +6,7 @@ const AnimatedText = ({ text }) => {
   const [displayText, setDisplayText] = useState("");
   const [intervalId, setIntervalId] = useState(null);
 
-  const onMouseEnter = (e) => {
+  const onMouseEnter = () => {
     let iteration = 0;
 
     clearInterval(intervalId);

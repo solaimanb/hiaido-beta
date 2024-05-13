@@ -73,7 +73,7 @@ const Hero = () => {
 
   return (
     <Section
-      className="pt-[3rem] -mt-[5.27rem]"
+      className=""
       crosses
       crossesOffset="lg:translate-y-[5.25rem]"
       customPaddings
@@ -90,7 +90,7 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-1 absolute flex flex-col items-center justify-center h-[80vh] min-h-screen text-center space-y-6 md:space-y-8 max-w-5xl mx-auto w-full px-4 mt-20"
+          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center space-y-6 md:space-y-8 max-w-5xl mx-auto w-full px-4 mt-20"
         >
           <p className="lg:text-5xl md:px-0 md:text-4xl lg:pt-10 px-4 space-y-4 text-3xl font-bold">
             <div className="text-white">
@@ -123,7 +123,7 @@ const Hero = () => {
             Experience efficiency like never before.
           </p>
 
-          <p className="body-1 type1 lg:text-2xl mx-auto text-sm font-bold">
+          <p className="type1 lg:text-2xl md:text-sm text-xs font-bold">
             &quot;welcome to the future of automation with HIAIDO&quot;
           </p>
 
