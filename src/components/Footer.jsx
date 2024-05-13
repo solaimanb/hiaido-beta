@@ -12,7 +12,7 @@ const Footer = () => {
             </NavLink>
           </p>
           <p className=" lg:block text-sm text-white">
-            © {new Date().getFullYear()} HIAIDO. All rights reserved.
+            © {new Date().getFullYear()} HIAIDO All rights reserved.
           </p>
         </div>
       </div>
