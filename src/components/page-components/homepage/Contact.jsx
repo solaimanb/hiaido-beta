@@ -9,82 +9,56 @@ import AnimatedText from "../../shared/AnimatedText";
 const Contact = () => {
   return (
     <div
-      style={{
-        backgroundImage: `url(${gridline})`,
-        backgroundRepeat: "repeat",
-      }}
-      className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/20 to-black border-orange-400/20 lg:p-20 relative w-[95%] md:py-10 mx-auto text-center border"
+      // style={{
+      //   backgroundImage: `url(${gridline})`,
+      //   backgroundRepeat: "repeat",
+      // }}
+      className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/5 to-black border-orange-400/5 lg:p-10 relative w-[95%] md:py-10 mx-auto text-center border"
     >
+      <div className="">
+        <div className="relative flex items-center justify-center">
+          <h1 className="text-9xl opacity-10 font-bold text-orange-400 uppercase">
+            Contact
+          </h1>
+
+          <h2 className="text-orange-500/90 absolute top-0 flex items-center justify-center w-full h-full mx-auto text-5xl font-bold">
+            Get In Touch
+          </h2>
+        </div>
+      </div>
+
       <div className="lg:grid-cols-2 grid grid-cols-1 mx-auto">
         <div className="sm:pt-32 lg:static lg:px-8 lg:py-32 relative px-6 pt-24 pb-20">
-          <div className="lg:mx-0 lg:max-w-lg max-w-xl mx-auto">
-            <div className="-z-10 lg:w-1/2 absolute inset-y-0 left-0 w-full overflow-hidden">
-              <svg
-                className=" absolute inset-0 w-full h-full"
-                aria-hidden="true"
-              >
-                <defs>
-                  <pattern
-                    id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527"
-                    width="200"
-                    height="200"
-                    x="100%"
-                    y="-1"
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <path d="M130 200V.5M.5 .5H200" fill="none"></path>
-                  </pattern>
-                </defs>
-                <rect
-                  width="100%"
-                  height="100%"
-                  strokeWidth="0"
-                  fill="white"
-                ></rect>
-                <svg x="100%" y="-1" className=" overflow-visible">
-                  <path d="M-470.5 0h201v201h-201Z" strokeWidth="0"></path>
-                </svg>
-                <rect
-                  width="100%"
-                  height="100%"
-                  strokeWidth="0"
-                  fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"
-                ></rect>
-              </svg>
-            </div>
-            <h2 className="text-3xl font-semibold tracking-tight text-white">
-              Contact Us
-            </h2>
-            <p className="mt-6 text-lg font-thin leading-8 text-white">
+          <div className="lg:mx-0 lg:max-w-lg md:text-start max-w-xl mx-auto text-center">
+            <p className="text-white/80 mt-6 text-lg font-semibold leading-8">
               Need to get in touch with us ? Either fill out the form with your
             </p>
 
             <dl className="mt-10 space-y-4 text-base leading-7 text-white">
               <div className="gap-x-4 flex">
                 <dt className="flex-none">
-                  <span className=" font-thin sr-only">Email</span>
+                  <span className="font-thin sr-only">Email</span>
                 </dt>
+
                 <dd>
                   <div className=" flex flex-col items-start justify-start gap-2 text-2xl">
                     <span className="flex items-center gap-3">
-                      {" "}
                       <span>
-                        {" "}
                         <img src={admin} height={25} width={25} />
                       </span>{" "}
                       <h1 className=" font-sans text-sm">Karthik Thandapani</h1>
                     </span>
+
                     <a
                       href="mailto:ceo@hiaido.com"
                       className="flex items-center gap-3"
                     >
-                      {" "}
                       <span>
-                        {" "}
                         <img src={email} height={25} width={25} />
                       </span>{" "}
                       <h1 className=" font-sans text-sm">ceo@hiaido.com</h1>
                     </a>
+
                     <span className="flex items-center gap-3">
                       {" "}
                       <span>
@@ -146,6 +120,7 @@ const Contact = () => {
                   />
                 </div>
               </div>
+
               <div className="sm:col-span-2">
                 <label
                   htmlFor="email"
