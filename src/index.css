@@ -16,6 +16,7 @@
 
 * {
   scroll-behavior: smooth;
+  font-family: var(--font-sora);
 }
 
 .body {
@@ -196,62 +197,35 @@ input[type="file"]::file-selector-button:active {
   }
 }
 
-/* ------- */
-#regAnimation {
-  position: relative;
-  overflow: hidden;
-  width: 40vw;
-  margin-top: 50px;
-  border-radius: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ----------CUSTOM---------- */
+.gradient-text {
+  background: linear-gradient(270deg, #e75a27, rgba(245, 207, 164, 0.6));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient 10s ease-in-out infinite;
 }
 
-#regAnimation::before {
-  content: "";
-  background-image: conic-gradient(#ff0000 20deg, transparent 120deg);
-  width: 350%;
-  height: 350%;
-  position: absolute;
-  animation: rotate 10s linear infinite;
-}
-
-#regAnimation::after {
-  content: "";
-  width: 39.7vw;
-  height: 99%;
-  background: #111;
-  position: absolute;
-  border-radius: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-@keyframes rotate {
+@keyframes gradient {
   0% {
-    transform: rotate(0deg);
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
   }
   100% {
-    transform: rotate(-360deg);
+    background-position: 0% 50%;
   }
 }
 
-@media (max-width: 768px) {
-  #regAnimation {
-    width: 70vw;
-  }
-  #regAnimation::after {
-    width: 69.7vw;
-  }
+.hrzn {
+  background: linear-gradient(to right, transparent, #ff7f50, transparent);
 }
-@media (min-width: 1350px) {
-  #regAnimation {
-    width: 30vw;
-  }
-  #regAnimation::after {
-    width: 29.7vw;
-  }
-}
-
-/* CUSTOM */

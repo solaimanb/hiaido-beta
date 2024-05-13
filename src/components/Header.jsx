@@ -1,13 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { NavLink } from "react-router-dom";
-
-import { hiaido } from "../assets";
 import { navigation } from "../constants";
-import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu } from "./design/Header";
 import { useEffect, useState } from "react";
+import AnimatedBtn from "./Buttons/AnimatedBtn";
+
+import { hiaido } from "../assets";
 
 const Header = () => {
   const pathname = useLocation();
@@ -124,12 +124,13 @@ const Header = () => {
         navBarVisible ? "" : "-translate-y-full "
       }`}
     >
-      <div className="flex justify-between md:gap-4 items-center mt-4 mb-2 px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-        <NavLink className="xl:mr-8 w-fit block" to="/">
-          <img src={hiaido} alt="hiaido" className="md:w-32 w-24" />
-        </NavLink>
+      <div className="container flex justify-between md:gap-4 items-center mt-4 mb-2 px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
+        <div className="flex items-center">
+          <NavLink className="xl:mr-8 w-fit block" to="/">
+            <img src={hiaido} alt="hiaido" className="md:w-40 w-24" />
+          </NavLink>
 
-        {/* <div className="gap-x-4 flex">
+          {/* <div className="gap-x-4 flex">
           {linkTexts.map((linkText, index) => (
             <div
               key={index}
@@ -142,34 +143,35 @@ const Header = () => {
           ))}
         </div> */}
 
-        <nav className="lg:block hidden">
-          <ul className="gap-x-10 flex">
-            {navItems.map((item, index) => (
-              <li
-                key={index}
-                className="w-32 font-semibold text-center text-orange-400"
-              >
-                <Link
-                  to={`/${item?.name?.toLowerCase()}`}
-                  className={`link uppercase ${
-                    activeLink === index ? "active" : ""
-                  }`}
-                  onClick={() => handleLinkClick(index)}
-                  data-value={item?.name}
-                  onMouseOver={(e) => onMouseEnter(e, index)}
-                  onMouseOut={() => onMouseLeave(index)}
+          <nav className="lg:block hidden">
+            <ul className="gap-x-10 flex">
+              {navItems.map((item, index) => (
+                <li
+                  key={index}
+                  className="w-32 font-semibold text-center text-orange-400"
                 >
-                  {` ${displayTexts[index] || item?.name}`}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                  <Link
+                    to={`/${item?.name?.toLowerCase()}`}
+                    className={`link uppercase ${
+                      activeLink === index ? "active" : ""
+                    }`}
+                    onClick={() => handleLinkClick(index)}
+                    data-value={item?.name}
+                    onMouseOver={(e) => onMouseEnter(e, index)}
+                    onMouseOut={() => onMouseLeave(index)}
+                  >
+                    {` ${displayTexts[index] || item?.name}`}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
 
         <div className=" flex items-center justify-center gap-8 px-5">
-          <Button className="lg:flex hidden" href="/login">
+          <AnimatedBtn className="lg:flex hidden" href="/login">
             Sign In
-          </Button>
+          </AnimatedBtn>
 
           <button
             className="lg:hidden ml-auto"
@@ -180,6 +182,8 @@ const Header = () => {
           </button>
         </div>
       </div>
+
+      <div className="hrzn opacity-30 containe h-[1px] mt-6 bg-orange-400" />
 
       {/* Small Screen Toggle Nav */}
       <nav

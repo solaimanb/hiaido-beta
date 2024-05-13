@@ -1,6 +1,6 @@
 import Header from "./Header";
 import "../index.css";
-import Button from "./Button";
+import Button from "../components/Buttons/Button";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

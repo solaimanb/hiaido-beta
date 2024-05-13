@@ -1,4 +1,4 @@
-import { curve, hiaido } from "../assets";
+import { curve } from "../assets";
 import Section from "./Section";
 import "react-toastify/dist/ReactToastify.css";
 import { useRef, useState } from "react";
@@ -132,8 +132,8 @@ const Hero = () => {
       </div> */}
 
       <div className="flex flex-col items-center justify-center h-[80vh] md:min-h-screen text-center">
-        <h1 className="text-[12vw] md:text-[10vw] text-center">
-          <span className="text-[#e75a27] inline-block font-bold">
+        <h1 className="text-[12vw] md:text-[9vw] text-center">
+          {/* <span className="h-44 text-[#e75a27] inline-block font-bold">
             <motion.h1
               initial={{ scale: 2 }}
               animate={{ scale: 1 }}
@@ -148,10 +148,26 @@ const Hero = () => {
             >
               HIAIDO
             </motion.h1>
+          </span> */}
+          <span className="h-44 inline-block font-bold">
+            <motion.h1
+              initial={{ scale: 2 }}
+              animate={{ scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 90,
+                damping: 10,
+                duration: 1,
+                ease: "easeInOut",
+              }}
+              className="gradient-text flex items-center h-full"
+            >
+              HIAIDO
+            </motion.h1>
           </span>
         </h1>
 
-        <p className="lg:mt-20 lg:text-2xl text-white/80 mt-10 text-xl font-bold">
+        <p className="lg:text-2xl text-white/80 text-xl font-bold">
           The Next Generation &nbsp;&nbsp;
           <span className="relative inline-block">
             AI Powered

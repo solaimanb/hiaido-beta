@@ -1,0 +1,41 @@
+#loginAnimation {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background: #352e2c;
+}
+
+#loginAnimation::before {
+  content: "";
+  background-image: conic-gradient(#e75a27 20deg, transparent 120deg);
+  width: 350%;
+  height: 400%;
+  position: absolute;
+  animation: rotate 5s linear infinite;
+  border-radius: 50px;
+  padding: 5px;
+}
+
+#loginAnimation::after {
+  content: "";
+  width: 96%;
+  height: 94%;
+  background: #050505;
+  position: absolute;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
