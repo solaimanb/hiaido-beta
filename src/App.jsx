@@ -3,12 +3,14 @@ import Hiring from "./components/Hiring";
 import Pricing from "./components/Pricing";
 
 import { Route, Routes } from "react-router-dom";
-import ContactUs from "./components/ContactUs";
+import ContactUs from "./pages/ContactUs";
 import Login from "./components/Login";
 import Privacy from "./components/Privacy";
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import Landing from "./pages/Landing";
+import RootLayout from "./layouts/RootLayout";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,14 +38,25 @@ const App = () => {
 
   return (
     <>
-      <div className=" overflow-hidden">
+      <div className="overflow-hidden">
         <Routes>
-          <Route path="/" element={<Landing />} />
+          {/* Root Layout */}
+          <Route path="/" element={<RootLayout />}>
+            <Route index element={<Landing />} />
+            <Route path="hiring" element={<Hiring />} />
+            <Route path="contact" element={<ContactUs />} />
+            <Route path="pricing" element={<Pricing />} />
+          </Route>
+
+          {/* Others */}
           <Route path="/hiring" element={<Hiring />} />
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/privacy" element={<Privacy />} />
+
+          {/* Not Found */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
 

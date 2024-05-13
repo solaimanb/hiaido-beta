@@ -46,7 +46,7 @@ export const navigation = [
   {
     id: "1",
     title: "Contact Us",
-    to: "/contact-us",
+    to: "/contact",
     onlyMobile: true,
   },
   {
@@ -66,7 +66,6 @@ export const navigation = [
     title: "Privacy",
     to: "/privacy",
     onlyMobile: true,
-    
   },
 ];
 
@@ -208,7 +207,8 @@ export const pricing = [
   {
     id: "0",
     title: "Starter",
-    description: "Ideal for developers, cloud engineers, small businesses and startups",
+    description:
+      "Ideal for developers, cloud engineers, small businesses and startups",
     price: "99",
     features: [
       "Basic AI-powered cloud automation",
@@ -219,7 +219,8 @@ export const pricing = [
   {
     id: "1",
     title: "Premium",
-    description: "Suitable for growing businesses with moderate cloud infrastructure needs",
+    description:
+      "Suitable for growing businesses with moderate cloud infrastructure needs",
     price: "749",
     features: [
       "Advanced AI capabilities for efficient automation",
@@ -231,7 +232,8 @@ export const pricing = [
   {
     id: "2",
     title: "Business",
-    description: "Designed for established enterprises with substantial cloud infrastructure requirements",
+    description:
+      "Designed for established enterprises with substantial cloud infrastructure requirements",
     price: "1599",
     features: [
       "Comprehensive AI-driven automation for complex workflows",
@@ -244,7 +246,8 @@ export const pricing = [
   {
     id: "3",
     title: "Enterprise",
-    description: "Tailored solution for large-scale enterprises with diverse cloud environments",
+    description:
+      "Tailored solution for large-scale enterprises with diverse cloud environments",
     price: null,
     features: [
       "Fully customizable AI automation tailored to specific business needs",

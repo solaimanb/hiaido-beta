@@ -92,7 +92,7 @@ const Hero = () => {
           }}
           className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center space-y-6 md:space-y-8 max-w-5xl mx-auto w-full px-4 mt-20"
         >
-          <p className="lg:text-5xl md:px-0 md:text-4xl lg:pt-10 px-4 space-y-4 text-3xl font-bold">
+          <p className="lg:text-5xl md:px-0 md:text-4xl lg:pt-10 px-2 space-y-4 text-2xl font-bold">
             <div className="text-white">
               The Next Generation
               <br />

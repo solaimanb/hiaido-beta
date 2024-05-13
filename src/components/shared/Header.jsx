@@ -50,9 +50,9 @@ const Header = () => {
   }, [lastScrollTop]);
 
   const navItems = [
-    { name: "Hiring" },
-    { name: "Contact Us" },
-    { name: "Pricing" },
+    { name: "Hiring", path: "/hiring" },
+    { name: "Contact Us", path: "/contact" },
+    { name: "Pricing", path: "/pricing" },
   ];
 
   return (
@@ -74,10 +74,7 @@ const Header = () => {
                   key={index}
                   className="w-32 font-semibold text-center text-orange-400"
                 >
-                  <Link
-                    to={`/${item?.name?.toLowerCase()}`}
-                    className="uppercase"
-                  >
+                  <Link to={item?.path} className="uppercase">
                     <AnimatedText text={` ${item?.name}`} />
                   </Link>
                 </li>
@@ -107,7 +104,7 @@ const Header = () => {
         className={`${
           openNavigation
             ? "fixed top-0 bottom-0 left-0 flex translate-x-0 transition duration-500 ease-in-out bg-black h-[100vh]"
-            : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0"
+            : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0 bg-black h-[100vh]"
         } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[90%] md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
       >
         <div className="p-2">
@@ -128,7 +125,7 @@ const Header = () => {
             {navigation.map((item) => (
               <NavLink
                 key={item?.id}
-                href={item?.url}
+                href={item?.path}
                 onClick={handleClick}
                 className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold ${
                   item?.onlyMobile ? "lg:hidden" : ""
