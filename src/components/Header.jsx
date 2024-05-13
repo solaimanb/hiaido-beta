@@ -169,7 +169,7 @@ const Header = () => {
         </div>
 
         <div className=" flex items-center justify-center gap-8 px-5">
-          <AnimatedBtn className="lg:flex hidden" href="/login">
+          <AnimatedBtn className="lg:flex hidden font-semibold" href="/login">
             Sign In
           </AnimatedBtn>
 
@@ -183,7 +183,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="hrzn opacity-30 containe h-[1px] mt-6 bg-orange-400" />
+      <div className="horizon-bar opacity-30 containe h-[1px] mt-6 bg-orange-400" />
 
       {/* Small Screen Toggle Nav */}
       <nav

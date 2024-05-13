@@ -132,24 +132,8 @@ const Hero = () => {
       </div> */}
 
       <div className="flex flex-col items-center justify-center h-[80vh] md:min-h-screen text-center">
-        <h1 className="text-[12vw] md:text-[9vw] text-center">
-          {/* <span className="h-44 text-[#e75a27] inline-block font-bold">
-            <motion.h1
-              initial={{ scale: 2 }}
-              animate={{ scale: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 90,
-                damping: 10,
-                duration: 1,
-                ease: "easeInOut",
-              }}
-              className="flex items-center"
-            >
-              HIAIDO
-            </motion.h1>
-          </span> */}
-          <span className="h-44 inline-block font-bold">
+        {/* <h1 className="text-[12vw] md:text-[8vw] text-center">
+          <span className="inline-block h-40 font-bold">
             <motion.h1
               initial={{ scale: 2 }}
               animate={{ scale: 1 }}
@@ -165,9 +149,20 @@ const Hero = () => {
               HIAIDO
             </motion.h1>
           </span>
-        </h1>
+        </h1> */}
 
-        <p className="lg:text-2xl text-white/80 text-xl font-bold">
+        <motion.p
+          initial={{ scale: 2 }}
+          animate={{ scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 90,
+            damping: 10,
+            duration: 1,
+            ease: "easeInOut",
+          }}
+          className="gradient-text lg:text-4xl text-white/80 text-2xl font-bold"
+        >
           The Next Generation &nbsp;&nbsp;
           <span className="relative inline-block">
             AI Powered
@@ -179,11 +174,18 @@ const Hero = () => {
               alt="Curve"
             />
           </span>
-          <br className="xl:hidden" />{" "}
+          <br className="" />{" "}
           <span className=" relative inline-block mt-2">
             Cloud Automation Platform
           </span>
-        </p>
+        </motion.p>
+
+        {/* <button
+          className="px-10 py-2 mt-10 border-2 rounded-full"
+          href="/login"
+        >
+          Sign In
+        </button> */}
       </div>
 
       {/* Star Canvas */}

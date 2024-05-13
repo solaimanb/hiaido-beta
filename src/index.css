@@ -20,6 +20,7 @@
 }
 
 .body {
+  font-family: var(--font-sora);
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -226,6 +227,7 @@ input[type="file"]::file-selector-button:active {
   }
 }
 
-.hrzn {
+.horizon-bar {
+  font-family: var(--font-sora);
   background: linear-gradient(to right, transparent, #ff7f50, transparent);
 }
