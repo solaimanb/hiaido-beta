@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Header from "./shared/Header";
 import "../index.css";
 import Button from "../components/Buttons/Button";
 import { useEffect, useState } from "react";

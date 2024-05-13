@@ -1,12 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { NavLink } from "react-router-dom";
-import { navigation } from "../constants";
-import MenuSvg from "../assets/svg/MenuSvg";
+import { navigation } from "../../constants";
+import MenuSvg from "../../assets/svg/MenuSvg";
 import { useEffect, useState } from "react";
-import AnimatedBtn from "./Buttons/AnimatedBtn";
+import AnimatedBtn from "../Buttons/AnimatedBtn";
 
-import { hiaido } from "../assets";
+import { hiaido } from "../../assets";
+import AnimatedText from "./AnimatedText";
 
 const Header = () => {
   const pathname = useLocation();
@@ -48,69 +49,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollTop]);
 
-  // Random Hover Text:
-  const letters = "abcdefghijklmnopqrstuvwxyz0123456789";
-  const [activeLink, setActiveLink] = useState(null);
-  const [displayTexts, setDisplayTexts] = useState(Array(3).fill(""));
-  const [interValIds, setIntervalIds] = useState(Array(3).fill(null));
-
-  const onMouseEnter = (e, index) => {
-    let iteration = 0;
-
-    clearInterval(interValIds[index]);
-
-    const newIntervalId = setInterval(() => {
-      const newText = e.target.dataset.value
-        .split("")
-        .map((letter, idx) => {
-          if (idx < iteration) {
-            return e.target.dataset.value[idx];
-          }
-
-          return letters[Math.floor(Math.random() * 26)];
-        })
-        .join("");
-
-      setDisplayTexts((prev) => {
-        const newTexts = [...prev];
-        newTexts[index] = newText;
-        return newTexts;
-      });
-
-      if (iteration >= e.target.dataset.value.length) {
-        clearInterval(newIntervalId);
-      }
-
-      iteration += 1 / 3;
-    }, 30);
-
-    setIntervalIds((prev) => {
-      const newIds = [...prev];
-      newIds[index] = newIntervalId;
-      return newIds;
-    });
-  };
-
-  const onMouseLeave = (index) => {
-    clearInterval(interValIds[index]);
-
-    setDisplayTexts((prev) => {
-      const newTexts = [...prev];
-      newTexts[index] = "";
-      return newTexts;
-    });
-  };
-
-  useEffect(() => {
-    return () => {
-      interValIds.forEach((id) => clearInterval(id));
-    };
-  }, [interValIds]);
-
-  const handleLinkClick = (index) => {
-    setActiveLink(index);
-  };
-
   const navItems = [
     { name: "Hiring" },
     { name: "Contact Us" },
@@ -138,15 +76,9 @@ const Header = () => {
                 >
                   <Link
                     to={`/${item?.name?.toLowerCase()}`}
-                    className={`link uppercase ${
-                      activeLink === index ? "active" : ""
-                    }`}
-                    onClick={() => handleLinkClick(index)}
-                    data-value={item?.name}
-                    onMouseOver={(e) => onMouseEnter(e, index)}
-                    onMouseOut={() => onMouseLeave(index)}
+                    className="uppercase"
                   >
-                    {` ${displayTexts[index] || item?.name}`}
+                    <AnimatedText text={` ${item?.name}`} />
                   </Link>
                 </li>
               ))}

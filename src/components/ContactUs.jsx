@@ -1,16 +1,14 @@
-import Header from "../components/Header";
-import email from '../assets/images/email.png';
-import phone from '../assets/images/phone.png';
-import admin from '../assets/images/admin.png';
-import place from '../assets/images/place.png'
+import Header from "./shared/Header";
+import email from "../assets/images/email.png";
+import phone from "../assets/images/phone.png";
+import admin from "../assets/images/admin.png";
+import place from "../assets/images/place.png";
 import { useEffect } from "react";
 
-
 const ContactUs = () => {
-  
   useEffect(() => {
     document.title = "Hiaido | Contact Us";
-  }, []) 
+  }, []);
 
   return (
     <>
@@ -42,7 +40,11 @@ const ContactUs = () => {
                     strokeWidth="0"
                     fill="white"
                   ></rect>
-                  <svg x="100%" y="-1" className="overflow-visible fill-gray-50">
+                  <svg
+                    x="100%"
+                    y="-1"
+                    className="overflow-visible fill-gray-50"
+                  >
                     <path d="M-470.5 0h201v201h-201Z" strokeWidth="0"></path>
                   </svg>
                   <rect
@@ -64,22 +66,50 @@ const ContactUs = () => {
                 <div className="flex gap-x-4">
                   <dt className="flex-none">
                     <span className="font-thin sr-only">Email</span>
-                   
-					
                   </dt>
                   <dd>
-                  <a
-                      class=" text-2xl gap-2 items-start justify-start flex flex-col"
-                    >
-                      <span  className="flex gap-3  items-center"> <span> <img src={admin} height={25} width={25} /></span>  <h1 className=" text-sm  font-sans">Karthik Thandapani</h1></span>
-                      <a  href='mailto:ceo@hiaido.com' className="flex gap-3  items-center"> <span> <img src={email} height={25} width={25} /></span>  <h1 className=" text-sm font-sans">ceo@hiaido.com</h1></a>
-                      <span  className="flex gap-3 items-center"> <span> <img src={phone}  height={25} width={25} /></span> <h1 className="text-sm  font-sans" >+91 8939979393</h1></span>
-                      <span className="flex gap-3 items-center"><span><img height={25} width={25} src={place}/></span><h1 className=" text-sm  font-sans">Chennai, India</h1></span>
+                    <a class=" text-2xl gap-2 items-start justify-start flex flex-col">
+                      <span className="flex gap-3  items-center">
+                        {" "}
+                        <span>
+                          {" "}
+                          <img src={admin} height={25} width={25} />
+                        </span>{" "}
+                        <h1 className=" text-sm  font-sans">
+                          Karthik Thandapani
+                        </h1>
+                      </span>
+                      <a
+                        href="mailto:ceo@hiaido.com"
+                        className="flex gap-3  items-center"
+                      >
+                        {" "}
+                        <span>
+                          {" "}
+                          <img src={email} height={25} width={25} />
+                        </span>{" "}
+                        <h1 className=" text-sm font-sans">ceo@hiaido.com</h1>
+                      </a>
+                      <span className="flex gap-3 items-center">
+                        {" "}
+                        <span>
+                          {" "}
+                          <img src={phone} height={25} width={25} />
+                        </span>{" "}
+                        <h1 className="text-sm  font-sans">+91 8939979393</h1>
+                      </span>
+                      <span className="flex gap-3 items-center">
+                        <span>
+                          <img height={25} width={25} src={place} />
+                        </span>
+                        <h1 className=" text-sm  font-sans">Chennai, India</h1>
+                      </span>
                     </a>
                   </dd>
                 </div>
               </dl>
-            </div>s
+            </div>
+            s
           </div>
           <form className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-32">
             <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">

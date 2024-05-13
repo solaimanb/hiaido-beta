@@ -8,6 +8,7 @@ import "../index.css";
 import * as random from "maath/random/dist/maath-random.esm";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import AnimatedText from "./shared/AnimatedText";
 
 function Stars(props) {
   const ref = useRef();
@@ -96,7 +97,7 @@ const Hero = () => {
               The Next Generation
               <br />
               <span className="relative inline-block">
-                AI Powered
+                <AnimatedText text="AI Powered" />
                 <img
                   src={curve}
                   className="top-full absolute left-0 w-full"
@@ -144,7 +145,7 @@ const Hero = () => {
                 onClick={refreshPage}
                 type="submit"
               >
-                Request Demo
+                <AnimatedText text="Request Demo" />
               </button>
             </div>
           </form>

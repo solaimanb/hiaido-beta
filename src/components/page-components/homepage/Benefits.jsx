@@ -1,9 +1,12 @@
-import aws from "../assets/images/aws.png";
-import Heading from "./Heading";
-import Section from "./Section";
-import azure from "../assets/images/azure.png";
-import gcp from "../assets/images/gcp.png";
-import "../index.css";
+import aws from "../../../assets/images/aws.png";
+// import Heading from "../../Heading";
+// import Section from "../../Section";
+import Heading from "../../Heading";
+import Section from "../../Section";
+import azure from "../../../assets/images/azure.png";
+import gcp from "../../../assets/images/gcp.png";
+// import "../index.css";
+import "../../../index.css";
 // import email from "../assets/images/email.png";
 // import phone from "../assets/images/phone.png";
 // import admin from "../assets/images/admin.png";
