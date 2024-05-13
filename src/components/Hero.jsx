@@ -42,35 +42,6 @@ function Stars(props) {
 }
 
 const Hero = () => {
-  // const parallaxRef = useRef(null);
-
-  // const [data, setData] = useState({
-  //   request_email: "",
-  // });
-
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setData({
-  //     ...data,
-  //     [name]: value,
-  //   });
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // Do something with the form data, for example, send it to a server
-  //   console.log(data);
-  //   // Reset form fields
-  //   setData({
-  //     data,
-  //   });
-  // };
-
-  // const refreshPage = () => {
-  //   toast("Details submitted Successfully");
-  //   window.location.href = "/";
-  // };
-
   return (
     <Section
       className="pt-[3rem] -mt-[5.27rem]"
@@ -161,7 +132,7 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="gradient-text lg:text-4xl text-white/80 text-2xl font-bold"
+          className="gradient-text lg:text-5xl text-white/80 md:px-0 px-4 text-3xl font-bold"
         >
           The Next Generation &nbsp;&nbsp;
           <span className="relative inline-block">
@@ -180,12 +151,12 @@ const Hero = () => {
           </span>
         </motion.p>
 
-        {/* <button
-          className="px-10 py-2 mt-10 border-2 rounded-full"
+        <button
+          className="gradient-btn border-orange-400/60 px-10 py-2 mt-10 font-semibold border-2 rounded-full"
           href="/login"
         >
-          Sign In
-        </button> */}
+          Get Started
+        </button>
       </div>
 
       {/* Star Canvas */}

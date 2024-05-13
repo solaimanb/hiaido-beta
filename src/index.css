@@ -201,7 +201,7 @@ input[type="file"]::file-selector-button:active {
 
 /* ----------CUSTOM---------- */
 .gradient-text {
-  background: linear-gradient(270deg, #e75a27, rgba(245, 207, 164, 0.6));
+  background: linear-gradient(270deg, #e75a27, rgba(255, 239, 220, 0.6));
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;

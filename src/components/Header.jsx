@@ -119,28 +119,15 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md h-20 lg:h-24 py-6 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md h-20 lg:h-24 py-6 px-4 lg:px-0 ${
         navBarVisible ? "" : "-translate-y-full "
       }`}
     >
-      <div className="md:gap-4 mb- px- container flex items-center justify-between">
+      <div className="container flex items-center justify-between w-full px-0">
         <div className="z-50 flex items-center">
-          <NavLink className="xl:mr-8 w-fit block" to="/">
+          <NavLink className="w-fit block" to="/">
             <img src={hiaido} alt="hiaido" className="md:w-40 w-24" />
           </NavLink>
-
-          {/* <div className="gap-x-4 flex">
-          {linkTexts.map((linkText, index) => (
-            <div
-              key={index}
-              style={{ fontFamily: "monospace" }}
-              onMouseEnter={() => onMouseEnter(index, linkText)}
-              onMouseLeave={() => onMouseLeave(index)}
-            >
-              {hoverTexts[index] || linkText}
-            </div>
-          ))}
-        </div> */}
 
           <nav className="lg:block hidden">
             <ul className="gap-x-10 flex">
