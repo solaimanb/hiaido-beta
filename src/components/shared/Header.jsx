@@ -106,9 +106,9 @@ const Header = () => {
       <nav
         className={`${
           openNavigation
-            ? "fixed top-0 left-0 flex translate-x-0 transition-all duration-500 ease-in-out opacity-100"
+            ? "fixed top-0 left-0 flex translate-x-0 transition-all duration-500 ease-in-out opacity-100 min-h-screen"
             : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0"
-        } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[90%] md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-xl h-svh border-r border-orange-400/20 p-4`}
+        } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[90%] h-screen md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
       >
         <div className="p-2">
           {/* Brand Logo */}
