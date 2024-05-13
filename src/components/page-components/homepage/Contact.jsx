@@ -6,6 +6,27 @@ import admin from "../../../assets/images/admin.png";
 import place from "../../../assets/images/place.png";
 import AnimatedText from "../../shared/AnimatedText";
 
+// Contact Details:
+const contactDetails = [
+  {
+    image: admin,
+    text: "Karthik Thandapani",
+  },
+  {
+    image: email,
+    text: "ceo@hiaido.com",
+    link: "mailto:ceo@hiaido.com",
+  },
+  {
+    image: phone,
+    text: "+91 8939979393",
+  },
+  {
+    image: place,
+    text: "Chennai, India",
+  },
+];
+
 const Contact = () => {
   return (
     <div
@@ -29,50 +50,44 @@ const Contact = () => {
 
       <div className="lg:grid-cols-2 grid grid-cols-1 mx-auto">
         <div className="lg:static lg:px-8 lg:py-32 relative px-6">
-          <div className="lg:mx-0 lg:max-w-lg md:text-start max-w-xl mx-auto text-center">
-            <p className="text-white/80 text-lg font-semibold leading-8">
-              Need to get in touch with us ? Either fill out the form with your
+          <div className="lg:mx-0 lg:max-w-lg lg:text-start max-w-xl mx-auto text-center">
+            <p className="text-white/60 text-lg font-semibold leading-8">
+              Need to get in touch with us? Either fill out the form with your
+              details or reach out to us directly via email or phone. We&apos;re
+              always here to help and answer any questions you might have.
             </p>
 
-            <dl className="mt-10 space-y-4 text-base leading-7 text-white">
-              <div className="gap-x-4 flex">
+            <dl className=" text-white/70 w-full mt-10 space-y-4 text-base leading-7">
+              <div className="gap-x-2">
                 <dt className="flex-none">
                   <span className="font-thin sr-only">Email</span>
                 </dt>
 
-                <dd>
-                  <div className=" flex flex-col items-start justify-start gap-2 text-2xl">
-                    <span className="flex items-center gap-3">
-                      <span>
-                        <img src={admin} height={25} width={25} />
-                      </span>{" "}
-                      <h1 className=" font-sans text-sm">Karthik Thandapani</h1>
-                    </span>
+                <dd className="flex items-center justify-center w-full">
+                  <div className=" md:space-y-2 flex flex-col items-center justify-center w-full gap-2 space-y-4 text-base font-semibold">
+                    {contactDetails.map((detail, index) => (
+                      <span
+                        key={index}
+                        className=" md:justify-start lg:flex-row flex flex-col items-center justify-center w-full gap-3"
+                      >
+                        <span>
+                          <img
+                            src={detail?.image}
+                            height={25}
+                            width={25}
+                            className="opacity-70"
+                          />
+                        </span>
 
-                    <a
-                      href="mailto:ceo@hiaido.com"
-                      className="flex items-center gap-3"
-                    >
-                      <span>
-                        <img src={email} height={25} width={25} />
-                      </span>{" "}
-                      <h1 className=" font-sans text-sm">ceo@hiaido.com</h1>
-                    </a>
-
-                    <span className="flex items-center gap-3">
-                      {" "}
-                      <span>
-                        {" "}
-                        <img src={phone} height={25} width={25} />
-                      </span>{" "}
-                      <h1 className="font-sans text-sm">+91 8939979393</h1>
-                    </span>
-                    <span className="flex items-center gap-3">
-                      <span>
-                        <img height={25} width={25} src={place} />
+                        {detail?.link ? (
+                          <a href={detail?.link} className="">
+                            {detail?.text}
+                          </a>
+                        ) : (
+                          <p className="">{detail?.text}</p>
+                        )}
                       </span>
-                      <h1 className=" font-sans text-sm">Chennai, India</h1>
-                    </span>
+                    ))}
                   </div>
                 </dd>
               </div>
@@ -99,7 +114,7 @@ const Contact = () => {
                     autoComplete="given-name"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="firstName"
-                    placeholder="Enter first name"
+                    placeholder="Kelsey"
                   />
                 </div>
               </div>
@@ -118,7 +133,7 @@ const Contact = () => {
                     autoComplete="family-name"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="lastName"
-                    placeholder="Enter last name"
+                    placeholder="Turner"
                   />
                 </div>
               </div>
@@ -137,7 +152,7 @@ const Contact = () => {
                     autoComplete="email"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="email"
-                    placeholder="hiaido@gmail.com"
+                    placeholder="turner@gmail.com"
                   />
                 </div>
               </div>

@@ -252,7 +252,7 @@ input[type="file"]::file-selector-button:active {
 }
 
 .input-placeholder::placeholder {
-  opacity: 0.4;
+  opacity: 0.3;
   color: #ffffff;
   font-weight: 500;
 }
