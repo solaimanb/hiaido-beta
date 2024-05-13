@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap");
@@ -8,19 +8,18 @@
 @tailwind utilities;
 
 :root {
-  --font-sora: "Sora", sans-serif;
+  --font-fira: "Fira Code", monospace;
   --font-code: "Source Code Pro", monospace;
   --font-grotesk: "Space Grotesk", sans-serif;
   color-scheme: dark;
 }
 
 * {
-  scroll-behavior: smooth;
-  font-family: var(--font-sora);
+  font-family: var(--font-fira);
 }
 
 .body {
-  font-family: var(--font-sora);
+  font-family: var(--font-fira);
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -211,11 +210,10 @@ input[type="file"]::file-selector-button:active {
 }
 
 /* Gradient Button */
-.gradient-border {
-  background: linear-gradient(270deg, #f58b6470, rgba(255, 239, 220, 0.185));
-  background-clip: border-box;
+.gradient-bg {
+  background: linear-gradient(270deg, #df6336, rgba(255, 253, 251, 0.507));
   background-size: 200% 200%;
-  animation: gradient 3s ease-in-out infinite;
+  /* animation: gradient 3s ease-in-out infinite; */
 }
 
 @keyframes gradient {
