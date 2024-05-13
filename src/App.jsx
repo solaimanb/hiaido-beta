@@ -1,5 +1,5 @@
 import ButtonGradient from "./assets/svg/ButtonGradient";
-import Hiring from "./components/Hiring";
+import Hiring from "./pages/Hiring";
 import Pricing from "./components/Pricing";
 
 import { Route, Routes } from "react-router-dom";
