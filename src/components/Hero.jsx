@@ -81,7 +81,7 @@ const Hero = () => {
     >
       <div className="flex justify-center h-[80vh] relative md:min-h-screen">
         <motion.div
-          initial={{ scale: 2 }}
+          initial={{ scale: 1.5 }}
           animate={{ scale: 1 }}
           transition={{
             type: "spring",
@@ -114,7 +114,7 @@ const Hero = () => {
               </span>
             </p>
 
-            <p className="body-1 opacity-80 w-full md:w-[90%] mx-auto md:text-xl">
+            <p className="body-1 text-white/70 w-full md:w-[90%] mx-auto md:text-xl">
               HIAIDO is a powerful AI platform designed to revolutionize your
               cloud operations, seamlessly automating tasks and amplifying
               efficiency.
@@ -125,7 +125,10 @@ const Hero = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-20 space-y-4">
+          <form
+            onSubmit={handleSubmit}
+            className="text-start flex flex-col items-center mt-20 space-y-4"
+          >
             <p className="type1 lg:text-2xl md:text-sm text-xs font-bold">
               &quot;welcome to the future of automation with HIAIDO&quot;
             </p>
