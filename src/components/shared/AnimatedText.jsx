@@ -47,9 +47,13 @@ const AnimatedText = ({ text }) => {
   }, [intervalId]);
 
   return (
-    <span onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <p
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="md:py-2 w-full h-full py-1 rounded-full"
+    >
       {displayText || text}
-    </span>
+    </p>
   );
 };
 

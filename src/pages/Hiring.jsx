@@ -1,25 +1,106 @@
 import "../index.css";
-import Button from "../components/Buttons/Button";
-import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getCountryCallingCode } from "libphonenumber-js";
+import countries from "i18n-iso-countries";
+import en from "i18n-iso-countries/langs/en.json";
+import AnimatedText from "../components/shared/AnimatedText";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+countries.registerLocale(en);
+
+const countryCodes = countries.getAlpha2Codes();
+const countryList = Object.keys(countryCodes).map((code) => {
+  const name = countries.getName(code, "en");
+  let dialCode;
+  try {
+    dialCode = getCountryCallingCode(code);
+  } catch (error) {
+    console.error(`Failed to get dial code for country ${code}: ${error}`);
+    dialCode = "N/A";
+  }
+  return { code, name, dialCode };
+});
 
 const Hiring = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Hiaido | Hiring";
     window.scrollTo(0, 0);
   }, []);
 
+  const [isLoader, setIsLoader] = useState(false);
+  const [error, setError] = useState({});
   const [formData, setFormData] = useState({
-    floating_email: "",
-    floating_last_name: "",
-    floating_first_name: "",
-    countryCode: "",
-    floating_phone: "",
-    filename: "",
+    email: "",
+    last_name: "",
+    first_name: "",
+    country_code: "",
+    phone: "",
+    document: null,
   });
 
+  if (isLoader) {
+    console.log("Form submitting..");
+  }
+
+  const checkEmail = () => {
+    var isValid = true;
+    let err = {};
+
+    if (!formData.first_name || !formData?.first_name?.trim()) {
+      isValid = false;
+      err["first_name_err"] = "Please enter first name!";
+    }
+
+    if (!formData.document) {
+      isValid = false;
+      err["document_err"] = "Please select a file!";
+    }
+
+    if (!formData.last_name || !formData?.last_name?.trim()) {
+      isValid = false;
+      err["last_name_err"] = "Please enter last name!";
+    }
+
+    if (!formData.email || !formData.email.trim()) {
+      isValid = false;
+      err["email_err"] = "Please enter the email!";
+    } else if (typeof formData.email !== "undefined") {
+      let lastAtPos = formData.email.lastIndexOf("@");
+      let lastDotPos = formData.email.lastIndexOf(".");
+      if (
+        !(
+          lastAtPos < lastDotPos &&
+          lastAtPos > 0 &&
+          formData.email.indexOf("@@") === -1 &&
+          lastDotPos > 2 &&
+          formData.email?.length - lastDotPos > 2
+        )
+      ) {
+        isValid = false;
+        err["email_err"] = "Email is not valid!";
+      }
+    }
+
+    if (!formData.phone) {
+      isValid = false;
+      err["phone_err"] = "Please enter phone number!";
+    } else if (!/^\d{8,}$/.test(formData.phone)) {
+      isValid = false;
+      err["phone_err"] = "Enter valid phone number!";
+    }
+
+    setError(err);
+
+    return isValid;
+  };
+
   const handleInputChange = (event) => {
+    event.preventDefault();
     const { name, value } = event.target;
     setFormData({
       ...formData,
@@ -29,88 +110,153 @@ const Hiring = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Do something with the form data, for example, send it to a server
-    console.log(formData);
-    // Reset form fields
-    setFormData({
-      formData,
-    });
+
+    if (checkEmail()) {
+      setIsLoader(true);
+      const bodyFormData = new FormData();
+      bodyFormData.append("email", formData.email);
+      bodyFormData.append("first_name", formData.first_name);
+      bodyFormData.append("last_name", formData.last_name);
+      bodyFormData.append("country_code", formData.country_code);
+      bodyFormData.append("phone", formData.phone);
+      bodyFormData.append("document", formData.document);
+
+      console.log(bodyFormData);
+
+      axios({
+        method: "POST",
+        url: "https://api.hiaido.com/public/api/hiringData",
+        data: bodyFormData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((response) => {
+          if (response?.data.status === true) {
+            refreshPage();
+            setIsLoader(false);
+            toast.success(response?.data.message);
+
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
+          } else {
+            toast.error("Something went wrong!");
+          }
+        })
+        .catch((err) => {
+          refreshPage();
+          setIsLoader(false);
+          console.error("Error while saving data" + err);
+          toast.error("Internal Server Error!");
+
+          return;
+        });
+    }
   };
 
   const refreshPage = () => {
-    toast("Details submitted Successfully");
-    window.location.href = "/";
+    setFormData({
+      email: "",
+      last_name: "",
+      first_name: "",
+      country_code: "",
+      phone: "",
+      document: null,
+    });
+  };
+
+  const handleFile = (e) => {
+    if (e?.target?.files[0]) {
+      const allowedTypes = ["application/msword", "application/pdf"];
+      const fileType = e.target.files[0].type;
+
+      if (allowedTypes.includes(fileType)) {
+        setFormData({ ...formData, document: e.target.files[0] });
+      } else {
+        toast.error("Invalid file type. Only PDF, DOC Files are allowed.");
+      }
+    }
   };
 
   return (
-    <div className="lg:mt-60 min-h-screen mt-40">
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10">
-        <div
-          onChange={handleInputChange}
-          value={formData.floating_email}
-          className="group relative z-0 w-full mb-5"
+    <div className="bg-black/90">
+      <div className="md:mt-64 mt-40">
+        <form
+          onSubmit={handleSubmit}
+          className="border-orange-400/10 md:mx-auto max-w-lg p-4 mx-2 border rounded-md"
         >
-          <input
-            type="email"
-            name="floating_email"
-            id="floating_email"
-            className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
-            placeholder=" "
-            required
-          />
-          <label
-            htmlFor="floating_email"
-            className="placeholder:peer-focus:font-medium absolute text-sm text-white  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Email address
-          </label>
-        </div>
-
-        <div
-          onChange={handleInputChange}
-          value={formData.floating_first_name}
-          className="md:grid-cols-2 md:gap-6 grid"
-        >
+          {/* Email Field */}
           <div className="group relative z-0 w-full mb-5">
             <input
-              type="text"
-              name="floating_first_name"
-              id="floating_first_name"
-              className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
+              type="email"
+              name="email"
+              id="floating_email"
+              onChange={handleInputChange}
+              value={formData.email}
+              className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
               placeholder=" "
               required
             />
+            <div className="text-red-400">{error.email_err}</div>
             <label
-              htmlFor="floating_first_name"
-              className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              htmlFor="floating_email"
+              className="placeholder:peer-focus:font-medium absolute text-sm text-white  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              First name
+              Email address
             </label>
           </div>
-          <div
-            onChange={handleInputChange}
-            value={formData.floating_last_name}
-            className="group relative z-0 w-full mb-5"
-          >
-            <input
+
+          <div className="md:grid-cols-2 md:gap-6 grid">
+            {/* First Name */}
+            <div className="group relative z-0 w-full mb-5">
+              <input
+                type="text"
+                name="first_name"
+                onChange={handleInputChange}
+                value={formData.first_name}
+                id="floating_first_name"
+                className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                placeholder=" "
+                required
+              />
+              <label
+                htmlFor="floating_first_name"
+                className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                First name
+              </label>
+            </div>
+
+            {/* Last Name */}
+            <div
               type="text"
-              name="floating_last_name"
-              id="floating_last_name"
-              className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="floating_last_name"
-              className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              name="last_name"
+              onChange={handleInputChange}
+              value={formData.last_name}
+              className="group relative z-0 w-full mb-5"
             >
-              Last name
-            </label>
+              <input
+                type="text"
+                name="last_name"
+                id="floating_last_name"
+                className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                placeholder=" "
+                required
+              />
+              <label
+                htmlFor="floating_last_name"
+                className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Last name
+              </label>
+            </div>
           </div>
-        </div>
-        <div className="md:grid-cols-2 md:gap-6 grid items-center">
-          <div className="group relative z-0 w-32 mb-5">
-            <select
+
+          {/* Country Code Dropdown */}
+          <div className="md:grid-cols-2 md:gap-6 grid items-center">
+            <div className="group relative z-0 w-full mb-5">
+              {/* <select
               className="w-52 text-l text-white bg-transparent"
               onChange={handleInputChange}
               value={formData.countryCode}
@@ -802,45 +948,73 @@ const Hiring = () => {
                   Zimbabwe (+263)
                 </option>
               </optgroup>
-            </select>
+            </select> */}
+
+              <select
+                required={true}
+                onChange={handleInputChange}
+                value={formData.country_code}
+                name="country_code"
+                className="w-full text-white bg-transparent"
+              >
+                {countryList.map((country) => (
+                  <option
+                    key={country?.code}
+                    data-countryCode={country?.code}
+                    value={country?.dialCode}
+                  >
+                    {country?.name} (+{country?.dialCode})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Phone Number Field */}
+            <div className="group relative z-0 w-full mb-5">
+              <input
+                type="number"
+                pattern="[8-14]"
+                name="phone"
+                onChange={handleInputChange}
+                value={formData.phone}
+                id="phone"
+                className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                placeholder=" "
+                required
+              />
+              <label
+                htmlFor="floating_phone"
+                className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Phone number
+              </label>
+            </div>
           </div>
-          <div
-            onChange={handleInputChange}
-            value={formData.floating_phone}
-            className="group relative z-0 w-full mb-5"
-          >
-            <input
-              type="tel"
-              pattern="[8-14]"
-              name="floating_phone"
-              id="floating_phone"
-              className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="floating_phone"
-              className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+
+          {/* Document/File */}
+          <input
+            onChange={handleFile}
+            type="file"
+            id="myFile"
+            name="document"
+            // required
+            className="bg-orange-400/10 w-full"
+          />
+
+          <div className="mt-1 text-xs text-red-400">{error.document_err}</div>
+
+          {/* Form Submission Button */}
+          <div className="mt-10">
+            <button
+              type="submit"
+              className="bg-orange-500/80 w-full font-semibold rounded-full"
             >
-              Phone number
-            </label>
+              <AnimatedText text="Submit" className="w-full border" />
+            </button>
+            <ToastContainer />
           </div>
-        </div>
-        <input
-          onChange={handleInputChange}
-          value={formData.filename}
-          type="file"
-          id="myFile"
-          name="filename"
-          required
-        />
-        <div>
-          <Button type="submit" onClick={refreshPage} className=" lg:flex mt-8">
-            Submit
-          </Button>
-          <ToastContainer />
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
