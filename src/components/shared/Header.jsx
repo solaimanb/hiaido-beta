@@ -31,17 +31,12 @@ const Header = () => {
   };
 
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const [navBarVisible, setNavBarVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollTop =
         window.scrollY || document.documentElement.scrollTop;
-      if (currentScrollTop < lastScrollTop) {
-        setNavBarVisible(true);
-      } else {
-        setNavBarVisible(false);
-      }
+
       setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
     };
 
@@ -56,25 +51,24 @@ const Header = () => {
   ];
 
   return (
-    <div
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-md h-20 lg:h-24 py-6 px-4 lg:px-0 ${
-        navBarVisible ? "" : "-translate-y-full "
-      }`}
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl py-3 px-4 lg:px-0
+      `}
     >
       <div className="container flex items-center justify-between w-full px-0">
-        <div className="z-50 flex items-center">
+        <div className="gap-x-10 z-50 flex items-center">
           <NavLink className="w-fit block" to="/">
-            <img src={hiaido} alt="hiaido" className="md:w-40 w-24" />
+            <img src={hiaido} alt="hiaido" className="md:w-48 w-28" />
           </NavLink>
 
           <nav className="lg:block hidden">
-            <ul className="gap-x-10 flex">
+            <ul className="gap-x-1 flex">
               {navItems.map((item, index) => (
                 <li
                   key={index}
                   className="w-32 font-semibold text-center text-orange-400"
                 >
-                  <Link to={item?.path} className="uppercase">
+                  <Link to={item?.path} className="">
                     <AnimatedText text={` ${item?.name}`} />
                   </Link>
                 </li>
@@ -97,7 +91,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="horizon-bar opacity-30 container h-[1px] mt-6 bg-orange-400" />
+      {/* <div className="horizon-bar opacity-30 container h-[1px] bg-orange-400" /> */}
 
       {/* Small Screen Toggle Nav */}
       <nav
@@ -118,8 +112,6 @@ const Header = () => {
               <MenuSvg openNavigation={openNavigation} />
             </button>
           </div>
-
-          <div className="horizon-bar opacity-30 container h-[1px] mt-6 bg-orange-400" />
 
           <div className="pt-4 space-y-6">
             {navigation.map((item) => (
@@ -144,12 +136,12 @@ const Header = () => {
         <div className="space-y-2">
           <div className="horizon-bar opacity-30 h-[1px] bg-orange-400" />
 
-          <p className=" lg:block text-white/80 text-xs font-semibold">
+          <p className="lg:block text-white/80 text-xs font-semibold">
             © {new Date().getFullYear()} HIAIDO All rights reserved.
           </p>
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 
