@@ -1,4 +1,3 @@
-import Header from "../components/shared/Header";
 import "../index.css";
 import Button from "../components/Buttons/Button";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Hiring = () => {
   useEffect(() => {
     document.title = "Hiaido | Hiring";
+    window.scrollTo(0, 0);
   }, []);
 
   const [formData, setFormData] = useState({

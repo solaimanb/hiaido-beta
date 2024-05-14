@@ -9,6 +9,7 @@ import RootLayout from "./layouts/RootLayout";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   // useEffect(() => {
@@ -35,7 +36,6 @@ const App = () => {
           </Route>
 
           {/* Others */}
-          <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
 
           {/* Not Found */}
@@ -44,6 +44,7 @@ const App = () => {
       </div>
 
       <ButtonGradient />
+      <ToastContainer />
     </>
   );
 };

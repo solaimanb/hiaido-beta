@@ -78,9 +78,11 @@ const Header = () => {
         </div>
 
         <div className=" flex items-center justify-center gap-8 px-5">
-          <AnimatedBtn className="lg:flex hidden font-semibold" href="/login">
-            Sign In
-          </AnimatedBtn>
+          <Link to="/login">
+            <AnimatedBtn className="lg:flex hidden font-semibold">
+              Sign In
+            </AnimatedBtn>
+          </Link>
 
           <button
             className={`${openNavigation ? "hidden" : ""} lg:hidden ml-auto`}

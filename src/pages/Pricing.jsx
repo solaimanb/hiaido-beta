@@ -7,6 +7,7 @@ import { useEffect } from "react";
 const Pricing = () => {
   useEffect(() => {
     document.title = "Hiaido | Subscription";
+    window.scrollTo(0, 0);
   }, []);
 
   return (

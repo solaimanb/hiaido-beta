@@ -1,8 +1,15 @@
-import email from "../../../assets/images/email.png";
-import phone from "../../../assets/images/phone.png";
-import admin from "../../../assets/images/admin.png";
-import place from "../../../assets/images/place.png";
-import AnimatedText from "../../shared/AnimatedText";
+import email from "../../assets/images/email.png";
+import phone from "../../assets/images/phone.png";
+import admin from "../../assets/images/admin.png";
+import place from "../../assets/images/place.png";
+
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+import axios from "axios";
+
+import AnimatedText from "./AnimatedText";
 
 // Contact Details:
 const contactDetails = [
@@ -26,6 +33,120 @@ const contactDetails = [
 ];
 
 const Contact = () => {
+  const navigate = useNavigate();
+  const [isLoader, setIsLoader] = useState(false);
+  const [error, setError] = useState({});
+  const [formData, setFormData] = useState({
+    last_name: "",
+    first_name: "",
+    email: "",
+    messages: "",
+  });
+
+  if (isLoader) {
+    console.log("Form submitting..");
+  }
+
+  useEffect(() => {
+    document.title = "Hiaido | Contact Us";
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleInputChange = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const checkEmail = () => {
+    var isValid = true;
+    let err = {};
+    if (!formData.first_name || !formData?.first_name?.trim()) {
+      isValid = false;
+      err["first_name_err"] = "Please enter first name!";
+    }
+
+    if (!formData.last_name || !formData?.last_name?.trim()) {
+      isValid = false;
+
+      err["last_name_err"] = "Please enter last name!";
+    }
+
+    if (!formData.email || !formData?.email?.trim()) {
+      isValid = false;
+      err["email_err"] = "Please enter email!";
+    } else if (typeof formData.email !== "undefined") {
+      let lastAtPos = formData.email.lastIndexOf("@");
+      let lastDotPos = formData.email.lastIndexOf(".");
+      if (
+        !(
+          lastAtPos < lastDotPos &&
+          lastAtPos > 0 &&
+          formData.email.indexOf("@@") === -1 &&
+          lastDotPos > 2 &&
+          formData.email?.length - lastDotPos > 2
+        )
+      ) {
+        isValid = false;
+        err["email_err"] = "Email is not valid!";
+      }
+    }
+    setError(err);
+    return isValid;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (checkEmail()) {
+      setIsLoader(true);
+      const bodyFormData = new FormData();
+      bodyFormData.append("email", formData.email);
+      bodyFormData.append("first_name", formData.first_name);
+      bodyFormData.append("last_name", formData.last_name);
+      bodyFormData.append("messages", formData.messages);
+
+      console.log(bodyFormData);
+
+      axios({
+        method: "POST",
+        url: "https://api.hiaido.com/public/api/contactUsData",
+        data: bodyFormData,
+      })
+        .then((response) => {
+          if (response?.data.status === true) {
+            setIsLoader(false);
+            toast.success(response?.data.message);
+            refreshPage();
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
+          } else {
+            setIsLoader(false);
+            toast.error("Something went wrong!");
+          }
+        })
+        .catch((err) => {
+          setIsLoader(false);
+          console.error("Error while saving data" + err);
+          toast.error("Internal Server Error!");
+          refreshPage();
+          return;
+        });
+    }
+  };
+
+  const refreshPage = () => {
+    setFormData({
+      email: "",
+      last_name: "",
+      first_name: "",
+      messages: "",
+    });
+  };
+
   return (
     <div className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/5 to-black border-orange-400/10 lg:p-10 relative w-full md:w-[95%] py-10 mx-auto text-center border">
       <div className="">
@@ -88,7 +209,10 @@ const Contact = () => {
         </div>
 
         {/* Contact Form */}
-        <form className="sm:pb-32 lg:px-8 lg:py-32 px-2 pt-20 pb-24">
+        <form
+          onSubmit={handleSubmit}
+          className="sm:pb-32 lg:px-8 lg:py-32 px-2 pt-20 pb-24"
+        >
           <div className="lg:mr-0 lg:max-w-lg max-w-xl mx-auto">
             <div className="gap-x-8 gap-y-6 sm:grid-cols-2 grid grid-cols-1">
               <div>
@@ -105,9 +229,14 @@ const Contact = () => {
                     id="first-name"
                     autoComplete="given-name"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
-                    name="firstName"
+                    name="first_name"
                     placeholder="Kelsey"
+                    value={formData.first_name}
+                    onChange={handleInputChange}
                   />
+                  <div className="text-start mt-1 text-xs text-red-400">
+                    {error.first_name_err}
+                  </div>
                 </div>
               </div>
 
@@ -124,9 +253,14 @@ const Contact = () => {
                     id="last-name"
                     autoComplete="family-name"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
-                    name="lastName"
+                    name="last_name"
                     placeholder="Turner"
+                    value={formData.last_name}
+                    onChange={handleInputChange}
                   />
+                  <div className="text-start mt-1 text-xs text-red-400">
+                    {error.last_name_err}
+                  </div>
                 </div>
               </div>
 
@@ -145,7 +279,12 @@ const Contact = () => {
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="email"
                     placeholder="turner@gmail.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
                   />
+                  <div className="text-start mt-1 text-xs text-red-400">
+                    {error.email_err}
+                  </div>
                 </div>
               </div>
 
@@ -161,8 +300,10 @@ const Contact = () => {
                     id="message"
                     rows="4"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
-                    name="message"
+                    name="messages"
                     placeholder="Write your message here..."
+                    value={formData.messages}
+                    onChange={handleInputChange}
                   ></textarea>
                 </div>
               </div>
@@ -171,7 +312,6 @@ const Contact = () => {
             <div className="md:justify-end flex justify-center mt-8">
               <button
                 className="bg-orange-500/80 md:w-fit w-full px-4 py-2 font-semibold rounded-full"
-                onClick={() => SubmitEvent()}
                 type="submit"
               >
                 <AnimatedText text="Send message" />

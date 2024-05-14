@@ -1,14 +1,14 @@
-import { curve } from "../assets";
-import Section from "./Section";
+import { curve } from "../../../assets";
+import Section from "../../Section";
 import "react-toastify/dist/ReactToastify.css";
 import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PointMaterial, Points } from "@react-three/drei";
-import "../index.css";
 import * as random from "maath/random/dist/maath-random.esm";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import AnimatedText from "./shared/AnimatedText";
+import AnimatedText from "../../shared/AnimatedText";
+import axios from "axios";
 
 function Stars(props) {
   const ref = useRef();
@@ -44,31 +44,69 @@ function Stars(props) {
 }
 
 const Hero = () => {
-  const [data, setData] = useState({
-    request_email: "",
-  });
+  const [data, setData] = useState("");
+  const [isLoader, setIsLoader] = useState(false);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+  if (isLoader) {
+    console.log("submitting request..", isLoader);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(data);
+    if (checkEmail()) {
+      setIsLoader(true);
+      const bodyFormData = new FormData();
+      bodyFormData.append("email", data);
 
-    setData({
-      data,
-    });
+      axios({
+        method: "POST",
+        url: "https://api.hiaido.com/public/api/demo",
+        data: bodyFormData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((response) => {
+          if (response?.data.status === true) {
+            setIsLoader(false);
+            console.log(response.data);
+            toast.success(response?.data.message);
+            setData("");
+          } else {
+            setIsLoader(false);
+            toast.error("Something went wrong!");
+          }
+        })
+        .catch((err) => {
+          setIsLoader(false);
+          console.error("Error while saving data" + err);
+          toast.error("Internal Server Error!");
+        });
+    }
   };
 
-  const refreshPage = () => {
-    toast("Details submitted Successfully");
-    window.location.href = "/";
+  const checkEmail = () => {
+    var isValid = true;
+
+    if (typeof data !== "undefined") {
+      let lastAtPos = data.lastIndexOf("@");
+      let lastDotPos = data.lastIndexOf(".");
+      if (
+        !(
+          lastAtPos < lastDotPos &&
+          lastAtPos > 0 &&
+          data.indexOf("@@") === -1 &&
+          lastDotPos > 2 &&
+          data?.length - lastDotPos > 2
+        )
+      ) {
+        isValid = false;
+        toast.error("Email is not valid");
+      }
+    }
+
+    return isValid;
   };
 
   return (
@@ -139,16 +177,15 @@ const Hero = () => {
               className="md:flex-row flex flex-col items-center justify-center gap-4"
             >
               <input
-                onChange={handleInputChange}
+                onChange={(e) => setData(e.target.value.replace(/\s/g, " "))}
                 className="input-placeholder decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80 md:py-2 py-1 pl-6 font-semibold rounded-full"
                 type="text"
                 placeholder="hiaido@gmail.com"
               />
 
               <button
-                className="bg-orange-500/80 w-44 md:py-2 px-4 py-1 font-semibold rounded-full"
-                onClick={refreshPage}
                 type="submit"
+                className="bg-orange-500/80 w-44 md:py-2 px-4 py-1 font-semibold rounded-full"
               >
                 <AnimatedText text="Request Demo" />
               </button>

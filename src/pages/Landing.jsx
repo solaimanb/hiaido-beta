@@ -1,6 +1,6 @@
-import Hero from "../components/Hero";
 import Benefits from "../components/page-components/homepage/Benefits";
-import Contact from "../components/page-components/homepage/Contact";
+import Hero from "../components/page-components/homepage/Hero";
+import Contact from "../components/shared/Contact";
 
 const Landing = () => {
   return (

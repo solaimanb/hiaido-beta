@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Contact from "../components/page-components/homepage/Contact";
+import Contact from "../components/shared/Contact";
 
 const ContactUs = () => {
   useEffect(() => {
