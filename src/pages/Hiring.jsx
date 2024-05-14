@@ -256,7 +256,78 @@ const Hiring = () => {
           {/* Country Code Dropdown */}
           <div className="md:grid-cols-2 md:gap-6 grid items-center">
             <div className="group relative z-0 w-full mb-5">
-              {/* <select
+              <select
+                required={true}
+                onChange={handleInputChange}
+                value={formData.country_code}
+                name="country_code"
+                className="w-full text-white bg-transparent"
+              >
+                {countryList.map((country) => (
+                  <option
+                    key={country?.code}
+                    data-countrycode={country?.code}
+                    value={country?.dialCode}
+                  >
+                    {country?.name} (+{country?.dialCode})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Phone Number Field */}
+            <div className="group relative z-0 w-full mb-5">
+              <input
+                type="number"
+                pattern="[8-14]"
+                name="phone"
+                onChange={handleInputChange}
+                value={formData.phone}
+                id="phone"
+                className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                placeholder=" "
+                required
+              />
+              <label
+                htmlFor="floating_phone"
+                className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Phone number
+              </label>
+            </div>
+          </div>
+
+          {/* Document/File */}
+          <input
+            onChange={handleFile}
+            type="file"
+            id="myFile"
+            name="document"
+            // required
+            className="bg-orange-400/10 w-full"
+          />
+
+          <div className="mt-1 text-xs text-red-400">{error.document_err}</div>
+
+          {/* Form Submission Button */}
+          <div className="mt-10">
+            <button
+              type="submit"
+              className="bg-orange-500/80 w-full font-semibold rounded-full"
+            >
+              <AnimatedText text="Submit" className="w-full border" />
+            </button>
+            <ToastContainer />
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+export default Hiring;
+
+{
+  /* <select
               className="w-52 text-l text-white bg-transparent"
               onChange={handleInputChange}
               value={formData.countryCode}
@@ -948,74 +1019,5 @@ const Hiring = () => {
                   Zimbabwe (+263)
                 </option>
               </optgroup>
-            </select> */}
-
-              <select
-                required={true}
-                onChange={handleInputChange}
-                value={formData.country_code}
-                name="country_code"
-                className="w-full text-white bg-transparent"
-              >
-                {countryList.map((country) => (
-                  <option
-                    key={country?.code}
-                    data-countryCode={country?.code}
-                    value={country?.dialCode}
-                  >
-                    {country?.name} (+{country?.dialCode})
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Phone Number Field */}
-            <div className="group relative z-0 w-full mb-5">
-              <input
-                type="number"
-                pattern="[8-14]"
-                name="phone"
-                onChange={handleInputChange}
-                value={formData.phone}
-                id="phone"
-                className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
-                placeholder=" "
-                required
-              />
-              <label
-                htmlFor="floating_phone"
-                className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Phone number
-              </label>
-            </div>
-          </div>
-
-          {/* Document/File */}
-          <input
-            onChange={handleFile}
-            type="file"
-            id="myFile"
-            name="document"
-            // required
-            className="bg-orange-400/10 w-full"
-          />
-
-          <div className="mt-1 text-xs text-red-400">{error.document_err}</div>
-
-          {/* Form Submission Button */}
-          <div className="mt-10">
-            <button
-              type="submit"
-              className="bg-orange-500/80 w-full font-semibold rounded-full"
-            >
-              <AnimatedText text="Submit" className="w-full border" />
-            </button>
-            <ToastContainer />
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-};
-export default Hiring;
+            </select> */
+}

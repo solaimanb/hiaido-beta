@@ -7,7 +7,7 @@ const ContactUs = () => {
   }, []);
 
   return (
-    <div className="lg:mt-60 mt-40">
+    <div className="mt-40">
       <Contact />
     </div>
   );
