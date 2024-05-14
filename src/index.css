@@ -213,7 +213,6 @@ input[type="file"]::file-selector-button:active {
 .gradient-bg {
   background: linear-gradient(270deg, #df6336, rgba(255, 253, 251, 0.507));
   background-size: 200% 200%;
-  /* animation: gradient 3s ease-in-out infinite; */
 }
 
 @keyframes gradient {
@@ -255,4 +254,8 @@ input[type="file"]::file-selector-button:active {
   opacity: 0.4;
   color: #ffffff;
   font-weight: 500;
+}
+
+input:focus::placeholder {
+  color: transparent;
 }
