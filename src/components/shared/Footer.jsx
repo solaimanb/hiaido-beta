@@ -5,12 +5,12 @@ const Footer = () => {
     <section className="min-h-[40vh] flex">
       <div className="bg-gradient-to-r from-black via-orange-400/15 to-black border-orange-400/20 md:flex-row container flex flex-col items-center justify-between w-full pt-6 pb-4 mx-auto mt-auto space-y-4 border-t">
         <p className="lg:block text-white/80 text- font-semibold uppercase">
-          Made with ❤️ in India
+          Made with <span className="text-red-600">❤️</span> in India
         </p>
 
         <NavLink
           to="/privacy"
-          className="lg:block text-white/60 text-xs font-semibold text-center"
+          className="lg:block text-white/60 underline-offset-2 text-xs font-semibold text-center underline"
         >
           Privacy Policy
         </NavLink>

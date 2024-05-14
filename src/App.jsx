@@ -5,16 +5,12 @@ import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import Login from "./components/Login";
 import Privacy from "./components/Privacy";
-// import { useEffect, useState } from "react";
-// import Loading from "./components/Loading";
 import Landing from "./pages/Landing";
 import RootLayout from "./layouts/RootLayout";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 
 const App = () => {
-  // const [isLoading, setIsLoading] = useState(true);
-
   // useEffect(() => {
   //   // Smooth Scroll Trigger:
   //   (async () => {
@@ -23,18 +19,6 @@ const App = () => {
   //     const locomotiveScroll = new LocomotiveScroll();
   //   })();
   // }, []);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
 
   return (
     <>

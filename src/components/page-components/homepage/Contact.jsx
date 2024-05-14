@@ -38,20 +38,20 @@ const Contact = () => {
     >
       <div className="">
         <div className="relative flex items-center justify-center">
-          <h1 className="md:text-9xl opacity-10 text-7xl font-bold text-orange-400 uppercase">
+          <h1 className="md:text-9xl opacity-10 text-6xl font-bold text-orange-400 uppercase">
             Contact
           </h1>
 
-          <h2 className="text-orange-500/90 md:text-5xl absolute top-0 flex items-center justify-center w-full h-full mx-auto text-3xl font-bold">
+          <h2 className="text-orange-500/90 md:text-6xl absolute top-0 flex items-center justify-center w-full h-full mx-auto text-3xl font-bold">
             Get In Touch
           </h2>
         </div>
       </div>
 
-      <div className="lg:grid-cols-2 grid grid-cols-1 mx-auto">
-        <div className="lg:static lg:px-8 lg:py-32 relative px-6">
-          <div className="lg:mx-0 lg:max-w-lg lg:text-start max-w-xl mx-auto text-center">
-            <p className="text-white/60 text-lg font-semibold leading-8">
+      <div className="lg:grid-cols-2 grid grid-cols-1 mx-auto mt-4">
+        <div className="lg:px-8 lg:py-32 relative px-1">
+          <div className="lg:mx-0 lg:max-w-lg lg:text-start mx-auto text-center">
+            <p className="text-white/60 text-lg font-[500] md:font-semibold leading-8">
               Need to get in touch with us? Either fill out the form with your
               details or reach out to us directly via email or phone. We&apos;re
               always here to help and answer any questions you might have.
@@ -96,7 +96,7 @@ const Contact = () => {
         </div>
 
         {/* Contact Form */}
-        <form className="sm:pb-32 lg:px-8 lg:py-32 px-6 pt-20 pb-24">
+        <form className="sm:pb-32 lg:px-8 lg:py-32 px-2 pt-20 pb-24">
           <div className="lg:mr-0 lg:max-w-lg max-w-xl mx-auto">
             <div className="gap-x-8 gap-y-6 sm:grid-cols-2 grid grid-cols-1">
               <div>

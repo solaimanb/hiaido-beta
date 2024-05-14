@@ -4,7 +4,7 @@ import Contact from "../components/page-components/homepage/Contact";
 
 const Landing = () => {
   return (
-    <div className="bg-black/90 min-h-screen overflow-hidden">
+    <div className="bg-black/90 min-h-screen px-2 overflow-hidden">
       <Hero />
       <Benefits />
       <Contact />
