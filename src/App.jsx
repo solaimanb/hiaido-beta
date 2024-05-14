@@ -3,12 +3,12 @@ import Hiring from "./pages/Hiring";
 
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
-import Login from "./components/Login";
 import Privacy from "./pages/Privacy";
 import Landing from "./pages/Landing";
 import RootLayout from "./layouts/RootLayout";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
+import Login from "./pages/Login";
 
 const App = () => {
   // useEffect(() => {

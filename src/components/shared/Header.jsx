@@ -115,9 +115,9 @@ const Header = () => {
 
           <div className="pt-4 space-y-6">
             {navigation.map((item) => (
-              <NavLink
+              <Link
                 key={item?.id}
-                href={item?.path}
+                to={item?.to}
                 onClick={handleClick}
                 className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold ${
                   item?.onlyMobile ? "lg:hidden" : ""
@@ -128,7 +128,7 @@ const Header = () => {
                 }`}
               >
                 {item?.title}
-              </NavLink>
+              </Link>
             ))}
           </div>
         </div>
