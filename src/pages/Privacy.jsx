@@ -1,14 +1,16 @@
+import { useEffect } from "react";
 import { hiaido } from "../assets";
-import Header from "./shared/Header";
-import Footer from "./shared/Footer";
 
 const Privacy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <>
-      <Header />
-      <div className="flex mb-5 mr-10 max-w-[55rem]  gap-8 justify-start text-justify whitespace-normal  items-center flex-col ml-10 lg:ml-72 mt-72">
+    <div className="bg-black/90 min-h-screen overflow-hidden">
+      <div className="md:mt-40 max-w-4xl mx-auto mt-20 space-y-4">
         <div>
-          <div>
+          <div className="flex justify-center">
             <img
               className="mb-5"
               src={hiaido}
@@ -17,7 +19,8 @@ const Privacy = () => {
               alt="hiaido"
             />
           </div>
-          <h1 className=" font-bold text-xl ">Privacy Policy</h1>
+
+          <h1 className=" text-xl font-bold">Privacy Policy</h1>
           <p className="font-roboto ">
             At HIAIDO, we are committed to protecting your privacy and ensuring
             the security of your personal information. This Privacy Policy
@@ -25,10 +28,9 @@ const Privacy = () => {
             our website or use our services.
           </p>
         </div>
+
         <div>
-          <h1 className=" font-bold text-xl ">
-            Information Collection and Use
-          </h1>
+          <h1 className=" text-xl font-bold">Information Collection and Use</h1>
           <p className="font-roboto ">
             We collect personal information such as name, email address, and
             contact details when you sign up for our services or interact with
@@ -37,7 +39,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Data Security</h1>
+          <h1 className=" text-xl font-bold">Data Security</h1>
           <p className="font-roboto ">
             We implement industry-standard security measures to protect your
             personal information from unauthorized access, alteration,
@@ -46,7 +48,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Cookie Policy</h1>
+          <h1 className=" text-xl font-bold">Cookie Policy</h1>
           <p className="font-roboto ">
             We use cookies and similar tracking technologies to enhance your
             browsing experience and analyze website traffic. By using our
@@ -55,7 +57,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Data Retention</h1>
+          <h1 className=" text-xl font-bold">Data Retention</h1>
           <p className="font-roboto ">
             We retain your personal information only for as long as necessary to
             fulfill the purposes outlined in this Privacy Policy or as required
@@ -63,7 +65,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Changes to This Policy</h1>
+          <h1 className=" text-xl font-bold">Changes to This Policy</h1>
           <p className="font-roboto ">
             We may update this Privacy Policy from time to time to reflect
             changes in our practices or legal requirements. We encourage you to
@@ -76,7 +78,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Terms and Conditions</h1>
+          <h1 className=" text-xl font-bold">Terms and Conditions</h1>
           <p className="font-roboto ">
             Welcome to HIAIDO! By accessing our website and using our services,
             you agree to comply with these Terms and Conditions. Please read
@@ -84,9 +86,9 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Service Availability</h1>
+          <h1 className=" text-xl font-bold">Service Availability</h1>
           <p className="font-roboto ">
-            HIAIDO's cloud automation platform is open to users of all
+            HIAIDO&apos;s cloud automation platform is open to users of all
             backgrounds and ages. We welcome individuals from diverse
             communities and cultures to utilize our services. Our platform is
             inclusive and aims to empower users worldwide to harness the power
@@ -95,7 +97,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">User Conduct</h1>
+          <h1 className=" text-xl font-bold">User Conduct</h1>
           <p className="font-roboto ">
             You agree to use our services for lawful purposes and in compliance
             with all applicable laws and regulations. You shall not engage in
@@ -104,7 +106,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Intellectual Property</h1>
+          <h1 className=" text-xl font-bold">Intellectual Property</h1>
           <p className="font-roboto ">
             All content and materials provided on our website and within our
             services, including but not limited to text, graphics, logos, and
@@ -113,16 +115,17 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Disclaimer of Warranties</h1>
+          <h1 className=" text-xl font-bold">Disclaimer of Warranties</h1>
           <p className="font-roboto ">
-            Our services are provided on an "as is" and "as available" basis
-            without warranties of any kind, whether express or implied. We make
-            no representations or warranties regarding the accuracy,
-            reliability, or completeness of the content provided.
+            Our services are provided on an &quote;as is&quote; and &quote;as
+            available&quote; basis without warranties of any kind, whether
+            express or implied. We make no representations or warranties
+            regarding the accuracy, reliability, or completeness of the content
+            provided.
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Limitation of Liability</h1>
+          <h1 className=" text-xl font-bold">Limitation of Liability</h1>
           <p className="font-roboto ">
             In no event shall HIAIDO or its affiliates be liable for any
             indirect, incidental, special, or consequential damages arising out
@@ -131,7 +134,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Governing Law</h1>
+          <h1 className=" text-xl font-bold">Governing Law</h1>
           <p className="font-roboto ">
             These Terms and Conditions shall be governed by and construed in
             accordance with{" "}
@@ -145,7 +148,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h1 className=" font-bold text-xl ">Contact Us</h1>
+          <h1 className=" text-xl font-bold">Contact Us</h1>
           <p className="font-roboto ">
             If you have any questions or concerns about these Terms and
             Conditions, please contact us at{" "}
@@ -155,8 +158,7 @@ const Privacy = () => {
           </p>
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 export default Privacy;

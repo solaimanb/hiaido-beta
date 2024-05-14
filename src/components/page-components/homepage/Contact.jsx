@@ -1,5 +1,3 @@
-// import gridline from "../../../assets/gridline.svg";
-
 import email from "../../../assets/images/email.png";
 import phone from "../../../assets/images/phone.png";
 import admin from "../../../assets/images/admin.png";
@@ -29,13 +27,7 @@ const contactDetails = [
 
 const Contact = () => {
   return (
-    <div
-      // style={{
-      //   backgroundImage: `url(${gridline})`,
-      //   backgroundRepeat: "repeat",
-      // }}
-      className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/5 to-black border-orange-400/10 lg:p-10 relative w-full md:w-[95%] py-10 mx-auto text-center border"
-    >
+    <div className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/5 to-black border-orange-400/10 lg:p-10 relative w-full md:w-[95%] py-10 mx-auto text-center border">
       <div className="">
         <div className="relative flex items-center justify-center">
           <h1 className="md:text-9xl opacity-10 text-6xl font-bold text-orange-400 uppercase">

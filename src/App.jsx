@@ -4,7 +4,7 @@ import Hiring from "./pages/Hiring";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import Login from "./components/Login";
-import Privacy from "./components/Privacy";
+import Privacy from "./pages/Privacy";
 import Landing from "./pages/Landing";
 import RootLayout from "./layouts/RootLayout";
 import NotFound from "./pages/NotFound";
@@ -30,14 +30,13 @@ const App = () => {
             <Route path="hiring" element={<Hiring />} />
             <Route path="contact" element={<ContactUs />} />
             <Route path="pricing" element={<Pricing />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/hiring" element={<Hiring />} />
           </Route>
 
           {/* Others */}
-          <Route path="/hiring" element={<Hiring />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/privacy" element={<Privacy />} />
 
           {/* Not Found */}
           <Route path="*" element={<NotFound />} />
