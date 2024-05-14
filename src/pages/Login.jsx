@@ -9,8 +9,8 @@ const Login = () => {
 
   return (
     <section className="bg-black/90 flex items-center justify-center w-full h-full min-h-screen p-4">
-      <div className="md:flex-row border-orange-400/10 backdrop-blur-sm flex flex-col items-center w-full h-[96vh] border rounded-lg space-y-6">
-        <div className=" lg:flex md:w-1/2 xl:w-2/3 flex items-center justify-center w-full p-10">
+      <div className="md:flex-row border-orange-400/10 backdrop-blur-sm flex flex-col items-center w-full h-[96vh] border rounded-lg space-y-6 md:space-y-0">
+        <div className="lg:flex md:w-1/2 xl:w-2/3 flex items-center justify-center w-full p-10">
           <div>
             <img src={hiaido} alt="logo" width={400} />
           </div>
