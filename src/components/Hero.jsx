@@ -135,7 +135,7 @@ const Hero = () => {
             >
               <input
                 onChange={handleInputChange}
-                className="decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80 py-2 pl-6 font-semibold rounded-full"
+                className="input-placeholder decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80 py-2 pl-6 font-semibold rounded-full"
                 type="text"
                 placeholder="hiaido@gmail.com"
               />

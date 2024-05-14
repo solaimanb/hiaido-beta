@@ -52,7 +52,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 lg:px-0
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
       `}
     >
       <div className="container flex items-center justify-between w-full px-0">
@@ -66,7 +66,7 @@ const Header = () => {
               {navItems.map((item, index) => (
                 <li
                   key={index}
-                  className="w-28 hover:text-orange-400/100 font-semibold text-center text-gray-300 transition-all duration-300 ease-in-out"
+                  className="w-28 hover:text-orange-400/100 font-[400] text-center text-white/70 transition-all duration-300 ease-in-out"
                 >
                   <Link to={item?.path} className="">
                     <AnimatedText text={` ${item?.name}`} />

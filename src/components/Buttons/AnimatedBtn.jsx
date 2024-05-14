@@ -13,7 +13,7 @@ const AnimatedBtn = ({
 }) => {
   return (
     <div
-      id={id || "loginAnimation"}
+      id={id || "animated-btn"}
       className={`rounded-full ${additionalClasses}`}
       style={style}
     >

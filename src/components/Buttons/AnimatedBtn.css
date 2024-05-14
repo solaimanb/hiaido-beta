@@ -1,4 +1,4 @@
-#loginAnimation {
+#animated-btn {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -8,9 +8,9 @@
   background: #352e2c;
 }
 
-#loginAnimation::before {
+#animated-btn::before {
   content: "";
-  background-image: conic-gradient(#e75a27 20deg, transparent 120deg);
+  background-image: conic-gradient(#e75a27 10deg, transparent 145deg);
   width: 350%;
   height: 400%;
   position: absolute;
@@ -19,7 +19,7 @@
   padding: 5px;
 }
 
-#loginAnimation::after {
+#animated-btn::after {
   content: "";
   width: 96%;
   height: 94%;
@@ -33,9 +33,9 @@
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(-360deg);
   }
   100% {
-    transform: rotate(-360deg);
+    transform: rotate(0deg);
   }
 }

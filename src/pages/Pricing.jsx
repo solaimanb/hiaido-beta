@@ -1,20 +1,18 @@
-import Section from "./Section";
-import Header from "./shared/Header";
-import Footer from "./shared/Footer";
-import Heading from "./Heading";
-import PricingList from "./PricingList";
-import { LeftLine, RightLine } from "./design/Pricing";
+import Section from "../components/Section";
+import Heading from "../components/Heading";
+import PricingList from "../components/PricingList";
+
 import { useEffect } from "react";
 
 const Pricing = () => {
   useEffect(() => {
     document.title = "Hiaido | Subscription";
   }, []);
+
   return (
     <>
-      <Header />
       <Section className=" mt-[2rem] overflow-hidden" id="pricing">
-        <div className="container relative z-2">
+        <div className="z-2 container relative">
           <Heading />
 
           <div className="relative">

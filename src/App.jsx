@@ -1,6 +1,5 @@
 import ButtonGradient from "./assets/svg/ButtonGradient";
 import Hiring from "./pages/Hiring";
-import Pricing from "./components/Pricing";
 
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
@@ -11,6 +10,7 @@ import Privacy from "./components/Privacy";
 import Landing from "./pages/Landing";
 import RootLayout from "./layouts/RootLayout";
 import NotFound from "./pages/NotFound";
+import Pricing from "./pages/Pricing";
 
 const App = () => {
   // const [isLoading, setIsLoading] = useState(true);
