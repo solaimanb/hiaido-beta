@@ -5,7 +5,7 @@ import place from "../../assets/images/place.png";
 
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import axios from "axios";
 
@@ -123,6 +123,7 @@ const Contact = () => {
             setTimeout(() => {
               navigate("/");
             }, 2000);
+            console.log("Data saved successfully");
           } else {
             setIsLoader(false);
             toast.error("Something went wrong!");
@@ -311,7 +312,7 @@ const Contact = () => {
 
             <div className="md:justify-end flex justify-center mt-8">
               <button
-                className="bg-orange-500/80 md:w-fit w-full px-4 py-2 font-semibold rounded-full"
+                className="bg-orange-500/80 md:w-fit w-full px-4 py-1 font-semibold rounded-full"
                 type="submit"
               >
                 <AnimatedText text="Send message" />
@@ -320,6 +321,7 @@ const Contact = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

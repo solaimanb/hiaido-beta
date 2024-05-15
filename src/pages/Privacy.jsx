@@ -78,6 +78,7 @@ const sections = [
 
 const Privacy = () => {
   useEffect(() => {
+    document.title = "Hiaido | Privacy";
     window.scrollTo(0, 0);
   }, []);
 
