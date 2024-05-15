@@ -11,8 +11,8 @@ const Landing = () => {
       {/* SEO CONTENT */}
       <Helmet>
         <title>
-          Hiaido | AI Powered Cloud Operations Automation | Cloud Automation
-          Platform India
+          Hiaido | AI Powered Cloud Automation Platform | Seamlessly automate
+          tasks, optimize resources, and drive efficiency for your business.
         </title>
         <meta
           name="description"

@@ -97,7 +97,7 @@ const Privacy = () => {
 
       {/* MAIN CONTENT */}
       <div className="bg-black/90 min-h-screen overflow-hidden">
-        <div className="md:mt-40 max-w-4xl mx-auto mt-20 space-y-4">
+        <div className="md:mt-40 max-w-4xl px-4 mx-auto mt-32 space-y-4">
           <div className="flex justify-center">
             <img
               className="mb-5"
