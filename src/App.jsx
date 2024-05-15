@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
+import { HelmetProvider } from "react-helmet-async";
 
 const App = () => {
   // useEffect(() => {
@@ -22,7 +23,7 @@ const App = () => {
   // }, []);
 
   return (
-    <>
+    <HelmetProvider>
       <div className="overflow-hidden">
         <Routes>
           {/* Root Layout */}
@@ -45,7 +46,7 @@ const App = () => {
 
       <ButtonGradient />
       <ToastContainer />
-    </>
+    </HelmetProvider>
   );
 };
 

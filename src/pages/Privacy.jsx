@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { hiaido } from "../assets";
 
 const sections = [
@@ -77,34 +77,48 @@ const sections = [
 ];
 
 const Privacy = () => {
-  useEffect(() => {
-    document.title = "Hiaido | Privacy";
-    window.scrollTo(0, 0);
-  }, []);
+  window.scrollTo(0, 0);
 
   return (
-    <div className="bg-black/90 min-h-screen overflow-hidden">
-      <div className="md:mt-40 max-w-4xl mx-auto mt-20 space-y-4">
-        <div className="flex justify-center">
-          <img
-            className="mb-5"
-            src={hiaido}
-            height={200}
-            width={200}
-            alt="hiaido"
-          />
-        </div>
+    <>
+      {/* SEO CONTENT */}
+      <Helmet>
+        <title>Hiaido | Privacy Policy</title>
+        <meta
+          name="description"
+          content="Read Hiaido's Privacy Policy. Learn how we collect, use, and protect your personal information."
+        />
+        <meta
+          name="keywords"
+          content="Hiaido, Privacy Policy, Personal Information, Data Protection"
+        />
+        <meta name="author" content="Hiaido" />
+      </Helmet>
 
-        <div className="horizon-bar opacity-30 container h-[1px] mt-4 bg-orange-400" />
-
-        {sections.map((section, index) => (
-          <div key={index}>
-            <h1 className=" text-xl font-bold">{section.title}</h1>
-            <p className="font-roboto ">{section.content}</p>
+      {/* MAIN CONTENT */}
+      <div className="bg-black/90 min-h-screen overflow-hidden">
+        <div className="md:mt-40 max-w-4xl mx-auto mt-20 space-y-4">
+          <div className="flex justify-center">
+            <img
+              className="mb-5"
+              src={hiaido}
+              height={200}
+              width={200}
+              alt="hiaido"
+            />
           </div>
-        ))}
+
+          <div className="horizon-bar opacity-30 container h-[1px] mt-4 bg-orange-400" />
+
+          {sections.map((section, index) => (
+            <div key={index}>
+              <h1 className=" text-xl font-bold">{section.title}</h1>
+              <p className="font-roboto ">{section.content}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Privacy;
