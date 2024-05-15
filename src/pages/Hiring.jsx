@@ -192,7 +192,7 @@ const Hiring = () => {
       </Helmet>
 
       {/* MAIN CONTENT */}
-      <main className="bg-black/90">
+      <div className="bg-black/90">
         <div className="md:mt-60 mt-40">
           <form
             onSubmit={handleSubmit}
@@ -1004,7 +1004,6 @@ const Hiring = () => {
               required={false}
               className="bg-orange-400/10 w-full"
             />
-
             <div className="mt-1 text-xs text-red-400">
               {error.document_err}
             </div>
@@ -1021,7 +1020,7 @@ const Hiring = () => {
             </div>
           </form>
         </div>
-      </main>
+      </div>
     </>
   );
 };

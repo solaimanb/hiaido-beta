@@ -50,7 +50,7 @@ const AnimatedText = ({ text }) => {
     <span
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="md:py-2 w-full h-full py-1 rounded-full"
+      className="md:py-2 w-full h-full py-2 rounded-full"
     >
       {displayText || text}
     </span>
