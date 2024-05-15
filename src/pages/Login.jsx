@@ -74,7 +74,7 @@ const Login = () => {
 
                 <button
                   type="submit"
-                  className="hover:bg-orange-600 focus:bg-orange-500 hover:scale-95 block w-full px-4 py-1 mt-6 font-semibold text-white transition duration-300 bg-orange-500 rounded-full"
+                  className="hover:bg-orange-600 focus:bg-orange-500 hover:scale-95 block w-full px-4 py-2 mt-6 font-semibold text-white transition duration-300 bg-orange-500 rounded-full"
                 >
                   <AnimatedText text="Login" />
                 </button>

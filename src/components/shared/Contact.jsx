@@ -4,7 +4,7 @@ import admin from "../../assets/images/admin.png";
 import place from "../../assets/images/place.png";
 
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import axios from "axios";
@@ -33,6 +33,7 @@ const contactDetails = [
 ];
 
 const Contact = () => {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [isLoader, setIsLoader] = useState(false);
   const [error, setError] = useState({});
@@ -46,11 +47,6 @@ const Contact = () => {
   if (isLoader) {
     console.log("Form submitting..");
   }
-
-  useEffect(() => {
-    document.title = "Hiaido | Contact Us";
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -312,7 +308,7 @@ const Contact = () => {
 
             <div className="md:justify-end flex justify-center mt-8">
               <button
-                className="bg-orange-500/80 md:w-fit w-full px-4 py-1 font-semibold rounded-full"
+                className="bg-orange-500/80 md:w-fit w-full px-4 py-2 font-semibold rounded-full"
                 type="submit"
               >
                 <AnimatedText text="Send message" />

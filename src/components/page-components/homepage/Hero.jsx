@@ -178,14 +178,14 @@ const Hero = () => {
             >
               <input
                 onChange={(e) => setData(e.target.value.replace(/\s/g, " "))}
-                className="input-placeholder decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80 py-3 pl-6 font-semibold rounded-full"
+                className="input-placeholder decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80 py-2 pl-6 font-semibold rounded-full"
                 type="text"
                 placeholder="hiaido@gmail.com"
               />
 
               <button
                 type="submit"
-                className="bg-orange-500/80 w-44 px-4 py-1 font-semibold rounded-full"
+                className="bg-orange-500/80 w-44 px-4 py-2 font-semibold rounded-full"
               >
                 <AnimatedText text="Request Demo" />
               </button>

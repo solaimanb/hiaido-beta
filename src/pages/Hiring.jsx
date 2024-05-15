@@ -1012,7 +1012,7 @@ const Hiring = () => {
             <div className="mt-10">
               <button
                 type="submit"
-                className="bg-orange-500/80 w-full font-semibold rounded-full"
+                className="bg-orange-500/80 w-full py-2 font-semibold rounded-full"
               >
                 <AnimatedText text="Submit" className="w-full border" />
               </button>
