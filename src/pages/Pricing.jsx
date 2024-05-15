@@ -10,7 +10,7 @@ const Pricing = () => {
     <>
       {/* SEO CONTENT */}
       <Helmet>
-        <title>Hiaido | Subscription</title>
+        <title>Hiaido | Pricing</title>
         <meta
           name="description"
           content="Explore Hiaido's subscription plans. Find the perfect plan for your cloud operations automation needs."
