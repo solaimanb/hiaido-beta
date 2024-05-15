@@ -227,7 +227,7 @@ const Contact = () => {
                     autoComplete="given-name"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="first_name"
-                    placeholder="Kelsey"
+                    placeholder="Enter your first name"
                     value={formData.first_name}
                     onChange={handleInputChange}
                   />
@@ -251,7 +251,7 @@ const Contact = () => {
                     autoComplete="family-name"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="last_name"
-                    placeholder="Turner"
+                    placeholder="Enter your last name"
                     value={formData.last_name}
                     onChange={handleInputChange}
                   />
@@ -275,7 +275,7 @@ const Contact = () => {
                     autoComplete="email"
                     className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
                     name="email"
-                    placeholder="turner@gmail.com"
+                    placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleInputChange}
                   />
