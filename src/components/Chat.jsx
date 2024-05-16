@@ -231,7 +231,7 @@ const ChatContainer = () => {
           selectedButton == "" ? "" : buttonProps[selectedButton].buttonGradient
         }`}
       >
-        <div className=" w-full bg-neutral-800 rounded-lg p-4 flex flex-col gap-4">
+        <div className=" w-full bg-neutral-800 rounded-lg p-3 flex flex-col gap-3">
           <Flex gap="3">
             {buttons.map((button) => {
               return (
@@ -251,7 +251,7 @@ const ChatContainer = () => {
                         inputRef.current.focus();
                       }
                     }}
-                    className={`!p-5 !text-sm  inline ${
+                    className={`!p-[17px] !text-sm  inline ${
                       button == selectedButton
                         ? buttonProps[button].buttonGradient
                         : // : "!from-[#396afc] !to-[#2948ff]"
@@ -259,7 +259,7 @@ const ChatContainer = () => {
                     }`}
                   >
                     <span
-                      className={`font-medium text-[16px] ${
+                      className={`text-[15px] ${
                         button === selectedButton
                           ? "text-neutral-100"
                           : "text-neutral-800"
@@ -272,19 +272,19 @@ const ChatContainer = () => {
               );
             })}
           </Flex>
-          <div className="query-input flex gap-5 items-center">
+          <div className="query-input flex gap-4 items-center">
             <input
               ref={inputRef}
               type="text"
               placeholder="Ask Any Question..."
-              className="w-full h-12 rounded-md px-3 bg-neutral-700 outline-neutral-800 outline-8 focus:outline-neutral-800"
+              className="w-full h-12 rounded-md px-3 bg-neutral-700 outline-neutral-800 outline-1 focus:outline-neutral-800"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={onKeyUp}
             />
             <div className="ease-in duration-100 rounded-md">
               <Button
-                className="!p-6 !bg-gradient-to-r !text-lg !to-green-500 !via-blue-500 !from-blue-600 hover:!bg-gradient-to-r hover:!from-green-500 hover:!via-blue-500 hover:!to-blue-600 !duration-200 ease-in"
+                className="!p-6 !bg-gradient-to-r !text-base !to-green-500 !via-blue-500 !from-blue-600 hover:!scale-105 !duration-200 ease-in"
                 onClick={getChat}
               >
                 Submit

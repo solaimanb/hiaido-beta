@@ -63,9 +63,7 @@ const CHECK_ITEMS = ["Always Show Bookmarks Bar", "Always Show Full URLs"];
 const DashboardSection = () => {
   const [selectedOption, setSelectedOption] = useState("Sky");
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const handleSelection = () => {
-    setSelectedOption;
-  };
+
   const data = [
     {
       label: "Sky",
@@ -97,7 +95,7 @@ const DashboardSection = () => {
 
   return (
     <div className="space-y-4">
-      <Menubar.Root className="flex bg-neutral-800 py-3 w-full rounded-lg shadow-blackA4 space-x-2 justify-around">
+      <Menubar.Root className="flex bg-neutral-800 py-2 w-fit px-2 rounded-lg shadow-blackA4 space-x-2 justify-start">
         {data.map((item, i) => {
           return (
             <Menubar.Menu>
@@ -118,7 +116,7 @@ const DashboardSection = () => {
               >
                 <div className="flex items-center justify-center">
                   {item.icon}
-                  <span className="text-lg">{item.label}</span>
+                  <span className="text-base">{item.label}</span>
                   {activeTabIndex == i && (
                     <motion.span
                       layoutId="bubble"
