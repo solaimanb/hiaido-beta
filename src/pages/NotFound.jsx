@@ -27,9 +27,8 @@ const NotFound = () => {
           </div>
 
           <p className="opacity-80 mt-4">
-            doesn&apos;t exist. Oops! The page you&apos;re looking for
-            isn&apos;t here. <br /> But don&apos;t worry, there&apos;s plenty
-            more to explore!
+            The page you&apos;re looking for isn&apos;t here. <br /> But
+            don&apos;t worry, there&apos;s plenty more to explore!
           </p>
 
           <button
