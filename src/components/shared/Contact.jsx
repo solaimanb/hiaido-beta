@@ -33,7 +33,6 @@ const contactDetails = [
 ];
 
 const Contact = () => {
-  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [isLoader, setIsLoader] = useState(false);
   const [error, setError] = useState({});
