@@ -97,7 +97,7 @@ const DashboardSection = () => {
 
   return (
     <div className="space-y-4">
-      <Menubar.Root className="flex bg-neutral-800/80 py-3 w-full rounded-lg shadow-blackA4 space-x-2 justify-around">
+      <Menubar.Root className="flex bg-neutral-800 py-3 w-full rounded-lg shadow-blackA4 space-x-2 justify-around">
         {data.map((item, i) => {
           return (
             <Menubar.Menu>

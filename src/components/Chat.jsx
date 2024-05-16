@@ -6,12 +6,21 @@ import ReactMarkdown from "react-markdown";
 import dotsLoaderGif from "/icons8-dots-loading.gif";
 // import Button from "./Button";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// import logo from "/hiaido-logo.png";
 import {
   dark,
   gruvboxDark,
   darcula,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 import logo from "/hiaido-logo.png";
+import { DashboardIcon, GearIcon, RocketIcon } from "@radix-ui/react-icons";
+import {
+  ChatBubbleLeftRightIcon,
+  Cog6ToothIcon,
+  CurrencyDollarIcon,
+  Squares2X2Icon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
 
 const sampleChat = [
   {
@@ -42,6 +51,62 @@ const sampleChat = [
 ];
 
 const Chat = () => {
+  return (
+    <div className="grid grid-cols-8 h-full">
+      <div className="col-span-1 p-3">
+        <Navbar />
+      </div>
+      <div className="w-full col-span-4 px-4 pl-10 pr-14">
+        <ChatContainer />
+      </div>
+
+      <div className="col-span-3">
+        <Dashboard />
+      </div>
+    </div>
+  );
+};
+
+const Navbar = () => {
+  const [navTabIndex, setNavTabIndex] = useState();
+
+  const navbarData = [
+    {
+      label: "Chatbot",
+      icon: <ChatBubbleLeftRightIcon className="w-8 h-8 pr-3" />,
+    },
+    { label: "Profile", icon: <UserIcon className="w-8 h-8 pr-3" /> },
+    { label: "Dashboard", icon: <Squares2X2Icon className="w-8 h-8 pr-3" /> },
+    { label: "Pricing", icon: <CurrencyDollarIcon className="w-8 h-8 pr-3" /> },
+    { label: "Settings", icon: <Cog6ToothIcon className="w-8 h-8 pr-3" /> },
+  ];
+
+  return (
+    <div className="w-full rounded-lg bg-neutral-800 h-full p-5">
+      <div className="text-2xl mb-10 flex items-center">
+        <img className="w-8 h-8 mr-2" src={logo} alt="Brand Logo" />
+        <h1>HiAiDo</h1>
+      </div>
+      <div className="my-10 space-y-2 pl-1 text-neutral-400">
+        {navbarData.map((item, i) => {
+          return (
+            <button
+              onClick={() => setNavTabIndex(i)}
+              className={`rounded-lg flex items-center text-base outline-none w-full p-2 px-3 ${
+                i == navTabIndex ? "bg-neutral-600 text-white" : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
+              }`}
+            >
+              {item.icon}
+              {item.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const ChatContainer = () => {
   const [selectedButton, setSelectedButton] = useState("");
   const [query, setQuery] = useState("");
   const [chats, setChats] = useState([]);
@@ -49,11 +114,6 @@ const Chat = () => {
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
   console.log(selectedButton);
-  // console.log
-
-  useEffect(() => {
-    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-  }, [chats]);
 
   const getChat = async () => {
     try {
@@ -94,153 +154,144 @@ const Chat = () => {
     }
   };
 
-  return (
-    <div className="grid grid-cols-3 h-full">
-      <div className="w-full col-span-2 px-4 pl-10 pr-14">
-        <div className="chat-container w-full flex flex-col gap-5 relative h-screen">
-          <div className="chat-heading text-3xl p-4 pt-10 md:text-2xl">
-            Welcome To HIAIDO Cloud Assistant.
-          </div>
-          <div
-            className="chat-box w-full h-[670px] p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
-            ref={chatBoxRef}
-          >
-            {chats.map((chat, index) => (
-              <div key={index} className="py-2 mb-5">
-                <div className="user-chat !text-xl py-4 text-gray-200 md:text-base flex">
-                  <div className="bg-cyan-700 rounded-full w-10 h-10 mx-4 flex justify-center items-center">
-                    <div>U</div>
-                  </div>
-                  <p className="text-2xl text-neutral-300">{chat.query}</p>
-                </div>
-                <div className="chat-boat-chat relative">
-                  {chat.loading ? (
-                    <div>
-                      <div className="dot-typing ml-5 mt-5"></div>
-                    </div>
-                  ) : (
-                    <div className="flex">
-                      <img
-                        className="w-12 h-12 mx-3 my-4"
-                        src={logo}
-                        alt="bot avatar"
-                      />
-                      <ReactMarkdown
-                        className="markdown"
-                        components={{
-                          code(props) {
-                            const { children, className, node, ...rest } =
-                              props;
-                            const match = /language-(\w+)/.exec(
-                              className || ""
-                            );
-                            return true ? (
-                              <div className="my-4 rounded-md overflow-x-auto w-full">
-                                <SyntaxHighlighter
-                                  // {...rest}
-                                  // PreTag="div"
-                                  children={children[0].slice(
-                                    children[0].indexOf(" ") + 1
-                                  )}
-                                  // language="python"
-                                  style={gruvboxDark}
-                                  showLineNumbers
-                                  wrapLongLines
-                                  // wrapLines
-                                />
-                              </div>
-                            ) : (
-                              <code {...rest} className={className}>
-                                {children}
-                              </code>
-                            );
-                          },
-                        }}
-                      >
-                        {chat.result}
-                      </ReactMarkdown>
-                    </div>
-                  )}
-                  {/* <div className="absolute w-full h-0.5 bg-gray-300 bottom--4 left-0 opacity-10"></div> */}
-                </div>
-              </div>
-            ))}
-          </div>
+  useEffect(() => {
+    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+  }, [chats]);
 
-          <div
-            className={`chat-query-box mb-5 w-full absolute bottom-0 rounded-lg p-[3px] transition-all duration-200 ease-in bg-gradient-to-tr animated-background ${
-              selectedButton == ""
-                ? ""
-                : buttonProps[selectedButton].buttonGradient
-            }`}
-          >
-            <div className=" w-full bg-neutral-800 rounded-lg p-4 flex flex-col gap-4">
-              <Flex gap="3">
-                {buttons.map((button) => {
-                  return (
-                    <div
-                      className={`rounded-md inline ${
-                        button === selectedButton ? "" : " "
-                      }`}
-                    >
-                      <Button
-                        onClick={() => {
-                          if (button == selectedButton) {
-                            setSelectedButton("");
-                            setQuery("");
-                          } else {
-                            setQuery(button + " ");
-                            setSelectedButton(button);
-                            inputRef.current.focus();
-                          }
-                        }}
-                        className={`!p-5 !text-sm  inline ${
-                          button == selectedButton
-                            ? buttonProps[button].buttonGradient
-                            : // : "!from-[#396afc] !to-[#2948ff]"
-                              "!bg-cyan-100 !text-neutral-900"
-                        }`}
-                      >
-                        <span
-                          className={`font-medium text-[16px] ${
-                            button === selectedButton
-                              ? "text-neutral-100"
-                              : "text-neutral-800"
-                          } my-3`}
-                        >
-                          {button}
-                        </span>
-                      </Button>
-                    </div>
-                  );
-                })}
-              </Flex>
-              <div className="query-input flex gap-5 items-center">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="Ask Any Question..."
-                  className="w-full h-12 rounded-md px-3 bg-neutral-700 outline-neutral-800 outline-8 focus:outline-neutral-800"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyUp={onKeyUp}
-                />
-                <div className="ease-in duration-100 rounded-md">
-                  <Button
-                    className="!p-6 !bg-gradient-to-r !text-lg !to-green-500 !via-blue-500 !from-blue-600 hover:!bg-gradient-to-r hover:!from-green-500 hover:!via-blue-500 hover:!to-blue-600 !duration-200 ease-in"
-                    onClick={getChat}
+  return (
+    <div className="chat-container w-full flex flex-col gap-5 relative h-screen">
+      <div className="chat-heading text-3xl p-4 pt-10 md:text-2xl">
+        Welcome To HIAIDO Cloud Assistant.
+      </div>
+      <div
+        className="chat-box w-full h-[670px] p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
+        ref={chatBoxRef}
+      >
+        {chats.map((chat, index) => (
+          <div key={index} className="py-2 mb-5">
+            <div className="user-chat !text-xl py-4 text-gray-200 md:text-base flex">
+              <div className="bg-cyan-700 rounded-full w-10 h-10 mx-4 flex justify-center items-center">
+                <div>U</div>
+              </div>
+              <p className="text-2xl text-neutral-300">{chat.query}</p>
+            </div>
+            <div className="chat-boat-chat relative">
+              {chat.loading ? (
+                <div>
+                  <div className="dot-typing ml-5 mt-5"></div>
+                </div>
+              ) : (
+                <div className="flex">
+                  <img
+                    className="w-12 h-12 mx-3 my-4"
+                    src={logo}
+                    alt="bot avatar"
+                  />
+                  <ReactMarkdown
+                    className="markdown"
+                    components={{
+                      code(props) {
+                        const { children, className, node, ...rest } = props;
+                        const match = /language-(\w+)/.exec(className || "");
+                        return true ? (
+                          <div className="my-4 rounded-md overflow-x-auto w-full">
+                            <SyntaxHighlighter
+                              // {...rest}
+                              // PreTag="div"
+                              children={children[0].slice(
+                                children[0].indexOf(" ") + 1
+                              )}
+                              // language="python"
+                              style={gruvboxDark}
+                              showLineNumbers
+                              wrapLongLines
+                              // wrapLines
+                            />
+                          </div>
+                        ) : (
+                          <code {...rest} className={className}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
                   >
-                    Submit
+                    {chat.result}
+                  </ReactMarkdown>
+                </div>
+              )}
+              {/* <div className="absolute w-full h-0.5 bg-gray-300 bottom--4 left-0 opacity-10"></div> */}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        className={`chat-query-box mb-5 w-full absolute bottom-0 rounded-lg p-[3px] transition-all duration-200 ease-in bg-gradient-to-tr animated-background ${
+          selectedButton == "" ? "" : buttonProps[selectedButton].buttonGradient
+        }`}
+      >
+        <div className=" w-full bg-neutral-800 rounded-lg p-4 flex flex-col gap-4">
+          <Flex gap="3">
+            {buttons.map((button) => {
+              return (
+                <div
+                  className={`rounded-md inline ${
+                    button === selectedButton ? "" : " "
+                  }`}
+                >
+                  <Button
+                    onClick={() => {
+                      if (button == selectedButton) {
+                        setSelectedButton("");
+                        setQuery("");
+                      } else {
+                        setQuery(button + " ");
+                        setSelectedButton(button);
+                        inputRef.current.focus();
+                      }
+                    }}
+                    className={`!p-5 !text-sm  inline ${
+                      button == selectedButton
+                        ? buttonProps[button].buttonGradient
+                        : // : "!from-[#396afc] !to-[#2948ff]"
+                          "!bg-cyan-100 !text-neutral-900"
+                    }`}
+                  >
+                    <span
+                      className={`font-medium text-[16px] ${
+                        button === selectedButton
+                          ? "text-neutral-100"
+                          : "text-neutral-800"
+                      } my-3`}
+                    >
+                      {button}
+                    </span>
                   </Button>
                 </div>
-              </div>
+              );
+            })}
+          </Flex>
+          <div className="query-input flex gap-5 items-center">
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Ask Any Question..."
+              className="w-full h-12 rounded-md px-3 bg-neutral-700 outline-neutral-800 outline-8 focus:outline-neutral-800"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyUp={onKeyUp}
+            />
+            <div className="ease-in duration-100 rounded-md">
+              <Button
+                className="!p-6 !bg-gradient-to-r !text-lg !to-green-500 !via-blue-500 !from-blue-600 hover:!bg-gradient-to-r hover:!from-green-500 hover:!via-blue-500 hover:!to-blue-600 !duration-200 ease-in"
+                onClick={getChat}
+              >
+                Submit
+              </Button>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="col-span-1">
-        <Dashboard />
       </div>
     </div>
   );
