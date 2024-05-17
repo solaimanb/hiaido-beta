@@ -259,3 +259,84 @@ input[type="file"]::file-selector-button:active {
 input:focus::placeholder {
   color: transparent;
 }
+
+/* LOGIN COMPONENT */
+[data-amplify-container] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+[data-amplify-router] {
+  width: 100%;
+}
+
+[data-amplify-form] {
+  display: flex;
+  width: 100%;
+}
+
+[data-amplify-form] input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgb(251 146 60 / 0.4);
+  background: rgba(97, 61, 31, 0.1);
+}
+
+[data-amplify-form] input:focus {
+  outline: none;
+  background: rgba(139, 85, 41, 0.219);
+}
+
+[data-amplify-form] label {
+  display: none;
+}
+
+[data-amplify-form] button[type="submit"] {
+  padding: 8px;
+  background-color: rgba(243, 125, 41, 0.897);
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  border-radius: 50px;
+}
+
+[data-amplify-form] button[type="submit"]:hover {
+  background-color: #e88134;
+}
+
+[data-amplify-footer] {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 5px;
+  text-align: end;
+}
+
+.amplify-loader {
+  display: none;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.amplify-flex {
+  width: 100%;
+}
+
+.amplify-tabs__list {
+  display: none;
+}
+
+.amplify-visually-hidden {
+  display: none;
+}
+
+.amplify-icon {
+  display: none;
+}
