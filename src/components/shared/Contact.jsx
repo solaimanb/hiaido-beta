@@ -9,8 +9,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 import axios from "axios";
 
-import AnimatedText from "./AnimatedText";
-
 // Contact Details:
 const contactDetails = [
   {
@@ -211,106 +209,94 @@ const Contact = () => {
         >
           <div className="lg:mr-0 lg:max-w-lg max-w-xl mx-auto">
             <div className="gap-x-8 gap-y-6 sm:grid-cols-2 grid grid-cols-1">
-              <div>
+              {/* First Name */}
+              <div className="group text-start relative z-0 w-full mb-5">
+                <input
+                  type="text"
+                  name="first_name"
+                  onChange={handleInputChange}
+                  value={formData.first_name}
+                  id="floating_first_name"
+                  className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                  placeholder=" "
+                  required
+                />
                 <label
-                  htmlFor="first-name"
-                  className="text-start block text-sm font-semibold leading-6 text-orange-400"
+                  htmlFor="floating_first_name"
+                  className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   First name
                 </label>
-
-                <div className="mt-2.5">
-                  <input
-                    type="text"
-                    id="first-name"
-                    autoComplete="given-name"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
-                    name="first_name"
-                    placeholder="Enter your first name"
-                    value={formData.first_name}
-                    onChange={handleInputChange}
-                  />
-                  <div className="text-start mt-1 text-xs text-red-400">
-                    {error.first_name_err}
-                  </div>
-                </div>
               </div>
 
-              <div>
+              {/* Last Name */}
+              <div className="group text-start relative z-0 w-full mb-5">
+                <input
+                  type="text"
+                  name="last_name"
+                  onChange={handleInputChange}
+                  value={formData.last_name}
+                  id="floating_last_name"
+                  className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                  placeholder=" "
+                  required
+                />
                 <label
-                  htmlFor="last-name"
-                  className="text-start block text-sm font-semibold leading-6 text-orange-400"
+                  htmlFor="floating_last_name"
+                  className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Last name
                 </label>
-                <div className="mt-2.5">
-                  <input
-                    type="text"
-                    id="last-name"
-                    autoComplete="family-name"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
-                    name="last_name"
-                    placeholder="Enter your last name"
-                    value={formData.last_name}
-                    onChange={handleInputChange}
-                  />
-                  <div className="text-start mt-1 text-xs text-red-400">
-                    {error.last_name_err}
-                  </div>
-                </div>
               </div>
 
-              <div className="sm:col-span-2">
+              {/* Email Field */}
+              <div className="group sm:col-span-2 text-start relative z-0 w-full mb-5">
+                <input
+                  type="email"
+                  name="email"
+                  id="floating_email"
+                  onChange={handleInputChange}
+                  value={formData.email}
+                  className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                  placeholder=" "
+                  required
+                />
+                <div className="text-red-400">{error.email_err}</div>
                 <label
-                  htmlFor="email"
-                  className="text-start block text-sm font-semibold leading-6 text-orange-400"
+                  htmlFor="floating_email"
+                  className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                  Email
+                  Email address
                 </label>
-                <div className="mt-2.5">
-                  <input
-                    type="email"
-                    id="email"
-                    autoComplete="email"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
-                    name="email"
-                    placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                  />
-                  <div className="text-start mt-1 text-xs text-red-400">
-                    {error.email_err}
-                  </div>
-                </div>
               </div>
 
-              <div className="sm:col-span-2">
+              {/* Message Field */}
+              <div className="sm:col-span-2 text-start relative z-0 w-full">
+                <textarea
+                  type="text"
+                  name="messages"
+                  value={formData.messages}
+                  onChange={handleInputChange}
+                  id="floating_last_name"
+                  className="block py-2.5 font-semibold w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none dark:text-white  dark:focus:border-white focus:outline-none focus:ring-0 focus:bg-orange-400/5 focus:border-orange-400/20 peer border-orange-400/30 px-2"
+                  placeholder=" "
+                  required
+                />
                 <label
-                  htmlFor="message"
-                  className="text-start block text-sm font-semibold leading-6 text-orange-400"
+                  htmlFor="floating_last_name"
+                  className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                  Message
+                  Write your message..
                 </label>
-                <div className="mt-2.5">
-                  <textarea
-                    id="message"
-                    rows="4"
-                    className="bg-white/5 focus:outline-none focus:ring-inset sm:text-sm sm:leading-6 border-orange-400/40 input-placeholder block w-full px-2 py-2 font-semibold text-white border-b rounded-sm shadow-sm"
-                    name="messages"
-                    placeholder="Write your message here..."
-                    value={formData.messages}
-                    onChange={handleInputChange}
-                  ></textarea>
-                </div>
               </div>
             </div>
 
             <div className="md:justify-end flex justify-center mt-8">
               <button
-                className="bg-orange-500/80 md:w-fit w-full px-4 py-2 font-semibold rounded-full"
+                className="bg-orange-500/80 hover:bg-orange-500/70 hover:scale-105 md:w-fit w-full px-4 py-2 font-semibold transition duration-200 rounded-full"
                 type="submit"
               >
-                <AnimatedText text="Send message" />
+                Send message
               </button>
             </div>
           </div>
