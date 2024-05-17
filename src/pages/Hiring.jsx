@@ -1,7 +1,6 @@
 import "../index.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AnimatedText from "../components/shared/AnimatedText";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -213,7 +212,7 @@ const Hiring = () => {
               <div className="text-red-400">{error.email_err}</div>
               <label
                 htmlFor="floating_email"
-                className="placeholder:peer-focus:font-medium absolute text-sm text-white  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
                 Email address
               </label>
@@ -1012,9 +1011,9 @@ const Hiring = () => {
             <div className="mt-10">
               <button
                 type="submit"
-                className="bg-orange-500/80 w-full py-2 font-semibold rounded-full"
+                className="bg-orange-500/80 hover:bg-orange-500/70 hover:scale-105 w-full px-4 py-2 font-semibold transition duration-200 rounded-full"
               >
-                <AnimatedText text="Submit" className="w-full border" />
+                Submit
               </button>
               <ToastContainer />
             </div>
