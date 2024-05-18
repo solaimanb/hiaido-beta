@@ -35,6 +35,7 @@ import {
   twitter,
   yourlogo,
 } from "../assets";
+import Stepper from "../components/ChatBot/Stepper";
 
 export const navigation = [
   {
@@ -342,5 +343,88 @@ export const socials = [
     title: "Facebook",
     iconUrl: facebook,
     url: "#",
+  },
+];
+
+export const colorVariants = {
+  primary: "bg-orange-500",
+  red: "bg-red-500",
+  secondary: "bg-pink-500",
+  blue: "bg-blue-800",
+};
+export const borderVariants = {
+  primary: "border-orange-500",
+  red: "border-red-700",
+  secondary: "border-pink-500",
+  blue: "border-blue-800",
+};
+export const topics = [
+  {
+    id: 1,
+    title: "Create",
+    color: "blue",
+  },
+  // {
+  //   id: 2,
+  //   title: "Descrive",
+  //   color: "blue",
+  // },
+  // {
+  //   id: 3,
+  //   title: "Update",
+  //   color: "blue",
+  // },
+  // {
+  //   id: 4,
+  //   title: "List",
+  //   color: "blue",
+  // },
+  // {
+  //   id: 5,
+  //   title: "Delete",
+  //   color: "red",
+  // },
+];
+
+export const gptVersions = [
+  {
+    id: 1,
+    title: "v4",
+  },
+  {
+    id: 2,
+    title: "v4-turbo",
+  },
+];
+
+export const modes = [
+  {
+    id: 1,
+    title: "explain",
+    themecolor: "primary",
+  },
+  {
+    id: 2,
+    title: "balanced",
+    themecolor: "secondary",
+  },
+  {
+    id: 3,
+    title: "code",
+    themecolor: "red",
+  },
+];
+
+export const tabs = [
+  {
+    id: 1,
+    title: "Dashbord",
+    content: "Dashboard Content",
+    HTML: Stepper,
+  },
+  {
+    id: 2,
+    title: "Profile",
+    content: "Profile Content",
   },
 ];

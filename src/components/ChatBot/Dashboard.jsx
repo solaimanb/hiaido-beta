@@ -2,9 +2,25 @@ import React, { useState } from "react";
 // import * as Popover from "@radix-ui/react-popover";
 // import * as Tabs from "@radix-ui/react-tabs";
 import classNames from "classnames";
-import { CubeIcon, GlobeIcon, UploadIcon } from "@radix-ui/react-icons";
+import {
+  CaretDownIcon,
+  CubeIcon,
+  DropdownMenuIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  DotFilledIcon,
+  GlobeIcon,
+  UploadIcon,
+} from "@radix-ui/react-icons";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
-import { DropdownMenu, Button } from "@radix-ui/themes";
+import {
+  Tabs,
+  TabNav,
+  Box,
+  Text,
+  DropdownMenu,
+  Button,
+} from "@radix-ui/themes";
 import * as Menubar from "@radix-ui/react-menubar";
 import { motion } from "framer-motion";
 
@@ -69,12 +85,24 @@ const DashboardSection = () => {
     },
   ];
 
+  const MENU_ITEMS = ["Sky", "Resources", "Deployments"];
+  const ICONS = [
+    <GlobeIcon className="w-6 h-6 mx-2" />,
+    <CubeIcon className="w-6 h-6 mx-2" />,
+    <UploadIcon className="w-6 h-6 mx-2" />,
+  ];
+  const CONTENT = [
+    "Sky",
+    "Manage your resources",
+    "Manage all your deployments from one place",
+  ];
+
   return (
     <div className="space-y-4">
       <Menubar.Root className="bg-neutral-800/80 shadow-blackA4 flex justify-around w-full py-3 space-x-2 rounded-lg">
         {data.map((item, i) => {
           return (
-            <Menubar.Menu key={i}>
+            <Menubar.Menu>
               <Menubar.Trigger
                 onClick={() => {
                   // setSelectedOption(item);
