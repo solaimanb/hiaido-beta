@@ -1,8 +1,9 @@
-import { Authenticator } from "@aws-amplify/ui-react";
 import { hiaido } from "../assets";
 import { Helmet } from "react-helmet-async";
-import { Amplify } from "aws-amplify";
+
 import awsExports from "../awsExports";
+import { Amplify } from "aws-amplify";
+import { Authenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(awsExports);
 
