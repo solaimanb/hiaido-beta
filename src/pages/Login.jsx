@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet-async";
 import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
 import awsExports from "../awsExports";
+import { Link } from "react-router-dom";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 Amplify.configure(awsExports);
 
@@ -29,8 +31,16 @@ const Login = () => {
       {/* MAIN CONTENT */}
       <div className="bg-black/90 flex items-center justify-center w-full h-full min-h-screen p-4">
         <div className="md:flex-row border-orange-400/10 backdrop-blur-sm flex flex-col items-center w-full h-[96vh] border rounded-lg space-y-6 md:space-y-0">
+          <div className="top-2 left-2 absolute px-2">
+            <Link
+              to="/"
+              className="border-white/90 hover:bg-white/10 hover:text-white/100 text-orange-400/80 flex items-center gap-1 p-2 text-xl font-semibold rounded-md"
+            >
+              <ArrowLeftIcon />
+            </Link>
+          </div>
           {/* HiAiDo Image Banner */}
-          <div className="lg:flex md:w-1/2 xl:w-2/3 flex items-center justify-center w-full p-10">
+          <div className="lg:flex md:w-1/2 xl:w-2/3 relative flex items-center justify-center w-full p-10">
             <div>
               <img src={hiaido} alt="logo" width={400} />
             </div>
