@@ -45,6 +45,7 @@ const Header = () => {
   }, [lastScrollTop]);
 
   const navItems = [
+    { name: "Chat", path: "/chat" },
     { name: "Hiring", path: "/hiring" },
     { name: "Contact Us", path: "/contact" },
     { name: "Pricing", path: "/pricing" },

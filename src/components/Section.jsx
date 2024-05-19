@@ -1,14 +1,4 @@
-// import SectionSvg from "../assets/svg/SectionSvg";
-
-const Section = ({
-  className,
-  id,
-  crosses,
-  // eslint-disable-next-line no-unused-vars
-  crossesOffset,
-  customPaddings,
-  children,
-}) => {
+const Section = ({ className, id, crosses, customPaddings, children }) => {
   return (
     <div
       id={id}
@@ -16,7 +6,7 @@ const Section = ({
       relative
       ${
         customPaddings ||
-        `py-2 lg:py-16 xl:py-2 ${crosses ? "lg:py-8 xl:py-2" : ""}`
+        `py-10 lg:py-16 xl:py-20 ${crosses ? "lg:py-32 xl:py-40" : ""}`
       }
       ${className || ""}`}
     >

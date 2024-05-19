@@ -14,14 +14,27 @@ function Stars(props) {
   const ref = useRef();
 
   const [sphere] = useState(() => {
-    const positions = random.inSphere(new Float32Array(5000), { radius: 1.5 });
-    const validPositions = Array.from(positions).filter((pos) => !isNaN(pos));
+    const positions = random.inSphere(new Float32Array(15000), { radius: 2 });
+    const validPositions = [];
+
+    // Filter out NaN values and populate validPositions array
+    for (let i = 0; i < positions.length; i += 3) {
+      const x = positions[i];
+      const y = positions[i + 1];
+      const z = positions[i + 2];
+
+      // Check if any of the coordinates are NaN
+      if (!isNaN(x) && !isNaN(y) && !isNaN(z)) {
+        validPositions.push(x, y, z);
+      }
+    }
+
     return new Float32Array(validPositions);
   });
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    ref.current.rotation.x -= delta / 15;
+    ref.current.rotation.y -= delta / 20;
   });
 
   return (
@@ -35,7 +48,7 @@ function Stars(props) {
       <PointMaterial
         transparent
         color="#E17225"
-        size={0.003}
+        size={0.002}
         sizeAttenuation={true}
         depthWrite={false}
       />

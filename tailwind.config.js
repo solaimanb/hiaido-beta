@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
+import tailwindScrollbar from "tailwind-scrollbar";
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -38,9 +39,9 @@ export default {
         sans: ["var(--font-sora)", ...fontFamily.sans],
         code: "var(--font-code)",
         grotesk: "var(--font-grotesk)",
-        roboto :["Reddit Mono", "monospace"],
-        Bungee :["Bungee Spice", "sans-serif"],
-        Raleway:["Raleway", "sans-serif"]
+        roboto: ["Reddit Mono", "monospace"],
+        Bungee: ["Bungee Spice", "sans-serif"],
+        Raleway: ["Raleway", "sans-serif"],
       },
       letterSpacing: {
         tagline: ".15em",
@@ -77,6 +78,7 @@ export default {
     },
   },
   plugins: [
+    tailwindScrollbar,
     plugin(function ({ addBase, addComponents, addUtilities }) {
       addBase({});
       addComponents({
@@ -131,5 +133,6 @@ export default {
         },
       });
     }),
+    require("tailwind-scrollbar"),
   ],
 };
