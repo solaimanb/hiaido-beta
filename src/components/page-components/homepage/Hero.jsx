@@ -198,7 +198,7 @@ const Hero = () => {
 
               <button
                 type="submit"
-                className="bg-orange-500/80 w-44 px-4 py-2 font-semibold rounded-full"
+                className="bg-orange-500/80 w-44 px-4 font-semibold rounded-full"
               >
                 <AnimatedText text="Request Demo" />
               </button>

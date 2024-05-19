@@ -86,11 +86,11 @@
 }
 
 * {
-  font-family: var(--font-fira);
+  font-family: var(--font-sora);
 }
 
 .body {
-  font-family: var(--font-fira);
+  font-family: var(--font-sora);
   background: rgba(0, 0, 0, 0.7);
 }
 
