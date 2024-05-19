@@ -1,9 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import Dashboard from "../components/ChatBot/Dashboard";
-import { Flex, Button, Card, Avatar, Box, Text } from "@radix-ui/themes";
+// Built-in modules
+import { useState, useEffect, useRef } from "react";
+
+// External modules
 import ReactMarkdown from "react-markdown";
+import { Flex, Button, Avatar, Box, Text } from "@radix-ui/themes";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+// Internal modules
+import Dashboard from "../components/ChatBot/Dashboard";
+
+// Assets
 import logo from "/hiaido-logo.png";
 
 import {
@@ -20,41 +27,41 @@ import {
 import * as Menubar from "@radix-ui/react-menubar";
 import { motion } from "framer-motion";
 
-const sampleChat = [
-  {
-    query: "Deploy website to S3",
-    result:
-      "Make sure to replace www with the path to your local directory that contains your website's static files. \n1. The index.html inside that directory will be used as the entry point (index document) for your S3 website. \n\n2.After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.\nMake sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-  },
-  {
-    query: "Deploy website to S3",
-    result:
-      "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-  },
-  {
-    query: "Deploy website to S3",
-    result:
-      "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-  },
-  {
-    query: "Deploy website to S3",
-    result:
-      "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-  },
-  {
-    query: "send sms notification using python boto3 adn sns",
-    result:
-      "Here are the steps to send SMS notifications using Python, Boto3 and Amazon SNS: \n1. Install boto3 library. \n\n ```python pip install boto3 ```\n\n 2. Import boto3 SDK and setup SNS client\n\n ```python import boto3 sns = boto3.client('sns') ```\n\n 3. Create a new SNS topic to send SMS messages\n\n ```python response = sns.create_topic(Name=\"my-sms-topic\") topic_arn = response[\"TopicArn\"] ```\n\n 4. Subscribe a phone number to the SNS topic \n\n```python sns.subscribe(TopicArn=topic_arn, Protocol=\"sms\", Endpoint=\"+1234567890\") ```\n\n 5. Publish a message to the SNS topic to send SMS\n\n ```python response = sns.publish( TopicArn=topic_arn, Message=\"Hello from SNS!\", MessageAttributes={ 'AWS.SNS.SMS.SenderID': { 'DataType': 'String', 'StringValue': 'MySenderID' } } ) ```\n\n Make sure to replace the phone number and specify a sender ID. This will send an SMS notification to the subscribed number. Let me know if you need any clarification or have additional questions!",
-  },
-];
+// const sampleChat = [
+//   {
+//     query: "Deploy website to S3",
+//     result:
+//       "Make sure to replace www with the path to your local directory that contains your website's static files. \n1. The index.html inside that directory will be used as the entry point (index document) for your S3 website. \n\n2.After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.\nMake sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
+//   },
+//   {
+//     query: "Deploy website to S3",
+//     result:
+//       "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
+//   },
+//   {
+//     query: "Deploy website to S3",
+//     result:
+//       "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
+//   },
+//   {
+//     query: "Deploy website to S3",
+//     result:
+//       "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
+//   },
+//   {
+//     query: "send sms notification using python boto3 adn sns",
+//     result:
+//       "Here are the steps to send SMS notifications using Python, Boto3 and Amazon SNS: \n1. Install boto3 library. \n\n ```python pip install boto3 ```\n\n 2. Import boto3 SDK and setup SNS client\n\n ```python import boto3 sns = boto3.client('sns') ```\n\n 3. Create a new SNS topic to send SMS messages\n\n ```python response = sns.create_topic(Name=\"my-sms-topic\") topic_arn = response[\"TopicArn\"] ```\n\n 4. Subscribe a phone number to the SNS topic \n\n```python sns.subscribe(TopicArn=topic_arn, Protocol=\"sms\", Endpoint=\"+1234567890\") ```\n\n 5. Publish a message to the SNS topic to send SMS\n\n ```python response = sns.publish( TopicArn=topic_arn, Message=\"Hello from SNS!\", MessageAttributes={ 'AWS.SNS.SMS.SenderID': { 'DataType': 'String', 'StringValue': 'MySenderID' } } ) ```\n\n Make sure to replace the phone number and specify a sender ID. This will send an SMS notification to the subscribed number. Let me know if you need any clarification or have additional questions!",
+//   },
+// ];
 
 const Chat = () => {
   return (
-    <div className="grid grid-cols-8 h-full">
+    <div className="grid h-full grid-cols-8">
       <div className="col-span-1 p-3">
         <Navbar />
       </div>
-      <div className="w-full col-span-4 px-4 pl-10 pr-14">
+      <div className="pr-14 w-full col-span-4 px-4 pl-10">
         <ChatContainer />
       </div>
 
@@ -95,17 +102,18 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="w-full rounded-lg bg-neutral-800 h-full p-5 relative">
-      <div className="text-2xl mb-10 flex items-center">
+    <div className="bg-neutral-800 relative w-full h-full p-5 rounded-lg">
+      <div className="flex items-center mb-10 text-2xl">
         <img className="w-8 h-8 mr-2" src={logo} alt="Brand Logo" />
         <h1>HiAiDo</h1>
       </div>
       <div className="divide-neutral-600">
-        <div className="my-10 space-y-1 pl-1 text-neutral-400">
-          <div className="text-neutral-500 text-sm my-3">MAIN</div>
+        <div className="text-neutral-400 pl-1 my-10 space-y-1">
+          <div className="text-neutral-500 my-3 text-sm">MAIN</div>
           {navbarData.slice(0, 5).map((item, i) => {
             return (
               <button
+                key={item.id || i}
                 onClick={() => setNavTabIndex(i)}
                 className={`rounded-lg flex items-center text-base outline-none w-full p-1 px-3 ${
                   i == navTabIndex
@@ -120,11 +128,12 @@ const Navbar = () => {
           })}
         </div>
         <div className="h-[1px] bg-neutral-600"></div>
-        <div className="my-8 space-y-1 pl-1 text-neutral-400">
-          <div className="text-neutral-500 text-sm mt-7 my-4">SUPPORT</div>
+        <div className="text-neutral-400 pl-1 my-8 space-y-1">
+          <div className="text-neutral-500 mt-7 my-4 text-sm">SUPPORT</div>
           {navbarData.slice(5).map((item, i) => {
             return (
               <button
+                key={item.id || i}
                 onClick={() => setNavTabIndex(i + 5)}
                 className={`rounded-lg flex items-center text-base outline-none w-full p-1 px-3 ${
                   i + 5 == navTabIndex
@@ -139,11 +148,11 @@ const Navbar = () => {
           })}
         </div>
 
-        <div className="absolute bottom-0 left-0 mx-3 my-3  space-y-2 flex flex-col items-center justify-end">
+        <div className="absolute bottom-0 left-0 flex flex-col items-center justify-end mx-3 my-3 space-y-2">
           <Menubar.Root className="flex bg-neutral-900 w-fit p-[5px] rounded-lg shadow-blackA4 space-x-2 justify-start">
             {data.map((item, i) => {
               return (
-                <Menubar.Menu>
+                <Menubar.Menu key={item.id || i}>
                   <Menubar.Trigger
                     onClick={() => {
                       setActiveTabIndex(i);
@@ -164,7 +173,7 @@ const Navbar = () => {
                       {activeTabIndex == i && (
                         <motion.span
                           layoutId="theme-bubble"
-                          className="bg-cyan-100 inset-0 absolute z-10 mix-blend-difference rounded-lg"
+                          className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-lg"
                           transition={{
                             type: "spring",
                             bounce: 0.1,
@@ -207,7 +216,6 @@ const ChatContainer = () => {
   const [error, setError] = useState(null);
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
-  console.log(selectedButton);
 
   const getChat = async () => {
     try {
@@ -253,8 +261,8 @@ const ChatContainer = () => {
   }, [chats]);
 
   return (
-    <div className="chat-container w-full flex flex-col gap-5 relative h-screen">
-      <div className="chat-heading text-3xl p-4 pt-10 md:text-2xl">
+    <div className="chat-container relative flex flex-col w-full h-screen gap-5">
+      <div className="chat-heading md:text-2xl p-4 pt-10 text-3xl">
         Welcome To HIAIDO Cloud Assistant.
       </div>
       <div
@@ -264,15 +272,15 @@ const ChatContainer = () => {
         {chats.map((chat, index) => (
           <div key={index} className="py-2 mb-5">
             <div className="user-chat !text-xl py-4 text-gray-200 md:text-base flex">
-              <div className="bg-cyan-700 rounded-full w-10 h-10 mx-4 flex justify-center items-center">
+              <div className="bg-cyan-700 flex items-center justify-center w-10 h-10 mx-4 rounded-full">
                 <div>U</div>
               </div>
-              <p className="text-2xl text-neutral-300">{chat.query}</p>
+              <p className="text-neutral-300 text-2xl">{chat.query}</p>
             </div>
             <div className="chat-boat-chat relative">
               {chat.loading ? (
                 <div>
-                  <div className="dot-typing ml-5 mt-5"></div>
+                  <div className="dot-typing mt-5 ml-5"></div>
                 </div>
               ) : (
                 <div className="flex">
@@ -287,20 +295,16 @@ const ChatContainer = () => {
                       code(props) {
                         const { children, className, node, ...rest } = props;
                         const match = /language-(\w+)/.exec(className || "");
+
                         return true ? (
-                          <div className="my-4 rounded-md overflow-x-auto w-full">
+                          <div className="w-full my-4 overflow-x-auto rounded-md">
                             <SyntaxHighlighter
-                              // {...rest}
-                              // PreTag="div"
-                              children={children[0].slice(
-                                children[0].indexOf(" ") + 1
-                              )}
-                              // language="python"
                               style={gruvboxDark}
                               showLineNumbers
                               wrapLongLines
-                              // wrapLines
-                            />
+                            >
+                              {children[0].slice(children[0].indexOf(" ") + 1)}
+                            </SyntaxHighlighter>
                           </div>
                         ) : (
                           <code {...rest} className={className}>
@@ -314,7 +318,6 @@ const ChatContainer = () => {
                   </ReactMarkdown>
                 </div>
               )}
-              {/* <div className="absolute w-full h-0.5 bg-gray-300 bottom--4 left-0 opacity-10"></div> */}
             </div>
           </div>
         ))}
@@ -325,11 +328,12 @@ const ChatContainer = () => {
           selectedButton == "" ? "" : buttonProps[selectedButton].buttonGradient
         }`}
       >
-        <div className=" w-full bg-neutral-800 rounded-lg p-3 flex flex-col gap-3">
+        <div className=" bg-neutral-800 flex flex-col w-full gap-3 p-3 rounded-lg">
           <Flex gap="3">
-            {buttons.map((button) => {
+            {buttons.map((button, i) => {
               return (
                 <div
+                  key={i}
                   className={`rounded-md inline ${
                     button === selectedButton ? "" : " "
                   }`}
@@ -366,17 +370,17 @@ const ChatContainer = () => {
               );
             })}
           </Flex>
-          <div className="query-input flex gap-4 items-center">
+          <div className="query-input flex items-center gap-4">
             <input
               ref={inputRef}
               type="text"
               placeholder="Ask Any Question..."
-              className="w-full h-12 rounded-md px-3 bg-neutral-700 outline-neutral-800 outline-1 focus:outline-neutral-800"
+              className="bg-neutral-700 outline-neutral-800 outline-1 focus:outline-neutral-800 w-full h-12 px-3 rounded-md"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={onKeyUp}
             />
-            <div className="ease-in duration-100 rounded-md">
+            <div className="duration-100 ease-in rounded-md">
               <Button
                 className="!p-6 !bg-gradient-to-r !text-base !to-green-500 !via-blue-500 !from-blue-600 hover:!scale-105 !duration-200 ease-in"
                 onClick={getChat}
