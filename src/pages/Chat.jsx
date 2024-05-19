@@ -225,6 +225,7 @@ const Chat = () => {
                   );
                 })}
               </Flex>
+
               <div className="query-input flex items-center gap-5">
                 <input
                   ref={inputRef}

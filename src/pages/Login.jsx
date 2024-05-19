@@ -1,9 +1,9 @@
 import { hiaido } from "../assets";
 import { Helmet } from "react-helmet-async";
 
-import awsExports from "../awsExports";
 import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
+import awsExports from "../awsExports";
 
 Amplify.configure(awsExports);
 
@@ -44,21 +44,7 @@ const Login = () => {
 
               <div className="horizon-bar opacity-30 container h-[1px] mt-10 bg-orange-400" />
 
-              <Authenticator>
-                {({ signOut, user }) => (
-                  <div className="flex flex-col items-center justify-center h-screen">
-                    <h1 className="mb-4 text-2xl font-bold">
-                      Hello {user.username}
-                    </h1>
-                    <button
-                      onClick={signOut}
-                      className="hover:bg-blue-600 px-4 py-2 text-white bg-blue-500 rounded"
-                    >
-                      Sign out
-                    </button>
-                  </div>
-                )}
-              </Authenticator>
+              <Authenticator />
             </div>
           </div>
         </div>
@@ -67,3 +53,19 @@ const Login = () => {
   );
 };
 export default Login;
+
+{
+  /* <Authenticator>
+  {({ signOut, user }) => (
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="mb-4 text-2xl font-bold">Hello {user.username}</h1>
+      <button
+        onClick={signOut}
+        className="hover:bg-blue-600 px-4 py-2 text-white bg-blue-500 rounded"
+      >
+        Sign out
+      </button>
+    </div>
+  )}
+</Authenticator>; */
+}

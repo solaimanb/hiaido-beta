@@ -7,10 +7,13 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { DropdownMenu, Button } from "@radix-ui/themes";
 import * as Menubar from "@radix-ui/react-menubar";
 import { motion } from "framer-motion";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 // import '@radix-ui/themes/styles.css';
 
 export default function Dashboard() {
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
+
   return (
     <div className="flex flex-col justify-center w-full">
       <div className="flex justify-end w-full h-20 pr-10 my-6 text-4xl">
@@ -28,7 +31,10 @@ export default function Dashboard() {
             <DropdownMenu.Item className="!text-lg !p-5 !mx-2 !my-1 duration-300">
               Settings
             </DropdownMenu.Item>
-            <DropdownMenu.Item className="!text-lg !p-5 !mx-2 !my-1 duration-300">
+            <DropdownMenu.Item
+              onClick={signOut}
+              className="!text-lg !p-5 !mx-2 !my-1 duration-300"
+            >
               Log out
             </DropdownMenu.Item>
           </DropdownMenu.Content>

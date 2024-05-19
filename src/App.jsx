@@ -8,12 +8,13 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
 import { HelmetProvider } from "react-helmet-async";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ButtonGradient from "./assets/svg/ButtonGradient";
 import "@radix-ui/themes/styles.css";
 
 import Chat from "./pages/Chat.jsx";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const App = () => {
   // useEffect(() => {
@@ -24,6 +25,9 @@ const App = () => {
   //     const locomotiveScroll = new LocomotiveScroll();
   //   })();
   // }, []);
+
+  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  console.log(authStatus);
 
   return (
     <HelmetProvider>
@@ -40,8 +44,27 @@ const App = () => {
           </Route>
 
           {/* Others */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route
+            path="/login"
+            element={
+              authStatus !== "authenticated" ? (
+                <Login />
+              ) : (
+                <Navigate to="/chat" />
+              )
+            }
+          />
+
+          <Route
+            path="/chat"
+            element={
+              authStatus === "authenticated" ? (
+                <Chat />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
 
           {/* Not Found */}
           <Route path="*" element={<NotFound />} />
