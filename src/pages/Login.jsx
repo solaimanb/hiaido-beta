@@ -5,13 +5,7 @@ import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
 import awsExports from "../awsExports";
 import { Link } from "react-router-dom";
-import {
-  ArrowBottomLeftIcon,
-  ArrowLeftIcon,
-  BackpackIcon,
-  FaceIcon,
-  TriangleUpIcon,
-} from "@radix-ui/react-icons";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 Amplify.configure(awsExports);
 
