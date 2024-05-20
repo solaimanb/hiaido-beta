@@ -9,6 +9,38 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 Amplify.configure(awsExports);
 
+const components = {
+  // Footer() {
+  //   const { toForgotPassword } = useAuthenticator();
+  //   return (
+  //     <Button
+  //       fontWeight="normal"
+  //       onClick={toForgotPassword}
+  //       size="small"
+  //       variation="link"
+  //     >
+  //       Forgot Password?
+  //     </Button>
+  //   );
+  // },
+};
+
+const formFields = {
+  signIn: {
+    username: {
+      placeholder: "Username",
+    },
+    password: {
+      placeholder: "Password",
+    },
+  },
+  forgotPassword: {
+    username: {
+      placeholder: "Enter your email",
+    },
+  },
+};
+
 const Login = () => {
   window.scrollTo(0, 0);
 
@@ -47,14 +79,14 @@ const Login = () => {
           </div>
 
           <div className="md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12 bor border-orange-400/10 bg-orange-400/5 flex items-center justify-center w-full h-full px-6 border-l">
-            <div className="h-100 w-full space-y-10">
+            <div className="h-100 relative w-full space-y-10">
               <h1 className="mt-12 text-xl font-bold leading-tight text-center">
                 Log in to your account
               </h1>
 
               <div className="horizon-bar opacity-30 container h-[1px] mt-10 bg-orange-400" />
 
-              <Authenticator />
+              <Authenticator formFields={formFields} components={components} />
             </div>
           </div>
         </div>
