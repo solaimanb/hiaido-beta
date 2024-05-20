@@ -296,7 +296,7 @@ const ChatContainer = () => {
         Welcome To HIAIDO Cloud Assistant.
       </div>
       <div
-        className="chat-box w-full h-[670px] p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
+        className="chat-box w-full h-[600px] text-sm p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
         ref={chatBoxRef}
       >
         {chats.map((chat, index) => (
@@ -325,14 +325,13 @@ const ChatContainer = () => {
                       code(props) {
                         const { children, className, node, ...rest } = props;
                         const match = /language-(\w+)/.exec(className || "");
-
                         return true ? (
                           <div className="w-full my-4 overflow-x-auto rounded-md">
                             <SyntaxHighlighter
                               style={gruvboxDark}
                               showLineNumbers
                               wrapLongLines
-                              language="python"
+                              language={match[1]}
                             >
                               {children}
                             </SyntaxHighlighter>
