@@ -15,6 +15,7 @@ import "@radix-ui/themes/styles.css";
 
 import Chat from "./pages/Chat.jsx";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   // useEffect(() => {
@@ -69,6 +70,7 @@ const App = () => {
           {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Toaster />
       </div>
 
       <ButtonGradient />
