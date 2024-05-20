@@ -25,15 +25,21 @@ import Dashboard from "../components/ChatBot/Dashboard";
 import logo from "/hiaido-logo.png";
 
 import {
+  ArrowUpTrayIcon,
   ChatBubbleLeftRightIcon,
+  CloudArrowUpIcon,
   Cog6ToothIcon,
   CurrencyDollarIcon,
   MoonIcon,
+  PresentationChartLineIcon,
   QuestionMarkCircleIcon,
+  QueueListIcon,
   Squares2X2Icon,
+  SquaresPlusIcon,
   SunIcon,
   TicketIcon,
   UserIcon,
+  UsersIcon,
 } from "@heroicons/react/24/solid";
 import * as Menubar from "@radix-ui/react-menubar";
 import { motion } from "framer-motion";
@@ -90,15 +96,28 @@ const Navbar = () => {
     { label: "Light", icon: <SunIcon className="w-6 pr-1" /> },
     { label: "Dark", icon: <MoonIcon className="w-6 pr-1" /> },
   ];
+  const sliceIndex = 8;
   const navbarData = [
+    { label: "Dashboard", icon: <Squares2X2Icon className="w-8 h-8 pr-3" /> },
     {
-      label: "Chatbot",
+      label: "Chat",
       icon: <ChatBubbleLeftRightIcon className="w-8 h-8 pr-3" />,
     },
-    { label: "Profile", icon: <UserIcon className="w-8 h-8 pr-3" /> },
-    { label: "Dashboard", icon: <Squares2X2Icon className="w-8 h-8 pr-3" /> },
-    { label: "Pricing", icon: <CurrencyDollarIcon className="w-8 h-8 pr-3" /> },
-    { label: "Settings", icon: <Cog6ToothIcon className="w-8 h-8 pr-3" /> },
+    {
+      label: "Usage Analytics",
+      icon: <PresentationChartLineIcon className="w-8 h-8 pr-3" />,
+    },
+    {
+      label: "Deployments",
+      icon: <CloudArrowUpIcon className="w-8 h-8 pr-3" />,
+    },
+    { label: "Scheduler", icon: <QueueListIcon className="w-8 h-8 pr-3" /> },
+    {
+      label: "Feature requests",
+      icon: <SquaresPlusIcon className="w-8 h-8 pr-3" />,
+    },
+    { label: "User management", icon: <UsersIcon className="w-8 h-8 pr-3" /> },
+    { label: "Billing", icon: <CurrencyDollarIcon className="w-8 h-8 pr-3" /> },
     {
       label: "Tickets",
       icon: <TicketIcon className="w-8 h-8 pr-3" />,
@@ -113,40 +132,44 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="bg-neutral-800 relative w-full h-full p-5 rounded-lg">
-      <div className="flex items-center mb-10 text-2xl">
+    <div className="bg-neutral-800 relative w-full h-full p-3 rounded-lg text-[13px] flex flex-col">
+      <div className="flex items-center my-4 text-2xl">
         <img className="w-8 h-8 mr-2" src={logo} alt="Brand Logo" />
         <h1>HiAiDo</h1>
       </div>
-      <div className="divide-neutral-600">
-        <div className="text-neutral-400 pl-1 my-10 space-y-1">
-          <div className="text-neutral-500 my-3 text-sm">MAIN</div>
-          {navbarData.slice(0, 5).map((item, i) => {
+      <div className="divide-neutral-600 h-full">
+        <div className="text-neutral-400 my-2 space-y-1">
+          <div className="text-neutral-500 my-2 text-xs font-semibold">
+            MAIN
+          </div>
+          {navbarData.slice(0, sliceIndex).map((item, i) => {
             return (
               <button
                 key={item.id || i}
                 onClick={() => setNavTabIndex(i)}
-                className={`rounded-lg flex items-center text-base outline-none w-full p-1 px-3 ${
+                className={`rounded-lg flex items-center outline-none w-full p-[1px] px-1 ${
                   i == navTabIndex
                     ? "bg-neutral-600 text-white"
                     : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
                 }`}
               >
                 {item.icon}
-                {item.label}
+                <span className="text-left">{item.label}</span>
               </button>
             );
           })}
         </div>
-        <div className="h-[1px] bg-neutral-600"></div>
-        <div className="text-neutral-400 pl-1 my-8 space-y-1">
-          <div className="text-neutral-500 mt-7 my-4 text-sm">SUPPORT</div>
-          {navbarData.slice(5).map((item, i) => {
+        <div className="h-[1px] bg-neutral-700/75 my-2"></div>
+        <div className="text-neutral-400 pl-1 mt-6 h-full space-y-1">
+          <div className="text-neutral-500 my-2 text-xs font-semibold">
+            SUPPORT
+          </div>
+          {navbarData.slice(sliceIndex).map((item, i) => {
             return (
               <button
                 key={item.id || i}
                 onClick={() => setNavTabIndex(i + 5)}
-                className={`rounded-lg flex items-center text-base outline-none w-full p-1 px-3 ${
+                className={`rounded-lg flex items-center outline-none w-full p-[1px] px-1 ${
                   i + 5 == navTabIndex
                     ? "bg-neutral-600 text-white"
                     : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
@@ -158,63 +181,59 @@ const Navbar = () => {
             );
           })}
         </div>
-
-        <div className="absolute bottom-0 left-0 flex flex-col items-center justify-end mx-3 my-3 space-y-2">
-          <Menubar.Root className="flex bg-neutral-900 w-fit p-[5px] rounded-lg shadow-blackA4 space-x-2 justify-start">
-            {data.map((item, i) => {
-              return (
-                <Menubar.Menu key={item.id || i}>
-                  <Menubar.Trigger
-                    onClick={() => {
-                      setActiveTabIndex(i);
-                    }}
-                    className={`py-2 w-fit px-3 outline-none select-none font-medium leading-none rounded-lg relative ${
-                      i == activeTabIndex
-                        ? // ? "bg-cyan-100 text-neutral-800"
-                          ""
-                        : "hover:bg-neutral-600/35"
-                    }`}
-                    style={{
-                      WebkitTapHighlightColor: "transparent",
-                    }}
-                  >
-                    <div className="flex items-center justify-center">
-                      {item.icon}
-                      <span className="text-sm">{item.label}</span>
-                      {activeTabIndex == i && (
-                        <motion.span
-                          layoutId="theme-bubble"
-                          className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-lg"
-                          transition={{
-                            type: "spring",
-                            bounce: 0.1,
-                            duration: 0.6,
-                          }}
-                        />
-                      )}
-                    </div>
-                  </Menubar.Trigger>
-                </Menubar.Menu>
-              );
-            })}
-          </Menubar.Root>
-          <div className="h-[1px] bg-neutral-600"></div>
-          <Flex
-            gap="2"
-            align="center"
-            className="!border-t-[1px] !border-neutral-600 pt-5 pb-1"
-          >
-            <Avatar src="" fallback="U" radius="full" />
-            <Box maxWidth={"70%"}>
-              <Text truncate size={"2"}>
-                Nadine Schtakieff
-              </Text>
-              <Text truncate size={"1"} className="text-neutral-500">
-                Frontend Developer
-              </Text>
-            </Box>
-          </Flex>
-        </div>
+      </div>
+      <div className="flex flex-col h-fit items-center justify-end mx-3 space-y-2">
+        <Menubar.Root className="flex bg-neutral-900 w-fit p-[5px] rounded-lg shadow-blackA4 space-x-1 justify-start">
+          {data.map((item, i) => {
+            return (
+              <Menubar.Menu key={item.id || i}>
+                <Menubar.Trigger
+                  onClick={() => {
+                    setActiveTabIndex(i);
+                  }}
+                  className={`py-[7px] w-fit px-[12px] outline-none select-none font-medium leading-none rounded-lg relative ${
+                    i == activeTabIndex ? "" : "hover:bg-neutral-600/35"
+                  }`}
+                  style={{
+                    WebkitTapHighlightColor: "transparent",
+                  }}
+                >
+                  <div className="flex items-center justify-center">
+                    {item.icon}
+                    <span className="text-sm">{item.label}</span>
+                    {activeTabIndex == i && (
+                      <motion.span
+                        layoutId="theme-bubble"
+                        className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-lg"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.1,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
+                  </div>
+                </Menubar.Trigger>
+              </Menubar.Menu>
+            );
+          })}
+        </Menubar.Root>
+        <div className="h-[1px] bg-neutral-600"></div>
+        <Flex
+          gap="2"
+          align="center"
+          className="!border-t-[1px] !border-neutral-600 pt-5 pb-1"
+        >
+          <Avatar src="" fallback="U" radius="full" />
+          <Box maxWidth={"70%"}>
+            <Text truncate size={"2"}>
+              Nadine Schtakieff
+            </Text>
+            <Text truncate size={"1"} className="text-neutral-500">
+              Frontend Developer
+            </Text>
+          </Box>
+        </Flex>
       </div>
     </div>
   );
