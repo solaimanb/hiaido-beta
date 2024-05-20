@@ -5,7 +5,18 @@ import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { Flex, Button, Avatar, Box, Text } from "@radix-ui/themes";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  gruvboxDark,
+  darcula,
+  coldarkDark,
+  duotoneDark,
+  dracula,
+  oneDark,
+  materialDark,
+  nord,
+  ghcolors,
+  holiTheme,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
 // Internal modules
 import Dashboard from "../components/ChatBot/Dashboard";
@@ -302,8 +313,9 @@ const ChatContainer = () => {
                               style={gruvboxDark}
                               showLineNumbers
                               wrapLongLines
+                              language="python"
                             >
-                              {children[0].slice(children[0].indexOf(" ") + 1)}
+                              {children}
                             </SyntaxHighlighter>
                           </div>
                         ) : (
