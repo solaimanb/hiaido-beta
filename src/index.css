@@ -335,7 +335,7 @@ input:focus::placeholder {
   color: transparent;
 }
 
-/* LOGIN COMPONENT */
+/* ----------LOGIN COMPONENT STYLE---------- */
 [data-amplify-container] {
   display: flex;
   justify-content: center;
@@ -386,6 +386,13 @@ input:focus::placeholder {
 }
 
 [data-amplify-footer] {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 5px;
+  text-align: end;
+}
+
+[data-amplify-footer] button[type="button"] {
   font-size: 12px;
   font-weight: 500;
   margin-top: 5px;
@@ -525,4 +532,31 @@ p {
   stroke: #fff;
   fill: none;
   animation: checkmark 0.3s ease-in-out forwards;
+}
+
+/* SIGN IN BUTTON ANIMATION */
+.text-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-slide {
+  display: block;
+  transition: transform 0.6s ease-in-out;
+}
+
+.text-slide-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  transition: transform 0.6s ease-in-out;
+}
+
+#animated-btn:hover .text-slide {
+  transform: translateY(100%);
+}
+
+#animated-btn:hover .text-slide-hover {
+  transform: translateY(0);
 }

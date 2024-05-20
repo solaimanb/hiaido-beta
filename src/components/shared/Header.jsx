@@ -45,7 +45,7 @@ const Header = () => {
   }, [lastScrollTop]);
 
   const navItems = [
-    { name: "Chat", path: "/chat" },
+    // { name: "Chat", path: "/chat" },
     { name: "Hiring", path: "/hiring" },
     { name: "Contact Us", path: "/contact" },
     { name: "Pricing", path: "/pricing" },
@@ -63,18 +63,17 @@ const Header = () => {
           </NavLink>
 
           <nav className="lg:block hidden">
-            <ul className="flex">
+            <div className="flex">
               {navItems.map((item, index) => (
-                <li
+                <NavLink
                   key={index}
                   className="w-28 hover:text-orange-400/100 font-[400] text-center text-white/70 transition-all duration-300 ease-in-out"
+                  to={item?.path}
                 >
-                  <Link to={item?.path} className="">
-                    <AnimatedText text={` ${item?.name}`} />
-                  </Link>
-                </li>
+                  <AnimatedText text={` ${item?.name}`} />
+                </NavLink>
               ))}
-            </ul>
+            </div>
           </nav>
         </div>
 

@@ -1,6 +1,4 @@
-import Section from "../components/Section";
-import Heading from "../components/Heading";
-import PricingList from "../components/PricingList";
+import PricingList from "../components/page-components/pricing/PricingList";
 import { Helmet } from "react-helmet-async";
 
 const Pricing = () => {
@@ -23,15 +21,14 @@ const Pricing = () => {
       </Helmet>
 
       {/* MAIN CONTENT */}
-      <Section className=" mt-[2rem] overflow-hidden" id="pricing">
-        <div className="z-2 container relative">
-          <Heading />
-
-          <div className="relative">
-            <PricingList />
-          </div>
+      <main
+        className="min-h-[60vh] flex justify-center overflow-hidden"
+        id="pricing"
+      >
+        <div className="flex justify-center mt-20">
+          <PricingList />
         </div>
-      </Section>
+      </main>
     </>
   );
 };
