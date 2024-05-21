@@ -423,6 +423,20 @@ input:focus::placeholder {
   display: none;
 }
 
+.amplify-heading--3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.amplify-button--link {
+  font-size: 12px;
+  font-weight: 500;
+  text-align: end;
+  width: 100%;
+  padding-top: 5px;
+}
+
 /* from, to { border-color: transparent }
   50% { border-color: orange } */
 
