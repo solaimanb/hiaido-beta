@@ -155,7 +155,7 @@ const Hero = () => {
                     className="top-full absolute left-0 w-full"
                     width={624}
                     height={28}
-                    alt="Curve"
+                    alt=""
                   />
                 </span>
               </div>
