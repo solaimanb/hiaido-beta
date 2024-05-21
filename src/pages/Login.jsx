@@ -71,6 +71,7 @@ const Login = () => {
               <ArrowLeftIcon />
             </Link>
           </div>
+
           {/* HiAiDo Image Banner */}
           <div className="lg:flex md:w-1/2 xl:w-2/3 relative flex items-center justify-center w-full p-10">
             <div>
