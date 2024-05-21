@@ -8,6 +8,14 @@
   background: #352e2c;
 }
 
+#animated-btn:hover {
+  box-shadow: 1px 1px 25px 10px rgba(241, 125, 71, 0.185);
+}
+
+#animated-btn:hover:before {
+  left: 100%;
+}
+
 #animated-btn::before {
   content: "";
   background-image: conic-gradient(#e75a27 10deg, transparent 145deg);
