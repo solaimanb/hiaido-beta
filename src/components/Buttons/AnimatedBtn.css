@@ -4,47 +4,42 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50px;
+  border-radius: 4px;
   background: #352e2c;
 }
 
 #animated-btn:hover {
   transition: all;
   transition-duration: 0.5s;
-  box-shadow: 1px 1px 25px 10px rgba(241, 125, 71, 0.185);
-  outline: none;
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
+  /* box-shadow: 1px 1px 20px 5px rgba(241, 125, 71, 0.185); */
+}
+
+#animated-btn:hover::before {
+  background-image: conic-gradient(
+    from 250deg,
+    #f17d47 10deg,
+    transparent 145deg
   );
+  animation: rotate 6s linear infinite;
+  transition: all;
 }
 
 #animated-btn::before {
   content: "";
-  background-image: conic-gradient(#e75a27 10deg, transparent 145deg);
   width: 350%;
   height: 400%;
   position: absolute;
-  animation: rotate 5s linear infinite;
-  border-radius: 50px;
+  border-radius: 20px;
   padding: 5px;
 }
 
 #animated-btn::after {
   content: "";
-  width: 97%;
-  height: 95%;
+  width: 96%;
+  height: 94%;
   background: #050505;
   position: absolute;
-  border-radius: 50px;
+  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
