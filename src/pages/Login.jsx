@@ -79,6 +79,7 @@ const Login = () => {
                 <ArrowLeftIcon /> Back to home
               </Link>
             </div>
+
             <div className="h-100 relative w-full space-y-10">
               <h1 className="mt-12 text-xl font-bold leading-tight text-center">
                 Log in to your account
@@ -93,4 +94,5 @@ const Login = () => {
     </>
   );
 };
+
 export default Login;

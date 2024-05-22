@@ -191,7 +191,7 @@ const Hiring = () => {
       </Helmet>
 
       {/* MAIN CONTENT */}
-      <div className="bg-black/90">
+      <div className="">
         <div className="md:mt-60 mt-40">
           <form
             onSubmit={handleSubmit}
