@@ -135,7 +135,7 @@ const SkySection = () => {
         {
           method: "POST",
           body: JSON.stringify(obj.value),
-          // headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" },
         }
       );
       if (response.ok) {
@@ -163,7 +163,7 @@ const SkySection = () => {
           { style: { backgroundColor: "rgb(200, 68, 68)" } }
         );
       }
-      // setIsLoading(false);
+      setIsLoading(false);
     },
   });
   const [idx, setIdx] = useState(0);
