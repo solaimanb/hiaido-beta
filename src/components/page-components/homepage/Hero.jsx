@@ -165,14 +165,17 @@ const Hero = () => {
               </span>
             </p>
 
-            <p className="body-1 text-white/70 w-full md:w-[90%] mx-auto md:text-xl">
-              HIAIDO is a powerful AI platform designed to revolutionize your
-              cloud operations, seamlessly automating tasks and amplifying
-              efficiency.
+            <p className="text-white/80 w-full md:w-[90%] mx-auto md:text-xl">
+              HIAIDO is your intelligent cloud assistant, enabling you to
+              effortlessly manage your cloud operations through natural language
+              commands. With HIAIDO, you can perform a variety of tasks across
+              multiple cloud providers and technologies, including creating,
+              describing, updating, listing, and deleting resources.
               <br />
-              To make cloud management intuitive, we offer tailored solutions
-              and ongoing innovation, redefining seamless cloud experiences.
-              Experience efficiency like never before.
+              Whether you need to provision new infrastructure, modify existing
+              configurations, or simply get insights into your cloud
+              environment, HIAIDO streamlines the process, making cloud
+              management intuitive and efficient.
             </p>
           </div>
 
