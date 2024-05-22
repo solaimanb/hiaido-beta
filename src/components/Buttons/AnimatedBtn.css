@@ -12,6 +12,19 @@
   transition: all;
   transition-duration: 0.5s;
   box-shadow: 1px 1px 25px 10px rgba(241, 125, 71, 0.185);
+  outline: none;
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
 }
 
 #animated-btn::before {
@@ -27,8 +40,8 @@
 
 #animated-btn::after {
   content: "";
-  width: 96%;
-  height: 94%;
+  width: 97%;
+  height: 95%;
   background: #050505;
   position: absolute;
   border-radius: 50px;
