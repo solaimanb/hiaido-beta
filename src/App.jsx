@@ -28,7 +28,6 @@ const App = () => {
   // }, []);
 
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
-  console.log(authStatus);
 
   return (
     <HelmetProvider>
