@@ -14,13 +14,13 @@ const AnimatedBtn = ({
   return (
     <div
       id={id || "animated-btn"}
-      className={`rounded-full ${additionalClasses}`}
+      className={`${additionalClasses}`}
       style={style}
     >
       <div
         className={`z-50 px-${
           px || 8
-        } py-2 text-center transition-all duration-200 hover:bg-orange-400/10${
+        } py-2 text-center transition-all duration-200 ${
           white ? "text-white" : ""
         } ${className}`}
       >
