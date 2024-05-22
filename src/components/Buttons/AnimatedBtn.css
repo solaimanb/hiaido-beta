@@ -9,11 +9,9 @@
 }
 
 #animated-btn:hover {
+  transition: all;
+  transition-duration: 0.5s;
   box-shadow: 1px 1px 25px 10px rgba(241, 125, 71, 0.185);
-}
-
-#animated-btn:hover:before {
-  left: 100%;
 }
 
 #animated-btn::before {
