@@ -141,11 +141,11 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl mx-auto w-full px-4 mt-32"
+          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl mx-auto w-full px-4 mt-20"
         >
           <div className="space-y-4">
             <p className="lg:text-6xl md:px-0 md:text-5xl lg:pt-10 px-2 space-y-4 text-3xl font-bold">
-              <div className="text-white/90">
+              <div className="text-white/90 inline-block">
                 The Next Generation
                 <br />
                 <span className="relative inline-block">
@@ -181,7 +181,7 @@ const Hero = () => {
             className="text-start flex flex-col items-center mt-20 space-y-4"
           >
             <p className="type1 lg:text-2xl md:text-sm text-xs font-bold">
-              &quot;welcome to the future of automation with HIAIDO&quot;
+              &quot;Welcome to the future of automation with HIAIDO&quot;
             </p>
 
             <div
