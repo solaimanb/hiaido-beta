@@ -56,17 +56,17 @@ const DashboardSection = () => {
   const data = [
     {
       label: "Sky",
-      icon: <GlobeIcon className="w-6 h-6 mx-2" />,
+      icon: <GlobeIcon className="w-5 h-5 mx-2" />,
       content: <SkySection />,
     },
     {
       label: "Resources",
-      icon: <CubeIcon className="w-6 h-6 mx-2" />,
+      icon: <CubeIcon className="w-5 h-5 mx-2" />,
       content: "Manage your resources",
     },
     {
       label: "Deployments",
-      icon: <UploadIcon className="w-6 h-6 mx-2" />,
+      icon: <UploadIcon className="w-5 h-5 mx-2" />,
       content: "Manage all your deployments from one place",
     },
   ];
@@ -82,7 +82,7 @@ const DashboardSection = () => {
                   // setSelectedOption(item);
                   setActiveTabIndex(i);
                 }}
-                className={`py-2 w-fit px-6 outline-none select-none font-medium leading-none rounded-lg relative ${
+                className={`py-2 w-fit px-3 outline-none select-none font-medium leading-none rounded-lg relative ${
                   i === activeTabIndex
                     ? // ? "bg-cyan-100 text-neutral-800"
                       ""
@@ -94,7 +94,7 @@ const DashboardSection = () => {
               >
                 <div className="flex items-center justify-center">
                   {item.icon}
-                  <span className="text-base">{item.label}</span>
+                  <span className="text-sm">{item.label}</span>
                   {activeTabIndex == i && (
                     <motion.span
                       layoutId="bubble"
@@ -272,7 +272,7 @@ const SkySection = () => {
           </div>
           <div className="flex justify-end w-full col-span-2">
             <button
-              className={`bg-cyan-100 text-black mt-10 p-3 px-5 rounded-lg space-x-3 w-fit flex items-center disabled:cursor-not-allowed disabled:bg-cyan-100/50`}
+              className={`bg-cyan-100 text-black mt-10 p-3 px-5 rounded-lg space-x-3 w-fit flex items-center disabled:cursor-not-allowed disabled:bg-cyan-100/50 hover:scale-105 duration-300 delay-75`}
               disabled={isLoading}
               stype="submit"
             >

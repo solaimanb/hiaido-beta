@@ -34,6 +34,7 @@
     "react-just-parallax": "^3.1.16",
     "react-loading": "^2.0.3",
     "react-markdown": "^8.0.6",
+    "react-resizable-panels": "^2.0.19",
     "react-router-dom": "^6.22.3",
     "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^10.0.5",

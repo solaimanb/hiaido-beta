@@ -43,6 +43,7 @@ import {
 } from "@heroicons/react/24/solid";
 import * as Menubar from "@radix-ui/react-menubar";
 import { motion } from "framer-motion";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 // const sampleChat = [
 //   {
@@ -74,17 +75,23 @@ import { motion } from "framer-motion";
 
 const Chat = () => {
   return (
-    <div className="grid h-full grid-cols-8">
-      <div className="col-span-1 p-3">
+    <div className="h-full flex">
+      <div className="p-3">
         <Navbar />
       </div>
-      <div className="pr-14 w-full col-span-4 px-4 pl-10">
-        <ChatContainer />
-      </div>
-
-      <div className="col-span-3">
-        <Dashboard />
-      </div>
+      <PanelGroup direction="horizontal">
+        <Panel defaultSize={40} className="max-w-[1100px] min-w-[720px]">
+          <div className="pr-14 w-full px-4 pl-10">
+            <ChatContainer />
+          </div>
+        </Panel>
+        <PanelResizeHandle />
+        <Panel className="min-w-[600px]">
+          <div>
+            <Dashboard />
+          </div>
+        </Panel>
+      </PanelGroup>
     </div>
   );
 };
