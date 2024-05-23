@@ -1,4 +1,5 @@
-#animated-btn {
+/* -----Version 1----- */
+/* #animated-btn {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -15,11 +16,11 @@
 }
 
 #animated-btn:hover::before {
-  /* background-image: conic-gradient(
+  background-image: conic-gradient(
     from 250deg,
     #f17d47 10deg,
     transparent 145deg
-  ); */
+  );
   animation: rotate 2s linear;
 }
 
@@ -48,9 +49,9 @@
   100% {
     transform: rotate(0deg);
   }
-}
+} */
 
-/* -----V.2----- */
+/* -----Version 2----- */
 /* .child-wrapper {
   position: relative;
   overflow: hidden;
@@ -136,3 +137,33 @@
   transition: 0.25s;
   transition-delay: 0.5s;
 } */
+
+/* Version 3 */
+#animated-btn {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+  border-radius: 50px;
+  transition: all 0.4s ease-in-out;
+}
+
+#animated-btn:hover {
+  background-position: 100% 0;
+  transition: all 0.4s ease-in-out;
+}
+
+#animated-btn:focus {
+  outline: none;
+}
