@@ -215,30 +215,56 @@ const SkySection = () => {
           <div className="col-span-1 w-full">
             <form.Field
               name="firstName"
+              validators={{
+                onChange({ value }) {
+                  return value.trim() === ""
+                    ? "First name cannot be empty"
+                    : undefined;
+                },
+              }}
               children={(field) => (
-                <input
-                  name={field.name}
-                  className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
-                  placeholder="First name"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
+                <>
+                  <input
+                    name={field.name}
+                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    placeholder="First name"
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <div className="text-red-500 h-3">
+                    {field.state.meta.errors.length > 0 &&
+                      field.state.meta.errors[0]}
+                  </div>
+                </>
               )}
             />
           </div>
           <div className="col-span-1 w-full">
             <form.Field
               name="lastName"
+              validators={{
+                onChange({ value }) {
+                  return value.trim() === ""
+                    ? "Last name cannot be empty"
+                    : undefined;
+                },
+              }}
               children={(field) => (
-                <input
-                  name={field.name}
-                  className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
-                  placeholder="Last name"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
+                <>
+                  <input
+                    name={field.name}
+                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    placeholder="Last name"
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <div className="text-red-500 h-3">
+                    {field.state.meta.errors.length > 0 &&
+                      field.state.meta.errors[0]}
+                  </div>
+                </>
               )}
             />
           </div>
