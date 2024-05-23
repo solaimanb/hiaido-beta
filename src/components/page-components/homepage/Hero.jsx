@@ -130,7 +130,7 @@ const Hero = () => {
       customPaddings
       id="hero"
     >
-      <div className="flex justify-center h-[80vh] relative md:min-h-screen">
+      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-40 md:mt-10">
         <motion.div
           initial={{ scale: 1.5 }}
           animate={{ scale: 1 }}
@@ -141,10 +141,10 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl mx-auto w-full px-4 mt-20"
+          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full px-4 mt-20"
         >
           <div className="space-y-4">
-            <p className="lg:text-6xl md:px-0 md:text-5xl lg:pt-10 px-2 space-y-4 text-3xl font-bold">
+            <p className="lg:text-6xl md:px-0 md:text-5xl xl:text-7xl lg:pt-10 px-2 space-y-4 text-3xl font-bold">
               <div className="text-white/90 inline-block">
                 The Next Generation
                 <br />
@@ -165,18 +165,27 @@ const Hero = () => {
               </span>
             </p>
 
-            <p className="text-white/80 w-full md:w-[90%] mx-auto md:text-xl">
-              HIAIDO is your intelligent cloud assistant, enabling you to
-              effortlessly manage your cloud operations through natural language
-              commands. With HIAIDO, you can perform a variety of tasks across
-              multiple cloud providers and technologies, including creating,
-              describing, updating, listing, and deleting resources.
-              <br />
-              Whether you need to provision new infrastructure, modify existing
-              configurations, or simply get insights into your cloud
-              environment, HIAIDO streamlines the process, making cloud
-              management intuitive and efficient.
-            </p>
+            <div className="text-white/80 md:text-xl xl:text-2xl w-full mx-auto space-y-2">
+              <p className="secondaryText">
+                HIAIDO is your intelligent cloud assistant, enabling you to
+                effortlessly manage your
+                <br />
+                cloud operations through natural language commands.
+              </p>
+              <p className="secondaryText">
+                With HIAIDO, you can perform a variety of tasks across multiple
+                cloud providers and <br /> technologies, including creating,
+                describing, updating, listing, and deleting resources.
+                <br />
+                Whether you need to provision new infrastructure, modify
+                existing configurations, or
+                <br />
+                simply get insights into your cloud environment, HIAIDO
+                streamlines the process,
+                <br />
+                making cloud management intuitive and efficient.
+              </p>
+            </div>
           </div>
 
           <form
