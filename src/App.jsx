@@ -16,8 +16,20 @@ import "@radix-ui/themes/styles.css";
 import Chat from "./pages/Chat.jsx";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
+import Loading from "./components/shared/Loading.jsx";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true); // Create a loading state
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // useEffect(() => {
   //   // Smooth Scroll Trigger:
   //   (async () => {
@@ -28,6 +40,10 @@ const App = () => {
   // }, []);
 
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <HelmetProvider>
