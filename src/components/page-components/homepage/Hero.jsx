@@ -141,10 +141,10 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full px-4 mt-20"
+          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full px-2 md:mt-16"
         >
-          <div className="space-y-4">
-            <p className="lg:text-6xl md:px-0 md:text-5xl lg:pt-10 px-2 space-y-4 text-3xl font-bold">
+          <div className=" space-y-4">
+            <div className="lg:text-6xl md:px-0 md:text-5xl lg:pt-10 flex flex-col px-2 space-y-4 text-3xl font-bold">
               <div className="text-white/90 inline-block">
                 The Next Generation
                 <br />
@@ -163,9 +163,9 @@ const Hero = () => {
               <span className="relative inline-block mt-2 text-orange-500">
                 Cloud Automation Platform
               </span>
-            </p>
+            </div>
 
-            <div className="text-white/80 md:text-xl xl:text-2xl w-full mx-auto space-y-2">
+            <div className="text-white/80 md:text-xl xl:text-2xl w-full mx-auto space-y-2 text-sm">
               <p className="secondaryText">
                 HIAIDO is your intelligent cloud assistant, enabling you to
                 effortlessly manage your
@@ -174,15 +174,16 @@ const Hero = () => {
               </p>
               <p className="secondaryText">
                 With HIAIDO, you can perform a variety of tasks across multiple
-                cloud providers and <br /> technologies, including creating,
-                describing, updating, listing, and deleting resources.
-                <br />
+                cloud providers and <br className="md:block hidden" />{" "}
+                technologies, including creating, describing, updating, listing,
+                and deleting resources.
+                <br className="md:block hidden" />
                 Whether you need to provision new infrastructure, modify
                 existing configurations, or
-                <br />
+                <br className="md:block hidden" />
                 simply get insights into your cloud environment, HIAIDO
                 streamlines the process,
-                <br />
+                <br className="md:block hidden" />
                 making cloud management intuitive and efficient.
               </p>
             </div>
