@@ -17,6 +17,17 @@ const AnimatedBtn = ({
       // onClick={onClick}
     >
       <div
+        className={`z-50 px-8 py-2 text-center transition-all duration-200 ${
+          white ? "text-white" : ""
+        } ${className}`}
+      >
+        <a href={href} className="">
+          <span className="">{children}</span>
+        </a>
+      </div>
+
+      {/* V.2 */}
+      {/* <div
         className={`child-wrapper ${white ? "text-white" : ""} ${className}`}
       >
         <span></span>
@@ -26,7 +37,7 @@ const AnimatedBtn = ({
         <a href={href} className="text-container">
           {children}
         </a>
-      </div>
+      </div> */}
     </button>
   );
 };

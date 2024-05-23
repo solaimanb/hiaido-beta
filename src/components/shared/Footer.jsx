@@ -25,7 +25,7 @@ const Footer = () => {
             <div className="horizon-bar opacity-30 h-[1px] mt-6 bg-orange-400" />
 
             <p className="lg:block text-white/80 gap-x-1 flex items-center text-sm font-semibold">
-              &copy; {new Date().getFullYear()} <Link to="/">HIAIDO</Link> All
+              &copy; {new Date().getFullYear()} <Link to="/">HIAIDO</Link>. All
               rights reserved.
             </p>
           </div>
