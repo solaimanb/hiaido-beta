@@ -1011,7 +1011,7 @@ const Hiring = () => {
             <div className="mt-10">
               <button
                 type="submit"
-                className="bg-orange-500/80 w-full py-2 font-semibold rounded-full"
+                className="bg-orange-500/80 hover:bg-orange-500/70 hover:scale-105 w-full px-4 py-2 font-semibold transition duration-200 rounded-full"
               >
                 Submit
               </button>
