@@ -1,4 +1,4 @@
-#animated-btn {
+/* #animated-btn {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -19,7 +19,7 @@
     #f17d47 10deg,
     transparent 145deg
   );
-  animation: rotate 4s linear infinite;
+  animation: rotate 2s linear;
 }
 
 #animated-btn::before {
@@ -48,15 +48,16 @@
   100% {
     transform: rotate(0deg);
   }
-}
+} */
 
 /* -----V.2----- */
-/*
 .child-wrapper {
   position: relative;
-  background: #ee7d311a;
-  padding: 10px 30px;
-  border-radius: 5px;
+  overflow: hidden;
+  background: #ee7d312f;
+  padding: 8px 28px;
+  border-radius: 2px;
+  font-size: 16px;
 }
 
 .child-wrapper span {
@@ -133,4 +134,4 @@
   transform-origin: right;
   transition: 0.25s;
   transition-delay: 0.5s;
-} */
+}
