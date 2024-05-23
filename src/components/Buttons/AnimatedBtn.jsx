@@ -12,12 +12,12 @@ const AnimatedBtn = ({
   return (
     <button
       id={id || "animated-btn"}
-      className={`${additionalClasses} transition-all duration-200  hover:scale-105`}
+      className={`${additionalClasses} transition-all duration-200`}
       style={style}
       // onClick={onClick}
     >
       <div
-        className={`z-50 px-6 py-2 text-center ${
+        className={`cusbtn z-50 px-6 py-2 text-center ${
           white ? "text-white" : ""
         } ${className}`}
       >

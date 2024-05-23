@@ -40,8 +40,22 @@ const Benefits = () => {
     <Section id="features">
       <div
         ref={animateRef}
-        className="md:pt-40 container relative min-h-screen pt-20 mt-20"
+        className="md:pt-40 container relative min-h-screen pt-20 mt-20 text-center"
       >
+        <p className="secondaryText mb-10 text-2xl">
+          With HIAIDO, you can perform a variety of tasks across multiple cloud
+          providers and <br className="md:block hidden" /> technologies,
+          including creating, describing, updating, listing, and deleting
+          resources.
+          <br className="md:block hidden" />
+          Whether you need to provision new infrastructure, modify existing
+          configurations, or
+          <br className="md:block hidden" />
+          simply get insights into your cloud environment, HIAIDO streamlines
+          the process,
+          <br className="md:block hidden" />
+          making cloud management intuitive and efficient.
+        </p>
         <div className="flex flex-col flex-wrap items-center justify-center gap-4 mb-8 font-bold">
           <p className="lg:text-4xl w-auto text-2xl text-center text-orange-400">
             Build Faster, Build Better, Build With AI

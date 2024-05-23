@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import AnimatedText from "../../shared/AnimatedText";
 import axios from "axios";
 
+import textGif from "../../../assets/gif/TEXT-animation-website.gif";
+
 function Stars(props) {
   const ref = useRef();
 
@@ -130,7 +132,7 @@ const Hero = () => {
       customPaddings
       id="hero"
     >
-      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-40 md:mt-10">
+      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-40 md:mt-20">
         <motion.div
           initial={{ scale: 1.5 }}
           animate={{ scale: 1 }}
@@ -141,9 +143,9 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full px-2 md:mt-16"
+          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full px-2 md:mt-12"
         >
-          <div className=" space-y-4">
+          <div className="space-y-4">
             <div className="lg:text-6xl md:px-0 md:text-5xl lg:pt-10 flex flex-col px-2 space-y-4 text-3xl font-bold">
               <div className="text-white/90 inline-block">
                 The Next Generation
@@ -172,7 +174,7 @@ const Hero = () => {
                 <br />
                 cloud operations through natural language commands.
               </p>
-              <p className="secondaryText">
+              {/* <p className="secondaryText">
                 With HIAIDO, you can perform a variety of tasks across multiple
                 cloud providers and <br className="md:block hidden" />{" "}
                 technologies, including creating, describing, updating, listing,
@@ -185,13 +187,13 @@ const Hero = () => {
                 streamlines the process,
                 <br className="md:block hidden" />
                 making cloud management intuitive and efficient.
-              </p>
+              </p> */}
             </div>
           </div>
 
           <form
             onSubmit={handleSubmit}
-            className="text-start flex flex-col items-center mt-20 space-y-4"
+            className="text-start flex flex-col items-center mt-10 space-y-4"
           >
             <p className="type1 lg:text-2xl md:text-sm text-xs font-bold">
               &quot;Welcome to the future of automation with HIAIDO&quot;
@@ -217,6 +219,9 @@ const Hero = () => {
               </button>
             </div>
           </form>
+
+          {/* Text Animation */}
+          <img src={textGif} alt="hiaido-process" className="w-[80%] mt-10" />
         </motion.div>
       </div>
 
