@@ -44,34 +44,126 @@ import {
 import * as Menubar from "@radix-ui/react-menubar";
 import { motion } from "framer-motion";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { CopyIcon } from "@radix-ui/react-icons";
+import toast from "react-hot-toast";
 
-// const sampleChat = [
-//   {
-//     query: "Deploy website to S3",
-//     result:
-//       "Make sure to replace www with the path to your local directory that contains your website's static files. \n1. The index.html inside that directory will be used as the entry point (index document) for your S3 website. \n\n2.After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.\nMake sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-//   },
-//   {
-//     query: "Deploy website to S3",
-//     result:
-//       "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-//   },
-//   {
-//     query: "Deploy website to S3",
-//     result:
-//       "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-//   },
-//   {
-//     query: "Deploy website to S3",
-//     result:
-//       "Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website. Make sure to replace www with the path to your local directory that contains your website's static files. The index.html inside that directory will be used as the entry point (index document) for your S3 website. After deploying this program with Pulumi, the websiteUrl output will provide you with the URL to access your static website.",
-//   },
-//   {
-//     query: "send sms notification using python boto3 adn sns",
-//     result:
-//       "Here are the steps to send SMS notifications using Python, Boto3 and Amazon SNS: \n1. Install boto3 library. \n\n ```python pip install boto3 ```\n\n 2. Import boto3 SDK and setup SNS client\n\n ```python import boto3 sns = boto3.client('sns') ```\n\n 3. Create a new SNS topic to send SMS messages\n\n ```python response = sns.create_topic(Name=\"my-sms-topic\") topic_arn = response[\"TopicArn\"] ```\n\n 4. Subscribe a phone number to the SNS topic \n\n```python sns.subscribe(TopicArn=topic_arn, Protocol=\"sms\", Endpoint=\"+1234567890\") ```\n\n 5. Publish a message to the SNS topic to send SMS\n\n ```python response = sns.publish( TopicArn=topic_arn, Message=\"Hello from SNS!\", MessageAttributes={ 'AWS.SNS.SMS.SenderID': { 'DataType': 'String', 'StringValue': 'MySenderID' } } ) ```\n\n Make sure to replace the phone number and specify a sender ID. This will send an SMS notification to the subscribed number. Let me know if you need any clarification or have additional questions!",
-//   },
-// ];
+const sampleChat = [
+  {
+    query: "Create lambda function using boto3",
+    result: `To create a Lambda function using the AWS CLI, we need to gather some required and optional fields. Here are the details:
+
+### Required Fields:
+1. **Function Name**: The name you want to assign to the Lambda function.
+2. **Runtime**: The runtime environment for the Lambda function (e.g., \`python3.8\`, \`nodejs14.x\`).
+3. **Role**: The ARN of the IAM role that Lambda assumes when it executes your function.
+4. **Handler**: The function within your code that Lambda calls to begin execution (e.g., \`lambda_function.lambda_handler\`).
+5. **Zip File**: The path to the deployment package (a .zip file) that contains your Lambda function code.
+
+### Optional Fields:
+1. **Description**: A description of the function.
+2. **Timeout**: The amount of time that Lambda allows a function to run before stopping it (default is 3 seconds).
+3. **Memory Size**: The amount of memory available to the function at runtime (default is 128 MB).
+4. **Environment Variables**: Key-value pairs that Lambda sets in the execution environment.
+
+### Steps:
+1. **Specify the required fields.**
+2. **Specify any optional fields if needed.**
+3. **Confirm to proceed with the creation.**
+
+Let's start by gathering the required information.
+
+#### Required Fields:
+1. **Function Name**: What would you like to name your Lambda function?
+2. **Runtime**: Which runtime environment would you like to use (e.g., \`python3.8\`, \`nodejs14.x\`)?
+3. **Role ARN**: Do you have the ARN of the IAM role that Lambda will assume?
+4. **Handler**: What is the handler for your Lambda function (e.g., \`lambda_function.lambda_handler\`)?
+5. **Zip File Path**: Where is the deployment package located?
+
+#### Optional Fields:
+1. **Description**: Would you like to add a description for the function?
+2. **Timeout**: Do you want to set a custom timeout (default is 3 seconds)?
+3. **Memory Size**: Do you want to set a custom memory size (default is 128 MB)?
+4. **Environment Variables**: Do you have any environment variables to set?
+
+Please provide the required information, and specify any optional fields if needed.`,
+  },
+  {
+    query: "Write python code to upload a docker container",
+    result: `To upload a Docker container to a repository, you typically need to follow these steps:
+1. Build the Docker image.
+2. Tag the Docker image.
+3. Push the Docker image to a Docker registry (e.g., Docker Hub, Amazon ECR).
+    
+    Below is a Python script that uses the Docker SDK for Python to automate these steps. This example assumes you are pushing the Docker image to Docker Hub.
+    
+    First, you need to install the Docker SDK for Python:
+    \`\`\`sh
+    pip install docker
+    \`\`\`
+    
+    Here is the Python code:
+    
+    \`\`\`python
+    import docker
+    import os
+    
+    # Initialize the Docker client
+    client = docker.from_env()
+    
+    # Define variables
+    dockerfile_path = './Dockerfile'  # Path to your Dockerfile
+    image_name = 'your_image_name'    # Name of the Docker image
+    tag = 'latest'                    # Tag for the Docker image
+    repository = 'your_dockerhub_username/your_repository_name'  # Docker Hub repository
+
+    # Build the Docker image
+    print("Building Docker image...")
+    image, build_logs = client.images.build(path='.', dockerfile=dockerfile_path, tag=f'{image_name}:{tag}')
+    for log in build_logs:
+        print(log)
+    
+    # Tag the Docker image
+    print("Tagging Docker image...")
+    image.tag(repository, tag=tag)
+    
+    # Log in to Docker Hub
+    print("Logging in to Docker Hub...")
+    dockerhub_username = os.getenv('DOCKERHUB_USERNAME')
+    dockerhub_password = os.getenv('DOCKERHUB_PASSWORD')
+    client.login(username=dockerhub_username, password=dockerhub_password)
+    
+    # Push the Docker image to Docker Hub
+    print("Pushing Docker image to Docker Hub...")
+    push_logs = client.images.push(repository, tag=tag, stream=True, decode=True)
+    for log in push_logs:
+        print(log)
+    
+    print("Docker image uploaded successfully.")
+    \`\`\`
+    
+    ### Explanation:
+    1. **Initialize the Docker client**: Connects to the Docker daemon.
+    2. **Define variables**: Set the path to your Dockerfile, the image name, tag, and repository.
+    3. **Build the Docker image**: Uses the Dockerfile to build the image.
+    4. **Tag the Docker image**: Tags the image with the repository and tag.
+    5. **Log in to Docker Hub**: Authenticates with Docker Hub using environment variables for security.
+    6. **Push the Docker image**: Pushes the tagged image to the specified Docker Hub repository.
+    
+    ### Prerequisites:
+    - Ensure Docker is installed and running on your machine.
+    - Replace \`your_image_name\`, \`your_dockerhub_username\`, and \`your_repository_name\` with your actual Docker image name, Docker Hub username, and repository name.
+    - Set the \`DOCKERHUB_USERNAME\` and \`DOCKERHUB_PASSWORD\` environment variables with your Docker Hub credentials.
+    
+    You can set the environment variables in your terminal like this:
+    \`\`\`sh
+    export DOCKERHUB_USERNAME='your_dockerhub_username'
+    export DOCKERHUB_PASSWORD='your_dockerhub_password'
+    \`\`\`
+    
+    This script will automate the process of building, tagging, and pushing a Docker image to Docker Hub.
+    `,
+  },
+];
 
 const Chat = () => {
   return (
@@ -260,16 +352,19 @@ const ChatContainer = () => {
       setChats((prevChats) => [...prevChats, newChat]);
       setQuery("");
 
-      const response = await fetch("https://apis.hiaido.com/ask-question", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: "r367708@gmail.com",
-          question: query,
-        }),
-      });
+      const response = await fetch(
+        `https://i7isuomfpxsfxsf5jlbdv5as6u0kcayx.lambda-url.us-east-1.on.aws/get-response`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: "r367708@gmail.com",
+            query,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -278,6 +373,7 @@ const ChatContainer = () => {
       const data = await response.json();
       newChat.result = data.response;
       newChat.loading = false;
+      console.log(data.response);
 
       setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
       setQuery("");
@@ -303,7 +399,7 @@ const ChatContainer = () => {
         Welcome To HIAIDO Cloud Assistant.
       </div>
       <div
-        className="chat-box w-full h-[600px] text-sm p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
+        className="chat-box w-full h-[680px] text-sm p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
         ref={chatBoxRef}
       >
         {chats.map((chat, index) => (
@@ -331,20 +427,63 @@ const ChatContainer = () => {
                     components={{
                       code(props) {
                         const { children, className, node, ...rest } = props;
+                        // console.log(children, className);
                         const match = /language-(\w+)/.exec(className || "");
-                        return true ? (
-                          <div className="w-full my-4 overflow-x-auto rounded-md">
-                            <SyntaxHighlighter
-                              style={gruvboxDark}
-                              showLineNumbers
-                              wrapLongLines
-                              language={match[1]}
+                        // console.log(match);
+                        // console.log(children[0])
+                        let pretag = ({ children, className, ...rest }) => {
+                          return (
+                            <pre
+                              {...rest}
+                              className={`${className} rounded-b-md bg-red-50 !my-0`}
                             >
                               {children}
+                            </pre>
+                          );
+                        };
+                        const copyContent = async (text) => {
+                          try {
+                            await navigator.clipboard.writeText(text);
+                            toast.success("Copied to clipboard");
+                          } catch (err) {
+                            alert("Failed to copy", err);
+                          }
+                        };
+                        return match ? (
+                          <div
+                            className="w-full my-4 overflow-x-auto rounded-lg p-0 drop-shadow-lg"
+                            style={{ fontFamily: "monospace" }}
+                          >
+                            <div className="flex bg-neutral-900 rounded-t-md justify-between w-full items-center p-2 px-4">
+                              <div className="">{match[1]}</div>
+                              <div className="">
+                                <CopyIcon
+                                  className="cursor-pointer"
+                                  onClick={async () => {
+                                    await copyContent(children[0]);
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <SyntaxHighlighter
+                              lineNumberStyle={{ fontFamily: "monospace" }}
+                              style={gruvboxDark}
+                              // codeTagProps={{
+                              //   style: { fontFamily: "inherit" },
+                              // }}
+                              showLineNumbers
+                              wrapLongLines
+                              PreTag={pretag}
+                              language={match[1]}
+                            >
+                              {children[0].trim()}
                             </SyntaxHighlighter>
                           </div>
                         ) : (
-                          <code {...rest} className={className}>
+                          <code
+                            {...rest}
+                            className={`${className} text-yellow-200/50 bg-neutral-900 rounded-md p-[2px] px-1 font-mono`}
+                          >
                             {children}
                           </code>
                         );
@@ -389,8 +528,7 @@ const ChatContainer = () => {
                     className={`!p-[17px] !text-sm  inline ${
                       button == selectedButton
                         ? buttonProps[button].buttonGradient
-                        : // : "!from-[#396afc] !to-[#2948ff]"
-                          "!bg-cyan-100 !text-neutral-900"
+                        : "!bg-cyan-100 !text-neutral-900"
                     }`}
                   >
                     <span
