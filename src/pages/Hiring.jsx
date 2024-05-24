@@ -975,7 +975,7 @@ const Hiring = () => {
               {/* Phone Number Field */}
               <div className="group relative z-0 w-full mb-5">
                 <input
-                  type="number"
+                  type="tel"
                   pattern="[8-14]"
                   name="phone"
                   onChange={handleInputChange}
