@@ -191,6 +191,8 @@ const Chat = () => {
 const Navbar = () => {
   const [navTabIndex, setNavTabIndex] = useState();
   const [activeTabIndex, setActiveTabIndex] = useState(1);
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
   const data = [
     { label: "Light", icon: <SunIcon className="w-6 pr-1" /> },
     { label: "Dark", icon: <MoonIcon className="w-6 pr-1" /> },
@@ -231,92 +233,106 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="bg-neutral-800 relative w-full h-full p-3 rounded-lg text-[13px] flex flex-col">
-      <div className="flex items-center my-4 text-2xl">
-        <img className="w-8 h-8 mr-2" src={logo} alt="Brand Logo" />
-        <h1>HiAiDo</h1>
+    <div
+      className={`bg-neutral-800 relative h-full rounded-lg text-[13px] flex flex-col ${
+        isCollapsed ? "w-[48px] p-1 py-3 justify-center" : "w-[210px] p-3"
+      }`}
+    >
+      <div className={`flex items-center my-4 text-2xl ${isCollapsed && "justify-center"}`}>
+        <img
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
+          src={logo}
+          alt="Brand Logo"
+        />
+        {isCollapsed || <h1>HiAiDo</h1>}
       </div>
       <div className="divide-neutral-600 h-full">
         <div className="text-neutral-400 my-2 space-y-1">
-          <div className="text-neutral-500 my-2 text-xs font-semibold">
-            MAIN
+          <div className="text-neutral-500 my-2 h-3 text-xs font-semibold">
+            {isCollapsed || "MAIN"}
           </div>
           {navbarData.slice(0, sliceIndex).map((item, i) => {
             return (
               <button
                 key={item.id || i}
                 onClick={() => setNavTabIndex(i)}
-                className={`rounded-lg flex items-center outline-none w-full p-[1px] px-1 ${
+                className={`rounded-lg flex items-center justify-center outline-none p-[1px] px-2 ${
                   i == navTabIndex
                     ? "bg-neutral-600 text-white"
                     : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
                 }`}
               >
                 {item.icon}
-                <span className="text-left">{item.label}</span>
+                {isCollapsed || <span className="text-left">{item.label}</span>}
               </button>
             );
           })}
         </div>
         <div className="h-[1px] bg-neutral-700/75 my-2"></div>
-        <div className="text-neutral-400 pl-1 mt-6 h-full space-y-1">
-          <div className="text-neutral-500 my-2 text-xs font-semibold">
-            SUPPORT
+        <div className="text-neutral-400 mt-3 h-full space-y-1">
+          <div className="text-neutral-500 my-2 h-3 text-xs font-semibold">
+            {isCollapsed || "SUPPORT"}
           </div>
           {navbarData.slice(sliceIndex).map((item, i) => {
             return (
               <button
                 key={item.id || i}
                 onClick={() => setNavTabIndex(i + 5)}
-                className={`rounded-lg flex items-center outline-none w-full p-[1px] px-1 ${
+                className={`rounded-lg flex items-center justify-center outline-none p-[1px] px-2 ${
                   i + 5 == navTabIndex
                     ? "bg-neutral-600 text-white"
                     : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
                 }`}
               >
                 {item.icon}
-                {item.label}
+                {isCollapsed || <span className="text-left">{item.label}</span>}
               </button>
             );
           })}
         </div>
       </div>
       <div className="flex flex-col h-fit items-center justify-end mx-3 space-y-2">
-        <Menubar.Root className="flex bg-neutral-900 w-fit p-[5px] rounded-lg shadow-blackA4 space-x-1 justify-start">
-          {data.map((item, i) => {
-            return (
-              <Menubar.Menu key={item.id || i}>
-                <Menubar.Trigger
-                  onClick={() => {
-                    setActiveTabIndex(i);
-                  }}
-                  className={`py-[7px] w-fit px-[12px] outline-none select-none font-medium leading-none rounded-lg relative ${
-                    i == activeTabIndex ? "" : "hover:bg-neutral-600/35"
-                  }`}
-                  style={{
-                    WebkitTapHighlightColor: "transparent",
-                  }}
-                >
-                  <div className="flex items-center justify-center">
-                    {item.icon}
-                    <span className="text-sm">{item.label}</span>
-                    {activeTabIndex == i && (
-                      <motion.span
-                        layoutId="theme-bubble"
-                        className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-lg"
-                        transition={{
-                          type: "spring",
-                          bounce: 0.1,
-                          duration: 0.6,
-                        }}
-                      />
-                    )}
-                  </div>
-                </Menubar.Trigger>
-              </Menubar.Menu>
-            );
-          })}
-        </Menubar.Root>
+        {isCollapsed ? (
+          <div className="">{data[parseInt(activeTabIndex)].icon}</div>
+        ) : (
+          <Menubar.Root className="flex bg-neutral-900 w-fit p-[5px] rounded-lg shadow-blackA4 space-x-1 justify-start">
+            {data.map((item, i) => {
+              return (
+                <Menubar.Menu key={item.id || i}>
+                  <Menubar.Trigger
+                    onClick={() => {
+                      setActiveTabIndex(i);
+                    }}
+                    className={`py-[7px] w-fit px-[12px] outline-none select-none font-medium leading-none rounded-lg relative ${
+                      i == activeTabIndex ? "" : "hover:bg-neutral-600/35"
+                    }`}
+                    style={{
+                      WebkitTapHighlightColor: "transparent",
+                    }}
+                  >
+                    <div className="flex items-center justify-center">
+                      {item.icon}
+                      <span className="text-sm">{item.label}</span>
+                      {activeTabIndex == i && (
+                        <motion.span
+                          layoutId="theme-bubble"
+                          className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-lg"
+                          transition={{
+                            type: "spring",
+                            bounce: 0.1,
+                            duration: 0.6,
+                          }}
+                        />
+                      )}
+                    </div>
+                  </Menubar.Trigger>
+                </Menubar.Menu>
+              );
+            })}
+          </Menubar.Root>
+        )}
+
         <div className="h-[1px] bg-neutral-600"></div>
         <Flex
           gap="2"
@@ -324,14 +340,16 @@ const Navbar = () => {
           className="!border-t-[1px] !border-neutral-600 pt-5 pb-1"
         >
           <Avatar src="" fallback="U" radius="full" />
-          <Box maxWidth={"70%"}>
-            <Text truncate size={"2"}>
-              Nadine Schtakieff
-            </Text>
-            <Text truncate size={"1"} className="text-neutral-500">
-              Frontend Developer
-            </Text>
-          </Box>
+          {isCollapsed || (
+            <Box maxWidth={"70%"}>
+              <Text truncate size={"2"}>
+                Nadine Schtakieff
+              </Text>
+              <Text truncate size={"1"} className="text-neutral-500">
+                Frontend Developer
+              </Text>
+            </Box>
+          )}
         </Flex>
       </div>
     </div>
