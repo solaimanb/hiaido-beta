@@ -55,7 +55,7 @@ const Benefits = () => {
     <Section id="features">
       <div
         ref={animateRef}
-        className="md:pt-40 container relative min-h-screen pt-20 mt-20 text-center"
+        className="md:pt-20 container relative min-h-screen mt-10 text-center"
       >
         <motion.p
           ref={ref}
