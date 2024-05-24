@@ -16,8 +16,6 @@ import "@radix-ui/themes/styles.css";
 import Chat from "./pages/Chat.jsx";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
-import { useEffect, useState } from "react";
-import Loading from "./components/shared/Loading.jsx";
 
 const App = () => {
   // useEffect(() => {
