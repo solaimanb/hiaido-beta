@@ -10,7 +10,11 @@ import { toast } from "react-toastify";
 import AnimatedText from "../../shared/AnimatedText";
 import axios from "axios";
 
+<<<<<<< HEAD
 import textGif from "../../../assets/gif/TEXT-animation-website.gif";
+=======
+import textGif from "../../../assets/gif/TEXT.gif";
+>>>>>>> 72364ed600f30f3dce5c0799d3554112bbf4704c
 
 function Stars(props) {
   const ref = useRef();

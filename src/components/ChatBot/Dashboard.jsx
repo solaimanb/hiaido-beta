@@ -187,6 +187,7 @@ const SkySection = () => {
         {data.map((item, i) => {
           return (
             <div
+            key={i}
               className="relative aspect-square col-span-1 rounded-md hover:scale-[1.02] hover:invert-[.1] duration-300 delay-100"
               onClick={() => setIdx(i)}
             >
