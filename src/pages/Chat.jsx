@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import ChatContainer from "../components/ChatBot/ChatContainer";
 
 const Chat = () => {
+  console.log("Chat")
   return (
     <div className="h-full flex">
       <div className="p-3">

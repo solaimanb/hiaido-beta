@@ -26,7 +26,7 @@ const Sidebar = () => {
   const [navTabIndex, setNavTabIndex] = useState();
   const [activeTabIndex, setActiveTabIndex] = useState(1);
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const controls = useAnimationControls();
+  console.log("sidebar");
 
   const data = [
     { label: "Light", icon: <SunIcon className="w-5 " /> },
