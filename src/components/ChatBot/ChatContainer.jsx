@@ -5,11 +5,13 @@ import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import logo from "/hiaido-logo.png";
 import Codeblock from "./Codeblock";
 import { AnimatePresence, animate, motion } from "framer-motion";
+import { PaperClipIcon } from "@heroicons/react/24/solid";
+import { PlayIcon } from "@radix-ui/react-icons";
 
 const QueryTemplates = ({ askQuery }) => {
   const data = [
     "How to create an S3 bucket?",
-    "How to monitor a Lmabda function?",
+    "How to monitor a Lambda function?",
     "How to create an ETL pipeline using AWS Glue?",
     "How to setup a Elastic Load Balancer for EC2?",
   ];
@@ -18,14 +20,15 @@ const QueryTemplates = ({ askQuery }) => {
     <div className="relative h-full">
       <div className="absolute bottom-32 flex w-full justify-center space-x-4">
         {data.map((item, i) => {
+          console.log(item);
           return (
-            <AnimatePresence>
+            <AnimatePresence key={i}>
               <motion.button
                 onClick={() => askQuery(item)}
                 key={item}
-                className="p-4 w-40 rounded-2xl drop-shadow-md bg-neutral-800 border-[1px] py-8 border-neutral-700 text-neutral-100 text-left hover:bg-neutral-700 hover:border-neutral-500 duration-300"
+                className="p-4 w-40 rounded-2xl drop-shadow-md bg-neutral-800/50 border-[1px] flex justify-start border-neutral-700 text-neutral-100 text-left hover:bg-neutral-700/75 hover:border-neutral-500 duration-300"
               >
-                {item}
+                <span>{item}</span>
               </motion.button>
             </AnimatePresence>
           );
@@ -46,6 +49,7 @@ const ChatContainer = () => {
   const getChat = async (templateQuery) => {
     if (chats.length > 0 && chats.at(-1).loading) return;
     try {
+      console.log(templateQuery, query);
       const newChat = {
         query: templateQuery || query,
         result: "",
@@ -187,11 +191,11 @@ const ChatContainer = () => {
       </div>
 
       <div
-        className={`chat-query-box mb-5 w-full absolute bottom-0 rounded-lg p-[3px] transition-all duration-200 ease-in bg-gradient-to-tr animated-background ${
+        className={`chat-query-box mb-5 w-full absolute bottom-0 rounded-lg p-[3px] flex justify-center transition-all duration-200 ease-in bg-gradient-to-tr animated-background ${
           selectedButton == "" ? "" : buttonProps[selectedButton].buttonGradient
         }`}
       >
-        <div className=" bg-neutral-800 flex flex-col w-full gap-3 p-3 rounded-lg">
+        {/* <div className=" bg-neutral-800 flex flex-col w-full gap-3 p-3 rounded-lg">
           <Flex gap="3">
             {buttons.map((button, i) => {
               return (
@@ -252,17 +256,52 @@ const ChatContainer = () => {
               </Button>
             </div>
           </div>
+        </div> */}
+        <div className="bg-neutral-800 rounded-[26px] flex items-center gap-3.5 w-2/3 p-1.5 outline-none appearance-none">
+          {/* <PaperClipIcon className="w-6 ml-3" opacity={0} /> */}
+          <div className="flex min-w-0 flex-1 flex-col ml-4">
+            <textarea
+              rows={1}
+              className="h-[40px] bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-hidden"
+              ref={inputRef}
+              onChange={(e) => setQuery(e.target.value)}
+              name="query"
+              id="query-box"
+              value={query}
+              placeholder="Ask anything..."
+            ></textarea>
+          </div>
+          <button
+            onClick={() => getChat()}
+            disabled={chats.length > 0 && chats.at(-1).loading}
+            className="bg-neutral-100 w-8 h-8 rounded-full flex items-center justify-center mr-1 hover:bg-neutral-200 disabled:bg-neutral-500 disabled:cursor-not-allowed"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#111111"
+              className="size-5"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
   );
 };
+
 const buttons = ["Create", "Describe", "Update", "List", "Delete"];
 const buttonProps = {
   Create: {
     gradient: "from-[#4158D0] via-[#C850C0] to-[#FFCC70]",
     buttonGradient: "!from-emerald-500 !to-emerald-900 !bg-gradient-to-tr",
   },
+
   Describe: {
     gradient: "from-[#0093E9] via-[#80D0C7] to-[#4FB7AA]",
     // buttonGradient: "!from-[#0093E9] !via-[#80D0C7] !to-[#4FB7AA] !bg-gradient-to-tr",
