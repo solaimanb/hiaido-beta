@@ -7,7 +7,7 @@
 @tailwind utilities;
 /* @import '@radix-ui/themes/styles.css'; */
 
-/* .animated-background {
+.animated-background {
   background-size: 400%;
 
   -webkit-animation: animation 3s ease infinite;
@@ -74,7 +74,7 @@
   50% {
     background-position: 100% 50%;
   }
-} */
+}
 
 :root {
   --font-playpen: "Playpen Sans", cursive;

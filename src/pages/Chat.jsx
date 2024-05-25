@@ -470,6 +470,7 @@ const ChatContainer = () => {
   const inputRef = useRef(null);
 
   const getChat = async () => {
+    if (chats.length > 0 && chats.at(-1).loading) return;
     try {
       const newChat = { query, result: "", loading: true };
       setChats((prevChats) => [...prevChats, newChat]);
@@ -499,7 +500,7 @@ const ChatContainer = () => {
       console.log(data.response);
 
       setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
-      setQuery("");
+      // setQuery("");
     } catch (error) {
       console.error("Error:", error);
       setError("Failed to fetch data");
@@ -591,9 +592,6 @@ const ChatContainer = () => {
                             <SyntaxHighlighter
                               lineNumberStyle={{ fontFamily: "monospace" }}
                               style={gruvboxDark}
-                              // codeTagProps={{
-                              //   style: { fontFamily: "inherit" },
-                              // }}
                               showLineNumbers
                               wrapLongLines
                               PreTag={pretag}
@@ -682,6 +680,7 @@ const ChatContainer = () => {
               <Button
                 className="!p-6 !bg-gradient-to-r !text-base !to-green-500 !via-blue-500 !from-blue-600 hover:!scale-105 !duration-200 ease-in"
                 onClick={getChat}
+                disabled={chats.length > 0 && chats.at(-1).loading}
               >
                 Submit
               </Button>
