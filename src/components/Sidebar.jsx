@@ -27,7 +27,6 @@ const Sidebar = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(1);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const controls = useAnimationControls();
-  console.log(navTabIndex);
 
   const data = [
     { label: "Light", icon: <SunIcon className="w-5 " /> },
@@ -96,7 +95,6 @@ const Sidebar = () => {
             transition: { delay: 0.3 },
           },
         }}
-        // transition={{ delay: 0.4 }}
         animate={isCollapsed ? "collapse" : "expand"}
       >
         <div

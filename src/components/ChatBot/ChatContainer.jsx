@@ -4,6 +4,36 @@ import { Flex, Button } from "@radix-ui/themes";
 import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import logo from "/hiaido-logo.png";
 import Codeblock from "./Codeblock";
+import { AnimatePresence, animate, motion } from "framer-motion";
+
+const QueryTemplates = ({ askQuery }) => {
+  const data = [
+    "How to create an S3 bucket?",
+    "How to monitor a Lmabda function?",
+    "How to create an ETL pipeline using AWS Glue?",
+    "How to setup a Elastic Load Balancer for EC2?",
+  ];
+
+  return (
+    <div className="relative h-full">
+      <div className="absolute bottom-32 flex w-full justify-center space-x-4">
+        {data.map((item, i) => {
+          return (
+            <AnimatePresence>
+              <motion.button
+                onClick={() => askQuery(item)}
+                key={item}
+                className="p-4 w-40 rounded-2xl drop-shadow-md bg-neutral-800 border-[1px] py-8 border-neutral-700 text-neutral-100 text-left hover:bg-neutral-700 hover:border-neutral-500 duration-300"
+              >
+                {item}
+              </motion.button>
+            </AnimatePresence>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 const ChatContainer = () => {
   const [selectedButton, setSelectedButton] = useState("");
@@ -13,10 +43,15 @@ const ChatContainer = () => {
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
 
-  const getChat = async () => {
+  const getChat = async (templateQuery) => {
     if (chats.length > 0 && chats.at(-1).loading) return;
     try {
-      const newChat = { query, result: "", loading: true };
+      const newChat = {
+        query: templateQuery || query,
+        result: "",
+        loading: true,
+      };
+      if (newChat.query == "") return;
       setChats((prevChats) => [...prevChats, newChat]);
       setQuery("");
 
@@ -29,7 +64,7 @@ const ChatContainer = () => {
           },
           body: JSON.stringify({
             email: "r367708@gmail.com",
-            query,
+            query: newChat.query,
           }),
         }
       );
@@ -70,60 +105,85 @@ const ChatContainer = () => {
         className="chat-box w-full h-[680px] text-sm p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
         ref={chatBoxRef}
       >
-        {chats.map((chat, index) => (
-          <div key={index} className="py-2 mb-5">
-            <div className="user-chat !text-xl py-4 text-gray-200 md:text-base flex">
-              <div className="bg-cyan-700 flex items-center justify-center w-10 h-10 mx-4 rounded-full">
-                <div>U</div>
-              </div>
-              <p className="text-neutral-300 text-2xl">{chat.query}</p>
-            </div>
-            <div className="chat-boat-chat relative">
-              {chat.loading ? (
-                <div>
-                  <div className="dot-typing mt-5 ml-5"></div>
-                </div>
-              ) : (
-                <div className="flex">
-                  <img
-                    className="w-12 h-12 mx-3 my-4"
-                    src={logo}
-                    alt="bot avatar"
-                  />
-                  <ReactMarkdown
-                    className="markdown"
-                    components={{
-                      code(props) {
-                        const { children, className, node, ...rest } = props;
-                        // console.log(children, className);
-                        const match = /language-(\w+)/.exec(className || "");
-                        // console.log(match);
-                        // console.log(children[0])
+        <AnimatePresence>
+          {chats.length == 0 ? (
+            <motion.div
+              transition={{ duration: 0.5 }}
+              initial={{ scale: 0.8, opacity: 0, y: "-10px" }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              className="h-full"
+            >
+              <QueryTemplates
+                askQuery={(templateQuery) => getChat(templateQuery)}
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              transition={{ duration: 2 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="h-full"
+            >
+              {chats.map((chat, index) => (
+                <div key={index} className="py-2 mb-5">
+                  <div className="user-chat !text-xl py-4 text-gray-200 md:text-base flex">
+                    <div className="bg-cyan-700 flex items-center justify-center w-10 h-10 mx-4 rounded-full">
+                      <div>U</div>
+                    </div>
+                    <p className="text-neutral-300 text-2xl">{chat.query}</p>
+                  </div>
+                  <div className="chat-boat-chat relative">
+                    {chat.loading ? (
+                      <div>
+                        <div className="dot-typing mt-5 ml-5"></div>
+                      </div>
+                    ) : (
+                      <div className="flex">
+                        <img
+                          className="w-12 h-12 mx-3 my-4"
+                          src={logo}
+                          alt="bot avatar"
+                        />
+                        <ReactMarkdown
+                          className="markdown"
+                          components={{
+                            code(props) {
+                              const { children, className, node, ...rest } =
+                                props;
+                              // console.log(children, className);
+                              const match = /language-(\w+)/.exec(
+                                className || ""
+                              );
+                              // console.log(match);
+                              // console.log(children[0])
 
-                        return match ? (
-                          <Codeblock
-                            language={match[1]}
-                            code={children[0].trim()}
-                            theme={gruvboxDark}
-                          />
-                        ) : (
-                          <code
-                            {...rest}
-                            className={`${className} text-yellow-200/50 bg-neutral-900 rounded-md p-[2px] px-1 font-mono`}
-                          >
-                            {children}
-                          </code>
-                        );
-                      },
-                    }}
-                  >
-                    {chat.result}
-                  </ReactMarkdown>
+                              return match ? (
+                                <Codeblock
+                                  language={match[1]}
+                                  code={children[0].trim()}
+                                  theme={gruvboxDark}
+                                />
+                              ) : (
+                                <code
+                                  {...rest}
+                                  className={`${className} text-yellow-200/50 bg-neutral-900 rounded-md p-[2px] px-1 font-mono`}
+                                >
+                                  {children}
+                                </code>
+                              );
+                            },
+                          }}
+                        >
+                          {chat.result}
+                        </ReactMarkdown>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
-            </div>
-          </div>
-        ))}
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div
