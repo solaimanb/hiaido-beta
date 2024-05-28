@@ -1,11 +1,14 @@
 import { hiaido } from "../assets";
 import { Helmet } from "react-helmet-async";
 
+import { useEffect } from "react";
+
 import { Amplify } from "aws-amplify";
-import { Authenticator } from "@aws-amplify/ui-react";
-import awsExports from "../awsExports";
-import { Link } from "react-router-dom";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
+
+import awsExports from "../awsExports";
 
 Amplify.configure(awsExports);
 
@@ -43,6 +46,18 @@ const formFields = {
 
 const Login = () => {
   window.scrollTo(0, 0);
+
+  const navigate = useNavigate();
+
+  const { route } = useAuthenticator((context) => [context.route]);
+
+  useEffect(() => {
+    if (route === "/forgotPassword") {
+      navigate("/signIn", { replace: true });
+    }
+
+    console.log("Route log:", route);
+  }, [route, navigate]);
 
   return (
     <>
