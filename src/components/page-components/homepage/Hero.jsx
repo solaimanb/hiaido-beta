@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import AnimatedText from "../../shared/AnimatedText";
 import axios from "axios";
 
-import textGif from "../../../assets/gif/TEXT.gif";
+import textGif from "../../../assets/gif/Text-animation-v3.gif";
 
 function Stars(props) {
   const ref = useRef();
