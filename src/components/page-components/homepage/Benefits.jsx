@@ -59,7 +59,7 @@ const Benefits = () => {
       >
         <motion.p
           ref={ref}
-          className="secondaryText mb-10 text-2xl"
+          className="secondaryText md:text-xl xl:text-2xl mb-10 text-base"
           variants={variants}
           initial="hidden"
           animate={inView ? "show" : "hidden"}

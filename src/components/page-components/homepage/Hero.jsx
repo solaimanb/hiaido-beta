@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import AnimatedText from "../../shared/AnimatedText";
 import axios from "axios";
 
-import textAnimation from "../../../assets/video/Text-animation-video-v2.mp4";
+import textAnimation from "../../../assets/gif/Text-animation-v4.gif";
 
 function Stars(props) {
   const ref = useRef();
@@ -138,7 +138,7 @@ const Hero = () => {
       customPaddings
       id="hero"
     >
-      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-20 md:mt-18">
+      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-32 md:mt-18">
         <motion.div
           initial={{ scale: 1.5 }}
           animate={{ scale: 1 }}
@@ -149,7 +149,7 @@ const Hero = () => {
             duration: 1,
             ease: "easeInOut",
           }}
-          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full px-2 md:mt-12"
+          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12"
         >
           <div className="space-y-4">
             <div className="lg:text-6xl md:px-0 md:text-5xl lg:pt-10 flex flex-col px-2 space-y-4 text-3xl font-bold">
@@ -173,7 +173,7 @@ const Hero = () => {
               </span>
             </div>
 
-            <div className="text-white/80 md:text-xl xl:text-2xl w-full mx-auto space-y-2 text-sm">
+            <div className="text-white/80 md:text-xl xl:text-2xl w-full mx-auto space-y-2 text-base">
               <p className="secondaryText">
                 HIAIDO is your intelligent cloud assistant, enabling you to
                 effortlessly manage your
@@ -230,29 +230,14 @@ const Hero = () => {
           </form>
 
           {/* Text Animation */}
-          {/* <div className="flex items-center justify-center w-full h-full">
-            {showSecondAnimation && (
-              <img
-                src={textGif}
-                alt="hiaido-process"
-                className="w-full md:w-[90%] mt-2"
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            )}
-          </div> */}
-
           <div className="flex items-center justify-center w-full h-full">
             {showSecondAnimation && (
-              <video
-                className="w-full md:w-[90%] mt-2"
-                autoPlay
-                loop
-                muted
+              <img
+                src={textAnimation}
+                alt="hiaido-process"
+                className="w-full md:w-[80%] mt-2"
                 onContextMenu={(e) => e.preventDefault()}
-                disablePictureInPicture
-              >
-                <source src={textAnimation} type="video/mp4" />
-              </video>
+              />
             )}
           </div>
         </motion.div>
