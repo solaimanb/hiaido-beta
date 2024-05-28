@@ -243,7 +243,14 @@ const Hero = () => {
 
           <div className="flex items-center justify-center w-full h-full">
             {showSecondAnimation && (
-              <video className="w-full md:w-[90%] mt-2" autoPlay loop muted>
+              <video
+                className="w-full md:w-[90%] mt-2"
+                autoPlay
+                loop
+                muted
+                onContextMenu={(e) => e.preventDefault()}
+                disablePictureInPicture
+              >
                 <source src={textAnimation} type="video/mp4" />
               </video>
             )}
