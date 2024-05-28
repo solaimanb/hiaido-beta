@@ -236,6 +236,7 @@ const Hero = () => {
                 src={textGif}
                 alt="hiaido-process"
                 className="w-full md:w-[90%] mt-2"
+                onContextMenu={(e) => e.preventDefault()}
               />
             )}
           </div>
