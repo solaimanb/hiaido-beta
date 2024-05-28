@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import AnimatedText from "../../shared/AnimatedText";
 import axios from "axios";
 
-import textGif from "../../../assets/gif/Text-animation-v3.gif";
+import textAnimation from "../../../assets/video/Text-animation-video-v2.mp4";
 
 function Stars(props) {
   const ref = useRef();
@@ -230,7 +230,7 @@ const Hero = () => {
           </form>
 
           {/* Text Animation */}
-          <div className="flex items-center justify-center w-full h-full">
+          {/* <div className="flex items-center justify-center w-full h-full">
             {showSecondAnimation && (
               <img
                 src={textGif}
@@ -238,6 +238,14 @@ const Hero = () => {
                 className="w-full md:w-[90%] mt-2"
                 onContextMenu={(e) => e.preventDefault()}
               />
+            )}
+          </div> */}
+
+          <div className="flex items-center justify-center w-full h-full">
+            {showSecondAnimation && (
+              <video className="w-full md:w-[90%] mt-2" autoPlay loop muted>
+                <source src={textAnimation} type="video/mp4" />
+              </video>
             )}
           </div>
         </motion.div>
