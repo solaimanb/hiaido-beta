@@ -138,7 +138,7 @@ const Hero = () => {
       customPaddings
       id="hero"
     >
-      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-20 md:mt-10">
+      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-20 md:mt-18">
         <motion.div
           initial={{ scale: 1.5 }}
           animate={{ scale: 1 }}
@@ -230,17 +230,12 @@ const Hero = () => {
           </form>
 
           {/* Text Animation */}
-          {/* <img
-            src={textGif}
-            alt="hiaido-process"
-            className="w-full md:w-[80%] mt-10"
-          /> */}
           <div className="flex items-center justify-center w-full h-full">
             {showSecondAnimation && (
               <img
                 src={textGif}
                 alt="hiaido-process"
-                className="w-full md:w-[90%] mt-10"
+                className="w-full md:w-[90%] mt-2"
               />
             )}
           </div>
