@@ -62,6 +62,12 @@ const Hero = () => {
   const [data, setData] = useState("");
   const [isLoader, setIsLoader] = useState(false);
 
+  const [showSecondAnimation, setShowSecondAnimation] = useState(false);
+
+  const handleAnimationEnd = () => {
+    setShowSecondAnimation(true);
+  };
+
   if (isLoader) {
     console.log("submitting request..", isLoader);
   }
@@ -132,7 +138,7 @@ const Hero = () => {
       customPaddings
       id="hero"
     >
-      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-20 md:mt-10">
+      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-20 md:mt-18">
         <motion.div
           initial={{ scale: 1.5 }}
           animate={{ scale: 1 }}
@@ -195,7 +201,10 @@ const Hero = () => {
             onSubmit={handleSubmit}
             className="text-start flex flex-col items-center mt-10 space-y-4"
           >
-            <p className="type1 lg:text-2xl md:text-sm text-xs font-bold">
+            <p
+              className="type1 lg:text-2xl md:text-sm text-xs font-bold"
+              onAnimationEnd={handleAnimationEnd}
+            >
               &quot;Welcome to the future of automation with HIAIDO&quot;
             </p>
 
@@ -221,11 +230,15 @@ const Hero = () => {
           </form>
 
           {/* Text Animation */}
-          <img
-            src={textGif}
-            alt="hiaido-process"
-            className="w-full md:w-[80%] mt-10"
-          />
+          <div className="flex items-center justify-center w-full h-full">
+            {showSecondAnimation && (
+              <img
+                src={textGif}
+                alt="hiaido-process"
+                className="w-full md:w-[90%] mt-2"
+              />
+            )}
+          </div>
         </motion.div>
       </div>
 
