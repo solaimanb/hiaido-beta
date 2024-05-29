@@ -1,6 +1,5 @@
 import aws from "../../../assets/images/aws.png";
 import Heading from "../../Heading";
-// import Section from "../../Section";
 import azure from "../../../assets/images/azure.png";
 import gcp from "../../../assets/images/gcp.png";
 import "../../../index.css";
@@ -38,27 +37,32 @@ const Benefits = () => {
   }, []);
 
   const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.5,
+    triggerOnce: false,
   });
 
   const variants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: -50 },
     show: {
       opacity: 1,
+      y: 0,
       transition: {
-        duration: 0.5,
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        duration: 0.8,
       },
     },
   };
 
   return (
-    // <Section id="features">
-    <motion.div className="md:pt-20 container relative min-h-screen mt-10 text-center">
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      animate={inView ? "show" : "hidden"}
+      className="md:pt-20 bg-dark container relative min-h-screen mt-10 text-center"
+    >
       <motion.p
-        ref={ref}
         className="secondaryText md:text-xl xl:text-2xl mb-10 text-base"
-        variants={variants}
         initial="hidden"
         animate={inView ? "show" : "hidden"}
       >
@@ -74,15 +78,15 @@ const Benefits = () => {
         <br className="md:block hidden" />
         making cloud management intuitive and efficient.
       </motion.p>
+
       <div className="flex flex-col flex-wrap items-center justify-center gap-4 mb-8 font-bold">
-        <p className="lg:text-4xl w-auto text-2xl text-center text-orange-400">
+        <p className="lg:text-5xl md:px-0 md:text-5xl space-y-4 text-2xl font-bold text-center text-orange-500">
           Build Faster, Build Better, Build With AI
         </p>
 
         <motion.p
           ref={ref}
-          className="type2 lg:text-xl text-center"
-          variants={variants}
+          className={`lg:text-xl text-center ${inView ? "type2" : ""}`}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
         >
@@ -96,18 +100,19 @@ const Benefits = () => {
       />
 
       <div className="flex flex-wrap items-center justify-center gap-10 mb-10">
-        <div className="group rounded-xl border-orange-400/40 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
+        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
           <img src={aws} alt="aws" />
         </div>
-        <div className="group rounded-xl border-orange-400/40 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
+
+        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
           <img src={azure} alt="azure" />
         </div>
-        <div className="group rounded-xl border-orange-400/40 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
+
+        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
           <img src={gcp} alt="gcp" />
         </div>
       </div>
     </motion.div>
-    // </Section>
   );
 };
 
