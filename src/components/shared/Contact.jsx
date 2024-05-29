@@ -142,7 +142,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="container bg-black/90 rounded-2xl bg-gradient-to-r from-black via-orange-400/5 to-black border-orange-400/10 lg:p-10 relative w-full md:w-[95%] py-10 md:mx-auto text-center border">
+    <div className="container bg-dark rounded-2xl bg-gradient-to-r from-black via-orange-400/10 to-black border-orange-500/20 lg:p-10 relative w-full md:w-[95%] py-10 md:mx-auto text-center border">
       <div className="">
         <div className="relative flex items-center justify-center">
           <h1 className="md:text-9xl opacity-10 text-6xl font-bold text-orange-400 uppercase">

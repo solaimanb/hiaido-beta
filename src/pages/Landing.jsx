@@ -26,7 +26,7 @@ const Landing = () => {
       </Helmet>
 
       {/* MAIN CONTENT */}
-      <main className="bg-black/90 min-h-screen px-2 overflow-hidden">
+      <main className="bg-dark min-h-screen px-2 overflow-hidden">
         <Hero />
         <Benefits />
         <Contact />

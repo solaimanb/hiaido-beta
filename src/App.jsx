@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <HelmetProvider>
-      <div className="overflow-hidden">
+      <div className="bg-dark overflow-hidden">
         <Routes>
           {/* Root Layout */}
           <Route path="/" element={<RootLayout />}>

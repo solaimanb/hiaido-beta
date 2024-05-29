@@ -152,7 +152,7 @@ const Hero = () => {
           className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12"
         >
           <div className="space-y-4">
-            <div className="lg:text-6xl md:px-0 md:text-5xl lg:pt-10 flex flex-col px-2 space-y-4 text-3xl font-bold">
+            <div className="lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10 flex flex-col px-2 space-y-4 text-3xl font-bold">
               <div className="text-white/90 inline-block">
                 The Next Generation
                 <br />
