@@ -55,8 +55,6 @@ const Login = () => {
     if (route === "/forgotPassword") {
       navigate("/signIn", { replace: true });
     }
-
-    console.log("Route log:", route);
   }, [route, navigate]);
 
   return (

@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { lazy, Suspense } from "react";
+import Loading from "../components/shared/Loading";
 
 // Using React.lazy to dynamically import components for the Landing page.
 const Hero = lazy(() => import("../components/page-components/homepage/Hero"));
@@ -12,7 +13,7 @@ const Landing = () => {
   window.scrollTo(0, 0);
 
   return (
-    <Suspense fallback={<div className="bg-dark w-screen h-screen"></div>}>
+    <Suspense fallback={<Loading />}>
       {/* SEO CONTENT */}
       <Helmet>
         <title>

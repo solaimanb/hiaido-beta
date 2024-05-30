@@ -1,5 +1,10 @@
-import PricingList from "../components/page-components/pricing/PricingList";
 import { Helmet } from "react-helmet-async";
+import { lazy } from "react";
+
+// Using React.lazy to dynamically import components for the Pricing page.
+const PricingList = lazy(() =>
+  import("../components/page-components/pricing/PricingList")
+);
 
 const Pricing = () => {
   window.scrollTo(0, 0);

@@ -6,6 +6,7 @@ import "@radix-ui/themes/styles.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
 import { Suspense, lazy } from "react";
+import Loading from "./components/shared/Loading.jsx";
 
 // Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout"));
@@ -31,7 +32,7 @@ const App = () => {
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
 
   return (
-    <Suspense fallback={<div className="bg-dark w-screen h-screen"></div>}>
+    <Suspense fallback={<Loading />}>
       <HelmetProvider>
         <Routes>
           {/* Root Layout */}
