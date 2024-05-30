@@ -23,7 +23,7 @@ const QueryTemplates = ({ askQuery }) => {
               <motion.button
                 onClick={() => askQuery(item)}
                 key={item}
-                className="p-4 w-40 rounded-2xl drop-shadow-md bg-neutral-800/50 border-[1px] flex justify-start border-neutral-700 text-neutral-100 text-left hover:bg-neutral-700/75 hover:border-neutral-500 duration-300"
+                className="p-4 w-40 rounded-2xl shadow-lg shadow-neutral-950 bg-neutral-800/50 border-[1px] flex justify-start border-neutral-700 text-neutral-100 text-left hover:bg-neutral-700/75 hover:border-neutral-500 duration-300"
               >
                 <span>{item}</span>
               </motion.button>

@@ -16,6 +16,9 @@ import "@radix-ui/themes/styles.css";
 import Chat from "./pages/Chat.jsx";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
+import AppLayout from "./layouts/AppLayout.jsx";
+import UnderConstruction from "./pages/UnderConstruction.jsx";
+import { navbarData } from "./components/Sidebar.jsx";
 
 const App = () => {
   // useEffect(() => {
@@ -43,6 +46,29 @@ const App = () => {
             <Route path="/privacy" element={<Privacy />} />
           </Route>
 
+          <Route
+            element={
+              authStatus === "authenticated" ? (
+                <AppLayout />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          >
+            <Route path="/dashboard" element={<UnderConstruction />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/account-factory" element={<UnderConstruction />} />
+            <Route path="/usage-analytics" element={<UnderConstruction />} />
+            <Route path="/deployments" element={<UnderConstruction />} />
+            <Route path="/scheduler" element={<UnderConstruction />} />
+            <Route path="/feature-requests" element={<UnderConstruction />} />
+            <Route path="/user-management" element={<UnderConstruction />} />
+            <Route path="/billing" element={<UnderConstruction />} />
+            <Route path="/tickets" element={<UnderConstruction />} />
+            <Route path="/settings" element={<UnderConstruction />} />
+            <Route path="/help" element={<UnderConstruction />} />
+          </Route>
+
           {/* Others */}
           <Route
             path="/login"
@@ -55,7 +81,7 @@ const App = () => {
             }
           />
 
-          <Route
+          {/* <Route
             path="/chat"
             element={
               authStatus === "authenticated" ? (
@@ -64,7 +90,7 @@ const App = () => {
                 <Navigate to="/login" />
               )
             }
-          />
+          /> */}
 
           {/* Not Found */}
           <Route path="*" element={<NotFound />} />

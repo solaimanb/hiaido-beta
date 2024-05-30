@@ -1,6 +1,7 @@
 import { useAnimationControls } from "framer-motion";
 import { useState } from "react";
 import {
+  AtSymbolIcon,
   ChatBubbleLeftRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -21,6 +22,58 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Avatar, Flex, Text } from "@radix-ui/themes";
 import logo from "/hiaido-logo.png";
 import * as Menubar from "@radix-ui/react-menubar";
+import { NavLink } from "react-router-dom";
+
+export const navbarData = [
+  { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
+  {
+    label: "Chat",
+    icon: <ChatBubbleLeftRightIcon className="w-6" />,
+  },
+  {
+    label: "Account Factory",
+    icon: <AtSymbolIcon className="w-6" />,
+  },
+  {
+    label: "Usage Analytics",
+    icon: <PresentationChartLineIcon className="w-6" />,
+  },
+  {
+    label: "Deployments",
+    icon: <CloudArrowUpIcon className="w-6" />,
+  },
+  { label: "Scheduler", icon: <QueueListIcon className="w-6" /> },
+  {
+    label: "Feature requests",
+    icon: <SquaresPlusIcon className="w-6" />,
+  },
+  { label: "User management", icon: <UsersIcon className="w-6" /> },
+  { label: "Billing", icon: <CurrencyDollarIcon className="w-6" /> },
+  {
+    label: "Tickets",
+    icon: <TicketIcon className="w-6" />,
+  },
+  { label: "Settings", icon: <Cog6ToothIcon className="w-6" /> },
+  {
+    label: "Help",
+    icon: <QuestionMarkCircleIcon className="w-6" />,
+  },
+];
+
+const labelTransitions = {
+  transition: { delay: "0.3", ease: "easeIn" },
+  initial: {
+    opacity: 0,
+    transition: { delay: 0.2 },
+  },
+  animate: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+    transition: { delay: 0 },
+  },
+};
 
 const Sidebar = () => {
   const [navTabIndex, setNavTabIndex] = useState();
@@ -32,53 +85,7 @@ const Sidebar = () => {
     { label: "Light", icon: <SunIcon className="w-5 " /> },
     { label: "Dark", icon: <MoonIcon className="w-5 " /> },
   ];
-  const sliceIndex = 8;
-  const navbarData = [
-    { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
-    {
-      label: "Chat",
-      icon: <ChatBubbleLeftRightIcon className="w-6" />,
-    },
-    {
-      label: "Usage Analytics",
-      icon: <PresentationChartLineIcon className="w-6" />,
-    },
-    {
-      label: "Deployments",
-      icon: <CloudArrowUpIcon className="w-6" />,
-    },
-    { label: "Scheduler", icon: <QueueListIcon className="w-6" /> },
-    {
-      label: "Feature requests",
-      icon: <SquaresPlusIcon className="w-6" />,
-    },
-    { label: "User management", icon: <UsersIcon className="w-6" /> },
-    { label: "Billing", icon: <CurrencyDollarIcon className="w-6" /> },
-    {
-      label: "Tickets",
-      icon: <TicketIcon className="w-6" />,
-    },
-    { label: "Settings", icon: <Cog6ToothIcon className="w-6" /> },
-    {
-      label: "Help",
-      icon: <QuestionMarkCircleIcon className="w-6" />,
-    },
-  ];
-
-  const labelTransitions = {
-    transition: { delay: "0.3", ease: "easeIn" },
-    initial: {
-      opacity: 0,
-      transition: { delay: 0.2 },
-    },
-    animate: {
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-      transition: { delay: 0 },
-    },
-  };
+  const sliceIndex = 9;
 
   return (
     <AnimatePresence mode="wait">
@@ -118,33 +125,10 @@ const Sidebar = () => {
                 )}
               </AnimatePresence>
             </motion.div>
-            {navbarData.slice(0, sliceIndex).map((item, i) => {
-              return (
-                <button
-                  key={item.id || i}
-                  onClick={() => setNavTabIndex(i)}
-                  className={`rounded-lg flex items-center justify-start py-1 ${
-                    isCollapsed || "w-full"
-                  } outline-none p-[1px] px-2 ${
-                    i == navTabIndex
-                      ? "bg-neutral-600 text-white"
-                      : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
-                  }`}
-                >
-                  {item.icon}
-                  <AnimatePresence>
-                    {isCollapsed || (
-                      <motion.span
-                        className="text-left ml-3"
-                        {...labelTransitions}
-                      >
-                        {item.label}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </button>
-              );
-            })}
+            <NavLinksGroup
+              groupData={navbarData.slice(0, sliceIndex)}
+              isCollapsed={isCollapsed}
+            />
           </div>
           <div className="h-[1px] bg-neutral-700/75 my-2"></div>
           <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
@@ -155,34 +139,11 @@ const Sidebar = () => {
                 )}
               </AnimatePresence>
             </div>
-            {navbarData.slice(sliceIndex).map((item, i) => {
-              return (
-                <button
-                  key={item.id || i + sliceIndex}
-                  onClick={() => setNavTabIndex(i + sliceIndex)}
-                  className={`rounded-lg flex items-center justify-start outline-none p-[1px] px-2 py-1 ${
-                    isCollapsed || "w-full"
-                  } ${
-                    i + sliceIndex == navTabIndex
-                      ? "bg-neutral-600 text-white"
-                      : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
-                  }`}
-                >
-                  <motion.span>{item.icon}</motion.span>
 
-                  <AnimatePresence>
-                    {isCollapsed || (
-                      <motion.span
-                        {...labelTransitions}
-                        className="text-left ml-3"
-                      >
-                        {item.label}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </button>
-              );
-            })}
+            <NavLinksGroup
+              groupData={navbarData.slice(sliceIndex)}
+              isCollapsed={isCollapsed}
+            />
           </div>
         </div>
         <div className="flex flex-col h-fit items-center justify-end mx-3 space-y-2">
@@ -283,6 +244,40 @@ const Sidebar = () => {
         </button>
       </motion.div>
     </AnimatePresence>
+  );
+};
+
+const NavLinksGroup = ({ groupData, isCollapsed }) => {
+  return (
+    <>
+      {groupData.map((item, i) => {
+        return (
+          <NavLink
+            to={`/${item.label.replace(" ", "-").toLowerCase()}`}
+            key={item.id || i}
+            // onClick={() => setNavTabIndex(i)}
+            className={({ isActive }) =>
+              `rounded-lg flex items-center justify-start py-1 ${
+                isCollapsed || "w-full"
+              } outline-none p-[1px] px-2 ${
+                isActive
+                  ? "bg-neutral-600 text-white"
+                  : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
+              }`
+            }
+          >
+            {item.icon}
+            <AnimatePresence>
+              {isCollapsed || (
+                <motion.span className="text-left ml-3" {...labelTransitions}>
+                  {item.label}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </NavLink>
+        );
+      })}
+    </>
   );
 };
 
