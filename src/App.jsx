@@ -19,6 +19,7 @@ import { Toaster } from "react-hot-toast";
 import AppLayout from "./layouts/AppLayout.jsx";
 import UnderConstruction from "./pages/UnderConstruction.jsx";
 import { navbarData } from "./components/Sidebar.jsx";
+import AccountFactory from "./pages/AccountFactory.jsx";
 
 const App = () => {
   // useEffect(() => {
@@ -57,7 +58,7 @@ const App = () => {
           >
             <Route path="/dashboard" element={<UnderConstruction />} />
             <Route path="/chat" element={<Chat />} />
-            <Route path="/account-factory" element={<UnderConstruction />} />
+            <Route path="/account-factory" element={<AccountFactory />} />
             <Route path="/usage-analytics" element={<UnderConstruction />} />
             <Route path="/deployments" element={<UnderConstruction />} />
             <Route path="/scheduler" element={<UnderConstruction />} />

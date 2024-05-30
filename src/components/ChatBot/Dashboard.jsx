@@ -5,14 +5,13 @@ import {
   GlobeIcon,
   UploadIcon,
 } from "@radix-ui/react-icons";
-import { DropdownMenu, Button, RadioGroup, Radio } from "@radix-ui/themes";
-import * as Menubar from "@radix-ui/react-menubar";
+import { DropdownMenu, Button, Radio } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import logo from "/hiaido-logo.png";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useForm } from "@tanstack/react-form";
 import toast from "react-hot-toast";
-import { ArchiveBoxIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import AnimatedMenuBar from "../shared/AnimatedMenuBar";
 
 export default function Dashboard() {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
@@ -73,51 +72,18 @@ const DashboardSection = () => {
 
   return (
     <div className="space-y-4">
-      <Menubar.Root className="flex bg-neutral-800 py-2 w-fit px-2 rounded-lg shadow-blackA4 space-x-2 justify-start">
-        {data.map((item, i) => {
-          return (
-            <Menubar.Menu key={i}>
-              <Menubar.Trigger
-                onClick={() => {
-                  // setSelectedOption(item);
-                  setActiveTabIndex(i);
-                }}
-                className={`py-2 w-fit px-3 outline-none select-none font-medium leading-none rounded-lg relative ${
-                  i === activeTabIndex
-                    ? // ? "bg-cyan-100 text-neutral-800"
-                      ""
-                    : "hover:bg-neutral-600/35"
-                }`}
-                style={{
-                  WebkitTapHighlightColor: "transparent",
-                }}
-              >
-                <div className="flex items-center justify-center">
-                  {item.icon}
-                  <span className="text-sm">{item.label}</span>
-                  {activeTabIndex == i && (
-                    <motion.span
-                      layoutId="bubble"
-                      className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-lg"
-                      transition={{
-                        type: "spring",
-                        bounce: 0.1,
-                        duration: 0.6,
-                      }}
-                    />
-                  )}
-                </div>
-              </Menubar.Trigger>
-            </Menubar.Menu>
-          );
-        })}
-      </Menubar.Root>
+      <AnimatedMenuBar
+        menuData={data}
+        activeTabIndex={activeTabIndex}
+        setActiveTabIndex={setActiveTabIndex}
+      />
       <div className="w-full h-[500px]  rounded-lg p-4">
         {data[activeTabIndex].content}
       </div>
     </div>
   );
 };
+
 
 const SkySection = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -187,7 +153,7 @@ const SkySection = () => {
         {data.map((item, i) => {
           return (
             <div
-            key={i}
+              key={i}
               className="relative aspect-square col-span-1 rounded-md hover:scale-[1.02] hover:invert-[.1] duration-300 delay-100"
               onClick={() => setIdx(i)}
             >

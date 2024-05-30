@@ -158,8 +158,8 @@ const ChatContainer = () => {
   }, [chats]);
 
   return (
-    <div className="chat-container relative flex flex-col w-full h-screen gap-5">
-      <div className="chat-heading md:text-2xl p-4 pt-6 text-3xl">
+    <div className="chat-container relative flex flex-col w-[960px] h-screen gap-5">
+      <div className="chat-heading md:text-2xl p-4 pt-6 text-3xl text-center">
         Welcome To HIAIDO Cloud Assistant.
       </div>
       <div className="flex flex-col flex-1">
@@ -170,8 +170,8 @@ const ChatContainer = () => {
           <AnimatePresence>
             {chats.length == 0 && (
               <motion.div
-                transition={{ duration: 0.5 }}
-                initial={{ scale: 0.8, opacity: 0, y: "-10px" }}
+                transition={{ duration: 0.2 }}
+                initial={{ scale: 0.95, opacity: 0, y: "-5px" }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 className="h-full"
               >
@@ -264,7 +264,7 @@ const ChatContainer = () => {
             </div>
           </div>
         </div> */}
-          <div className="bg-neutral-800 rounded-[26px] flex items-center gap-3.5 w-2/3 p-1.5 outline-none appearance-none">
+          <div className="bg-neutral-800 rounded-[26px] flex items-center gap-3.5 w-[720px] p-1.5 outline-none appearance-none">
             {/* <PaperClipIcon className="w-6 ml-3" opacity={0} /> */}
             <div className="flex min-w-0 flex-1 flex-col ml-4">
               <textarea
