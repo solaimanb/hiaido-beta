@@ -2,10 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap");
 
 @tailwind base;
-/* @import "@radix-ui/themes"; */
 @tailwind components;
 @tailwind utilities;
-/* @import '@radix-ui/themes/styles.css'; */
 
 :root {
   --font-playpen: "Playpen Sans", cursive;
@@ -51,10 +49,6 @@
     @apply bg-n-8 text-n-1 font-sans text-base;
   }
 }
-
-/* .rotate-45 {
-  @apply rotate-[45deg];
-} */
 
 .rotate-45 {
   transform: rotate(45deg);
@@ -372,9 +366,6 @@ input:focus::placeholder {
   width: 100%;
   padding-top: 5px;
 }
-
-/* from, to { border-color: transparent }
-  50% { border-color: orange } */
 
 no-scrollbar::-webkit-scrollbar {
   display: none;

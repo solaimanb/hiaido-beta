@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import "./AnimatedBtn.css";
 
 const AnimatedBtn = ({
   className,
-  href,
+  to,
   children,
   white,
   id,
@@ -14,30 +15,16 @@ const AnimatedBtn = ({
       id={id || "animated-btn"}
       className={`${additionalClasses} transition-all duration-200`}
       style={style}
-      // onClick={onClick}
     >
       <div
         className={`cusbtn z-50 px-6 py-2 text-center ${
           white ? "text-white" : ""
         } ${className}`}
       >
-        <a href={href} className="">
+        <Link to={to} className="">
           <span className="">{children}</span>
-        </a>
+        </Link>
       </div>
-
-      {/* V.2 */}
-      {/* <div
-        className={`child-wrapper ${white ? "text-white" : ""} ${className}`}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <a href={href} className="text-container">
-          {children}
-        </a>
-      </div> */}
     </button>
   );
 };

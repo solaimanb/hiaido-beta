@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
+// Using React.lazy to dynamically import components for the Chat page.
 const Sidebar = lazy(() => import("./Sidebar"));
 const ChatContainer = lazy(() => import("./ChatContainer"));
 const Dashboard = lazy(() => import("./Dashboard"));
@@ -17,6 +18,7 @@ const Chat = () => {
             <ChatContainer />
           </div>
         </Panel>
+
         <PanelResizeHandle />
         <Panel className="min-w-[600px]">
           <Dashboard />
