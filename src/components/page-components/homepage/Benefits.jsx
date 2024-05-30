@@ -104,7 +104,7 @@ const Benefits = () => {
           <img src={aws} alt="aws" />
         </div>
 
-        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
+        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 scale-105 border shadow-2xl">
           <img src={azure} alt="azure" />
         </div>
 

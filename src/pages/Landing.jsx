@@ -1,13 +1,18 @@
-import Benefits from "../components/page-components/homepage/Benefits";
-import Hero from "../components/page-components/homepage/Hero";
-import Contact from "../components/shared/Contact";
 import { Helmet } from "react-helmet-async";
+import { lazy, Suspense } from "react";
+
+// Using React.lazy to dynamically import components for the Landing page.
+const Hero = lazy(() => import("../components/page-components/homepage/Hero"));
+const Benefits = lazy(() =>
+  import("../components/page-components/homepage/Benefits")
+);
+const Contact = lazy(() => import("../components/shared/Contact"));
 
 const Landing = () => {
   window.scrollTo(0, 0);
 
   return (
-    <>
+    <Suspense fallback={<div className="bg-dark w-screen h-screen"></div>}>
       {/* SEO CONTENT */}
       <Helmet>
         <title>
@@ -31,7 +36,7 @@ const Landing = () => {
         <Benefits />
         <Contact />
       </main>
-    </>
+    </Suspense>
   );
 };
 export default Landing;

@@ -1,12 +1,13 @@
-import Dashboard from "../components/ChatBot/Dashboard";
+import { lazy } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
-import Sidebar from "../components/Sidebar";
-import ChatContainer from "../components/ChatBot/ChatContainer";
+const Sidebar = lazy(() => import("./Sidebar"));
+const ChatContainer = lazy(() => import("./ChatContainer"));
+const Dashboard = lazy(() => import("./Dashboard"));
 
 const Chat = () => {
   return (
-    <div className="h-full flex">
+    <div className="flex h-full">
       <div className="p-3">
         <Sidebar />
       </div>
@@ -17,8 +18,8 @@ const Chat = () => {
           </div>
         </Panel>
         <PanelResizeHandle />
-        <Panel className="min-w-[600px]" >
-            <Dashboard />
+        <Panel className="min-w-[600px]">
+          <Dashboard />
         </Panel>
       </PanelGroup>
     </div>
