@@ -233,7 +233,7 @@ const SkySection = () => {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3">
+                  <div className="text-red-500 h-3 text-sm">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -261,7 +261,7 @@ const SkySection = () => {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3">
+                  <div className="text-red-500 h-3 text-sm">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -289,7 +289,7 @@ const SkySection = () => {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3">
+                  <div className="text-red-500 h-3 text-sm">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>

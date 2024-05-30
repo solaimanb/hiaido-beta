@@ -7,6 +7,7 @@ const ChatContainer = lazy(() => import("./ChatContainer"));
 const Dashboard = lazy(() => import("./Dashboard"));
 
 const Chat = () => {
+  console.log("Chat")
   return (
     <div className="flex h-full">
       <div className="p-3">
