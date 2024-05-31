@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 import Heading from "../../Heading";
 
@@ -10,11 +10,6 @@ import azure from "../../../assets/logo/microsoft-azure-hiaido.png";
 import gcp from "../../../assets/logo/google-cloud-hiaido.png";
 import "../../../index.css";
 
-// const images = [
-//   { src: azure, alt: "azure", maxWidth: "80" },
-//   { src: aws, alt: "aws", maxWidth: "28" },
-//   { src: gcp, alt: "gcp", maxWidth: "36" },
-// ];
 const images = [
   { src: azure, alt: "azure", width: "100%", height: "100%" },
   { src: aws, alt: "aws", width: "40%", height: "100%" },
@@ -51,6 +46,7 @@ const Benefits = () => {
 
   const [ref, inView] = useInView({
     triggerOnce: false,
+    threshold: 0.1,
   });
 
   const variants = {
@@ -60,9 +56,6 @@ const Benefits = () => {
       y: 0,
       transition: {
         type: "spring",
-        stiffness: 100,
-        damping: 20,
-        duration: 0.8,
       },
     },
   };
@@ -121,7 +114,6 @@ const Benefits = () => {
             <img
               src={image?.src}
               alt={image?.alt}
-              // className={`w-${image?.maxWidth}`}
               style={{ width: image.width, height: image.height }}
               className="object-cover"
             />
