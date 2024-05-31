@@ -300,19 +300,35 @@ input:focus::placeholder {
 }
 
 [data-amplify-form] button[type="submit"] {
-  padding: 8px;
-  background-color: rgba(243, 125, 41, 0.897);
-  width: 100%;
   color: white;
   border: none;
   cursor: pointer;
   font-weight: bold;
   margin-top: 10px;
+  padding: 8px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
   border-radius: 50px;
+  transition: all 0.4s ease-in-out;
 }
 
 [data-amplify-form] button[type="submit"]:hover {
-  background-color: #e88134;
+  background-position: 100% 0;
+  transition: all 0.4s ease-in-out;
 }
 
 [data-amplify-footer] {
@@ -494,10 +510,11 @@ p {
   transition: transform 0.6s ease-in-out;
 }
 
+/*
 #animated-btn:hover .text-slide {
   transform: translateY(100%);
 }
 
 #animated-btn:hover .text-slide-hover {
   transform: translateY(0);
-}
+} */

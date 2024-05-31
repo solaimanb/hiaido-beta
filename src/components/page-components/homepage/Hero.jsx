@@ -10,7 +10,8 @@ import { toast } from "react-toastify";
 import AnimatedText from "../../shared/AnimatedText";
 import axios from "axios";
 
-import textAnimation from "../../../assets/gif/Text-animation-v4.gif";
+import textAnimation from "../../../assets/gif/Text-animation-v5.gif";
+import AnimatedBtn from "../../Buttons/AnimatedBtn";
 
 function Stars(props) {
   const ref = useRef();
@@ -220,12 +221,10 @@ const Hero = () => {
                 placeholder="Enter your email"
               />
 
-              <button
-                type="submit"
-                className="bg-orange-500/80 w-44 px-4 font-semibold rounded-full"
-              >
-                <AnimatedText text="Request Demo" />
-              </button>
+              <AnimatedBtn type="submit" className="font-semibold rounded-full">
+                {/* <AnimatedText text="Request Demo" /> */}
+                Request Demo
+              </AnimatedBtn>
             </div>
           </form>
 

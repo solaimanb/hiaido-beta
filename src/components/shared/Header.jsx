@@ -8,10 +8,31 @@ import AnimatedBtn from "../Buttons/AnimatedBtn";
 
 import { hiaido } from "../../assets";
 import AnimatedText from "./AnimatedText";
+import { AvatarIcon } from "@radix-ui/react-icons";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Header = () => {
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [user, setUser] = useState();
+
+  const { signOut, authStatus } = useAuthenticator((context) => [
+    context.signOut,
+    context.authStatus,
+  ]);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      // Parse the user data from JSON
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+    }
+  }, []);
+
+  console.log(user);
 
   const toggleNavigation = () => {
     setOpenNavigation((prevState) => !prevState);
@@ -45,11 +66,20 @@ const Header = () => {
   }, [lastScrollTop]);
 
   const navItems = [
-    // { name: "Chat", path: "/chat" },
     { name: "Hiring", path: "/hiring" },
     { name: "Contact Us", path: "/contact" },
     { name: "Pricing", path: "/pricing" },
   ];
+
+  useEffect(() => {
+    if (authStatus !== "configuring") {
+      setIsLoading(false);
+    }
+  }, [authStatus]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <header
@@ -78,9 +108,20 @@ const Header = () => {
         </div>
 
         <div className=" flex items-center justify-center gap-8 px-5">
-          <AnimatedBtn to={"/login"} className="lg:flex hidden font-semibold">
-            Sign In
-          </AnimatedBtn>
+          {user ? (
+            <Link to={"/chat"}>
+              <AvatarIcon
+                width={26}
+                height={26}
+                src={user.avatarUrl}
+                className="lg:block hidden text-orange-500"
+              />
+            </Link>
+          ) : (
+            <AnimatedBtn to={"/login"} className="lg:flex hidden font-semibold">
+              Sign In
+            </AnimatedBtn>
+          )}
 
           <button
             className={`${openNavigation ? "hidden" : ""} lg:hidden ml-auto`}
@@ -130,6 +171,13 @@ const Header = () => {
                 {item?.title}
               </Link>
             ))}
+            <Link
+              onClick={() => user && signOut()}
+              className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold
+                `}
+            >
+              {user ? "Sign Out" : "Sign In"}
+            </Link>
           </div>
         </div>
 
