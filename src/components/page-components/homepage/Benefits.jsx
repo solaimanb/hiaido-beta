@@ -10,10 +10,15 @@ import azure from "../../../assets/logo/microsoft-azure-hiaido.png";
 import gcp from "../../../assets/logo/google-cloud-hiaido.png";
 import "../../../index.css";
 
+// const images = [
+//   { src: azure, alt: "azure", maxWidth: "80" },
+//   { src: aws, alt: "aws", maxWidth: "28" },
+//   { src: gcp, alt: "gcp", maxWidth: "36" },
+// ];
 const images = [
-  { src: azure, alt: "azure", maxWidth: "52" },
-  { src: aws, alt: "aws", maxWidth: "32" },
-  { src: gcp, alt: "gcp", maxWidth: "44" },
+  { src: azure, alt: "azure", width: "100%", height: "100%" },
+  { src: aws, alt: "aws", width: "40%", height: "100%" },
+  { src: gcp, alt: "gcp", width: "90%", height: "100%" },
 ];
 
 const Benefits = () => {
@@ -111,12 +116,14 @@ const Benefits = () => {
         {images.map((image, index) => (
           <div
             key={index}
-            className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative flex justify-center flex-1 w-full p-10 overflow-hidden transition-transform duration-300 scale-105 border shadow-2xl"
+            className="group rounded-xl border-orange-500/30 hover:scale-105 backdrop-blur-sm shadow-2x relative flex justify-center w-full h-full p-8 overflow-hidden transition-transform duration-200 border"
           >
             <img
               src={image?.src}
               alt={image?.alt}
-              className={`max-w-28 md:max-w-${image?.maxWidth}`}
+              // className={`w-${image?.maxWidth}`}
+              style={{ width: image.width, height: image.height }}
+              className="object-cover"
             />
           </div>
         ))}
