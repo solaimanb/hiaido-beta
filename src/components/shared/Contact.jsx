@@ -8,6 +8,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import axios from "axios";
+import AnimatedBtn from "../Buttons/AnimatedBtn";
 
 // Contact Details:
 const contactDetails = [
@@ -292,12 +293,7 @@ const Contact = () => {
             </div>
 
             <div className="md:justify-end flex justify-center mt-8">
-              <button
-                className="bg-orange-500/80 hover:bg-orange-500/70 hover:scale-105 md:w-fit w-full px-4 py-2 font-semibold transition duration-200 rounded-full"
-                type="submit"
-              >
-                Send message
-              </button>
+              <AnimatedBtn type="submit">Send message</AnimatedBtn>
             </div>
           </div>
         </form>

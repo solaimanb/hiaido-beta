@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   ArrowRightIcon,
   CubeIcon,
   GlobeIcon,
   UploadIcon,
 } from "@radix-ui/react-icons";
-import { DropdownMenu, Button, RadioGroup, Radio } from "@radix-ui/themes";
+import { DropdownMenu, Button, Radio } from "@radix-ui/themes";
 import * as Menubar from "@radix-ui/react-menubar";
 import { motion } from "framer-motion";
-import logo from "/hiaido-logo.png";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useForm } from "@tanstack/react-form";
 import toast from "react-hot-toast";
-import { ArchiveBoxIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 export default function Dashboard() {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
-  console.log(user.signInDetails.loginId);
+
   return (
     <div className="flex flex-col justify-center w-full">
       <div className="flex justify-end w-full h-20 pr-10 my-6 text-4xl">
@@ -73,7 +72,7 @@ const DashboardSection = () => {
 
   return (
     <div className="space-y-4">
-      <Menubar.Root className="flex bg-neutral-800 py-2 w-fit px-2 rounded-lg shadow-blackA4 space-x-2 justify-start">
+      <Menubar.Root className="bg-neutral-800 w-fit shadow-blackA4 flex justify-start px-2 py-2 space-x-2 rounded-lg">
         {data.map((item, i) => {
           return (
             <Menubar.Menu key={i}>
@@ -187,7 +186,7 @@ const SkySection = () => {
         {data.map((item, i) => {
           return (
             <div
-            key={i}
+              key={i}
               className="relative aspect-square col-span-1 rounded-md hover:scale-[1.02] hover:invert-[.1] duration-300 delay-100"
               onClick={() => setIdx(i)}
             >
@@ -206,14 +205,14 @@ const SkySection = () => {
       <div className="h-[1px] bg-neutral-700 w-full"></div>
       <div className="w-full">
         <form
-          className="relative py-5 grid grid-cols-2 gap-3"
+          className="relative grid grid-cols-2 gap-3 py-5"
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
             form.handleSubmit();
           }}
         >
-          <div className="col-span-1 w-full">
+          <div className="w-full col-span-1">
             <form.Field
               name="firstName"
               validators={{
@@ -227,13 +226,13 @@ const SkySection = () => {
                 <>
                   <input
                     name={field.name}
-                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    className="focus:ring-offset-green-700 bg-neutral-700/50 w-full p-3 rounded-md outline-none appearance-none"
                     placeholder="First name"
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3">
+                  <div className="h-3 text-sm text-red-500">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -241,7 +240,8 @@ const SkySection = () => {
               )}
             />
           </div>
-          <div className="col-span-1 w-full">
+
+          <div className="w-full col-span-1">
             <form.Field
               name="lastName"
               validators={{
@@ -255,13 +255,13 @@ const SkySection = () => {
                 <>
                   <input
                     name={field.name}
-                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    className="focus:ring-offset-green-700 bg-neutral-700/50 w-full p-3 rounded-md outline-none appearance-none"
                     placeholder="Last name"
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3">
+                  <div className="h-3 text-sm text-red-500">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -269,7 +269,7 @@ const SkySection = () => {
               )}
             />
           </div>
-          <div className="col-span-2 w-full">
+          <div className="w-full col-span-2">
             <form.Field
               name="email"
               validators={{
@@ -283,13 +283,13 @@ const SkySection = () => {
                 <>
                   <input
                     name={field.name}
-                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    className="focus:ring-offset-green-700 bg-neutral-700/50 w-full p-3 rounded-md outline-none appearance-none"
                     placeholder="Email"
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3">
+                  <div className="h-3 text-sm text-red-500">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -297,7 +297,7 @@ const SkySection = () => {
               )}
             />
           </div>
-          <div className="flex relative justify-end w-full col-span-2">
+          <div className="relative flex justify-end w-full col-span-2">
             <button
               className={`bg-cyan-100 z-[100] text-black p-3 px-5 rounded-lg space-x-3 w-fit flex items-center disabled:cursor-not-allowed absolute disabled:bg-cyan-100/50 hover:scale-105 duration-200 ease-in delay-75`}
               disabled={isLoading}
@@ -305,7 +305,7 @@ const SkySection = () => {
             >
               <span>Start</span>
               {isLoading ? (
-                <ArrowPathIcon className="w-5 h-5 animate-spin" />
+                <ArrowPathIcon className="animate-spin w-5 h-5" />
               ) : (
                 <ArrowRightIcon className="w-5 h-5" />
               )}
@@ -313,7 +313,7 @@ const SkySection = () => {
             {/* <div className="bg-gradient-to-tr from-red-500 z-0 to-pink-500 rounded-lg absolute w-fit p-3 px-5 space-x-3 flex items-center blur-[7px]">
               <span>Start</span>
               {isLoading ? (
-                <ArrowPathIcon className="w-5 h-5 animate-spin" />
+                <ArrowPathIcon className="animate-spin w-5 h-5" />
               ) : (
                 <ArrowRightIcon className="w-5 h-5" />
               )}

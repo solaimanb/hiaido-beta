@@ -1,4 +1,3 @@
-import { useAnimationControls } from "framer-motion";
 import { useState } from "react";
 import {
   ChatBubbleLeftRightIcon,
@@ -21,17 +20,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Avatar, Flex, Text } from "@radix-ui/themes";
 import logo from "/hiaido-logo.png";
 import * as Menubar from "@radix-ui/react-menubar";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [navTabIndex, setNavTabIndex] = useState();
   const [activeTabIndex, setActiveTabIndex] = useState(1);
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const controls = useAnimationControls();
-  console.log(navTabIndex);
 
   const data = [
-    { label: "Light", icon: <SunIcon className="w-5 " /> },
-    { label: "Dark", icon: <MoonIcon className="w-5 " /> },
+    { label: "Light", icon: <SunIcon className=" w-5" /> },
+    { label: "Dark", icon: <MoonIcon className=" w-5" /> },
   ];
   const sliceIndex = 8;
   const navbarData = [
@@ -96,24 +94,26 @@ const Sidebar = () => {
             transition: { delay: 0.3 },
           },
         }}
-        // transition={{ delay: 0.4 }}
         animate={isCollapsed ? "collapse" : "expand"}
       >
         <div
           className={`flex items-center justify-start my-4 text-2xl pl-1 ${""}`}
         >
-          <img
-            className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
-            src={logo}
-            alt="Brand Logo"
-          />
+          <Link to={"/"}>
+            <img
+              className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
+              src={logo}
+              alt="Brand Logo"
+            />
+          </Link>
+
           <AnimatePresence>
             {isCollapsed || <motion.h1 {...labelTransitions}>HiAiDo</motion.h1>}
           </AnimatePresence>
         </div>
         <div className="divide-neutral-600 h-full">
           <div className="text-neutral-400 my-2 space-y-[5px]">
-            <motion.div className="text-neutral-500 my-2 h-3 text-xs font-semibold">
+            <motion.div className="text-neutral-500 h-3 my-2 text-xs font-semibold">
               <AnimatePresence>
                 {isCollapsed || (
                   <motion.span {...labelTransitions}>MAIN</motion.span>
@@ -137,7 +137,7 @@ const Sidebar = () => {
                   <AnimatePresence>
                     {isCollapsed || (
                       <motion.span
-                        className="text-left ml-3"
+                        className="ml-3 text-left"
                         {...labelTransitions}
                       >
                         {item.label}
@@ -150,7 +150,7 @@ const Sidebar = () => {
           </div>
           <div className="h-[1px] bg-neutral-700/75 my-2"></div>
           <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
-            <div className="text-neutral-500 my-2 h-3 text-xs font-semibold">
+            <div className="text-neutral-500 h-3 my-2 text-xs font-semibold">
               <AnimatePresence>
                 {isCollapsed || (
                   <motion.span {...labelTransitions}>SUPPORT</motion.span>
@@ -176,7 +176,7 @@ const Sidebar = () => {
                     {isCollapsed || (
                       <motion.span
                         {...labelTransitions}
-                        className="text-left ml-3"
+                        className="ml-3 text-left"
                       >
                         {item.label}
                       </motion.span>
@@ -187,7 +187,7 @@ const Sidebar = () => {
             })}
           </div>
         </div>
-        <div className="flex flex-col h-fit items-center justify-end mx-3 space-y-2">
+        <div className="h-fit flex flex-col items-center justify-end mx-3 space-y-2">
           {
             // isCollapsed ? (
             //   <div className="">{data[parseInt(activeTabIndex)].icon}</div>
@@ -223,7 +223,7 @@ const Sidebar = () => {
                               <AnimatePresence>
                                 {isCollapsed || (
                                   <motion.span
-                                    className="text-sm ml-2"
+                                    className="ml-2 text-sm"
                                     {...labelTransitions}
                                   >
                                     {item.label}
@@ -275,7 +275,7 @@ const Sidebar = () => {
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute top-16 -right-4 bg-neutral-700 p-2 rounded-full"
+          className="top-16 -right-4 bg-neutral-700 absolute p-2 rounded-full"
         >
           {isCollapsed ? (
             <ChevronRightIcon className="w-4 h-4" />

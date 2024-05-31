@@ -29,10 +29,13 @@ const App = () => {
   //   })();
   // }, []);
 
-  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  const { route, authStatus } = useAuthenticator((context) => [
+    context.route,
+    context.authStatus,
+  ]);
 
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={authStatus === "configuring" && <Loading />}>
       <HelmetProvider>
         <Routes>
           {/* Root Layout */}
@@ -49,22 +52,14 @@ const App = () => {
           <Route
             path="/login"
             element={
-              authStatus !== "authenticated" ? (
-                <Login />
-              ) : (
-                <Navigate to="/chat" />
-              )
+              route === "authenticated" ? <Navigate to="/chat" /> : <Login />
             }
           />
 
           <Route
             path="/chat"
             element={
-              authStatus === "authenticated" ? (
-                <Chat />
-              ) : (
-                <Navigate to="/login" />
-              )
+              route === "authenticated" ? <Chat /> : <Navigate to="/login" />
             }
           />
 

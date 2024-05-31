@@ -10,17 +10,17 @@ import App from "./App.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <StoreProvider>
-        <Authenticator.Provider>
-          <View>
+    <Authenticator.Provider>
+      <View>
+        <BrowserRouter>
+          <StoreProvider>
             <Theme accentColor="blue" appearance="dark">
               <App />
               {/* <ThemePanel /> */}
             </Theme>
-          </View>
-        </Authenticator.Provider>
-      </StoreProvider>
-    </BrowserRouter>
+          </StoreProvider>
+        </BrowserRouter>
+      </View>
+    </Authenticator.Provider>
   </React.StrictMode>
 );

@@ -2,7 +2,6 @@ import { hiaido } from "../assets";
 import { Helmet } from "react-helmet-async";
 
 import { useEffect } from "react";
-
 import { Amplify } from "aws-amplify";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import { Link, useNavigate } from "react-router-dom";

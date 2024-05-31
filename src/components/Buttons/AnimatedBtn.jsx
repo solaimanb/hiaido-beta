@@ -11,21 +11,21 @@ const AnimatedBtn = ({
   additionalClasses,
 }) => {
   return (
-    <button
-      id={id || "animated-btn"}
-      className={`${additionalClasses} transition-all duration-200`}
-      style={style}
-    >
-      <div
-        className={`cusbtn z-50 px-6 py-2 text-center ${
-          white ? "text-white" : ""
-        } ${className}`}
+    <Link to={to} className="rounded-full">
+      <button
+        id={id || "animated-btn"}
+        className={`${additionalClasses} transition-all duration-200`}
+        style={style}
       >
-        <Link to={to} className="">
+        <div
+          className={`z-50 px-6 py-2 text-center ${
+            white ? "text-white" : ""
+          } ${className}`}
+        >
           <span className="">{children}</span>
-        </Link>
-      </div>
-    </button>
+        </div>
+      </button>
+    </Link>
   );
 };
 
