@@ -1,12 +1,20 @@
-import aws from "../../../assets/images/aws.png";
-import Heading from "../../Heading";
-import azure from "../../../assets/images/azure.png";
-import gcp from "../../../assets/images/gcp.png";
-import "../../../index.css";
 import { useEffect, useRef } from "react";
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+
+import Heading from "../../Heading";
+
+import aws from "../../../assets/logo/amazon-aws-hiaido.png";
+import azure from "../../../assets/logo/microsoft-azure-hiaido.png";
+import gcp from "../../../assets/logo/google-cloud-hiaido.png";
+import "../../../index.css";
+
+const images = [
+  { src: azure, alt: "azure", maxWidth: "52" },
+  { src: aws, alt: "aws", maxWidth: "32" },
+  { src: gcp, alt: "gcp", maxWidth: "44" },
+];
 
 const Benefits = () => {
   const animateRef = useRef(null);
@@ -99,18 +107,19 @@ const Benefits = () => {
         title="Our Cloud Partners"
       />
 
-      <div className="flex flex-wrap items-center justify-center gap-10 mb-10">
-        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
-          <img src={aws} alt="aws" />
-        </div>
-
-        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 scale-105 border shadow-2xl">
-          <img src={azure} alt="azure" />
-        </div>
-
-        <div className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative p-10 overflow-hidden transition-transform duration-300 border shadow-2xl">
-          <img src={gcp} alt="gcp" />
-        </div>
+      <div className="md:flex-row flex flex-col items-center justify-center gap-10 mb-10">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className="group rounded-xl border-orange-500/30 hover:scale-110 backdrop-blur-sm relative flex justify-center flex-1 w-full p-10 overflow-hidden transition-transform duration-300 scale-105 border shadow-2xl"
+          >
+            <img
+              src={image?.src}
+              alt={image?.alt}
+              className={`max-w-28 md:max-w-${image?.maxWidth}`}
+            />
+          </div>
+        ))}
       </div>
     </motion.div>
   );
