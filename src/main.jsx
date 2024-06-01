@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <StoreProvider>
         <Authenticator.Provider>
           <View>
-            <Theme accentColor="blue" appearance="dark">
+            <Theme accentColor="blue" appearance="dark" className="h-screen">
               <App />
               {/* <ThemePanel /> */}
             </Theme>

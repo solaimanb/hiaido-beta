@@ -16,10 +16,10 @@
 }
 
 .markdown > * {
-  all: revert;
+  all: revert !important;
 }
 .code-markdown > * {
-  all: revert;
+  all: revert !important;
 }
 
 .dot-typing {

@@ -14,9 +14,17 @@ const copyContent = async (text) => {
 
 let pretag = ({ children, className, ...rest }) => {
   return (
-    <pre {...rest} className={`${className} rounded-b-md bg-red-50 !my-0`}>
+    <pre {...rest} className={`${className} rounded-b-md w-[720px] !my-0 `}>
       {children}
     </pre>
+  );
+};
+
+let codetag = ({ children, className, ...rest }) => {
+  return (
+    <code {...rest} className={`${className} rounded-b-md !my-0  !overflow-x-scroll`}>
+      {children}
+    </code>
   );
 };
 
@@ -27,7 +35,7 @@ const Codeblock = ({ code, language, theme }) => {
       style={{ fontFamily: "monospace" }}
     >
       <div className="flex bg-neutral-900 rounded-t-md justify-between w-full items-center p-2 px-4">
-        <div className="">{language}</div>
+        <div className="text-xs">{language}</div>
         <div className="">
           <CopyIcon
             className="cursor-pointer"
@@ -43,6 +51,7 @@ const Codeblock = ({ code, language, theme }) => {
         showLineNumbers
         wrapLongLines
         PreTag={pretag}
+        CodeTag={codetag}
         language={language}
       >
         {code}

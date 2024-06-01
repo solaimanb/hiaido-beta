@@ -76,9 +76,8 @@ const labelTransitions = {
 };
 
 const Sidebar = () => {
-  const [navTabIndex, setNavTabIndex] = useState();
   const [activeTabIndex, setActiveTabIndex] = useState(1);
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   console.log("sidebar");
 
   const data = [

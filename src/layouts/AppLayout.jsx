@@ -4,11 +4,11 @@ import Sidebar from "../components/Sidebar";
 const AppLayout = () => {
   console.log("AppLayout");
   return (
-    <div className="bg-[#1a1a1a] min-h-screen overflow-hidden flex">
+    <div className="bg-[#1a1a1a] relative z-0 flex h-full w-full overflow-hidden">
       <div className="p-2">
         <Sidebar />
       </div>
-      <div className="w-full flex justify-center">
+      <div className="relative flex h-full max-w-full flex-1 overflow-hidden">
         <Outlet />
       </div>
     </div>

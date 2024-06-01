@@ -6,6 +6,9 @@ import Codeblock from "./Codeblock";
 import { AnimatePresence, motion } from "framer-motion";
 import { Avatar } from "@radix-ui/themes";
 
+const width = "840";
+const widthClass = `w-[${width}px]`;
+
 const QueryTemplates = ({ askQuery }) => {
   const data = [
     "How to create an S3 bucket?",
@@ -40,51 +43,61 @@ const ChatsList = memo(({ chats }) => {
   return (
     <>
       {chats.map((chat, index) => (
-        <div key={index} className="py-2 mb-5">
-          <div className="user-chat !text-xl py-4 text-gray-200 md:text-base flex">
-            <div className="flex items-center justify-center w-10 h-10 mx-4">
-              <Avatar fallback="U" radius="full" size={"4"} color="cyan" />
+        <div key={index} className="w-full">
+          <div className="py-2 px-3 text-base">
+            <div className={`flex flex-1 mx-auto gap-3 ${widthClass}`}>
+              {/* <div className="flex flex-shrink-0 items-start">
+                <Avatar fallback="U" radius="full" size={"3"} color="cyan" />
+              </div> */}
+              <p className="text-neutral-300 text-[15px] font-[500] ml-5 bg-neutral-700/50 p-2 rounded-[20px] px-5 shadow-neutral-900 shadow-md max-w-[75%] mt-3">{chat.query}</p>
             </div>
-            <p className="text-neutral-300 text-2xl">{chat.query}</p>
           </div>
-          <div className="chat-boat-chat relative">
+          <div className="relative py-2">
             {chat.loading ? (
               <div>
                 <div className="dot-typing mt-5 ml-5"></div>
               </div>
             ) : (
-              <div className="flex">
+              <div className={`flex flex-1 mx-auto gap-4 ${widthClass}`}>
                 <img
-                  className="w-12 h-12 mx-3 my-4"
+                  className="mx-3 my-4 size-10 flex-shrink-0"
                   src={logo}
                   alt="bot avatar"
                 />
-                <ReactMarkdown
-                  className="markdown"
-                  components={{
-                    code(props) {
-                      const { children, className, node, ...rest } = props;
-                      const match = /language-(\w+)/.exec(className || "");
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                  >
+                    <ReactMarkdown
+                      className="markdown leading-relaxed text-[15px]"
+                      components={{
+                        code(props) {
+                          const { children, className, node, ...rest } = props;
+                          const match = /language-(\w+)/.exec(className || "");
 
-                      return match ? (
-                        <Codeblock
-                          language={match[1]}
-                          code={children[0].trim()}
-                          theme={gruvboxDark}
-                        />
-                      ) : (
-                        <code
-                          {...rest}
-                          className={`${className} text-yellow-200/50 bg-neutral-900 rounded-md p-[2px] px-1 font-mono`}
-                        >
-                          {children}
-                        </code>
-                      );
-                    },
-                  }}
-                >
-                  {chat.result}
-                </ReactMarkdown>
+                          return match ? (
+                            <Codeblock
+                              language={match[1]}
+                              code={children[0].trim()}
+                              theme={gruvboxDark}
+                            />
+                          ) : (
+                            <code
+                              {...rest}
+                              className={`${className} text-yellow-200/50 bg-neutral-900 rounded-md p-[2px] px-1 font-mono`}
+                            >
+                              {children}
+                            </code>
+                          );
+                        },
+                      }}
+                    >
+                      {chat.result}
+                    </ReactMarkdown>
+                  </motion.div>
+                </AnimatePresence>
               </div>
             )}
           </div>
@@ -94,53 +107,88 @@ const ChatsList = memo(({ chats }) => {
   );
 });
 
+// contains the chats and query box
 const ChatContainer = () => {
   console.log("ChatContainer");
   const [selectedButton, setSelectedButton] = useState("");
   const [query, setQuery] = useState("");
-  // const [chats, setChats] = useState(sampleChat);
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState(sampleChat);
   const [error, setError] = useState(null);
+  const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
 
-  const getChat = async (templateQuery) => {
-    if (chats.length > 0 && chats.at(-1).loading) return;
-    try {
-      console.log(templateQuery, query.trim());
-      const newChat = {
-        query: templateQuery || query.trim(),
-        result: "",
-        loading: true,
-      };
+  useEffect(() => {
+    const fetchResponse = async () => {
       console.log(newChat);
-      if (newChat.query == "") return;
-      setChats((prevChats) => [...prevChats, newChat]);
-      setQuery("");
-
-      const response = await fetch(
-        `https://i7isuomfpxsfxsf5jlbdv5as6u0kcayx.lambda-url.us-east-1.on.aws/get-response`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: "r367708@gmail.com",
-            query: newChat.query,
-          }),
-        }
-      );
-
+      const response = await fetch(`http://localhost:8000/get-response`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "advant.analytics+user014@gmail.com",
+          query: newChat.query,
+        }),
+      });
+      console.log("Completed request");
+      const response_data = await response.json();
+      console.log(response_data);
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if (
+          response.status == 400 &&
+          response_data["detail"].includes("CLI not configured")
+        ) {
+          const res = await fetch("http://localhost:8000/configure-cli", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: "advant.analytics+user014@gmail.com",
+            }),
+          });
+          const res_data = await res.json();
+          console.log(res_data);
+          if (res.ok) {
+            fetchResponse();
+          } else {
+            setError(res_data);
+          }
+        } else {
+          throw new Error(res_data);
+        }
       }
 
-      const data = await response.json();
-      newChat.result = data.response;
+      newChat.result = response_data.response;
       newChat.loading = false;
 
       setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
+    };
+
+    if (newChat) {
+      fetchResponse();
+    }
+  }, [newChat]);
+
+  const getChat = async (templateQuery) => {
+    // previous response is still loading
+    if (chats.length > 0 && chats.at(-1).loading) return;
+
+    try {
+      console.log(templateQuery, query.trim());
+      // if template query is null then maybe user has typed the query
+      const queryToUse = templateQuery || query.trim();
+      if (queryToUse == "") return;
+
+      const chat = {
+        query: queryToUse,
+        result: "",
+        loading: true,
+      };
+      setChats((prevChats) => [...prevChats, chat]);
+      setQuery("");
+      setNewChat(chat);
     } catch (error) {
       console.error("Error:", error);
       setError("Failed to fetch data");
@@ -158,113 +206,48 @@ const ChatContainer = () => {
   }, [chats]);
 
   return (
-    <div className="chat-container relative flex flex-col w-[960px] h-screen gap-5">
-      <div className="chat-heading md:text-2xl p-4 pt-6 text-3xl text-center">
-        Welcome To HIAIDO Cloud Assistant.
-      </div>
-      <div className="flex flex-col flex-1">
-        <div
-          className="chat-box grow w-full h-[680px] text-sm p-3 scrollbar-none flex flex-col gap-3 overflow-auto divide-y-[1px] divide-gray-700"
-          ref={chatBoxRef}
-        >
-          <AnimatePresence>
-            {chats.length == 0 && (
-              <motion.div
-                transition={{ duration: 0.2 }}
-                initial={{ scale: 0.95, opacity: 0, y: "-5px" }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                className="h-full"
-              >
-                <QueryTemplates
-                  askQuery={(templateQuery) => getChat(templateQuery)}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-          <AnimatePresence>
-            {chats.length > 0 && (
-              <motion.div
-                transition={{ duration: 0.5 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="h-full"
-              >
-                <ChatsList chats={chats} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <div
-          className={`chat-query-box mb-4 mt-2 w-full rounded-lg p-[3px] flex justify-center transition-all duration-200 ease-in bg-gradient-to-tr animated-background ${
-            selectedButton == ""
-              ? ""
-              : buttonProps[selectedButton].buttonGradient
-          }`}
-        >
-          {/* <div className=" bg-neutral-800 flex flex-col w-full gap-3 p-3 rounded-lg">
-          <Flex gap="3">
-            {buttons.map((button, i) => {
-              return (
-                <div
-                  key={i}
-                  className={`rounded-md inline ${
-                    button === selectedButton ? "" : " "
-                  }`}
-                >
-                  <Button
-                    onClick={() => {
-                      if (button == selectedButton) {
-                        setSelectedButton("");
-                        setQuery("");
-                      } else {
-                        setQuery(button + " ");
-                        setSelectedButton(button);
-                        inputRef.current.focus();
-                      }
-                    }}
-                    className={`!p-[17px] !text-sm  inline ${
-                      button == selectedButton
-                        ? buttonProps[button].buttonGradient
-                        : "!bg-cyan-100 !text-neutral-900"
-                    }`}
-                  >
-                    <span
-                      className={`text-[15px] ${
-                        button === selectedButton
-                          ? "text-neutral-100"
-                          : "text-neutral-800"
-                      } my-3`}
-                    >
-                      {button}
-                    </span>
-                  </Button>
-                </div>
-              );
-            })}
-          </Flex>
-          <div className="query-input flex items-center gap-4">
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Ask Any Question..."
-              className="bg-neutral-700 outline-neutral-800 outline-1 focus:outline-neutral-800 w-full h-12 px-3 rounded-md"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyUp={onKeyUp}
-            />
-            <div className="duration-100 ease-in rounded-md">
-              <Button
-                className="!p-6 !bg-gradient-to-r !text-base !to-green-500 !via-blue-500 !from-blue-600 hover:!scale-105 !duration-200 ease-in"
-                onClick={getChat}
-                disabled={chats.length > 0 && chats.at(-1).loading}
-              >
-                Submit
-              </Button>
+    <>
+      {/* <div className="overflow-hidden h-full w-full"> */}
+      <div className="flex-1 overflow-hidden">
+        <div className="h-full overflow-y-auto w-full">
+          <div className="flex flex-col text-sm pb-20" ref={chatBoxRef}>
+            <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-neutral-300 bg-[#1a1a1a] z-10">
+              Welcome To HIAIDO Cloud Assistant.
             </div>
+            <AnimatePresence>
+              {chats.length == 0 && (
+                <motion.div
+                  transition={{ duration: 0.2 }}
+                  initial={{ scale: 0.95, opacity: 0, y: "-5px" }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  className="h-[800px]"
+                >
+                  <QueryTemplates
+                    askQuery={(templateQuery) => getChat(templateQuery)}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {/* <AnimatePresence>
+              {chats.length > 0 && (
+                <motion.div
+                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="h-full"
+                >
+                </motion.div>
+              )}
+            </AnimatePresence> */}
+            <ChatsList chats={chats} />
           </div>
-        </div> */}
-          <div className="bg-neutral-800 rounded-[26px] flex items-center gap-3.5 w-[720px] p-1.5 outline-none appearance-none">
+        </div>
+      </div>
+      <div className="w-full flex justify-center">
+        <div
+          className={`mb-4 mt-2 w-full rounded-lg p-[3px] flex justify-center transition-all duration-200 ease-in bg-gradient-to-tr animated-background`}
+        >
+          <div className="bg-neutral-800 rounded-[26px] flex items-center gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
             {/* <PaperClipIcon className="w-6 ml-3" opacity={0} /> */}
             <div className="flex min-w-0 flex-1 flex-col ml-4">
               <textarea
@@ -303,7 +286,8 @@ const ChatContainer = () => {
           </div>
         </div>
       </div>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 
