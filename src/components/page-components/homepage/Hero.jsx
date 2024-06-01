@@ -12,6 +12,7 @@ import axios from "axios";
 
 import textAnimation from "../../../assets/gif/Text-animation-v5.gif";
 import AnimatedBtn from "../../Buttons/AnimatedBtn";
+import { PlayIcon } from "@radix-ui/react-icons";
 
 function Stars(props) {
   const ref = useRef();
@@ -58,6 +59,19 @@ function Stars(props) {
     </Points>
   );
 }
+
+const GeneralTexts = [
+  "What is the current status of my EC2 instances?",
+  "How much storage space is available in my S3 bucket?",
+  "List all active security groups in my VPC.",
+  "What are the latest cost estimates for my AWS services?",
+  "Provide a summary of my Azure virtual machine deployments.",
+  "Retrieve the current network traffic metrics for my GCP project.",
+  "Show the recent log events for my Lambda functions.",
+  "Provide recommendations for optimizing my cloud infrastructure.",
+  "What are the compliance standards for storing sensitive data in the cloud?",
+  "Help troubleshoot connectivity issues between my cloud resources.",
+];
 
 const Hero = () => {
   const [data, setData] = useState("");
@@ -217,12 +231,61 @@ const Hero = () => {
           {/* Text Animation */}
           <div className="flex items-center justify-center w-full h-full">
             {showSecondAnimation && (
-              <img
-                src={textAnimation}
-                alt="hiaido-process"
-                className="w-full md:w-[80%] mt-2"
-                onContextMenu={(e) => e.preventDefault()}
-              />
+              <div className="flex flex-col items-start justify-center md:w-[80%]">
+                {/* HiAiDo Process Animation */}
+                <img
+                  src={textAnimation}
+                  alt="hiaido-process"
+                  className="w-full mt-2"
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+
+                {/* Functional Animation */}
+                <div className="border-[#2A0BF6] w-full p-3 border-[2px] gap-4 flex flex-col rounded-2xl">
+                  <div className="flex gap-2">
+                    {/* Create, Describe, Update, List, Delete */}
+                    {["Create", "Describe", "Update", "List", "Delete"].map(
+                      (button) => (
+                        <button
+                          key={button}
+                          className="bg-[#0353FB] py-1 text-center rounded-md font-semibold w-24"
+                        >
+                          {button}
+                        </button>
+                      )
+                    )}
+                  </div>
+
+                  <div className="flex w-full gap-2 p-1">
+                    {/* Self-Scroll Animation */}
+                    <div className="p-1 w-[80%] overflow-hidden text-start h-12">
+                      {GeneralTexts.map((text, index) => (
+                        <p
+                          key={index}
+                          className="inner-lines relative h-12 text-xl font-semibold text-[#BBBBBB]"
+                          style={{
+                            animation: `scroll 10s ease-in-out infinite`,
+                          }}
+                        >
+                          {text}
+                        </p>
+                      ))}
+                    </div>
+
+                    <div className="w-[20%] p-1 flex justify-end">
+                      <button className="bg-[#5BC313] px-4 py-1 rounded text-lg font-semibold">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* See Examples Trigger */}
+                <button className="bg-orange-500/10 hover:bg-orange-500/30 flex items-center gap-1 px-2 py-1 mt-4 ml-2 text-xs font-semibold transition-all duration-200 rounded-md">
+                  <PlayIcon />
+                  See Examples
+                </button>
+              </div>
             )}
           </div>
         </motion.div>
