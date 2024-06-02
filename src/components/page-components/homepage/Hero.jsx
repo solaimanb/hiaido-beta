@@ -315,20 +315,20 @@ const Hero = () => {
           {/* Text Animation */}
           <div className="flex items-center justify-center w-full h-full">
             {showSecondAnimation && (
-              <div className="flex flex-col items-start justify-center md:w-[80%]">
+              <div className="flex flex-col items-start justify-center w-[80%] mx-auto">
                 {/* HiAiDo Process Animation */}
                 {!showExample && (
                   <img
                     src={textAnimation}
                     alt="hiaido-process"
-                    className="w-full mt-10"
+                    className="w-full mx-auto h-auto"
                     onContextMenu={(e) => e.preventDefault()}
                   />
                 )}
 
                 {/* Functional Animation */}
                 {showExample && (
-                  <div className="border-[#2A0BF6] w-full p-3 border-[2px] gap-4 flex flex-col rounded-2xl mt-10">
+                  <div className="w-full mx-auto border-[#2A0BF6] p-3 border-[2px] gap-4 flex flex-col rounded-2xl mt-10">
                     <div className="flex gap-2">
                       {/* Create, Describe, Update, List, Delete */}
                       {["Create", "Describe", "Update", "List", "Delete"].map(
@@ -378,7 +378,10 @@ const Hero = () => {
 
                 {/* See Examples Trigger */}
                 <button
-                  onClick={() => setShowExample(!showExample)}
+                  onClick={() => {
+                    setShowExample(!showExample);
+                    setActiveContent("");
+                  }}
                   className="bg-orange-500/10 hover:bg-orange-500/30 flex items-center gap-1 px-2 py-1 mt-4 ml-2 text-xs font-semibold transition-all duration-200 rounded-md"
                 >
                   <PlayIcon />
