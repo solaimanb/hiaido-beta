@@ -49,18 +49,20 @@ const ChatsList = memo(({ chats }) => {
               {/* <div className="flex flex-shrink-0 items-start">
                 <Avatar fallback="U" radius="full" size={"3"} color="cyan" />
               </div> */}
-              <p className="text-neutral-300 text-[15px] font-[500] ml-5 bg-neutral-700/50 p-2 rounded-[20px] px-5 shadow-neutral-900 shadow-md max-w-[75%] mt-3">{chat.query}</p>
+              <p className="text-neutral-300 text-[15px] font-[500] ml-5 bg-neutral-700/50 p-2 rounded-[20px] px-5 shadow-neutral-900 shadow-md max-w-[75%] mt-8">
+                {chat.query}
+              </p>
             </div>
           </div>
           <div className="relative py-2">
             {chat.loading ? (
-              <div>
-                <div className="dot-typing mt-5 ml-5"></div>
+              <div className={`mx-auto pl-7 ${widthClass}`}>
+                <div className={`dot-typing mt-5 ml-5`}></div>
               </div>
             ) : (
               <div className={`flex flex-1 mx-auto gap-4 ${widthClass}`}>
                 <img
-                  className="mx-3 my-4 size-10 flex-shrink-0"
+                  className="my-4 size-8 flex-shrink-0"
                   src={logo}
                   alt="bot avatar"
                 />
@@ -196,7 +198,9 @@ const ChatContainer = () => {
   };
 
   const onKeyUp = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && e.shiftKey) {
+      setQuery((prev) => prev.slice().concat("\n"));
+    } else if (e.key === "Enter") {
       getChat();
     }
   };
@@ -210,8 +214,8 @@ const ChatContainer = () => {
       {/* <div className="overflow-hidden h-full w-full"> */}
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto w-full">
-          <div className="flex flex-col text-sm pb-20" ref={chatBoxRef}>
-            <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-neutral-300 bg-[#1a1a1a] z-10">
+          <div className="flex flex-col text-sm pb-48 " ref={chatBoxRef}>
+            <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 mb-5 font-semibold text-neutral-300 bg-[#1a1a1a] z-10">
               Welcome To HIAIDO Cloud Assistant.
             </div>
             <AnimatePresence>

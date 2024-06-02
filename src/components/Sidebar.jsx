@@ -211,10 +211,9 @@ const Sidebar = () => {
           }
 
           <div className="h-[1px] bg-neutral-600"></div>
-          <Flex
-            gap="2"
+          <div
             align="center"
-            className="!border-t-[1px] !border-neutral-600 pt-5 pb-1"
+            className="!border-t-[1px] !border-neutral-600 pt-5 pb-1 flex w-full space-x-3"
           >
             <Avatar src="" fallback="U" radius="full" size="2" />
             <AnimatePresence>
@@ -223,13 +222,13 @@ const Sidebar = () => {
                   <Text truncate size={"2"}>
                     Nadine Schtakieff
                   </Text>
-                  <Text truncate size={"1"} className="text-neutral-500">
+                  <Text truncate size={"1"} className="text-neutral-500 text-sm">
                     Frontend Developer
                   </Text>
                 </motion.div>
               )}
             </AnimatePresence>
-          </Flex>
+          </div>
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}

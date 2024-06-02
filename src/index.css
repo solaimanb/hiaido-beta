@@ -76,13 +76,13 @@
   }
 }
 
-:root {
+/* :root {
   --font-playpen: "Playpen Sans", cursive;
   --font-sora: "Sora", sans-serif;
   --font-code: "Source Code Pro", monospace;
   --font-grotesk: "Space Grotesk", sans-serif;
   color-scheme: dark;
-}
+} */
 
 * {
   font-family: var(--font-sora);
@@ -500,9 +500,6 @@ no-scrollbar::-webkit-scrollbar {
 
 .wrap {
   top: 6px;
-}
-span {
-  display: block;
 }
 p {
   overflow: hidden;
