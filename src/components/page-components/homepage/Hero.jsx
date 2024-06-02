@@ -13,6 +13,7 @@ import axios from "axios";
 import textAnimation from "../../../assets/gif/Text-animation-v5.gif";
 import AnimatedBtn from "../../Buttons/AnimatedBtn";
 import { PlayIcon } from "@radix-ui/react-icons";
+import { NavLink } from "react-router-dom";
 
 function Stars(props) {
   const ref = useRef();
@@ -73,20 +74,89 @@ const GeneralTexts = [
   "Help troubleshoot connectivity issues between my cloud resources.",
 ];
 
+const CreateTexts = [
+  "Deploy a new EC2 instance with Ubuntu OS and 4GB RAM.",
+  "Create a new S3 bucket named 'my-example-bucket'.",
+  "Provision an Azure SQL database with 100GB storage.",
+  "Set up a load balancer for distributing traffic to my web servers.",
+  "Launch a GCP Kubernetes cluster for containerized applications.",
+  "Create a new IAM role with read-only permissions for S3.",
+  "Provision a managed PostgreSQL database in AWS RDS.",
+  "Deploy a serverless API using AWS API Gateway and Lambda.",
+  "Set up a VPC peering connection between two AWS accounts.",
+  "Create a new Google Cloud Storage bucket with versioning enabled.",
+];
+
+const DescribeTexts = [
+  "Describe the configuration details of my EC2 instance.",
+  "Provide information about the security policies applied to my S3 bucket.",
+  "Describe the network architecture of my Azure virtual network.",
+  "Retrieve details about the scaling policies for my auto-scaling group.",
+  "List the tags associated with my GCP compute instances.",
+  "Describe the encryption settings for my AWS EBS volumes.",
+  "Get information about the access control lists (ACLs) for my S3 bucket.",
+  "Retrieve metadata about my Azure Blob Storage containers.",
+  "Describe the monitoring alarms set up for my AWS resources.",
+  "Get insights into the performance metrics of my GCP Cloud Functions.",
+];
+
+const UpdateTexts = [
+  "Increase the storage capacity of my RDS database instance.",
+  "Modify the IAM policies to grant additional permissions.",
+  "Update the configuration of my AWS CloudFormation stack.",
+  "Change the instance type for my running EC2 instances.",
+  "Update the firewall rules for my Azure virtual network.",
+  "Modify the access control settings for my Google Cloud Storage bucket.",
+  "Update the lifecycle policy for objects in my S3 bucket.",
+  "Adjust the auto-scaling settings for my ECS cluster.",
+  "Update the SSL certificate for my load balancer.",
+  "Modify the CORS configuration for my S3 static website hosting.",
+];
+
+const ListTexts = [
+  "List all running EC2 instances in my AWS account.",
+  "Retrieve a list of storage classes available in my S3 bucket.",
+  "List the virtual machine images available in my Azure subscription.",
+  "Get a list of databases hosted in my AWS RDS service.",
+  "List the active firewall rules in my Azure security group.",
+  "Retrieve a list of IAM users and their permissions.",
+  "List all cloud storage buckets in my GCP project.",
+  "Get a list of Lambda functions deployed in my AWS region.",
+  "List the active DNS records in my Route 53 hosted zone.",
+  "Retrieve a list of Google Cloud SQL instances in my project.",
+];
+
+const DeleteTexts = [
+  "Terminate the specified EC2 instance.",
+  "Delete the unused S3 buckets from my AWS account.",
+  "Remove the Azure virtual machine that is no longer needed.",
+  "Delete the CloudFormation stack and its associated resources.",
+  "Remove the inactive IAM user accounts from the system.",
+  "Delete the unused Google Cloud Storage buckets.",
+  "Terminate the RDS database instance to save costs.",
+  "Remove the expired SSL certificate from the load balancer.",
+  "Delete the unused security groups in my VPC.",
+  "Remove the redundant DNS records from Route 53.",
+];
+
 const Hero = () => {
   const [data, setData] = useState("");
   const [isLoader, setIsLoader] = useState(false);
-
+  const [activeContent, setActiveContent] = useState("");
+  const [showExample, setShowExample] = useState(false);
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
-
-  const handleAnimationEnd = () => {
-    setShowSecondAnimation(true);
-  };
 
   if (isLoader) {
     console.log("submitting request..", isLoader);
   }
 
+  const handleAnimationEnd = () => {
+    setShowSecondAnimation(true);
+  };
+
+  //================================
+  // 'Request Demo' Form Submission:
+  //================================
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -144,6 +214,20 @@ const Hero = () => {
 
     return isValid;
   };
+
+  //==================================
+  // Text Animation Mapping Functions:
+  //==================================
+  const textMapping = {
+    Create: CreateTexts,
+    Describe: DescribeTexts,
+    Update: UpdateTexts,
+    List: ListTexts,
+    Delete: DeleteTexts,
+    default: GeneralTexts,
+  };
+
+  const activeTexts = textMapping[activeContent] || textMapping["default"];
 
   return (
     <Section
@@ -233,57 +317,72 @@ const Hero = () => {
             {showSecondAnimation && (
               <div className="flex flex-col items-start justify-center md:w-[80%]">
                 {/* HiAiDo Process Animation */}
-                <img
-                  src={textAnimation}
-                  alt="hiaido-process"
-                  className="w-full mt-2"
-                  onContextMenu={(e) => e.preventDefault()}
-                />
+                {!showExample && (
+                  <img
+                    src={textAnimation}
+                    alt="hiaido-process"
+                    className="w-full mt-10"
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                )}
 
                 {/* Functional Animation */}
-                <div className="border-[#2A0BF6] w-full p-3 border-[2px] gap-4 flex flex-col rounded-2xl">
-                  <div className="flex gap-2">
-                    {/* Create, Describe, Update, List, Delete */}
-                    {["Create", "Describe", "Update", "List", "Delete"].map(
-                      (button) => (
-                        <button
-                          key={button}
-                          className="bg-[#0353FB] py-1 text-center rounded-md font-semibold w-24"
-                        >
-                          {button}
+                {showExample && (
+                  <div className="border-[#2A0BF6] w-full p-3 border-[2px] gap-4 flex flex-col rounded-2xl mt-10">
+                    <div className="flex gap-2">
+                      {/* Create, Describe, Update, List, Delete */}
+                      {["Create", "Describe", "Update", "List", "Delete"].map(
+                        (button) => (
+                          <button
+                            key={button}
+                            onClick={() => setActiveContent(button)}
+                            className={`bg-[#0353FB] py-1 text-center rounded-md font-semibold w-24 ${
+                              button === activeContent
+                                ? "bg-[#5286f5] active"
+                                : ""
+                            }`}
+                          >
+                            {button}
+                          </button>
+                        )
+                      )}
+                    </div>
+
+                    {/* Animation Outlet */}
+                    <div className="flex w-full gap-2 p-1">
+                      {/* Self-Scroll Animation */}
+                      <div className="p-1 w-[80%] overflow-hidden text-start h-12">
+                        <div className="animation-outlet">
+                          {activeTexts?.map((text, index) => (
+                            <p
+                              key={index}
+                              className="inner-lines relative h-12 text-lg font-semibold text-[#BBBBBB]"
+                              style={{
+                                animation: `scroll 10s ease-in-out infinite`,
+                              }}
+                            >
+                              {text}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="w-[20%] p-1 flex justify-end">
+                        <button className="bg-[#5BC313] px-4 py-1 rounded text-lg font-semibold">
+                          Submit
                         </button>
-                      )
-                    )}
-                  </div>
-
-                  <div className="flex w-full gap-2 p-1">
-                    {/* Self-Scroll Animation */}
-                    <div className="p-1 w-[80%] overflow-hidden text-start h-12">
-                      {GeneralTexts.map((text, index) => (
-                        <p
-                          key={index}
-                          className="inner-lines relative h-12 text-xl font-semibold text-[#BBBBBB]"
-                          style={{
-                            animation: `scroll 10s ease-in-out infinite`,
-                          }}
-                        >
-                          {text}
-                        </p>
-                      ))}
-                    </div>
-
-                    <div className="w-[20%] p-1 flex justify-end">
-                      <button className="bg-[#5BC313] px-4 py-1 rounded text-lg font-semibold">
-                        Submit
-                      </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 {/* See Examples Trigger */}
-                <button className="bg-orange-500/10 hover:bg-orange-500/30 flex items-center gap-1 px-2 py-1 mt-4 ml-2 text-xs font-semibold transition-all duration-200 rounded-md">
+                <button
+                  onClick={() => setShowExample(!showExample)}
+                  className="bg-orange-500/10 hover:bg-orange-500/30 flex items-center gap-1 px-2 py-1 mt-4 ml-2 text-xs font-semibold transition-all duration-200 rounded-md"
+                >
                   <PlayIcon />
-                  See Examples
+                  {showExample ? "Hide Examples" : "See Examples"}
                 </button>
               </div>
             )}
