@@ -315,7 +315,7 @@ const Hero = () => {
           {/* Text Animation */}
           <div className="flex items-center justify-center w-full h-full">
             {showSecondAnimation && (
-              <div className="flex flex-col items-start justify-center w-[80%] mx-auto">
+              <div className="flex flex-col items-start justify-center md:w-[80%] mx-auto">
                 {/* HiAiDo Process Animation */}
                 {!showExample && (
                   <img
@@ -336,7 +336,7 @@ const Hero = () => {
                           <button
                             key={button}
                             onClick={() => setActiveContent(button)}
-                            className={`bg-[#0353FB] py-1 text-center rounded-md font-semibold w-24 ${
+                            className={`bg-[#0353FB] py-1 text-center rounded-md font-semibold px-2 text-xs md:text-base md:w-24 ${
                               button === activeContent
                                 ? "bg-[#5286f5] active"
                                 : ""
@@ -356,7 +356,7 @@ const Hero = () => {
                           {activeTexts?.map((text, index) => (
                             <p
                               key={index}
-                              className="inner-lines relative h-12 text-lg font-semibold text-[#BBBBBB]"
+                              className="inner-lines relative h-12 text-xs md:text-lg font-semibold text-[#BBBBBB]"
                               style={{
                                 animation: `scroll 10s ease-in-out infinite`,
                               }}
@@ -368,7 +368,7 @@ const Hero = () => {
                       </div>
 
                       <div className="w-[20%] p-1 flex justify-end">
-                        <button className="bg-[#5BC313] px-4 py-1 rounded text-lg font-semibold">
+                        <button className="bg-[#5BC313] md:px-4 px-2 md:py-1 rounded text-xs md:text-lg font-semibold">
                           Submit
                         </button>
                       </div>
