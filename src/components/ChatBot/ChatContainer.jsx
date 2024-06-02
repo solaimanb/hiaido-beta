@@ -4,10 +4,80 @@ import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import logo from "/hiaido-logo.png";
 import Codeblock from "./Codeblock";
 import { AnimatePresence, motion } from "framer-motion";
-import { Avatar } from "@radix-ui/themes";
+import { Tooltip } from "@radix-ui/themes";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import { CopyIcon } from "@radix-ui/react-icons";
+import toast from "react-hot-toast";
+
+const copyContent = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    toast.success("Copied to clipboard");
+  } catch (err) {
+    console.log(err);
+    alert("Failed to copy", err);
+  }
+};
 
 const width = "840";
 const widthClass = `w-[${width}px]`;
+
+const MDX = ({ children }) => {
+  return (
+    <ReactMarkdown
+      className="markdown leading-relaxed text-[15px]"
+      components={{
+        code(props) {
+          const { children, className, node, ...rest } = props;
+          const match = /language-(\w+)/.exec(className || "");
+
+          return match ? (
+            <Codeblock
+              language={match[1]}
+              code={children[0].trim()}
+              theme={gruvboxDark}
+            />
+          ) : (
+            <code
+              {...rest}
+              className={`${className} text-yellow-200/50 bg-neutral-900 rounded-md p-[2px] px-1 font-mono`}
+            >
+              {children}
+            </code>
+          );
+        },
+        // h1: ({ className, children, ...rest }) => (
+        //   <h1 className={`mt-10`}>{children}</h1>
+        // ),
+        // h2: ({ className, children, ...rest }) => (
+        //   <h2 className={`${className} mt-10`} {...rest}>
+        //     {children}
+        //   </h2>
+        // ),
+        // h3: ({ className, children, ...rest }) => (
+        //   <h3 className={`${className} !mt-10`}>{children}</h3>
+        // ),
+        // h4: ({ className, children, ...rest }) => (
+        //   <h4 className={`${className} mt-10`} {...rest}>
+        //     {children}
+        //   </h4>
+        // ),
+        // h5: ({ className, children, ...rest }) => (
+        //   <h5 className={`${className} mt-10`} {...rest}>
+        //     {children}
+        //   </h5>
+        // ),
+        // h6: ({ className, children, ...rest }) => (
+        //   <h6 className={`${className} mt-10`} {...rest}>
+        //     {children}
+        //   </h6>
+        // ),
+      }}
+    >
+      {children}
+    </ReactMarkdown>
+  );
+};
 
 const QueryTemplates = ({ askQuery }) => {
   const data = [
@@ -38,6 +108,28 @@ const QueryTemplates = ({ askQuery }) => {
   );
 };
 
+const ChatResponseButtonsGroup = ({ content }) => {
+  return (
+    <div className="my-2 flex space-x-3">
+      <Tooltip content="Regenerate">
+        <button className="hover:stroke-neutral-600 stroke-neutral-500 outline-none">
+          <ArrowPathIcon className="size-[18px]" />
+        </button>
+      </Tooltip>
+      <Tooltip content="Copy response">
+        <button
+          onClick={() => {
+            copyContent(content);
+          }}
+          className="hover:stroke-neutral-600 stroke-neutral-500 outline-none"
+        >
+          <CopyIcon className="size-[18px]" strokeWidth={0.5} />
+        </button>
+      </Tooltip>
+    </div>
+  );
+};
+
 const ChatsList = memo(({ chats }) => {
   console.log("ChatsList");
   return (
@@ -56,8 +148,24 @@ const ChatsList = memo(({ chats }) => {
           </div>
           <div className="relative py-2">
             {chat.loading ? (
-              <div className={`mx-auto pl-7 ${widthClass}`}>
-                <div className={`dot-typing mt-5 ml-5`}></div>
+              // <div className={`mx-auto pl-7 ${widthClass}`}>
+              //   <div className={`dot-typing mt-5 ml-5`}></div>
+              // </div>
+              <div class={`mx-auto w-[720px] mt-3`}>
+                <div class="animate-pulse flex space-x-4">
+                  <div class="flex-1 space-y-4">
+                    <div class="h-4 bg-neutral-700/60 rounded"></div>
+                    <div class="grid grid-cols-3 gap-4">
+                      <div class="h-4 bg-neutral-700/60 rounded col-span-2"></div>
+                      <div class="h-4 bg-neutral-700/60 rounded col-span-1"></div>
+                    </div>
+                    <div class="h-4 bg-neutral-700/60 rounded"></div>
+                    <div class="grid grid-cols-3 gap-4">
+                      <div class="h-4 bg-neutral-700/60 rounded col-span-1"></div>
+                      <div class="h-4 bg-neutral-700/60 rounded col-span-2"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className={`flex flex-1 mx-auto gap-4 ${widthClass}`}>
@@ -72,32 +180,10 @@ const ChatsList = memo(({ chats }) => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                   >
-                    <ReactMarkdown
-                      className="markdown leading-relaxed text-[15px]"
-                      components={{
-                        code(props) {
-                          const { children, className, node, ...rest } = props;
-                          const match = /language-(\w+)/.exec(className || "");
-
-                          return match ? (
-                            <Codeblock
-                              language={match[1]}
-                              code={children[0].trim()}
-                              theme={gruvboxDark}
-                            />
-                          ) : (
-                            <code
-                              {...rest}
-                              className={`${className} text-yellow-200/50 bg-neutral-900 rounded-md p-[2px] px-1 font-mono`}
-                            >
-                              {children}
-                            </code>
-                          );
-                        },
-                      }}
-                    >
-                      {chat.result}
-                    </ReactMarkdown>
+                    <MDX>{chat.result}</MDX>
+                    {index == chats.length - 1 && (
+                      <ChatResponseButtonsGroup content={chat.result} />
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -112,7 +198,6 @@ const ChatsList = memo(({ chats }) => {
 // contains the chats and query box
 const ChatContainer = () => {
   console.log("ChatContainer");
-  const [selectedButton, setSelectedButton] = useState("");
   const [query, setQuery] = useState("");
   const [chats, setChats] = useState(sampleChat);
   const [error, setError] = useState(null);
@@ -153,7 +238,8 @@ const ChatContainer = () => {
           const res_data = await res.json();
           console.log(res_data);
           if (res.ok) {
-            fetchResponse();
+            await fetchResponse();
+            return;
           } else {
             setError(res_data);
           }
