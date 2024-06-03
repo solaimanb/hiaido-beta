@@ -24,7 +24,7 @@ const Landing = () => {
         </title>
         <meta
           name="description"
-          content="HIAIDO is a powerful AI platform designed to revolutionize your cloud operations, seamlessly automating tasks and amplifying efficiency."
+          content="HIAIDO is your intelligent cloud assistant, enabling you to effortlessly manage your cloud operations through natural language commands."
         />
         <meta
           name="keywords"
