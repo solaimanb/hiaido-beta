@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import textAnimation from "../../../../assets/gif/Interactive-animation-v5.gif";
@@ -7,6 +7,15 @@ import textArrays from "./TextArrays";
 const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeContent, setActiveContent] = useState("");
   const [showExample, setShowExample] = useState(false);
+  const [showExampleBtn, setShowExampleBtn] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowExampleBtn(true);
+    }, 20000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   //==================================
   // Text Animation Mapping Functions:
@@ -21,6 +30,28 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   };
 
   const activeTexts = textMapping[activeContent] || textMapping["default"];
+
+  // Function to shuffle an array - for random order:
+  function shuffleArray(array) {
+    let arr = [...array];
+    let currentIndex = arr.length,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [arr[currentIndex], arr[randomIndex]] = [
+        arr[randomIndex],
+        arr[currentIndex],
+      ];
+    }
+
+    return arr; // Return the shuffled copy of the array
+  }
 
   return (
     <div className="flex items-center justify-center w-full h-full">
@@ -45,7 +76,11 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                   (button) => (
                     <button
                       key={button}
-                      onClick={() => setActiveContent(button)}
+                      onClick={() =>
+                        setActiveContent(
+                          activeContent === button ? null : button
+                        )
+                      }
                       className={`py-1 text-center rounded-md font-semibold px-2 text-xs md:text-base md:w-24 ${
                         button === activeContent
                           ? button === "Delete"
@@ -61,16 +96,16 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               </div>
 
               {/* Animation Outlet */}
-              <div className="flex w-full gap-2 p-1">
+              <div className="flex w-full gap-2">
                 {/* Self-Scroll Animation */}
-                <div className="p-1 w-[80%] overflow-hidden text-start h-12">
-                  <div className="animation-outlet">
-                    {activeTexts?.map((text, index) => (
+                <div className="w-[80%] overflow-hidden text-start h-14">
+                  <div className="animation-outlet flex flex-col gap-4">
+                    {shuffleArray(activeTexts)?.map((text, index) => (
                       <p
                         key={index}
-                        className="inner-lines relative h-12 text-xs md:text-lg font-semibold text-[#BBBBBB]"
+                        className="inner-lines relative text-xs h-14 md:text-lg font-semibold text-[#BBBBBB]"
                         style={{
-                          animation: `scroll 10s ease-in-out infinite`,
+                          animation: `scroll 10s linear infinite`,
                         }}
                       >
                         {text}
@@ -92,60 +127,62 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
           )}
 
           {/* See Examples Trigger */}
-          <button
-            onClick={() => {
-              setShowExample(true);
-            }}
-            className="bg-orange-500/5 hover:bg-orange-500/10 flex items-center px-2 mt-4 text-xs font-semibold transition-all duration-200 gap-1 rounded-md text-orange-400/90"
-          >
-            {!showExample ? (
-              <PlayIcon size={20} />
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 100 100"
-                enable-background="new 0 0 0 0"
-                xml:space="preserve"
-                className="h-8 w-10"
-              >
-                <circle fill="#F97316" stroke="none" cx="6" cy="50" r="6">
-                  <animateTransform
-                    attributeName="transform"
-                    dur="1s"
-                    type="translate"
-                    values="0 15 ; 0 -15; 0 15"
-                    repeatCount="indefinite"
-                    begin="0.1"
-                  />
-                </circle>
-                <circle fill="#F97316" stroke="none" cx="30" cy="50" r="6">
-                  <animateTransform
-                    attributeName="transform"
-                    dur="1s"
-                    type="translate"
-                    values="0 10 ; 0 -10; 0 10"
-                    repeatCount="indefinite"
-                    begin="0.2"
-                  />
-                </circle>
-                <circle fill="#F97316" stroke="none" cx="54" cy="50" r="6">
-                  <animateTransform
-                    attributeName="transform"
-                    dur="1s"
-                    type="translate"
-                    values="0 5 ; 0 -5; 0 5"
-                    repeatCount="indefinite"
-                    begin="0.3"
-                  />
-                </circle>
-              </svg>
-            )}
+          {showExampleBtn && (
+            <button
+              onClick={() => {
+                setShowExample(!showExample);
+              }}
+              className="bg-orange-500/5 hover:bg-orange-500/10 flex items-center px-2 mt-4 text-xs font-semibold transition-all duration-200 gap-1 rounded-md text-orange-400/90"
+            >
+              {!showExample ? (
+                <PlayIcon size={20} />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 100 100"
+                  enable-background="new 0 0 0 0"
+                  xml:space="preserve"
+                  className="h-8 w-10"
+                >
+                  <circle fill="#F97316" stroke="none" cx="6" cy="50" r="6">
+                    <animateTransform
+                      attributeName="transform"
+                      dur="1s"
+                      type="translate"
+                      values="0 15 ; 0 -15; 0 15"
+                      repeatCount="indefinite"
+                      begin="0.1"
+                    />
+                  </circle>
+                  <circle fill="#F97316" stroke="none" cx="30" cy="50" r="6">
+                    <animateTransform
+                      attributeName="transform"
+                      dur="1s"
+                      type="translate"
+                      values="0 10 ; 0 -10; 0 10"
+                      repeatCount="indefinite"
+                      begin="0.2"
+                    />
+                  </circle>
+                  <circle fill="#F97316" stroke="none" cx="54" cy="50" r="6">
+                    <animateTransform
+                      attributeName="transform"
+                      dur="1s"
+                      type="translate"
+                      values="0 5 ; 0 -5; 0 5"
+                      repeatCount="indefinite"
+                      begin="0.3"
+                    />
+                  </circle>
+                </svg>
+              )}
 
-            {showExample ? "Interactive mode : Active" : "See Examples"}
-          </button>
+              {showExample ? "Interactive mode : Active" : "See Examples"}
+            </button>
+          )}
         </div>
       )}
     </div>
