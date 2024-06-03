@@ -372,7 +372,10 @@ const Hero = () => {
                       </div>
 
                       <div className="w-[20%] p-1 flex justify-end">
-                        <button className="border-2 border-[#5BC313] bg-[#5cc3132a] md:px-4 px-2 rounded-lg text-xs md:text-base font-semibold">
+                        <button
+                          title="ⓘ You're in interactive mode"
+                          className="border-2 border-[#5BC313] bg-[#5cc3132a] md:px-4 px-2 rounded-lg text-xs md:text-base font-semibold"
+                        >
                           Submit
                         </button>
                       </div>
@@ -390,46 +393,6 @@ const Hero = () => {
                   {!showExample ? (
                     <PlayIcon size={20} />
                   ) : (
-                    // <svg
-                    //   id="L4"
-                    //   xmlns="http://www.w3.org/2000/svg"
-                    //   xmlns:xlink="http://www.w3.org/1999/xlink"
-                    //   x="0px"
-                    //   y="0px"
-                    //   viewBox="0 0 100 100"
-                    //   enable-background="new 0 0 0 0"
-                    //   xml:space="preserve"
-                    //   className="h-8 w-10"
-                    // >
-                    //   <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
-                    //     <animate
-                    //       attributeName="opacity"
-                    //       dur="1s"
-                    //       values="0;1;0"
-                    //       repeatCount="indefinite"
-                    //       begin="0.1"
-                    //     />
-                    //   </circle>
-                    //   <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
-                    //     <animate
-                    //       attributeName="opacity"
-                    //       dur="1s"
-                    //       values="0;1;0"
-                    //       repeatCount="indefinite"
-                    //       begin="0.2"
-                    //     />
-                    //   </circle>
-                    //   <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
-                    //     <animate
-                    //       attributeName="opacity"
-                    //       dur="1s"
-                    //       values="0;1;0"
-                    //       repeatCount="indefinite"
-                    //       begin="0.3"
-                    //     />
-                    //   </circle>
-                    // </svg>
-
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink"
