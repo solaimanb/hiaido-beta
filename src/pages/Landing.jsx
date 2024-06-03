@@ -3,7 +3,9 @@ import { lazy, Suspense } from "react";
 import Loading from "../components/shared/Loading";
 
 // Using React.lazy to dynamically import components for the Landing page.
-const Hero = lazy(() => import("../components/page-components/homepage/Hero"));
+const Hero = lazy(() =>
+  import("../components/page-components/homepage/hero/Hero")
+);
 const Benefits = lazy(() =>
   import("../components/page-components/homepage/Benefits")
 );
