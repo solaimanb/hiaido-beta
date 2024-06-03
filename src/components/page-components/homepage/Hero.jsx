@@ -328,7 +328,7 @@ const Hero = () => {
 
                 {/* Functional Animation */}
                 {showExample && (
-                  <div className="w-full mx-auto border-[#2A0BF6] p-3 border-[2px] gap-4 flex flex-col rounded-2xl mt-10">
+                  <div className="w-full mx-auto border-[#2A0BF6] p-3 border-[3px] gap-4 flex flex-col rounded-2xl mt-10">
                     <div className="flex gap-2">
                       {/* Create, Describe, Update, List, Delete */}
                       {["Create", "Describe", "Update", "List", "Delete"].map(
@@ -336,10 +336,12 @@ const Hero = () => {
                           <button
                             key={button}
                             onClick={() => setActiveContent(button)}
-                            className={`bg-[#0353FB] py-1 text-center rounded-md font-semibold px-2 text-xs md:text-base md:w-24 ${
+                            className={`py-1 text-center rounded-md font-semibold px-2 text-xs md:text-base md:w-24 ${
                               button === activeContent
-                                ? "bg-[#5286f5] active"
-                                : ""
+                                ? button === "Delete"
+                                  ? "bg-red-500 active"
+                                  : "bg-[#5286f5] active"
+                                : "bg-[#0353FB]"
                             }`}
                           >
                             {button}
