@@ -400,7 +400,7 @@ const Hero = () => {
         <Canvas
           events={false}
           camera={{ position: [0, 0, 1] }}
-          className="canvas-container min-h-screen opacity-75"
+          className="canvas-container min-h-screen opacity-75 bg-dark/90"
         >
           <mesh>
             <Stars />
