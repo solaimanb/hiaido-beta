@@ -1,0 +1,74 @@
+{
+  "GeneralTexts": [
+    "What is the current status of my EC2 instances?",
+    "How much storage space is available in my S3 bucket?",
+    "List all active security groups in my VPC.",
+    "What are the latest cost estimates for my AWS services?",
+    "Provide a summary of my Azure virtual machine deployments.",
+    "Retrieve the current network traffic metrics for my GCP project.",
+    "Show the recent log events for my Lambda functions.",
+    "Provide recommendations for optimizing my cloud infrastructure.",
+    "What are the compliance standards for storing sensitive data in the cloud?",
+    "Help troubleshoot connectivity issues between my cloud resources."
+  ],
+  "CreateTexts": [
+    "Deploy a new EC2 instance with Ubuntu OS and 4GB RAM.",
+    "Create a new S3 bucket named 'my-example-bucket'.",
+    "Provision an Azure SQL database with 100GB storage.",
+    "Set up a load balancer for distributing traffic to my web servers.",
+    "Launch a GCP Kubernetes cluster for containerized applications.",
+    "Create a new IAM role with read-only permissions for S3.",
+    "Provision a managed PostgreSQL database in AWS RDS.",
+    "Deploy a serverless API using AWS API Gateway and Lambda.",
+    "Set up a VPC peering connection between two AWS accounts.",
+    "Create a new Google Cloud Storage bucket with versioning enabled."
+  ],
+  "DescribeTexts": [
+    "Describe the configuration details of my EC2 instance.",
+    "Provide information about the security policies applied to my S3 bucket.",
+    "Describe the network architecture of my Azure virtual network.",
+    "Retrieve details about the scaling policies for my auto-scaling group.",
+    "List the tags associated with my GCP compute instances.",
+    "Describe the encryption settings for my AWS EBS volumes.",
+    "Get information about the access control lists (ACLs) for my S3 bucket.",
+    "Retrieve metadata about my Azure Blob Storage containers.",
+    "Describe the monitoring alarms set up for my AWS resources.",
+    "Get insights into the performance metrics of my GCP Cloud Functions."
+  ],
+  "UpdateTexts": [
+    "Increase the storage capacity of my RDS database instance.",
+    "Modify the IAM policies to grant additional permissions.",
+    "Update the configuration of my AWS CloudFormation stack.",
+    "Change the instance type for my running EC2 instances.",
+    "Update the firewall rules for my Azure virtual network.",
+    "Modify the access control settings for my Google Cloud Storage bucket.",
+    "Update the lifecycle policy for objects in my S3 bucket.",
+    "Adjust the auto-scaling settings for my ECS cluster.",
+    "Update the SSL certificate for my load balancer.",
+    "Modify the CORS configuration for my S3 static website hosting."
+  ],
+  "ListTexts": [
+    "List all running EC2 instances in my AWS account.",
+    "Retrieve a list of storage classes available in my S3 bucket.",
+    "List the virtual machine images available in my Azure subscription.",
+    "Get a list of databases hosted in my AWS RDS service.",
+    "List the active firewall rules in my Azure security group.",
+    "Retrieve a list of IAM users and their permissions.",
+    "List all cloud storage buckets in my GCP project.",
+    "Get a list of Lambda functions deployed in my AWS region.",
+    "List the active DNS records in my Route 53 hosted zone.",
+    "Retrieve a list of Google Cloud SQL instances in my project."
+  ],
+  "DeleteTexts": [
+    "Terminate the specified EC2 instance.",
+    "Delete the unused S3 buckets from my AWS account.",
+    "Remove the Azure virtual machine that is no longer needed.",
+    "Delete the CloudFormation stack and its associated resources.",
+    "Remove the inactive IAM user accounts from the system.",
+    "Delete the unused Google Cloud Storage buckets.",
+    "Terminate the RDS database instance to save costs.",
+    "Remove the expired SSL certificate from the load balancer.",
+    "Delete the unused security groups in my VPC.",
+    "Remove the redundant DNS records from Route 53."
+  ]
+}
