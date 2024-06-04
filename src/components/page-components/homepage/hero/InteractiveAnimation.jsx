@@ -5,6 +5,7 @@ import textAnimation from "../../../../assets/gif/Interactive-animation-v5.gif";
 import textArrays from "./TextArrays";
 
 import { motion } from "framer-motion";
+import "./spinner.css";
 
 const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeContent, setActiveContent] = useState("");
@@ -128,52 +129,62 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               onClick={() => {
                 setShowExample(!showExample);
               }}
-              className="bg-orange-500/5 hover:bg-orange-500/10 flex items-center px-2 mt-4 text-xs font-semibold transition-all duration-200 gap-1 rounded-md text-orange-400/90"
+              className="flex items-center px-2 mt-4 text-sm font-semibold transition-all duration-200 gap-3 rounded-md text-orange-400/90"
             >
               {!showExample ? (
                 <PlayIcon size={20} />
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 100 100"
-                  enable-background="new 0 0 0 0"
-                  xml:space="preserve"
-                  className="h-8 w-10"
-                >
-                  <circle fill="#F97316" stroke="none" cx="6" cy="50" r="6">
-                    <animateTransform
-                      attributeName="transform"
-                      dur="1s"
-                      type="translate"
-                      values="0 15 ; 0 -15; 0 15"
-                      repeatCount="indefinite"
-                      begin="0.1"
-                    />
-                  </circle>
-                  <circle fill="#F97316" stroke="none" cx="30" cy="50" r="6">
-                    <animateTransform
-                      attributeName="transform"
-                      dur="1s"
-                      type="translate"
-                      values="0 10 ; 0 -10; 0 10"
-                      repeatCount="indefinite"
-                      begin="0.2"
-                    />
-                  </circle>
-                  <circle fill="#F97316" stroke="none" cx="54" cy="50" r="6">
-                    <animateTransform
-                      attributeName="transform"
-                      dur="1s"
-                      type="translate"
-                      values="0 5 ; 0 -5; 0 5"
-                      repeatCount="indefinite"
-                      begin="0.3"
-                    />
-                  </circle>
-                </svg>
+                // <svg
+                //   xmlns="http://www.w3.org/2000/svg"
+                //   xmlns:xlink="http://www.w3.org/1999/xlink"
+                //   x="0px"
+                //   y="0px"
+                //   viewBox="0 0 100 100"
+                //   enable-background="new 0 0 0 0"
+                //   xml:space="preserve"
+                //   className="h-8 w-10"
+                // >
+                //   <circle fill="#F97316" stroke="none" cx="6" cy="50" r="6">
+                //     <animateTransform
+                //       attributeName="transform"
+                //       dur="1s"
+                //       type="translate"
+                //       values="0 15 ; 0 -15; 0 15"
+                //       repeatCount="indefinite"
+                //       begin="0.1"
+                //     />
+                //   </circle>
+                //   <circle fill="#F97316" stroke="none" cx="30" cy="50" r="6">
+                //     <animateTransform
+                //       attributeName="transform"
+                //       dur="1s"
+                //       type="translate"
+                //       values="0 10 ; 0 -10; 0 10"
+                //       repeatCount="indefinite"
+                //       begin="0.2"
+                //     />
+                //   </circle>
+                //   <circle fill="#F97316" stroke="none" cx="54" cy="50" r="6">
+                //     <animateTransform
+                //       attributeName="transform"
+                //       dur="1s"
+                //       type="translate"
+                //       values="0 5 ; 0 -5; 0 5"
+                //       repeatCount="indefinite"
+                //       begin="0.3"
+                //     />
+                //   </circle>
+                // </svg>
+                <div className="spinner-wrapper">
+                  <div className="spinner">
+                    <div className="sk-folding-cube">
+                      <div className="sk-cube1 sk-cube"></div>
+                      <div className="sk-cube2 sk-cube"></div>
+                      <div className="sk-cube4 sk-cube"></div>
+                      <div className="sk-cube3 sk-cube"></div>
+                    </div>
+                  </div>
+                </div>
               )}
               {showExample ? "Interactive mode : Active" : "See Examples"}
             </motion.button>
