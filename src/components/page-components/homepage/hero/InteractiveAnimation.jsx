@@ -4,6 +4,8 @@ import { PlayIcon } from "@radix-ui/react-icons";
 import textAnimation from "../../../../assets/gif/Interactive-animation-v5.gif";
 import textArrays from "./TextArrays";
 
+import { motion } from "framer-motion";
+
 const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeContent, setActiveContent] = useState("");
   const [showExample, setShowExample] = useState(false);
@@ -12,7 +14,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowExampleBtn(true);
-    }, 20000);
+    }, 19000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -99,11 +101,11 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               <div className="flex w-full gap-2">
                 {/* Self-Scroll Animation */}
                 <div className="w-[80%] overflow-hidden text-start h-14">
-                  <div className="animation-outlet flex flex-col gap-4">
+                  <div className="animation-outlet flex flex-col gap-2">
                     {shuffleArray(activeTexts)?.map((text, index) => (
                       <p
                         key={index}
-                        className="inner-lines relative text-xs h-14 md:text-lg font-semibold text-[#BBBBBB]"
+                        className="inner-lines relative text-xs h-12 md:text-lg font-semibold text-[#BBBBBB]"
                         style={{
                           animation: `scroll 10s linear infinite`,
                         }}
@@ -114,7 +116,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                   </div>
                 </div>
 
-                <div className="w-[20%] p-1 flex justify-end">
+                <div className="w-[20%] flex justify-end">
                   <button
                     title="ⓘ You're in interactive mode"
                     className="border-2 border-[#5BC313] bg-[#5cc3132a] md:px-4 px-2 rounded-lg text-xs md:text-base font-semibold"
@@ -127,62 +129,66 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
           )}
 
           {/* See Examples Trigger */}
-          {showExampleBtn && (
-            <button
-              onClick={() => {
-                setShowExample(!showExample);
-              }}
-              className="bg-orange-500/5 hover:bg-orange-500/10 flex items-center px-2 mt-4 text-xs font-semibold transition-all duration-200 gap-1 rounded-md text-orange-400/90"
-            >
-              {!showExample ? (
-                <PlayIcon size={20} />
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 100 100"
-                  enable-background="new 0 0 0 0"
-                  xml:space="preserve"
-                  className="h-8 w-10"
-                >
-                  <circle fill="#F97316" stroke="none" cx="6" cy="50" r="6">
-                    <animateTransform
-                      attributeName="transform"
-                      dur="1s"
-                      type="translate"
-                      values="0 15 ; 0 -15; 0 15"
-                      repeatCount="indefinite"
-                      begin="0.1"
-                    />
-                  </circle>
-                  <circle fill="#F97316" stroke="none" cx="30" cy="50" r="6">
-                    <animateTransform
-                      attributeName="transform"
-                      dur="1s"
-                      type="translate"
-                      values="0 10 ; 0 -10; 0 10"
-                      repeatCount="indefinite"
-                      begin="0.2"
-                    />
-                  </circle>
-                  <circle fill="#F97316" stroke="none" cx="54" cy="50" r="6">
-                    <animateTransform
-                      attributeName="transform"
-                      dur="1s"
-                      type="translate"
-                      values="0 5 ; 0 -5; 0 5"
-                      repeatCount="indefinite"
-                      begin="0.3"
-                    />
-                  </circle>
-                </svg>
-              )}
-
-              {showExample ? "Interactive mode : Active" : "See Examples"}
-            </button>
-          )}
+          <div className="h-10 w-full">
+            {showExampleBtn && (
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                onClick={() => {
+                  setShowExample(!showExample);
+                }}
+                className="bg-orange-500/5 hover:bg-orange-500/10 flex items-center px-2 mt-4 text-xs font-semibold transition-all duration-200 gap-1 rounded-md text-orange-400/90"
+              >
+                {!showExample ? (
+                  <PlayIcon size={20} />
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 100 100"
+                    enable-background="new 0 0 0 0"
+                    xml:space="preserve"
+                    className="h-8 w-10"
+                  >
+                    <circle fill="#F97316" stroke="none" cx="6" cy="50" r="6">
+                      <animateTransform
+                        attributeName="transform"
+                        dur="1s"
+                        type="translate"
+                        values="0 15 ; 0 -15; 0 15"
+                        repeatCount="indefinite"
+                        begin="0.1"
+                      />
+                    </circle>
+                    <circle fill="#F97316" stroke="none" cx="30" cy="50" r="6">
+                      <animateTransform
+                        attributeName="transform"
+                        dur="1s"
+                        type="translate"
+                        values="0 10 ; 0 -10; 0 10"
+                        repeatCount="indefinite"
+                        begin="0.2"
+                      />
+                    </circle>
+                    <circle fill="#F97316" stroke="none" cx="54" cy="50" r="6">
+                      <animateTransform
+                        attributeName="transform"
+                        dur="1s"
+                        type="translate"
+                        values="0 5 ; 0 -5; 0 5"
+                        repeatCount="indefinite"
+                        begin="0.3"
+                      />
+                    </circle>
+                  </svg>
+                )}
+                {showExample ? "Interactive mode : Active" : "See Examples"}
+              </motion.button>
+            )}
+          </div>
         </div>
       )}
     </div>
