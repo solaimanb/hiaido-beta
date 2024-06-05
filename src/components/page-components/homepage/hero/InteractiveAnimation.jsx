@@ -143,9 +143,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             <button
               onClick={() => {
                 setShowExample(!showExample);
+                setActiveContent(null);
                 setActiveButton(null);
               }}
-              className="flex items-center gap-3 px-2 text-xs font-semibold transition-all duration-200 text-start md:text-sm text-orange-400/90"
+              className="flex items-center gap-3 px-2 text-xs font-semibold text-orange-500 transition-all duration-200 text-start md:text-sm"
             >
               {!showExample ? (
                 <PlayIcon size={20} />
