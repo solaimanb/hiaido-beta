@@ -94,12 +94,12 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                           activeContent === button ? null : button
                         )
                       }
-                      className={`py-1 text-center rounded-md font-semibold px-2 md:px-1 text-xs md:text-lg md:w-24 ${
+                      className={`py-[1px] text-center rounded-md font-semibold px-2 md:px-1 text-xs md:text-lg md:w-24 ${
                         button === activeContent
                           ? button === "Delete"
                             ? "border-2 border-red-500 active"
                             : "border-2 border-[#0353FB] active"
-                          : "bg-[#0353FB]"
+                          : "bg-[#0353FB] border-2 border-[#0353FB]"
                       }`}
                       initial={{ opacity: 0, x: -100 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -220,10 +220,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 {buttons.map((button, index) => (
                   <motion.button
                     key={index}
-                    className={`px-4 w-15 rounded flex items-center justify-center transition-all duration-200 ${
+                    className={`px-6 w-18 rounded flex items-center justify-center transition-all border border-transparent duration-200 ${
                       activeButton === button
-                        ? "grayscale-0 hover:grayscale-0"
-                        : "grayscale hover:grayscale-0"
+                        ? "grayscale-0 hover:grayscale-0 border-[1px] border-green-300/40 transition-all duration-150 bg-green-600/10"
+                        : "grayscale hover:grayscale-0 "
                     }`}
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -248,13 +248,13 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     }}
                   >
                     {button === "Aws" && (
-                      <img className="w-8" src={aws} alt="AWS" />
+                      <img className="w-7" src={aws} alt="AWS" />
                     )}
                     {button === "Azure" && (
-                      <img className="w-8" src={azure} alt="Azure" />
+                      <img className="w-7" src={azure} alt="Azure" />
                     )}
                     {button === "GCP" && (
-                      <img className="w-8" src={gcp} alt="GCP" />
+                      <img className="w-7" src={gcp} alt="GCP" />
                     )}
                   </motion.button>
                 ))}
