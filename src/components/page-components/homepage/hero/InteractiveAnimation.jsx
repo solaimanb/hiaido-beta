@@ -58,7 +58,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
-    }, 6100);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [shuffledTexts]);
@@ -157,8 +157,8 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="rotate-45"
-                  width="26px"
-                  height="26px"
+                  width="28px"
+                  height="28px"
                 >
                   <rect
                     x="10"
