@@ -1,30 +1,31 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
-
+import "./spinner.css";
 import { interactiveAnimationV5 } from "../../../../assets";
 
-import textArrays from "./TextArrays";
-
-import { motion } from "framer-motion";
-import "./spinner.css";
+// Animation Text Array Imports:
+import DefaultTextArrays from "./DefaultTextArrays";
+import { AwsTexts, AzureTexts, GcpTexts } from "./index";
 
 const buttons = ["Aws", "Azure", "GCP"];
 
 const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeContent, setActiveContent] = useState("");
   const [showExample, setShowExample] = useState(false);
+  const [textArrays, setTextArrays] = useState(DefaultTextArrays);
 
   //==================================
   // Text Animation Mapping Functions:
   //==================================
   const textMapping = {
-    Create: textArrays?.CreateTexts,
-    Describe: textArrays?.DescribeTexts,
-    Update: textArrays?.UpdateTexts,
-    List: textArrays?.ListTexts,
-    Delete: textArrays?.DeleteTexts,
-    default: textArrays?.GeneralTexts,
+    Create: textArrays?.Create,
+    Describe: textArrays?.Describe,
+    Update: textArrays?.Update,
+    List: textArrays?.List,
+    Delete: textArrays?.Delete,
+    default: textArrays?.General,
   };
 
   const activeTexts = textMapping[activeContent] || textMapping["default"];
@@ -182,9 +183,26 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1.3, duration: 0.5 + index * 0.5 }}
-                    onClick={() =>
-                      setActiveButton(activeButton === button ? null : button)
-                    }
+                    // onClick={() => {
+                    //   setActiveButton(activeButton === button ? null : button);
+                    //   console.log(button);
+                    // }}
+                    onClick={() => {
+                      setActiveButton(activeButton === button ? null : button);
+                      switch (button) {
+                        case "Aws":
+                          setTextArrays(AwsTexts);
+                          break;
+                        case "Azure":
+                          setTextArrays(AzureTexts);
+                          break;
+                        case "GCP":
+                          setTextArrays(GcpTexts);
+                          break;
+                        default:
+                          setTextArrays(DefaultTextArrays);
+                      }
+                    }}
                   >
                     {button}
                   </motion.button>

@@ -1,0 +1,64 @@
+{
+  "General": [
+    "How can I set up a new Google Cloud Platform (GCP) project?",
+    "What are the core services offered by Google Cloud, and how can they benefit my business?",
+    "How does Google Cloud differ from other cloud providers like AWS and Azure?",
+    "What options does Google Cloud provide for data storage and management?",
+    "How can I ensure the security and compliance of my applications and data on Google Cloud?",
+    "What tools does Google Cloud offer for monitoring and optimizing resource usage and costs?",
+    "How does Google Cloud support hybrid and multi-cloud architectures?",
+    "What are the best practices for deploying and managing applications on Google Cloud?",
+    "How can I integrate Google Cloud services with my existing infrastructure and tools?",
+    "What support options are available for businesses using Google Cloud, and how can I access them?"
+  ],
+  "Create": [
+    "Launch a virtual machine instance (VM) in Google Compute Engine (GCE).",
+    "Deploy a containerized application to Google Kubernetes Engine (GKE).",
+    "Create a Cloud Storage bucket to store and manage objects.",
+    "Set up a Cloud SQL instance for hosting relational databases.",
+    "Configure Cloud Pub/Sub for asynchronous messaging between applications.",
+    "Implement Cloud Functions to run serverless code in response to events.",
+    "Create and configure a VPC network with subnets and firewall rules.",
+    "Set up Cloud CDN to deliver content to users with lower latency.",
+    "Set up Cloud DNS to manage domain names and route traffic to GCP resources.",
+    "Deploy a Cloud Spanner database for globally consistent, scalable, and relational data.",
+    "Deploy a Cloud Dataflow pipeline for real-time stream and batch data processing.",
+    "Use BigQuery to analyze large datasets and gain insights with SQL queries.",
+    "Implement Cloud Dataproc for managed Apache Spark and Hadoop clusters.",
+    "Configure Cloud Armor for web application firewall (WAF) and DDoS protection.",
+    "Deploy an AI Platform model for machine learning predictions and inference."
+  ],
+  "Describe": [
+    "Configure a VPC network with subnets and firewall rules.",
+    "Use Cloud IAM to manage access control and permissions for resources.",
+    "Monitor application performance with Google Cloud Monitoring and Logging.",
+    "Analyze trends, identify optimization opportunities, and make data-driven decisions for your cloud strategy.",
+    "Implement Cloud CDN to deliver content to users with lower latency.",
+    "Set up Cloud DNS to manage domain names and route traffic to GCP resources.",
+    "Create a Cloud Spanner database for globally consistent, scalable, and relational data.",
+    "Deploy a Cloud Dataflow pipeline for real-time stream and batch data processing.",
+    "Use BigQuery to analyze large datasets and gain insights with SQL queries.",
+    "Implement Cloud Dataproc for managed Apache Spark and Hadoop clusters."
+  ],
+  "Update": [
+    "Set up automatic scaling for an App Engine application to handle varying traffic.",
+    "Configure Cloud Armor for web application firewall (WAF) and DDoS protection.",
+    "Implement Cloud KMS for key management and encryption of data at rest.",
+    "Use Cloud Memorystore for Redis for fully managed in-memory data storage.",
+    "Deploy Cloud VPN to establish secure connections between on-premises networks and GCP."
+  ],
+  "List": [
+    "Set up Cloud Storage Nearline or Coldline for cost-effective data archiving.",
+    "Use Cloud Monitoring Metrics Explorer to create custom dashboards and alerts.",
+    "Set up Cloud Scheduler to automate the execution of tasks at specified intervals.",
+    "Use Cloud Tasks for managing and executing background workloads asynchronously.",
+    "Use Cloud Logging for centralized logging and analysis of application and system logs."
+  ],
+  "Delete": [
+    "Delete a virtual machine instance (VM) in Google Compute Engine (GCE).",
+    "Delete a containerized application deployed to Google Kubernetes Engine (GKE).",
+    "Delete a Cloud Storage bucket along with its contents.",
+    "Delete a Cloud SQL instance and its associated databases.",
+    "Delete a Cloud Pub/Sub topic or subscription."
+  ]
+}

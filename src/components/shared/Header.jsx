@@ -32,8 +32,6 @@ const Header = () => {
     }
   }, []);
 
-  console.log(user);
-
   const toggleNavigation = () => {
     setOpenNavigation((prevState) => !prevState);
 
@@ -87,12 +85,12 @@ const Header = () => {
       `}
     >
       <div className="container flex items-center justify-between w-full px-0">
-        <div className="gap-x-10 z-50 flex items-center">
-          <NavLink className="w-fit block" to="/">
+        <div className="z-50 flex items-center gap-x-10">
+          <NavLink className="block w-fit" to="/">
             <img src={hiaido} alt="hiaido" className="md:w-48 w-28" />
           </NavLink>
 
-          <nav className="lg:block hidden">
+          <nav className="hidden lg:block">
             <div className="flex">
               {navItems.map((item, index) => (
                 <NavLink
@@ -107,18 +105,18 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className=" flex items-center justify-center gap-8 px-5">
+        <div className="flex items-center justify-center gap-8 px-5 ">
           {user ? (
             <Link to={"/chat"}>
               <AvatarIcon
                 width={26}
                 height={26}
                 src={user.avatarUrl}
-                className="lg:block hidden text-orange-500"
+                className="hidden text-orange-500 lg:block"
               />
             </Link>
           ) : (
-            <AnimatedBtn to={"/login"} className="lg:flex hidden font-semibold">
+            <AnimatedBtn to={"/login"} className="hidden font-semibold lg:flex">
               Sign In
             </AnimatedBtn>
           )}
@@ -145,11 +143,11 @@ const Header = () => {
         <div className="p-2">
           {/* Brand Logo */}
           <div className="flex items-center justify-between">
-            <NavLink className="xl:mr-8 w-fit block" to="/">
-              <img src={hiaido} alt="hiaido" className="md:w-40 w-24" />
+            <NavLink className="block xl:mr-8 w-fit" to="/">
+              <img src={hiaido} alt="hiaido" className="w-24 md:w-40" />
             </NavLink>
 
-            <button className="lg:hidden ml-auto" onClick={toggleNavigation}>
+            <button className="ml-auto lg:hidden" onClick={toggleNavigation}>
               <MenuSvg openNavigation={openNavigation} />
             </button>
           </div>
@@ -184,7 +182,7 @@ const Header = () => {
         <div className="space-y-2">
           <div className="horizon-bar opacity-30 h-[1px] bg-orange-400" />
 
-          <p className="lg:block text-white/80 text-xs font-semibold">
+          <p className="text-xs font-semibold lg:block text-white/80">
             © {new Date().getFullYear()} HIAIDO All rights reserved.
           </p>
         </div>
