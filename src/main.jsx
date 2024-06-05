@@ -6,6 +6,7 @@ import "./index.css";
 import { StoreProvider } from "./store/Store.jsx";
 import { Theme, ThemePanel } from "@radix-ui/themes";
 import { Authenticator, View } from "@aws-amplify/ui-react";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -13,10 +14,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <StoreProvider>
         <Authenticator.Provider>
           <View>
-            <Theme accentColor="blue" appearance="dark" className="h-screen">
-              <App />
-              {/* <ThemePanel /> */}
-            </Theme>
+            <ThemeProvider>
+              <Theme accentColor="blue" className="h-screen">
+                <App />
+                {/* <ThemePanel /> */}
+              </Theme>
+            </ThemeProvider>
           </View>
         </Authenticator.Provider>
       </StoreProvider>

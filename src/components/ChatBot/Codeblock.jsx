@@ -42,10 +42,10 @@ const Codeblock = ({ code, language, theme }) => {
       style={{ fontFamily: "monospace" }}
     >
       <div className="flex bg-neutral-900 rounded-t-md justify-between w-[720px] items-center p-2 px-4">
-        <div className="text-xs">{language}</div>
+        <div className="text-xs dark:text-neutral-50 text-neutral-50">{language}</div>
         <div className="">
           <CopyIcon
-            className="cursor-pointer"
+            className="cursor-pointer text-neutral-100"
             onClick={async () => {
               await copyContent(code);
             }}

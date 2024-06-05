@@ -1,5 +1,5 @@
 import { useAnimationControls } from "framer-motion";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   AtSymbolIcon,
   ChatBubbleLeftRightIcon,
@@ -23,6 +23,7 @@ import { Avatar, Flex, Text } from "@radix-ui/themes";
 import logo from "/hiaido-logo.png";
 import * as Menubar from "@radix-ui/react-menubar";
 import { NavLink } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 
 export const navbarData = [
   { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
@@ -75,21 +76,90 @@ const labelTransitions = {
   },
 };
 
-const Sidebar = () => {
-  const [activeTabIndex, setActiveTabIndex] = useState(1);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  console.log("sidebar");
-
+const ToggleTheme = ({ isCollapsed }) => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  console.log(theme);
+  const [activeTabIndex, setActiveTabIndex] = useState(
+    theme === "dark" ? 1 : 0
+  );
   const data = [
     { label: "Light", icon: <SunIcon className="w-5 " /> },
     { label: "Dark", icon: <MoonIcon className="w-5 " /> },
   ];
+
+  return (
+    <Menubar.Root
+      className={`flex dark:bg-neutral-900 bg-cyan-100 w-fit ${
+        isCollapsed ? "m-[6px]" : "p-[3px]"
+      } rounded-full shadow-blackA4 space-x-3 justify-start`}
+    >
+      {data.map((item, i) => {
+        return (
+          <AnimatePresence key={i}>
+            {(isCollapsed && i != activeTabIndex) || (
+              <motion.div {...labelTransitions}>
+                <Menubar.Menu key={item.id || i}>
+                  <Menubar.Trigger
+                    onClick={() => {
+                      if (activeTabIndex != i) {
+                        toggleTheme();
+                        setActiveTabIndex(i);
+                      }
+                    }}
+                    className={`${
+                      isCollapsed ? "p-[7px]" : "p-[8px]"
+                    } outline-none select-none font-medium leading-none rounded-full relative ${
+                      i == activeTabIndex ? "" : "dark:hover:bg-neutral-600/35 hover:bg-black/30"
+                    }`}
+                    style={{
+                      WebkitTapHighlightColor: "transparent",
+                    }}
+                  >
+                    <div className="flex items-center justify-center">
+                      {item.icon}
+                      <AnimatePresence>
+                        {isCollapsed || (
+                          <motion.span
+                            className="text-sm ml-2"
+                            {...labelTransitions}
+                          >
+                            {item.label}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                      {activeTabIndex == i && (
+                        <motion.span
+                          layoutId="theme-bubble"
+                          className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-full"
+                          transition={{
+                            type: "spring",
+                            bounce: 0.1,
+                            duration: 0.6,
+                          }}
+                        />
+                      )}
+                    </div>
+                  </Menubar.Trigger>
+                </Menubar.Menu>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        );
+      })}
+    </Menubar.Root>
+  );
+};
+
+const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  console.log("sidebar");
+
   const sliceIndex = 9;
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        className={`bg-neutral-800 relative h-full rounded-lg text-[13px] flex flex-col ${
+        className={`dark:bg-neutral-800 bg-neutral-950 relative h-full text-[13px] flex flex-col ${
           isCollapsed ? "p-1 py-3 " : "p-3"
         }`}
         variants={{
@@ -112,11 +182,11 @@ const Sidebar = () => {
             alt="Brand Logo"
           />
           <AnimatePresence>
-            {isCollapsed || <motion.h1 {...labelTransitions}>HiAiDo</motion.h1>}
+            {isCollapsed || <motion.h1 className="dark:text-neutral-100 text-neutral-50" {...labelTransitions}>HiAiDo</motion.h1>}
           </AnimatePresence>
         </div>
-        <div className="divide-neutral-600 h-full">
-          <div className="text-neutral-400 my-2 space-y-[5px]">
+        <div className="dark:divide-neutral-600 divide-neutral-600 h-full">
+          <div className="dark:text-neutral-500 text-neutral-400 my-2 space-y-[5px]">
             <motion.div className="text-neutral-500 my-2 h-3 text-xs font-semibold">
               <AnimatePresence>
                 {isCollapsed || (
@@ -129,9 +199,9 @@ const Sidebar = () => {
               isCollapsed={isCollapsed}
             />
           </div>
-          <div className="h-[1px] bg-neutral-700/75 my-2"></div>
+          <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800 my-2"></div>
           <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
-            <div className="text-neutral-500 my-2 h-3 text-xs font-semibold">
+            <div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
               <AnimatePresence>
                 {isCollapsed || (
                   <motion.span {...labelTransitions}>SUPPORT</motion.span>
@@ -150,67 +220,9 @@ const Sidebar = () => {
             // isCollapsed ? (
             //   <div className="">{data[parseInt(activeTabIndex)].icon}</div>
             // ) :
-            <Menubar.Root
-              className={`flex bg-neutral-900 w-fit ${
-                isCollapsed ? "m-[6px]" : "p-[6px]"
-              } rounded-full shadow-blackA4 space-x-3 justify-start`}
-            >
-              {data.map((item, i) => {
-                return (
-                  <AnimatePresence key={i}>
-                    {(isCollapsed && i != activeTabIndex) || (
-                      <motion.div {...labelTransitions}>
-                        <Menubar.Menu key={item.id || i}>
-                          <Menubar.Trigger
-                            onClick={() => {
-                              setActiveTabIndex(i);
-                            }}
-                            className={`${
-                              isCollapsed ? "p-[6px]" : "p-[7px]"
-                            } outline-none select-none font-medium leading-none rounded-full relative ${
-                              i == activeTabIndex
-                                ? ""
-                                : "hover:bg-neutral-600/35"
-                            }`}
-                            style={{
-                              WebkitTapHighlightColor: "transparent",
-                            }}
-                          >
-                            <div className="flex items-center justify-center">
-                              {item.icon}
-                              <AnimatePresence>
-                                {isCollapsed || (
-                                  <motion.span
-                                    className="text-sm ml-2"
-                                    {...labelTransitions}
-                                  >
-                                    {item.label}
-                                  </motion.span>
-                                )}
-                              </AnimatePresence>
-                              {activeTabIndex == i && (
-                                <motion.span
-                                  layoutId="theme-bubble"
-                                  className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-full"
-                                  transition={{
-                                    type: "spring",
-                                    bounce: 0.1,
-                                    duration: 0.6,
-                                  }}
-                                />
-                              )}
-                            </div>
-                          </Menubar.Trigger>
-                        </Menubar.Menu>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                );
-              })}
-            </Menubar.Root>
           }
-
-          <div className="h-[1px] bg-neutral-600"></div>
+          <ToggleTheme isCollapsed={isCollapsed} />
+          <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800"></div>
           <div
             align="center"
             className="!border-t-[1px] !border-neutral-600 pt-5 pb-1 flex w-full space-x-3"
@@ -219,10 +231,14 @@ const Sidebar = () => {
             <AnimatePresence>
               {isCollapsed || (
                 <motion.div className="max-w-[70%]" {...labelTransitions}>
-                  <Text truncate size={"2"}>
+                  <Text className="text-white dark:text-neutral-100" truncate size={"2"}>
                     Nadine Schtakieff
                   </Text>
-                  <Text truncate size={"1"} className="text-neutral-500 text-sm">
+                  <Text
+                    truncate
+                    size={"1"}
+                    className="text-neutral-500 text-sm"
+                  >
                     Frontend Developer
                   </Text>
                 </motion.div>
@@ -232,12 +248,12 @@ const Sidebar = () => {
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute top-16 -right-4 bg-neutral-700 p-2 rounded-full"
+          className="absolute top-16 -right-4 dark:bg-neutral-700 bg-white p-2 rounded-full stroke-neutral-800 dark:stroke-white z-20 outline-none shadow-neutral-700 shadow-md dark:shadow-none"
         >
           {isCollapsed ? (
-            <ChevronRightIcon className="w-4 h-4" />
+            <ChevronRightIcon className="size-5" />
           ) : (
-            <ChevronLeftIcon className="w-4 h-4" />
+            <ChevronLeftIcon className="size-5" />
           )}
         </button>
       </motion.div>
@@ -259,8 +275,8 @@ const NavLinksGroup = ({ groupData, isCollapsed }) => {
                 isCollapsed || "w-full"
               } outline-none p-[1px] px-2 ${
                 isActive
-                  ? "bg-neutral-600 text-white"
-                  : "hover:bg-neutral-700 duration-300 hover:text-neutral-300"
+                  ? "dark:bg-neutral-600 bg-neutral-200 dark:text-white text-black"
+                  : "dark:hover:bg-neutral-700 hover:bg-neutral-300 duration-300 dark:hover:text-neutral-300 hover:text-neutral-800"
               }`
             }
           >

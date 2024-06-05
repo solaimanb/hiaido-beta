@@ -2,10 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap");
 
 @tailwind base;
-/* @import "@radix-ui/themes"; */
 @tailwind components;
 @tailwind utilities;
-/* @import '@radix-ui/themes/styles.css'; */
 
 .animated-background {
   background-size: 400%;

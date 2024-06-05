@@ -42,7 +42,7 @@ export default function Dashboard() {
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       </div>
-      <div className="pr-15 border-l-[1px] border-neutral-700/85 pl-10">
+      <div className="pr-15 border-l-[1px] dark:border-neutral-700/85 border-neutral-400 pl-10">
         <DashboardSection />
       </div>
     </div>
@@ -164,12 +164,12 @@ const SkySection = () => {
                 size={"2"}
                 checked={i == idx}
               />
-              <img src={item.src} alt="" className="rounded-xl w-full" />
+              <img src={item.src} alt="" className="rounded-xl w-full shadow-md shadow-neutral-400" />
             </div>
           );
         })}
       </div>
-      <div className="h-[1px] bg-neutral-700 w-full"></div>
+      <div className="h-[1px] dark:bg-neutral-700 bg-neutral-400 w-full"></div>
       <div className="w-full">
         <form
           className="relative py-5 grid grid-cols-2 gap-3"
@@ -193,13 +193,13 @@ const SkySection = () => {
                 <>
                   <input
                     name={field.name}
-                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 dark:bg-neutral-700/50 border-[1px] border-neutral-300 dark:border-neutral-600 shadow-md dark:shadow-none"
                     placeholder="First name"
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3 text-sm">
+                  <div className="dark:text-red-500 text-red-600 h-3 text-sm">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -221,7 +221,7 @@ const SkySection = () => {
                 <>
                   <input
                     name={field.name}
-                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 dark:bg-neutral-700/50 border-[1px] border-neutral-300 dark:border-neutral-600 shadow-md dark:shadow-none"
                     placeholder="Last name"
                     value={field.state.value}
                     onBlur={field.handleBlur}
@@ -249,7 +249,7 @@ const SkySection = () => {
                 <>
                   <input
                     name={field.name}
-                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 bg-neutral-700/50"
+                    className="appearance-none outline-none focus:ring-offset-green-700 w-full rounded-md p-3 dark:bg-neutral-700/50 border-[1px] border-neutral-300 dark:border-neutral-600 shadow-md dark:shadow-none"
                     placeholder="Email"
                     value={field.state.value}
                     onBlur={field.handleBlur}
@@ -265,7 +265,7 @@ const SkySection = () => {
           </div>
           <div className="flex relative justify-end w-full col-span-2">
             <button
-              className={`bg-cyan-100 z-[100] text-black p-3 px-5 rounded-lg space-x-3 w-fit flex items-center disabled:cursor-not-allowed absolute disabled:bg-cyan-100/50 hover:scale-105 duration-200 ease-in delay-75`}
+              className={`dark:bg-cyan-100 bg-cyan-200 z-[100] text-black p-3 px-5 rounded-lg space-x-3 w-fit flex items-center disabled:cursor-not-allowed absolute disabled:bg-cyan-100/50 hover:scale-105 duration-200 ease-in delay-75`}
               disabled={isLoading}
               stype="submit"
             >
