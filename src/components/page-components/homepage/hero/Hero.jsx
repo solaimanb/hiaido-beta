@@ -155,15 +155,15 @@ const Hero = () => {
           className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12"
         >
           <div className="space-y-4">
-            <div className="lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10 flex flex-col px-2 space-y-8 text-3xl font-bold">
-              <div className="text-white/90 inline-block">
+            <div className="flex flex-col px-2 space-y-8 text-3xl font-bold lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10">
+              <div className="inline-block text-white/90">
                 The Next Generation
                 <br />
                 <span className="relative inline-block">
                   <AnimatedText text="AI Powered" />
                   <img
                     src={curve}
-                    className="top-full absolute left-0 w-full"
+                    className="absolute left-0 w-full top-full"
                     width={624}
                     height={28}
                     alt=""
@@ -176,7 +176,7 @@ const Hero = () => {
               </span>
             </div>
 
-            <div className="text-white/80 md:text-xl xl:text-2xl w-full mx-auto space-y-2 text-base">
+            <div className="w-full mx-auto space-y-2 text-base text-white/80 md:text-xl xl:text-2xl">
               <p className="secondaryText">
                 HIAIDO is your intelligent cloud assistant, enabling you to
                 effortlessly manage your
@@ -189,10 +189,10 @@ const Hero = () => {
           {/* Request Demo Form */}
           <form
             onSubmit={handleSubmit}
-            className="text-start flex flex-col items-center mt-10 space-y-4"
+            className="flex flex-col items-center mt-10 space-y-4 text-start"
           >
             <p
-              className="type1 lg:text-2xl md:text-sm text-xs font-bold"
+              className="text-xs font-bold type1 lg:text-2xl md:text-sm"
               onAnimationEnd={handleAnimationEnd}
             >
               &quot;Welcome to the future of automation with HIAIDO&quot;
@@ -201,11 +201,11 @@ const Hero = () => {
             <div
               value={data.request_email}
               name="request_email"
-              className="md:flex-row flex flex-col items-center justify-center gap-4"
+              className="flex flex-col items-center justify-center gap-4 md:flex-row"
             >
               <input
                 onChange={(e) => setData(e.target.value.replace(/\s/g, " "))}
-                className="input-placeholder decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80 py-2 pl-6 font-semibold rounded-full"
+                className="py-2 pl-6 font-semibold rounded-full input-placeholder decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80"
                 type="text"
                 placeholder="Enter your email"
               />
@@ -226,7 +226,7 @@ const Hero = () => {
         <Canvas
           events={false}
           camera={{ position: [0, 0, 1] }}
-          className="canvas-container min-h-screen opacity-75 bg-dark/90"
+          className="min-h-screen opacity-75 canvas-container bg-dark/90"
         >
           <mesh>
             <Stars />
