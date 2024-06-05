@@ -1,5 +1,5 @@
 {
-  "GeneralTexts": [
+  "General": [
     "Check the CPU utilization of a specific EC2 instance.",
     "Retrieve the monthly cost breakdown of all resources in an AWS account.",
     "List all available instance types in the us-east-1 region.",
@@ -21,7 +21,7 @@
     "List all DynamoDB tables with provisioned capacity exceeding 80%.",
     "Describe the API Gateway deployment stages for the production environment."
   ],
-  "CreateTexts": [
+  "Create": [
     "Launch a new EC2 instance with Ubuntu 20.04 LTS.",
     "Create an Amazon S3 bucket for storing user-uploaded images in a web application.",
     "Provision an Amazon RDS PostgreSQL database for a new microservices architecture.",
@@ -43,7 +43,7 @@
     "Deploy a containerized application using Amazon ECS with Fargate launch type.",
     "Set up an Amazon Cognito user pool for managing user identities and access control."
   ],
-  "DescribeTexts": [
+  "Describe": [
     "Retrieve details about the hardware specifications of a specific EC2 instance.",
     "Describe the lifecycle policy and versioning configuration of an Amazon S3 bucket.",
     "Get information about the backup retention period and automatic backups of an RDS database instance.",
@@ -65,7 +65,7 @@
     "Get information about the task definitions, services, and containers in an ECS cluster.",
     "Describe the authentication settings, user pools, and identity providers in a Cognito user pool."
   ],
-  "UpdateTexts": [
+  "Update": [
     "Modify the instance type and storage configuration of an existing EC2 instance.",
     "Update the access control list (ACL) and bucket policy of an S3 bucket.",
     "Change the database engine version and parameter group settings of an RDS instance.",
@@ -87,7 +87,7 @@
     "Change the task definitions and container configurations of an ECS service.",
     "Modify the authentication settings, user pool policies, and identity providers of a Cognito user pool."
   ],
-  "ListTexts": [
+  "List": [
     "List all running instances in a specific Amazon EC2 region.",
     "Retrieve a list of all S3 buckets owned by the AWS account.",
     "Get a list of all RDS database instances in the account.",
@@ -109,7 +109,7 @@
     "List all ECS services deployed in the production ECS cluster.",
     "Retrieve a list of all Cognito user pools configured in the AWS account."
   ],
-  "DeleteTexts": [
+  "Delete": [
     "Terminate an EC2 instance that is no longer required.",
     "Delete an S3 bucket and all its objects to free up storage space.",
     "Remove an RDS database instance that is no longer in use.",

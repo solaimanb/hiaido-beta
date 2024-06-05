@@ -1,0 +1,74 @@
+{
+  "General": [
+    "How can I set up billing alerts in AWS to monitor my usage and costs?",
+    "What AWS services can I use for machine learning and artificial intelligence?",
+    "How do I configure IAM policies to control access to AWS resources?",
+    "What are the best practices for securing my EC2 instances in AWS?",
+    "How can I optimize the performance of my RDS databases in AWS?",
+    "What AWS services support serverless computing?",
+    "How do I enable logging and monitoring for my AWS resources?",
+    "What AWS services can I use for data analytics and visualization?",
+    "How do I configure auto-scaling for my applications in AWS?",
+    "What are the options for disaster recovery and backup in AWS?"
+  ],
+  "Create": [
+    "Launch an EC2 instance in a specific region with predefined configurations.",
+    "Create an S3 bucket to store and manage objects.",
+    "Set up an RDS database instance for hosting relational databases.",
+    "Deploy a Lambda function to execute serverless code in response to events.",
+    "Create a DynamoDB table for scalable, NoSQL database storage.",
+    "Provision an ECS cluster to run containerized applications.",
+    "Set up an API Gateway for building and managing APIs.",
+    "Create a CloudFormation stack to provision AWS resources using templates.",
+    "Deploy a Redshift cluster for data warehousing and analytics.",
+    "Create a VPC with subnets, route tables, and internet gateways."
+  ],
+  "Describe": [
+    "Describe the configuration details of an EC2 instance, including instance type, security groups, and tags.",
+    "List the objects stored in an S3 bucket along with their metadata.",
+    "Retrieve information about the databases hosted on an RDS instance, including engine type, size, and status.",
+    "Get details about a Lambda function, including function code, runtime, and trigger configuration.",
+    "Describe the schema and provisioned throughput of a DynamoDB table.",
+    "Retrieve information about tasks running in an ECS cluster, including task definitions and container instances.",
+    "Describe the resources configured in an API Gateway, including endpoints, methods, and integrations.",
+    "List the resources provisioned by a CloudFormation stack, including EC2 instances, S3 buckets, and IAM roles.",
+    "Retrieve metadata about tables stored in a Redshift cluster, including distribution style and sort keys.",
+    "Describe the networking configuration of a VPC, including subnets, route tables, and network ACLs."
+  ],
+  "Update": [
+    "Modify the configuration of an existing EC2 instance, such as changing instance type or adding/removing security groups.",
+    "Update the access permissions of an S3 bucket to grant or revoke access to specific users or applications.",
+    "Modify the parameters of an RDS database instance, such as increasing storage capacity or changing the backup retention period.",
+    "Update the code or configuration of a Lambda function to add new functionality or improve performance.",
+    "Adjust the provisioned throughput or capacity settings of a DynamoDB table to accommodate changes in workload.",
+    "Update the task definition or deployment configuration of a task running in an ECS cluster.",
+    "Modify the API configuration in API Gateway to add new endpoints, methods, or integrations.",
+    "Update the resources provisioned by a CloudFormation stack by modifying the template or parameter values.",
+    "Adjust the configuration settings of a Redshift cluster, such as enabling encryption or changing the node type.",
+    "Update the networking configuration of a VPC, such as adding or removing subnets or modifying route table entries."
+  ],
+  "List": [
+    "List all EC2 instances in a specific region along with their instance IDs, instance types, and current status.",
+    "Retrieve a list of S3 buckets owned by the AWS account along with their creation dates and storage usage.",
+    "List all RDS database instances in a region along with their engine types, sizes, and status.",
+    "Get a list of Lambda functions deployed in the AWS account along with their function names and runtimes.",
+    "List all DynamoDB tables in the AWS account along with their table names, provisioned throughput, and storage size.",
+    "Retrieve a list of ECS clusters in a region along with their cluster names and current status.",
+    "List all API configurations in API Gateway along with their API names, endpoints, and deployment stages.",
+    "Get a list of CloudFormation stacks in the AWS account along with their stack names, status, and creation times.",
+    "Retrieve a list of Redshift clusters in a region along with their cluster names, node types, and status.",
+    "List all VPCs in the AWS account along with their VPC IDs, CIDR blocks, and associated subnets."
+  ],
+  "Delete": [
+    "Terminate an EC2 instance and remove it from the AWS account.",
+    "Delete an S3 bucket and permanently remove all objects stored in it.",
+    "Delete an RDS database instance and remove all associated snapshots and backups.",
+    "Remove a Lambda function and delete its code and configuration.",
+    "Delete a DynamoDB table and remove all data stored in it.",
+    "Delete an ECS cluster and remove all tasks and services associated with it.",
+    "Remove an API configuration from API Gateway and delete all associated resources.",
+    "Delete a CloudFormation stack and remove all provisioned resources.",
+    "Delete a Redshift cluster and remove all associated databases and data.",
+    "Remove a VPC and delete all associated subnets, route tables, and network ACLs."
+  ]
+}
