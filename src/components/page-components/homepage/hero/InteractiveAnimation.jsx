@@ -58,7 +58,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
-    }, 5200);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [shuffledTexts]);
