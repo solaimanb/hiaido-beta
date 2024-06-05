@@ -53,13 +53,15 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   //   return arr;
   // }
 
+  const shuffledTexts = [...activeTexts].sort(() => Math.random() - 0.5);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % activeTexts.length);
-    }, 6000);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
+    }, 6100);
 
     return () => clearInterval(interval);
-  }, [activeTexts]);
+  }, [shuffledTexts]);
 
   // AWS, AZURE, GCP Button State:
   const [activeButton, setActiveButton] = useState(null);
@@ -115,7 +117,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 <div className="w-[80%] overflow-hidden text-start">
                   <div className="flex flex-col gap-2 h-14 animation-outlet">
                     <p className="animate-text inner-lines relative text-xs h-14 md:text-lg font-semibold text-[#BBBBBB]">
-                      {activeTexts[currentIndex]}
+                      {shuffledTexts[currentIndex]}
                     </p>
                   </div>
                 </div>
