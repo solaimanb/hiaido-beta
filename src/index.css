@@ -24,7 +24,7 @@
   font-style: normal;
 }
 
-.body {
+html, body {
   background: #040404;
 }
 
