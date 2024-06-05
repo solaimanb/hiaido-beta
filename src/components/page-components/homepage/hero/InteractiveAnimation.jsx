@@ -191,7 +191,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 {buttons.map((button, index) => (
                   <motion.button
                     key={index}
-                    className={`px-4 w-36 rounded flex items-center justify-center transition-all duration-200 ${
+                    className={`px-4 w-15 rounded flex items-center justify-center transition-all duration-200 ${
                       activeButton === button
                         ? "grayscale-0 hover:grayscale-0"
                         : "grayscale hover:grayscale-0"
@@ -199,33 +199,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1.3, duration: 0.5 + index * 0.5 }}
-                    // onClick={() => {
-                    //   setActiveButton(activeButton === button ? null : button);
-                    //   console.log(button);
-                    // }}
-                    // onClick={() => {
-                    //   setActiveButton(activeButton === button ? null : button);
-                    //   switch (button) {
-                    //     case "Aws":
-                    //       setTextArrays(AwsTexts);
-                    //       break;
-                    //     case "Azure":
-                    //       setTextArrays(AzureTexts);
-                    //       break;
-                    //     case "GCP":
-                    //       setTextArrays(GcpTexts);
-                    //       break;
-                    //     default:
-                    //       setTextArrays(DefaultTextArrays);
-                    //   }
-                    // }}
                     onClick={() => {
                       const newActiveButton =
                         activeButton === button ? null : button;
-                      console.log("newActiveButton:", newActiveButton);
-
                       setActiveButton(newActiveButton);
-
                       switch (newActiveButton) {
                         case "Aws":
                           setTextArrays(AwsTexts);
@@ -239,17 +216,16 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                         default:
                           setTextArrays(DefaultTextArrays);
                       }
-                      console.log("textArrays:", textArrays);
                     }}
                   >
                     {button === "Aws" && (
                       <img className="w-8" src={aws} alt="AWS" />
                     )}
                     {button === "Azure" && (
-                      <img className="" src={azure} alt="Azure" />
+                      <img className="w-8" src={azure} alt="Azure" />
                     )}
                     {button === "GCP" && (
-                      <img className="" src={gcp} alt="GCP" />
+                      <img className="w-8" src={gcp} alt="GCP" />
                     )}
                   </motion.button>
                 ))}

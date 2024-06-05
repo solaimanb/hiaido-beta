@@ -81,9 +81,9 @@ import interactiveAnimationV4 from "./gif/Interactive-animation-v4.gif";
 import interactiveAnimationV5 from "./gif/Interactive-animation-v5.gif";
 
 // AWS, Azure, Google Cloud Services Icon's:
-import aws from "./logo/aws.svg"
-import azure from "./logo/microsoft-azure-hiaido.png"
-import gcp from "./logo/google-cloud-hiaido.png"
+import aws from "./icons/aws.svg"
+import azure from "./icons/azure.svg"
+import gcp from "./icons/google-cloud.svg"
 
 export {
   hiaido,
