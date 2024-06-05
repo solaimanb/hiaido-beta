@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
-import textAnimation from "../../../../assets/gif/Interactive-animation-v5.gif";
+
+import { interactiveAnimationV5 } from "../../../../assets";
+
 import textArrays from "./TextArrays";
 
 import { motion } from "framer-motion";
 import "./spinner.css";
+
+const buttons = ["Aws", "Azure", "GCP"];
 
 const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeContent, setActiveContent] = useState("");
@@ -47,6 +51,9 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
     return arr; // Return the shuffled copy of the array
   }
 
+  // AWS, AZURE, GCP Button State:
+  const [activeButton, setActiveButton] = useState(null);
+
   return (
     <div className="flex items-center justify-center w-full h-full">
       {showSecondAnimation && (
@@ -54,9 +61,9 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
           {/* HiAiDo Process Animation */}
           {!showExample && (
             <img
-              src={textAnimation}
+              src={interactiveAnimationV5}
               alt="hiaido-process"
-              className="w-full mx-auto object-cover"
+              className="object-cover w-full mx-auto"
               onContextMenu={(e) => e.preventDefault()}
             />
           )}
@@ -93,7 +100,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               <div className="flex w-full gap-2">
                 {/* Self-Scroll Animation */}
                 <div className="w-[80%] overflow-hidden text-start h-14">
-                  <div className="animation-outlet flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 animation-outlet">
                     {shuffleArray(activeTexts)?.map((text, index) => (
                       <p
                         key={index}
@@ -121,60 +128,24 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
           )}
 
           {/* See Examples Trigger */}
-          <div className="h-10 w-full">
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 16 }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className={`flex items-center w-full h-10 gap-6 ${
+              showExample ? "mt-6" : ""
+            }`}
+          >
+            <button
               onClick={() => {
                 setShowExample(!showExample);
+                setActiveButton(null);
               }}
-              className="flex items-center px-2 mt-4 text-sm font-semibold transition-all duration-200 gap-3 rounded-md text-orange-400/90"
+              className="flex items-center gap-3 px-2 text-xs font-semibold transition-all duration-200 text-start md:text-sm text-orange-400/90"
             >
               {!showExample ? (
                 <PlayIcon size={20} />
               ) : (
-                // <svg
-                //   xmlns="http://www.w3.org/2000/svg"
-                //   xmlns:xlink="http://www.w3.org/1999/xlink"
-                //   x="0px"
-                //   y="0px"
-                //   viewBox="0 0 100 100"
-                //   enable-background="new 0 0 0 0"
-                //   xml:space="preserve"
-                //   className="h-8 w-10"
-                // >
-                //   <circle fill="#F97316" stroke="none" cx="6" cy="50" r="6">
-                //     <animateTransform
-                //       attributeName="transform"
-                //       dur="1s"
-                //       type="translate"
-                //       values="0 15 ; 0 -15; 0 15"
-                //       repeatCount="indefinite"
-                //       begin="0.1"
-                //     />
-                //   </circle>
-                //   <circle fill="#F97316" stroke="none" cx="30" cy="50" r="6">
-                //     <animateTransform
-                //       attributeName="transform"
-                //       dur="1s"
-                //       type="translate"
-                //       values="0 10 ; 0 -10; 0 10"
-                //       repeatCount="indefinite"
-                //       begin="0.2"
-                //     />
-                //   </circle>
-                //   <circle fill="#F97316" stroke="none" cx="54" cy="50" r="6">
-                //     <animateTransform
-                //       attributeName="transform"
-                //       dur="1s"
-                //       type="translate"
-                //       values="0 5 ; 0 -5; 0 5"
-                //       repeatCount="indefinite"
-                //       begin="0.3"
-                //     />
-                //   </circle>
-                // </svg>
                 <div className="spinner-wrapper">
                   <div className="spinner">
                     <div className="sk-folding-cube">
@@ -187,8 +158,37 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 </div>
               )}
               {showExample ? "Interactive mode : Active" : "See Examples"}
-            </motion.button>
-          </div>
+            </button>
+
+            {/* AWS, AZURE, GCP Triggers */}
+            {showExample && (
+              <motion.div
+                className={`flex gap-2 text-sm font-semibold `}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.5 }}
+              >
+                {buttons.map((button, index) => (
+                  <motion.button
+                    key={index}
+                    className={`px-4 py-[1px] rounded ${
+                      activeButton === button
+                        ? "border-2 border-[#093eb1]"
+                        : "border-2 border-[#093eb1] bg-[#093eb1]"
+                    }`}
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1.0 + index * 0.5 }}
+                    onClick={() =>
+                      setActiveButton(activeButton === button ? null : button)
+                    }
+                  >
+                    {button}
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </motion.div>
         </div>
       )}
     </div>
