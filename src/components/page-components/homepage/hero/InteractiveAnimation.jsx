@@ -56,7 +56,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % activeTexts.length);
-    }, 5200);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [activeTexts]);

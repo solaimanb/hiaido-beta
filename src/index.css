@@ -549,7 +549,7 @@ p {
 } */
 
 .animate-text {
-  animation: slideInOut 5s infinite;
+  animation: slideInOut 6s infinite;
 }
 
 @keyframes slideInOut {
