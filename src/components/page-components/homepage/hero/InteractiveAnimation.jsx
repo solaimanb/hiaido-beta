@@ -131,7 +131,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1 }}
+            transition={{ duration: 0.5, delay: 16 }}
             className={`flex items-center w-full h-10 gap-6 ${
               showExample ? "mt-6" : ""
             }`}
