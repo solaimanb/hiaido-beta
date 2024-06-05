@@ -147,20 +147,34 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 setActiveContent(null);
                 setActiveButton(null);
               }}
-              className="flex items-center gap-3 px-2 text-xs font-semibold text-orange-500 transition-all duration-200 text-start md:text-sm"
+              className="flex items-center px-2 text-xs font-semibold text-orange-500 transition-all duration-200 text-start md:text-sm"
             >
               {!showExample ? (
                 <PlayIcon size={20} />
               ) : (
-                <div className="spinner-wrapper">
-                  <div className="spinner">
-                    <div className="sk-folding-cube">
-                      <div className="sk-cube1 sk-cube"></div>
-                      <div className="sk-cube2 sk-cube"></div>
-                      <div className="sk-cube4 sk-cube"></div>
-                      <div className="sk-cube3 sk-cube"></div>
-                    </div>
-                  </div>
+                // <div className="spinner-wrapper">
+                //   <div className="spinner">
+                //     <div className="sk-folding-cube">
+                //       <div className="sk-cube1 sk-cube"></div>
+                //       <div className="sk-cube2 sk-cube"></div>
+                //       <div className="sk-cube4 sk-cube"></div>
+                //       <div className="sk-cube3 sk-cube"></div>
+                //     </div>
+                //   </div>
+                // </div>
+                <div className="spinner">
+                  <div className="bar1"></div>
+                  <div className="bar2"></div>
+                  <div className="bar3"></div>
+                  <div className="bar4"></div>
+                  <div className="bar5"></div>
+                  <div className="bar6"></div>
+                  <div className="bar7"></div>
+                  <div className="bar8"></div>
+                  <div className="bar9"></div>
+                  <div className="bar10"></div>
+                  <div className="bar11"></div>
+                  <div className="bar12"></div>
                 </div>
               )}
               {showExample ? "Interactive mode : Active" : "See Examples"}
@@ -177,7 +191,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 {buttons.map((button, index) => (
                   <motion.button
                     key={index}
-                    className={`px-4 w-36 rounded flex items-center justify-center transition-all duration-200 ${
+                    className={`px-4 w-15 rounded flex items-center justify-center transition-all duration-200 ${
                       activeButton === button
                         ? "grayscale-0 hover:grayscale-0"
                         : "grayscale hover:grayscale-0"
@@ -185,33 +199,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1.3, duration: 0.5 + index * 0.5 }}
-                    // onClick={() => {
-                    //   setActiveButton(activeButton === button ? null : button);
-                    //   console.log(button);
-                    // }}
-                    // onClick={() => {
-                    //   setActiveButton(activeButton === button ? null : button);
-                    //   switch (button) {
-                    //     case "Aws":
-                    //       setTextArrays(AwsTexts);
-                    //       break;
-                    //     case "Azure":
-                    //       setTextArrays(AzureTexts);
-                    //       break;
-                    //     case "GCP":
-                    //       setTextArrays(GcpTexts);
-                    //       break;
-                    //     default:
-                    //       setTextArrays(DefaultTextArrays);
-                    //   }
-                    // }}
                     onClick={() => {
                       const newActiveButton =
                         activeButton === button ? null : button;
-                      console.log("newActiveButton:", newActiveButton);
-
                       setActiveButton(newActiveButton);
-
                       switch (newActiveButton) {
                         case "Aws":
                           setTextArrays(AwsTexts);
@@ -225,17 +216,16 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                         default:
                           setTextArrays(DefaultTextArrays);
                       }
-                      console.log("textArrays:", textArrays);
                     }}
                   >
                     {button === "Aws" && (
                       <img className="w-8" src={aws} alt="AWS" />
                     )}
                     {button === "Azure" && (
-                      <img className="" src={azure} alt="Azure" />
+                      <img className="w-8" src={azure} alt="Azure" />
                     )}
                     {button === "GCP" && (
-                      <img className="" src={gcp} alt="GCP" />
+                      <img className="w-8" src={gcp} alt="GCP" />
                     )}
                   </motion.button>
                 ))}
