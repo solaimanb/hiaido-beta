@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import "./spinner.css";
