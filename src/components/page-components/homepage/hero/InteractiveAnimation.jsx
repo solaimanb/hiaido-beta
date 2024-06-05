@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import "./spinner.css";
@@ -188,9 +188,31 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     //   setActiveButton(activeButton === button ? null : button);
                     //   console.log(button);
                     // }}
+                    // onClick={() => {
+                    //   setActiveButton(activeButton === button ? null : button);
+                    //   switch (button) {
+                    //     case "Aws":
+                    //       setTextArrays(AwsTexts);
+                    //       break;
+                    //     case "Azure":
+                    //       setTextArrays(AzureTexts);
+                    //       break;
+                    //     case "GCP":
+                    //       setTextArrays(GcpTexts);
+                    //       break;
+                    //     default:
+                    //       setTextArrays(DefaultTextArrays);
+                    //   }
+                    // }}
                     onClick={() => {
-                      setActiveButton(activeButton === button ? null : button);
-                      switch (button) {
+                      const newActiveButton =
+                        activeButton === button ? null : button;
+                      console.log("newActiveButton:", newActiveButton);
+
+                      setActiveButton(newActiveButton);
+                      setActiveContent(null);
+
+                      switch (newActiveButton) {
                         case "Aws":
                           setTextArrays(AwsTexts);
                           break;
@@ -203,6 +225,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                         default:
                           setTextArrays(DefaultTextArrays);
                       }
+                      console.log("textArrays:", textArrays);
                     }}
                   >
                     {button}
