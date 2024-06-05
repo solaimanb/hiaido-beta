@@ -567,3 +567,11 @@ p {
   }
 }
 
+/* Button Gray */
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.grayscale-0 {
+  filter: grayscale(0%);
+}

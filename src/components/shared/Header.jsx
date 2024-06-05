@@ -117,7 +117,7 @@ const Header = () => {
             </Link>
           ) : (
             <AnimatedBtn to={"/login"} className="hidden font-semibold lg:flex">
-              Sign In
+              Login
             </AnimatedBtn>
           )}
 

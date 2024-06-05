@@ -56,58 +56,59 @@ const Header = () => {
             openNavigation ? "flex" : "hidden"
           } fixed top-[7rem] left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
-          <div className="md:hidden z-2 lg:flex-row relative flex flex-col items-center justify-center m-auto">
+          <div className="relative flex flex-col items-center justify-center m-auto md:hidden z-2 lg:flex-row">
             {navigation.map((item) => (
               <Link
-                key={item.id}
-                to={item.url}
+                key={item?.id}
+                to={item?.url}
                 onClick={handleClick}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
-                  item.onlyMobile ? "lg:hidden" : ""
+                  item?.onlyMobile ? "lg:hidden" : ""
                 } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semibold ${
-                  item.url === pathname.hash
+                  item?.url === pathname.hash
                     ? "z-2 lg:text-n-1"
                     : "lg:text-n-1/50"
                 } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
               >
-                {item.title}
+                {item?.title}
               </Link>
             ))}
           </div>
 
           <HamburgerMenu />
         </nav>
+
         <Link
           to="/chat"
-          className="button text-n-1/50 hover:text-n-1 lg:block hidden mr-8 transition-colors"
+          className="hidden mr-8 transition-colors button text-n-1/50 hover:text-n-1 lg:block"
         >
           HiAiDo AI
         </Link>
         <Link
           to="/hiring"
-          className="button text-n-1/50 hover:text-n-1 lg:block hidden mr-8 transition-colors"
+          className="hidden mr-8 transition-colors button text-n-1/50 hover:text-n-1 lg:block"
         >
           Hiring
         </Link>
         <Link
           to="/contact-us"
-          className="button text-n-1/50 hover:text-n-1 lg:block hidden mr-8 transition-colors"
+          className="hidden mr-8 transition-colors button text-n-1/50 hover:text-n-1 lg:block"
         >
           Contact US
         </Link>
         <Link
           to="/Pricing"
-          className="button text-n-1/50 hover:text-n-1 lg:block hidden mr-8 transition-colors"
+          className="hidden mr-8 transition-colors button text-n-1/50 hover:text-n-1 lg:block"
         >
           Pricing
         </Link>
         {loggedInuser?.isAuthenticated ? (
-          <Button className="lg:flex hidden" onClick={() => logout()}>
+          <Button className="hidden lg:flex" onClick={() => logout()}>
             Welcome,{loggedInuser.name}
           </Button>
         ) : (
           <Button
-            className="lg:flex hidden"
+            className="hidden lg:flex"
             href={
               "https://hiaido.auth.us-east-1.amazoncognito.com/login?client_id=3tj4g5qhml5kiu1ds37bogvol3&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fapis.hiaido.com%2Fauth-callback"
             }
@@ -118,7 +119,7 @@ const Header = () => {
         )}
 
         <Button
-          className="lg:hidden ml-auto"
+          className="ml-auto lg:hidden"
           px="px-3"
           onClick={toggleNavigation}
         >
