@@ -156,9 +156,9 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="rotate-45"
-                  width="24px"
-                  height="24px"
+                  className="rotate-45 border"
+                  width="26px"
+                  height="26px"
                 >
                   <rect
                     x="10"
