@@ -125,7 +125,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 <div className="w-[20%] flex flex-row items-end justify-end">
                   <button
                     title="ⓘ You're in interactive mode"
-                    className="border-2 py-1 border-[#5BC313] bg-[#5cc3132a] md:px-4 px-2 rounded-lg text-xs md:text-base font-semibold"
+                    className="border-2 py-1 border-[#5BC313] bg-[#5cc3132a] md:px-4 px-2 rounded-md text-xs md:text-base font-semibold"
                   >
                     Submit
                   </button>
