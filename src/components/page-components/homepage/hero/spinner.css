@@ -1,3 +1,4 @@
+
 .box {
   animation: slide 3s infinite;
 }
@@ -15,9 +16,9 @@
 }
 
 .box2 {
-  animation-delay: 16s;
+  animation-delay: 1s;
 }
 
 .box3 {
-  animation-delay: 32s;
+  animation-delay: 2s;
 }
