@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import "./spinner.css";
@@ -15,6 +15,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeContent, setActiveContent] = useState("");
   const [showExample, setShowExample] = useState(false);
   const [textArrays, setTextArrays] = useState(DefaultTextArrays);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   //==================================
   // Text Animation Mapping Functions:
@@ -51,6 +52,14 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
 
     return arr; // Return the shuffled copy of the array
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % activeTexts.length);
+    }, 5300);
+
+    return () => clearInterval(interval);
+  }, [activeTexts]);
 
   // AWS, AZURE, GCP Button State:
   const [activeButton, setActiveButton] = useState(null);
@@ -103,19 +112,11 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               {/* Animation Outlet */}
               <div className="flex w-full gap-2">
                 {/* Self-Scroll Animation */}
-                <div className="w-[80%] overflow-hidden text-start h-14">
-                  <div className="flex flex-col gap-2 animation-outlet">
-                    {shuffleArray(activeTexts)?.map((text, index) => (
-                      <p
-                        key={index}
-                        className="inner-lines relative text-xs h-12 md:text-lg font-semibold text-[#BBBBBB]"
-                        style={{
-                          animation: `scroll 10s linear infinite`,
-                        }}
-                      >
-                        {text}
-                      </p>
-                    ))}
+                <div className="w-[80%] overflow-hidden text-start">
+                  <div className="flex flex-col gap-2 h-14 animation-outlet">
+                    <p className="animate-text inner-lines relative text-xs h-14 md:text-lg font-semibold text-[#BBBBBB]">
+                      {activeTexts[currentIndex]}
+                    </p>
                   </div>
                 </div>
 
