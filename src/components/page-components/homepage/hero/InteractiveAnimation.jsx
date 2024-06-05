@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import "./spinner.css";
@@ -208,8 +208,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                       const newActiveButton =
                         activeButton === button ? null : button;
                       console.log("newActiveButton:", newActiveButton);
+
                       setActiveButton(newActiveButton);
                       setActiveContent(null);
+
                       switch (newActiveButton) {
                         case "Aws":
                           setTextArrays(AwsTexts);
