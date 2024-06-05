@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import "./spinner.css";
-import { interactiveAnimationV5 } from "../../../../assets";
+import { interactiveAnimationV5, aws, azure, gcp } from "../../../../assets";
 
-// Animation Text Array Imports:
+// Animation Text Array & Asset Imports:
 import DefaultTextArrays from "./DefaultTextArrays";
 import { AwsTexts, AzureTexts, GcpTexts } from "./index";
 
@@ -32,26 +32,26 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   const activeTexts = textMapping[activeContent] || textMapping["default"];
 
   // Function to shuffle an array - for random order:
-  function shuffleArray(array) {
-    let arr = [...array];
-    let currentIndex = arr.length,
-      randomIndex;
+  // function shuffleArray(array) {
+  //   let arr = [...array];
+  //   let currentIndex = arr.length,
+  //     randomIndex;
 
-    // While there remain elements to shuffle...
-    while (currentIndex !== 0) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
+  //   // While there remain elements to shuffle...
+  //   while (currentIndex !== 0) {
+  //     // Pick a remaining element...
+  //     randomIndex = Math.floor(Math.random() * currentIndex);
+  //     currentIndex--;
 
-      // And swap it with the current element.
-      [arr[currentIndex], arr[randomIndex]] = [
-        arr[randomIndex],
-        arr[currentIndex],
-      ];
-    }
+  //     // And swap it with the current element.
+  //     [arr[currentIndex], arr[randomIndex]] = [
+  //       arr[randomIndex],
+  //       arr[currentIndex],
+  //     ];
+  //   }
 
-    return arr; // Return the shuffled copy of the array
-  }
+  //   return arr;
+  // }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -137,7 +137,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 16 }}
-            className={`flex items-center w-full h-10 gap-6 ${
+            className={`flex items-center justify-start w-full h-10 gap-4 ${
               showExample ? "mt-6" : ""
             }`}
           >
@@ -177,10 +177,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 {buttons.map((button, index) => (
                   <motion.button
                     key={index}
-                    className={`px-4 py-[1px] rounded ${
+                    className={`px-4 w-36 rounded flex items-center justify-center transition-all duration-200 ${
                       activeButton === button
-                        ? "border-2 border-[#093eb1]"
-                        : "border-2 border-[#093eb1] bg-[#093eb1]"
+                        ? "grayscale-0 hover:grayscale-0"
+                        : "grayscale hover:grayscale-0"
                     }`}
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -211,7 +211,6 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                       console.log("newActiveButton:", newActiveButton);
 
                       setActiveButton(newActiveButton);
-                      setActiveContent(null);
 
                       switch (newActiveButton) {
                         case "Aws":
@@ -229,7 +228,15 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                       console.log("textArrays:", textArrays);
                     }}
                   >
-                    {button}
+                    {button === "Aws" && (
+                      <img className="w-8" src={aws} alt="AWS" />
+                    )}
+                    {button === "Azure" && (
+                      <img className="" src={azure} alt="Azure" />
+                    )}
+                    {button === "GCP" && (
+                      <img className="" src={gcp} alt="GCP" />
+                    )}
                   </motion.button>
                 ))}
               </motion.div>
