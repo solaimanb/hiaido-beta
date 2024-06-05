@@ -74,8 +74,8 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               <div className="flex gap-2">
                 {/* Create, Describe, Update, List, Delete */}
                 {["Create", "Describe", "Update", "List", "Delete"].map(
-                  (button) => (
-                    <button
+                  (button, index) => (
+                    <motion.button
                       key={button}
                       onClick={() =>
                         setActiveContent(
@@ -89,9 +89,12 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                             : "border-2 border-[#0353FB] active"
                           : "bg-[#0353FB]"
                       }`}
+                      initial={{ opacity: 0, x: -100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5 + index * 0.2 }}
                     >
                       {button}
-                    </button>
+                    </motion.button>
                   )
                 )}
               </div>
@@ -178,7 +181,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     }`}
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1.0 + index * 0.5 }}
+                    transition={{ delay: 1.3, duration: 0.5 + index * 0.5 }}
                     onClick={() =>
                       setActiveButton(activeButton === button ? null : button)
                     }
