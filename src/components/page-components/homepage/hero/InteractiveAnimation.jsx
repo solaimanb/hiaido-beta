@@ -220,10 +220,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 {buttons.map((button, index) => (
                   <motion.button
                     key={index}
-                    className={`px-6 w-18 rounded flex items-center justify-center transition-all border-2 border-transparent duration-200 ${
+                    className={`px-6 w-18 rounded flex items-center justify-center transition-all duration-200 ${
                       activeButton === button
                         ? "grayscale-0 hover:grayscale-0 border border-green-400 bg-green-600/10"
-                        : "grayscale hover:grayscale-0 "
+                        : "grayscale hover:grayscale-0 border-2 border-transparent  "
                     }`}
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
