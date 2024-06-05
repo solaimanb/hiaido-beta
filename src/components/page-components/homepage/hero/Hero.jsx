@@ -227,11 +227,14 @@ const Hero = () => {
           events={false}
           camera={{ position: [0, 0, 1] }}
           className="min-h-screen opacity-75 canvas-container bg-dark/90"
+          background="#000"
         >
           <mesh>
             <Stars />
           </mesh>
         </Canvas>
+
+        <div className="absolute inset-0 opacity-50 bg-dark" />
       </div>
     </Section>
   );

@@ -14,11 +14,9 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 const Header = () => {
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
   const [user, setUser] = useState();
 
-  const { signOut, authStatus } = useAuthenticator((context) => [
+  const { signOut } = useAuthenticator((context) => [
     context.signOut,
     context.authStatus,
   ]);
@@ -68,16 +66,6 @@ const Header = () => {
     { name: "Contact Us", path: "/contact" },
     { name: "Pricing", path: "/pricing" },
   ];
-
-  useEffect(() => {
-    if (authStatus !== "configuring") {
-      setIsLoading(false);
-    }
-  }, [authStatus]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <header
