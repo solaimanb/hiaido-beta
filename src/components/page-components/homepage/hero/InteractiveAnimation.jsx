@@ -222,7 +222,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     key={index}
                     className={`px-6 w-18 rounded flex items-center justify-center transition-all border border-transparent duration-200 ${
                       activeButton === button
-                        ? "grayscale-0 hover:grayscale-0 border-[1px] border-green-300 transition-all duration-150 bg-green-600/10"
+                        ? "grayscale-0 hover:grayscale-0 border-[1px] border-green-300/40 transition-all duration-150 bg-green-600/10"
                         : "grayscale hover:grayscale-0 "
                     }`}
                     initial={{ opacity: 0, x: -100 }}
