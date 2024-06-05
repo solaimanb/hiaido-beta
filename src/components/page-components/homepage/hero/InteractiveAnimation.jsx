@@ -248,13 +248,28 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     }}
                   >
                     {button === "Aws" && (
-                      <img className="w-7" src={aws} alt="AWS" />
+                      <img
+                        className="w-7"
+                        src={aws}
+                        alt="AWS"
+                        title="Amazon Web Services"
+                      />
                     )}
                     {button === "Azure" && (
-                      <img className="w-7" src={azure} alt="Azure" />
+                      <img
+                        className="w-7"
+                        src={azure}
+                        alt="Azure"
+                        title="Microsoft Azure"
+                      />
                     )}
                     {button === "GCP" && (
-                      <img className="w-7" src={gcp} alt="GCP" />
+                      <img
+                        className="w-7"
+                        src={gcp}
+                        alt="GCP"
+                        title="Google Cloud Platform"
+                      />
                     )}
                   </motion.button>
                 ))}
