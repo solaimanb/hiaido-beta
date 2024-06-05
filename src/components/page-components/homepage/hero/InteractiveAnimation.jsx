@@ -122,10 +122,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                   </div>
                 </div>
 
-                <div className="w-[20%] flex flex-row items-center justify-end">
+                <div className="w-[20%] flex flex-row items-end justify-end">
                   <button
                     title="ⓘ You're in interactive mode"
-                    className="border-2 py-2 border-[#5BC313] bg-[#5cc3132a] md:px-4 px-2 rounded-lg text-xs md:text-base font-semibold"
+                    className="border-2 py-1 border-[#5BC313] bg-[#5cc3132a] md:px-4 px-2 rounded-lg text-xs md:text-base font-semibold"
                   >
                     Submit
                   </button>
@@ -220,9 +220,9 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 {buttons.map((button, index) => (
                   <motion.button
                     key={index}
-                    className={`px-6 w-18 rounded flex items-center justify-center transition-all border border-transparent duration-200 ${
+                    className={`px-6 w-18 rounded flex items-center justify-center transition-all border-2 border-transparent duration-200 ${
                       activeButton === button
-                        ? "grayscale-0 hover:grayscale-0 border-[1px] border-green-300/40 transition-all duration-150 bg-green-600/10"
+                        ? "grayscale-0 hover:grayscale-0 border-2 border-green-300/40 bg-green-600/10"
                         : "grayscale hover:grayscale-0 "
                     }`}
                     initial={{ opacity: 0, x: -100 }}
