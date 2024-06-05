@@ -149,35 +149,62 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 setActiveContent(null);
                 setActiveButton(null);
               }}
-              className="flex items-center px-2 text-xs font-semibold text-orange-500 transition-all duration-200 text-start md:text-sm"
+              className="flex items-center gap-2 px-4 text-xs font-semibold text-orange-500 transition-all duration-200 text-start md:text-sm"
             >
               {!showExample ? (
                 <PlayIcon size={20} />
               ) : (
-                // <div className="spinner-wrapper">
-                //   <div className="spinner">
-                //     <div className="sk-folding-cube">
-                //       <div className="sk-cube1 sk-cube"></div>
-                //       <div className="sk-cube2 sk-cube"></div>
-                //       <div className="sk-cube4 sk-cube"></div>
-                //       <div className="sk-cube3 sk-cube"></div>
-                //     </div>
-                //   </div>
-                // </div>
-                <div className="spinner">
-                  <div className="bar1"></div>
-                  <div className="bar2"></div>
-                  <div className="bar3"></div>
-                  <div className="bar4"></div>
-                  <div className="bar5"></div>
-                  <div className="bar6"></div>
-                  <div className="bar7"></div>
-                  <div className="bar8"></div>
-                  <div className="bar9"></div>
-                  <div className="bar10"></div>
-                  <div className="bar11"></div>
-                  <div className="bar12"></div>
-                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="rotate-45"
+                  width="24px"
+                  height="24px"
+                >
+                  <rect
+                    x="10"
+                    y="10"
+                    width="8"
+                    height="8"
+                    fill="none"
+                    strokeWidth="2"
+                  />
+
+                  <rect
+                    className="box box1"
+                    x="2"
+                    y="2"
+                    width="8"
+                    height="8"
+                    fill="#A94F10"
+                    strokeWidth="1"
+                    rx="1"
+                    ry="1"
+                  />
+
+                  <rect
+                    className="box box2"
+                    x="2"
+                    y="2"
+                    width="8"
+                    height="8"
+                    fill="#A94F10"
+                    strokeWidth="1"
+                    rx="1"
+                    ry="1"
+                  />
+
+                  <rect
+                    className="box box3"
+                    x="2"
+                    y="2"
+                    width="8"
+                    height="8"
+                    fill="#A94F10"
+                    strokeWidth="1"
+                    rx="1"
+                    ry="1"
+                  />
+                </svg>
               )}
               {showExample ? "Interactive mode : Active" : "See Examples"}
             </button>
