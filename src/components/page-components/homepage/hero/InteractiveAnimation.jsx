@@ -58,7 +58,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
-    }, 5000);
+    }, 5100);
 
     return () => clearInterval(interval);
   }, [shuffledTexts]);
@@ -139,7 +139,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 16 }}
-            className={`flex items-center justify-start w-full h-10 gap-4 ${
+            className={`flex items-center justify-start w-full h-10 md:gap-4 ${
               showExample ? "mt-6" : ""
             }`}
           >
@@ -149,16 +149,16 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 setActiveContent(null);
                 setActiveButton(null);
               }}
-              className="flex items-center gap-2 px-4 text-xs font-semibold text-orange-500 transition-all duration-200 text-start md:text-sm"
+              className="flex items-center gap-2 text-xs font-semibold text-orange-500 transition-all duration-200 md:px-2 text-start md:text-sm"
             >
               {!showExample ? (
                 <PlayIcon size={20} />
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="rotate-45"
-                  width="28px"
-                  height="28px"
+                  className="mt-2 rotate-45"
+                  width="36px"
+                  height="26px"
                 >
                   <rect
                     x="10"
@@ -212,7 +212,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             {/* AWS, AZURE, GCP Triggers */}
             {showExample && (
               <motion.div
-                className={`flex gap-2 text-sm font-semibold `}
+                className={`flex md:gap-2 text-sm font-semibold `}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ staggerChildren: 0.5 }}
@@ -249,7 +249,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                   >
                     {button === "Aws" && (
                       <img
-                        className="w-7"
+                        className="w-14 md:w-7"
                         src={aws}
                         alt="AWS"
                         title="Amazon Web Services"
@@ -257,7 +257,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     )}
                     {button === "Azure" && (
                       <img
-                        className="w-7"
+                        className="w-14 md:w-7"
                         src={azure}
                         alt="Azure"
                         title="Microsoft Azure"
@@ -265,7 +265,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     )}
                     {button === "GCP" && (
                       <img
-                        className="w-7"
+                        className="w-14 md:w-7"
                         src={gcp}
                         alt="GCP"
                         title="Google Cloud Platform"
