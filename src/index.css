@@ -510,26 +510,6 @@ p {
   transition: transform 0.6s ease-in-out;
 }
 
-/* Interactive Animation Text Slide */
-.animate-text {
-  animation: slideInOut 4.8s infinite;
-}
-
-@keyframes slideInOut {
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  25%, 75% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-}
-
 /* Button Gray */
 .grayscale {
   filter: grayscale(100%);
