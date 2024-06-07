@@ -138,7 +138,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     disableOnInteraction: false,
                   }}
                   modules={[Autoplay, Pagination, Navigation]}
-                  className="h-14 text-start"
+                  className="h-16 text-start"
                 >
                   {shuffledTexts.map((text, index) => (
                     <SwiperSlide key={index}>
