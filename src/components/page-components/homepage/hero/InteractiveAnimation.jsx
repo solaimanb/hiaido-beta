@@ -47,26 +47,26 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   const updateFilteredTextLines = (actionButton, categoryButton) => {
     let filteredTexts = allTextLines;
 
+    // Set activeActionButton to null if actionButton is not active
+    setActiveActionButton(actionButton || null);
+
+    // Apply category filtering
     if (categoryButton) {
-      const categoryFilteredData = filterByCategory(
-        categoryButton,
-        textArrayData
+      filteredTexts = filterByCategory(categoryButton, textArrayData).flatMap(
+        (item) => item.values
       );
-      filteredTexts = categoryFilteredData.map((item) => item.values).flat();
     }
 
+    // Apply actionButton filtering
     if (actionButton) {
       const filteredSubCategories = filterSubCategoryTexts(
         textArrayData,
         actionButton.toLowerCase()
-      );
-      const actionFilteredTexts = filteredSubCategories
-        .map((sc) => sc.values)
-        .flat();
+      ).flatMap((sc) => sc.values);
+
       filteredTexts = filteredTexts.filter((text) =>
-        actionFilteredTexts.includes(text)
+        filteredSubCategories.includes(text)
       );
-      setActiveActionButton(actionButton);
     }
 
     setFilteredTextLines(
