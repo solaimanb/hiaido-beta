@@ -39,10 +39,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeCategoryButton, setActiveCategoryButton] = useState("");
   const [activeContent, setActiveContent] = useState("");
   const [showExample, setShowExample] = useState(false);
-  // const [currentIndex, setCurrentIndex] = useState(0);
   const [filteredTextLines, setFilteredTextLines] = useState(allTextLines);
-
-  console.log(filteredTextLines);
 
   //==================================
   // Text Animation Mapping Functions:
@@ -77,18 +74,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
     );
   };
 
+  //======================================
+  // Shuffle the text array for animation:
+  //======================================
   const shuffledTexts = [...filteredTextLines].sort(() => Math.random() - 0.5);
-
-  // useEffect(() => {
-  //   const animationDuration = 4800;
-  //   const intervalTiming = animationDuration * 1.2;
-
-  //   const interval = setInterval(() => {
-  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
-  //   }, intervalTiming);
-
-  //   return () => clearInterval(interval);
-  // }, [filteredTextLines]);
 
   return (
     <div className="flex items-center justify-center w-full h-full">
