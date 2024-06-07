@@ -1,5 +1,16 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import "./spinner.css";
@@ -28,8 +39,10 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [activeCategoryButton, setActiveCategoryButton] = useState("");
   const [activeContent, setActiveContent] = useState("");
   const [showExample, setShowExample] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
   const [filteredTextLines, setFilteredTextLines] = useState(allTextLines);
+
+  console.log(filteredTextLines);
 
   //==================================
   // Text Animation Mapping Functions:
@@ -64,20 +77,18 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
     );
   };
 
-  useEffect(() => {
-    const shuffledTexts = [...filteredTextLines].sort(
-      () => Math.random() - 0.5
-    );
+  const shuffledTexts = [...filteredTextLines].sort(() => Math.random() - 0.5);
 
-    const animationDuration = 4800;
-    const intervalTiming = animationDuration * 1.2;
+  // useEffect(() => {
+  //   const animationDuration = 4800;
+  //   const intervalTiming = animationDuration * 1.2;
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
-    }, intervalTiming);
+  //   const interval = setInterval(() => {
+  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
+  //   }, intervalTiming);
 
-    return () => clearInterval(interval);
-  }, [filteredTextLines]);
+  //   return () => clearInterval(interval);
+  // }, [filteredTextLines]);
 
   return (
     <div className="flex items-center justify-center w-full h-full">
@@ -128,14 +139,26 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
 
               {/* Animation Outlet */}
               <div className="flex w-full gap-2">
-                {/* Self-Scroll Animation */}
-                <div className="w-[80%] overflow-hidden text-start">
-                  <div className="flex flex-col gap-2 h-14 animation-outlet">
-                    <p className="animate-text inner-lines relative text-xs h-14 md:text-lg font-semibold text-[#BBBBBB]">
-                      {filteredTextLines[currentIndex]}
-                    </p>
-                  </div>
-                </div>
+                {/* Self-Scroll Animation Swiper */}
+                <Swiper
+                  slidesPerView={1}
+                  loop={true}
+                  direction="vertical"
+                  autoplay={{
+                    delay: 3500,
+                    disableOnInteraction: false,
+                  }}
+                  modules={[Autoplay, Pagination, Navigation]}
+                  className="h-14 text-start"
+                >
+                  {shuffledTexts.map((text, index) => (
+                    <SwiperSlide key={index}>
+                      <p className="relative text-xs p-1 h-14 md:text-lg font-semibold text-[#BBBBBB]">
+                        {text}
+                      </p>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
 
                 <div className="w-[20%] flex flex-row items-end justify-end">
                   <button
