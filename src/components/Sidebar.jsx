@@ -1,5 +1,5 @@
 import { useAnimationControls } from "framer-motion";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   AtSymbolIcon,
   ChatBubbleLeftRightIcon,
@@ -24,6 +24,8 @@ import logo from "/hiaido-logo.png";
 import * as Menubar from "@radix-ui/react-menubar";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
+import { GlobalStateContext } from "../context/GlobalStateContext";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 export const navbarData = [
   { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
@@ -89,9 +91,9 @@ const ToggleTheme = ({ isCollapsed }) => {
 
   return (
     <Menubar.Root
-      className={`flex dark:bg-neutral-900 bg-cyan-100 w-fit ${
+      className={`flex dark:bg-neutral-900 bg-white w-fit ${
         isCollapsed ? "m-[6px]" : "p-[3px]"
-      } rounded-full shadow-blackA4 space-x-3 justify-start`}
+      } rounded-full shadow-blackA4 space-x-1 justify-start`}
     >
       {data.map((item, i) => {
         return (
@@ -107,9 +109,11 @@ const ToggleTheme = ({ isCollapsed }) => {
                       }
                     }}
                     className={`${
-                      isCollapsed ? "p-[7px]" : "p-[8px]"
+                      isCollapsed ? "p-[8px]" : "p-[8px]"
                     } outline-none select-none font-medium leading-none rounded-full relative ${
-                      i == activeTabIndex ? "" : "dark:hover:bg-neutral-600/35 hover:bg-black/30"
+                      i == activeTabIndex
+                        ? ""
+                        : "dark:hover:bg-neutral-600/35 hover:bg-black/30"
                     }`}
                     style={{
                       WebkitTapHighlightColor: "transparent",
@@ -120,7 +124,7 @@ const ToggleTheme = ({ isCollapsed }) => {
                       <AnimatePresence>
                         {isCollapsed || (
                           <motion.span
-                            className="text-sm ml-2"
+                            className="text-sm px-2"
                             {...labelTransitions}
                           >
                             {item.label}
@@ -130,7 +134,9 @@ const ToggleTheme = ({ isCollapsed }) => {
                       {activeTabIndex == i && (
                         <motion.span
                           layoutId="theme-bubble"
-                          className="bg-cyan-100 mix-blend-difference absolute inset-0 z-10 rounded-full"
+                          className={`${
+                            isCollapsed ? "bg-black" : "bg-white"
+                          } mix-blend-difference absolute inset-0 z-10 rounded-full`}
                           transition={{
                             type: "spring",
                             bounce: 0.1,
@@ -151,8 +157,57 @@ const ToggleTheme = ({ isCollapsed }) => {
 };
 
 const Sidebar = () => {
+  const {
+    memberAccounts,
+    setMemberAccounts,
+    setCurrentMemberAccount,
+    currentMemberAccount,
+  } = useContext(GlobalStateContext);
   const [isCollapsed, setIsCollapsed] = useState(false);
   console.log("sidebar");
+  console.log(memberAccounts)
+
+  useEffect(() => {
+    if (!memberAccounts) {
+      fetchMemberAccounts()
+        .then((res) => {
+          console.log(res);
+          setMemberAccounts(res);
+          setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+        })
+        .catch((err) => {
+          console.log(err);
+          // setError(err);
+        });
+    }
+  }, []);
+
+  const fetchMemberAccounts = async () => {
+    console.log("FETCHING MEMBER ACCOUNTS");
+    try {
+      let url =
+        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
+      const result = await fetchAuthSession();
+      const idToken = result.tokens.idToken.toString();
+      console.log(result);
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
+      const response_json = await response.json();
+      if (response.ok) {
+        console.log(response_json);
+        return response_json;
+        // setMemberAccounts(response_json);
+      } else {
+        console.log(response_json);
+
+        throw response_json;
+      }
+    } catch (err) {
+      return err;
+    }
+  };
 
   const sliceIndex = 9;
 
@@ -182,12 +237,19 @@ const Sidebar = () => {
             alt="Brand Logo"
           />
           <AnimatePresence>
-            {isCollapsed || <motion.h1 className="dark:text-neutral-100 text-neutral-50" {...labelTransitions}>HiAiDo</motion.h1>}
+            {isCollapsed || (
+              <motion.h1
+                className="dark:text-neutral-100 text-neutral-50"
+                {...labelTransitions}
+              >
+                HiAiDo
+              </motion.h1>
+            )}
           </AnimatePresence>
         </div>
         <div className="dark:divide-neutral-600 divide-neutral-600 h-full">
-          <div className="dark:text-neutral-500 text-neutral-400 my-2 space-y-[5px]">
-            <motion.div className="text-neutral-500 my-2 h-3 text-xs font-semibold">
+          <div className=" text-neutral-400 my-2 space-y-[5px]">
+            <motion.div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
               <AnimatePresence>
                 {isCollapsed || (
                   <motion.span {...labelTransitions}>MAIN</motion.span>
@@ -223,28 +285,7 @@ const Sidebar = () => {
           }
           <ToggleTheme isCollapsed={isCollapsed} />
           <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800"></div>
-          <div
-            align="center"
-            className="!border-t-[1px] !border-neutral-600 pt-5 pb-1 flex w-full space-x-3"
-          >
-            <Avatar src="" fallback="U" radius="full" size="2" />
-            <AnimatePresence>
-              {isCollapsed || (
-                <motion.div className="max-w-[70%]" {...labelTransitions}>
-                  <Text className="text-white dark:text-neutral-100" truncate size={"2"}>
-                    Nadine Schtakieff
-                  </Text>
-                  <Text
-                    truncate
-                    size={"1"}
-                    className="text-neutral-500 text-sm"
-                  >
-                    Frontend Developer
-                  </Text>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <CurrentMemberAccountComponent isCollapsed={isCollapsed} />
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
@@ -258,6 +299,51 @@ const Sidebar = () => {
         </button>
       </motion.div>
     </AnimatePresence>
+  );
+};
+
+const CurrentMemberAccountComponent = ({ isCollapsed }) => {
+  const { currentMemberAccount } = useContext(GlobalStateContext);
+  if (!currentMemberAccount) return;
+  // let currentMemberAccount = {
+  //   role_arn: "arn:aws:iam::730335590432:role/OrganizationAccountAccessRole",
+  //   account_name: "advant.analytics+1user012334",
+  //   lastName: "Fe",
+  //   timestamp: "2024-06-04T18:23:11.224000+00:00",
+  //   owner: "r367708@gmail.com",
+  //   region: "us-east-1",
+  //   account_id: "730335590432",
+  //   email: "advant.analytics+1user012334@gmail.com",
+  //   firstName: "Arnoldo",
+  //   owner_id: "f408b4e8-2031-7060-35bd-55174dc04329",
+  //   account_status: "SUCCEEDED",
+  // };
+  return (
+    <div
+      align="center"
+      className="!border-t-[1px] !border-neutral-600 pt-5 pb-1 flex w-full space-x-3 text-left"
+    >
+      <Avatar
+        src=""
+        fallback={currentMemberAccount?.firstName[0] || "U"}
+        radius="full"
+        size="2"
+      />
+      <AnimatePresence>
+        {isCollapsed || (
+          <motion.div className="max-w-[70%]" {...labelTransitions}>
+            <p className="truncate text-neutral-100">
+              {currentMemberAccount.firstName +
+                " " +
+                currentMemberAccount.lastName}
+            </p>
+            <p className="truncate text-neutral-500/90">
+              {currentMemberAccount.email}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

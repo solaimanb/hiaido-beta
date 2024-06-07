@@ -7,11 +7,13 @@ import {
 import logo from "/hiaido-logo.png";
 import Codeblock from "./Codeblock";
 import { AnimatePresence, motion } from "framer-motion";
-import { Tooltip } from "@radix-ui/themes";
+import { Dialog, Tooltip, AlertDialog } from "@radix-ui/themes";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { CopyIcon } from "@radix-ui/react-icons";
 import toast from "react-hot-toast";
 import { ThemeContext } from "../../context/ThemeContext";
+import { GlobalStateContext } from "../../context/GlobalStateContext";
+import CreateMemberAccountButton from "../CreateMemberAccountButton";
 
 const copyContent = async (text) => {
   try {
@@ -88,21 +90,21 @@ const MDX = ({ children }) => {
 const QueryTemplates = ({ askQuery }) => {
   const data = [
     "How to create an S3 bucket?",
-    "How to monitor a Lambda function?",
     "How to create an ETL pipeline using AWS Glue?",
+    "How to monitor a Lambda function?",
     "How to setup a Elastic Load Balancer for EC2?",
   ];
 
   return (
     <div className="relative h-full">
-      <div className="absolute bottom-32 flex w-full justify-center space-x-4">
+      <div className="absolute bottom-72 flex w-full justify-center space-x-4">
         {data.map((item, i) => {
           return (
             <AnimatePresence key={i}>
               <motion.button
                 onClick={() => askQuery(item)}
                 key={item}
-                className="p-4 w-40 rounded-2xl shadow-lg shadow-neutral-950 bg-neutral-800/50 border-[1px] flex justify-start border-neutral-700 text-neutral-100 text-left hover:bg-neutral-700/75 hover:border-neutral-500 duration-300"
+                className="p-4 w-40 rounded-2xl shadow-md dark:shadow-neutral-950 dark:bg-neutral-700/50 border-[1px] flex justify-start border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-100 text-left dark:hover:bg-neutral-700/75 hover:bg-neutral-200/60 hover:border-neutral-300 dark:hover:border-neutral-500 duration-300"
               >
                 <span>{item}</span>
               </motion.button>
@@ -132,6 +134,21 @@ const ChatResponseButtonsGroup = ({ content }) => {
           <CopyIcon className="size-[18px]" strokeWidth={0.5} />
         </button>
       </Tooltip>
+    </div>
+  );
+};
+
+const CreateMemberAccountWarningBox = () => {
+  return (
+    <div className="absolute top-32 flex justify-center w-full text-lg text-neutral-700">
+      <div className="w-[600px] text-center bg-red-400/35 border-red-500 dark:bg-red-800/30 dark:border-red-900 border-[1px] rounded-xl p-3 py-5">
+        <h1 className="text-black dark:text-neutral-50 text-3xl">No member account found</h1>
+        <p className="mb-12 mt-5 mx-3 dark:text-neutral-400">
+          You need to create a member account first before using the chatbot
+        </p>
+        <CreateMemberAccountButton />
+      </div>
+      <div></div>
     </div>
   );
 };
@@ -204,8 +221,9 @@ const ChatsList = memo(({ chats }) => {
 // contains the chats and query box
 const ChatContainer = () => {
   console.log("ChatContainer");
+  const { memberAccounts } = useContext(GlobalStateContext);
   const [query, setQuery] = useState("");
-  const [chats, setChats] = useState(sampleChat);
+  const [chats, setChats] = useState([]);
   const [error, setError] = useState(null);
   const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
@@ -318,9 +336,13 @@ const ChatContainer = () => {
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   className="h-[800px]"
                 >
-                  <QueryTemplates
-                    askQuery={(templateQuery) => getChat(templateQuery)}
-                  />
+                  {memberAccounts && memberAccounts.length == 0 ? (
+                    <CreateMemberAccountWarningBox />
+                  ) : (
+                    <QueryTemplates
+                      askQuery={(templateQuery) => getChat(templateQuery)}
+                    />
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -343,12 +365,13 @@ const ChatContainer = () => {
         <div
           className={`mb-4 mt-2 w-full rounded-lg p-[3px] flex justify-center transition-all duration-200 ease-in bg-gradient-to-tr animated-background`}
         >
-          <div className="dark:bg-neutral-800 bg-neutral-400/50 rounded-[26px] flex items-center gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
+          <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-center gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
             {/* <PaperClipIcon className="w-6 ml-3" opacity={0} /> */}
             <div className="flex min-w-0 flex-1 flex-col ml-4">
               <textarea
+                disabled={memberAccounts && memberAccounts.length == 0}
                 rows={1}
-                className="h-[40px] bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-hidden text-black dark:text-neutral-100 placeholder-neutral-600 dark:placeholder-neutral-400"
+                className="h-[40px] bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-hidden text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
                 ref={inputRef}
                 onChange={(e) => setQuery(e.target.value)}
                 name="query"
