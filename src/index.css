@@ -510,46 +510,9 @@ p {
   transition: transform 0.6s ease-in-out;
 }
 
-/*
-#animated-btn:hover .text-slide {
-  transform: translateY(100%);
-}
-
-#animated-btn:hover .text-slide-hover {
-  transform: translateY(0);
-} */
-
-/* HERO */
-/* @keyframes scroll {
-  0%,
-  100% {
-    top: 0;
-  }
-  20% {
-    top: 0;
-  }
-  25% {
-    top: -50px;
-  }
-  45% {
-    top: -50px;
-  }
-  50% {
-    top: -100px;
-  }
-  70% {
-    top: -100px;
-  }
-  75% {
-    top: -150px;
-  }
-  95% {
-    top: -150px;
-  }
-} */
-
+/* Interactive Animation Text Slide */
 .animate-text {
-  animation: slideInOut 5s infinite;
+  animation: slideInOut 4.8s infinite;
 }
 
 @keyframes slideInOut {

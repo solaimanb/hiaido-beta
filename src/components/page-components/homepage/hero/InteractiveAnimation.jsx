@@ -6,65 +6,78 @@ import "./spinner.css";
 import { interactiveAnimationV5, aws, azure, gcp } from "../../../../assets";
 
 // Animation Text Array & Asset Imports:
-import DefaultTextArrays from "./DefaultTextArrays";
-import { AwsTexts, AzureTexts, GcpTexts } from "./index";
+import { TextArrays } from "./index";
+import {
+  getTextArrayData,
+  getAllTextLines,
+  filterByCategory,
+  filterSubCategoryTexts,
+} from "./textArrayMapping";
 
-const buttons = ["Aws", "Azure", "GCP"];
+//==============================================
+// Functional Buttons for filtering text arrays:
+//==============================================
+const actionButtons = ["Create", "Describe", "Update", "List", "Delete"];
+const categoryButtons = ["Aws", "Azure", "GCP"];
 
 const InteractiveAnimation = ({ showSecondAnimation }) => {
+  let textArrayData = getTextArrayData(TextArrays);
+  let allTextLines = getAllTextLines(TextArrays);
+
+  const [activeActionButton, setActiveActionButton] = useState("");
+  const [activeCategoryButton, setActiveCategoryButton] = useState("");
   const [activeContent, setActiveContent] = useState("");
   const [showExample, setShowExample] = useState(false);
-  const [textArrays, setTextArrays] = useState(DefaultTextArrays);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [filteredTextLines, setFilteredTextLines] = useState(allTextLines);
 
   //==================================
   // Text Animation Mapping Functions:
   //==================================
-  const textMapping = {
-    Create: textArrays?.Create,
-    Describe: textArrays?.Describe,
-    Update: textArrays?.Update,
-    List: textArrays?.List,
-    Delete: textArrays?.Delete,
-    default: textArrays?.General,
+  const updateFilteredTextLines = (actionButton, categoryButton) => {
+    let filteredTexts = allTextLines;
+
+    if (categoryButton) {
+      const categoryFilteredData = filterByCategory(
+        categoryButton,
+        textArrayData
+      );
+      filteredTexts = categoryFilteredData.map((item) => item.values).flat();
+    }
+
+    if (actionButton) {
+      const filteredSubCategories = filterSubCategoryTexts(
+        textArrayData,
+        actionButton.toLowerCase()
+      );
+      const actionFilteredTexts = filteredSubCategories
+        .map((sc) => sc.values)
+        .flat();
+      filteredTexts = filteredTexts.filter((text) =>
+        actionFilteredTexts.includes(text)
+      );
+      setActiveActionButton(actionButton);
+    }
+
+    setFilteredTextLines(
+      filteredTexts.length > 0 ? filteredTexts : allTextLines
+    );
   };
 
-  const activeTexts = textMapping[activeContent] || textMapping["default"];
-
-  // Function to shuffle an array - for random order:
-  // function shuffleArray(array) {
-  //   let arr = [...array];
-  //   let currentIndex = arr.length,
-  //     randomIndex;
-
-  //   // While there remain elements to shuffle...
-  //   while (currentIndex !== 0) {
-  //     // Pick a remaining element...
-  //     randomIndex = Math.floor(Math.random() * currentIndex);
-  //     currentIndex--;
-
-  //     // And swap it with the current element.
-  //     [arr[currentIndex], arr[randomIndex]] = [
-  //       arr[randomIndex],
-  //       arr[currentIndex],
-  //     ];
-  //   }
-
-  //   return arr;
-  // }
-
-  const shuffledTexts = [...activeTexts].sort(() => Math.random() - 0.5);
-
   useEffect(() => {
+    const shuffledTexts = [...filteredTextLines].sort(
+      () => Math.random() - 0.5
+    );
+
+    const animationDuration = 4800;
+    const intervalTiming = animationDuration * 1.2;
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledTexts.length);
-    }, 5100);
+    }, intervalTiming);
 
     return () => clearInterval(interval);
-  }, [shuffledTexts]);
-
-  // AWS, AZURE, GCP Button State:
-  const [activeButton, setActiveButton] = useState(null);
+  }, [filteredTextLines]);
 
   return (
     <div className="flex items-center justify-center w-full h-full">
@@ -85,30 +98,32 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             <div className="w-full mx-auto border-[#2A0BF6] p-3 border-[3px] gap-4 flex flex-col rounded-2xl">
               <div className="flex gap-2">
                 {/* Create, Describe, Update, List, Delete */}
-                {["Create", "Describe", "Update", "List", "Delete"].map(
-                  (button, index) => (
-                    <motion.button
-                      key={button}
-                      onClick={() =>
-                        setActiveContent(
-                          activeContent === button ? null : button
-                        )
-                      }
-                      className={`py-[1px] text-center rounded-md font-semibold px-2 md:px-1 text-xs md:text-lg md:w-24 ${
-                        button === activeContent
-                          ? button === "Delete"
-                            ? "border-2 border-red-500 active"
-                            : "border-2 border-[#0353FB] active"
-                          : "bg-[#0353FB] border-2 border-[#0353FB]"
-                      }`}
-                      initial={{ opacity: 0, x: -100 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5 + index * 0.2 }}
-                    >
-                      {button}
-                    </motion.button>
-                  )
-                )}
+                {actionButtons.map((button, index) => (
+                  <motion.button
+                    key={button}
+                    onClick={() => {
+                      const newActiveContent =
+                        button === activeContent ? "" : button;
+                      setActiveContent(newActiveContent);
+                      updateFilteredTextLines(
+                        newActiveContent,
+                        activeCategoryButton
+                      );
+                    }}
+                    className={`py-[1px] text-center rounded-md font-semibold px-2 md:px-1 text-xs md:text-lg md:w-24 ${
+                      button === activeContent
+                        ? button === "Delete"
+                          ? "border-2 border-red-500 active"
+                          : "border-2 border-[#0353FB] active"
+                        : "bg-[#0353FB] border-2 border-[#0353FB]"
+                    }`}
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 + index * 0.2 }}
+                  >
+                    {button}
+                  </motion.button>
+                ))}
               </div>
 
               {/* Animation Outlet */}
@@ -117,7 +132,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 <div className="w-[80%] overflow-hidden text-start">
                   <div className="flex flex-col gap-2 h-14 animation-outlet">
                     <p className="animate-text inner-lines relative text-xs h-14 md:text-lg font-semibold text-[#BBBBBB]">
-                      {shuffledTexts[currentIndex]}
+                      {filteredTextLines[currentIndex]}
                     </p>
                   </div>
                 </div>
@@ -147,7 +162,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               onClick={() => {
                 setShowExample(!showExample);
                 setActiveContent(null);
-                setActiveButton(null);
+                setActiveActionButton(null);
               }}
               className="flex items-center gap-2 text-xs font-semibold text-orange-500 transition-all duration-200 md:px-2 text-start md:text-sm"
             >
@@ -217,34 +232,25 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                 animate={{ opacity: 1 }}
                 transition={{ staggerChildren: 0.5 }}
               >
-                {buttons.map((button, index) => (
+                {categoryButtons.map((button, index) => (
                   <motion.button
                     key={index}
                     className={`px-6 w-18 rounded flex items-center justify-center transition-all duration-200 ${
-                      activeButton === button
+                      activeCategoryButton === button
                         ? "grayscale-0 hover:grayscale-0 border border-green-400 bg-green-600/10"
-                        : "grayscale hover:grayscale-0 border-2 border-transparent  "
+                        : "grayscale hover:grayscale-0 border border-transparent  "
                     }`}
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1.3, duration: 0.5 + index * 0.5 }}
                     onClick={() => {
-                      const newActiveButton =
-                        activeButton === button ? null : button;
-                      setActiveButton(newActiveButton);
-                      switch (newActiveButton) {
-                        case "Aws":
-                          setTextArrays(AwsTexts);
-                          break;
-                        case "Azure":
-                          setTextArrays(AzureTexts);
-                          break;
-                        case "GCP":
-                          setTextArrays(GcpTexts);
-                          break;
-                        default:
-                          setTextArrays(DefaultTextArrays);
-                      }
+                      const newActiveCategoryButton =
+                        button === activeCategoryButton ? "" : button;
+                      setActiveCategoryButton(newActiveCategoryButton);
+                      updateFilteredTextLines(
+                        activeActionButton,
+                        newActiveCategoryButton
+                      );
                     }}
                   >
                     {button === "Aws" && (
