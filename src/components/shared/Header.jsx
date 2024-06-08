@@ -8,10 +8,27 @@ import AnimatedBtn from "../Buttons/AnimatedBtn";
 
 import { hiaido } from "../../assets";
 import AnimatedText from "./AnimatedText";
+import { AvatarIcon } from "@radix-ui/react-icons";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Header = () => {
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
+  const [user, setUser] = useState();
+
+  const { signOut } = useAuthenticator((context) => [
+    context.signOut,
+    context.authStatus,
+  ]);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      // Parse the user data from JSON
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+    }
+  }, []);
 
   const toggleNavigation = () => {
     setOpenNavigation((prevState) => !prevState);
@@ -45,7 +62,6 @@ const Header = () => {
   }, [lastScrollTop]);
 
   const navItems = [
-    // { name: "Chat", path: "/chat" },
     { name: "Hiring", path: "/hiring" },
     { name: "Contact Us", path: "/contact" },
     { name: "Pricing", path: "/pricing" },
@@ -57,12 +73,12 @@ const Header = () => {
       `}
     >
       <div className="container flex items-center justify-between w-full px-0">
-        <div className="gap-x-10 z-50 flex items-center">
-          <NavLink className="w-fit block" to="/">
+        <div className="z-50 flex items-center gap-x-10">
+          <NavLink className="block w-fit" to="/">
             <img src={hiaido} alt="hiaido" className="md:w-48 w-28" />
           </NavLink>
 
-          <nav className="lg:block hidden">
+          <nav className="hidden lg:block">
             <div className="flex">
               {navItems.map((item, index) => (
                 <NavLink
@@ -77,12 +93,21 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className=" flex items-center justify-center gap-8 px-5">
-          <Link to="/login">
-            <AnimatedBtn className="lg:flex hidden font-semibold">
-              Sign In
+        <div className="flex items-center justify-center gap-8 px-5 ">
+          {user ? (
+            <Link to={"/chat"}>
+              <AvatarIcon
+                width={26}
+                height={26}
+                src={user.avatarUrl}
+                className="hidden text-orange-500 lg:block"
+              />
+            </Link>
+          ) : (
+            <AnimatedBtn to={"/login"} className="hidden font-semibold lg:flex">
+              Login
             </AnimatedBtn>
-          </Link>
+          )}
 
           <button
             className={`${openNavigation ? "hidden" : ""} lg:hidden ml-auto`}
@@ -106,11 +131,11 @@ const Header = () => {
         <div className="p-2">
           {/* Brand Logo */}
           <div className="flex items-center justify-between">
-            <NavLink className="xl:mr-8 w-fit block" to="/">
-              <img src={hiaido} alt="hiaido" className="md:w-40 w-24" />
+            <NavLink className="block xl:mr-8 w-fit" to="/">
+              <img src={hiaido} alt="hiaido" className="w-24 md:w-40" />
             </NavLink>
 
-            <button className="lg:hidden ml-auto" onClick={toggleNavigation}>
+            <button className="ml-auto lg:hidden" onClick={toggleNavigation}>
               <MenuSvg openNavigation={openNavigation} />
             </button>
           </div>
@@ -132,13 +157,20 @@ const Header = () => {
                 {item?.title}
               </Link>
             ))}
+            <Link
+              onClick={() => user && signOut()}
+              className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold
+                `}
+            >
+              {user ? "Sign Out" : "Sign In"}
+            </Link>
           </div>
         </div>
 
         <div className="space-y-2">
           <div className="horizon-bar opacity-30 h-[1px] bg-orange-400" />
 
-          <p className="lg:block text-white/80 text-xs font-semibold">
+          <p className="text-xs font-semibold lg:block text-white/80">
             © {new Date().getFullYear()} HIAIDO All rights reserved.
           </p>
         </div>

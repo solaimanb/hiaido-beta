@@ -2,79 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap");
 
 @tailwind base;
-/* @import "@radix-ui/themes"; */
 @tailwind components;
 @tailwind utilities;
-/* @import '@radix-ui/themes/styles.css'; */
-
-.animated-background {
-  background-size: 400%;
-
-  -webkit-animation: animation 3s ease infinite;
-  -moz-animation: animation 3s ease infinite;
-  animation: animation 3s ease infinite;
-}
-
-.markdown > * {
-  all: revert;
-}
-.code-markdown > * {
-  all: revert;
-}
-
-.dot-typing {
-  position: relative;
-  left: -9999px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #9880ff;
-  color: #9880ff;
-  box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff, 10014px 0 0 0 #9880ff;
-  animation: dot-typing 1.5s infinite linear;
-}
-
-@keyframes dot-typing {
-  0% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  16.667% {
-    box-shadow: 9984px -10px 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  33.333% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  50% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px -10px 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  66.667% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  83.333% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px -10px 0 0 #9880ff;
-  }
-  100% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-}
-
-@keyframes animation {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
 
 :root {
   --font-playpen: "Playpen Sans", cursive;
@@ -95,9 +24,8 @@
   font-style: normal;
 }
 
-.body {
-  font-family: var(--font-sora);
-  background: rgba(0, 0, 0, 0.7);
+html, body {
+  background: #040404;
 }
 
 /* Star Canvas */
@@ -112,19 +40,15 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  background: linear-gradient(to top, #040404, transparent);
   pointer-events: none;
 }
 
 @layer base {
   body {
-    @apply bg-n-8 text-n-1 font-sans text-base;
+    @apply font-sans text-base bg-n-8 text-n-1;
   }
 }
-
-/* .rotate-45 {
-  @apply rotate-[45deg];
-} */
 
 .rotate-45 {
   transform: rotate(45deg);
@@ -376,19 +300,35 @@ input:focus::placeholder {
 }
 
 [data-amplify-form] button[type="submit"] {
-  padding: 8px;
-  background-color: rgba(243, 125, 41, 0.897);
-  width: 100%;
   color: white;
   border: none;
   cursor: pointer;
   font-weight: bold;
   margin-top: 10px;
+  padding: 8px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
   border-radius: 50px;
+  transition: all 0.4s ease-in-out;
 }
 
 [data-amplify-form] button[type="submit"]:hover {
-  background-color: #e88134;
+  background-position: 100% 0;
+  transition: all 0.4s ease-in-out;
 }
 
 [data-amplify-footer] {
@@ -442,9 +382,6 @@ input:focus::placeholder {
   width: 100%;
   padding-top: 5px;
 }
-
-/* from, to { border-color: transparent }
-  50% { border-color: orange } */
 
 no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -573,10 +510,11 @@ p {
   transition: transform 0.6s ease-in-out;
 }
 
-#animated-btn:hover .text-slide {
-  transform: translateY(100%);
+/* Button Gray */
+.grayscale {
+  filter: grayscale(100%);
 }
 
-#animated-btn:hover .text-slide-hover {
-  transform: translateY(0);
+.grayscale-0 {
+  filter: grayscale(0%);
 }

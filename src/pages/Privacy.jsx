@@ -96,7 +96,7 @@ const Privacy = () => {
       </Helmet>
 
       {/* MAIN CONTENT */}
-      <div className="bg-black/90 min-h-screen overflow-hidden">
+      <div className="min-h-screen overflow-hidden">
         <div className="md:mt-40 max-w-4xl px-4 mx-auto mt-32 space-y-4">
           <div className="flex justify-center">
             <img
@@ -113,7 +113,7 @@ const Privacy = () => {
           {sections.map((section, index) => (
             <div key={index}>
               <h1 className=" text-xl font-bold">{section.title}</h1>
-              <p className="font-roboto ">
+              <p className="">
                 {section.link
                   ? section.content.replace(
                       section.link.replace("mailto:", ""),

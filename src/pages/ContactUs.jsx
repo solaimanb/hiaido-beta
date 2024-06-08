@@ -1,5 +1,8 @@
-import Contact from "../components/shared/Contact";
 import { Helmet } from "react-helmet-async";
+import { lazy } from "react";
+
+// Using React.lazy to dynamically import components for the Contact page.
+const Contact = lazy(() => import("../components/shared/Contact"));
 
 const ContactUs = () => {
   window.scrollTo(0, 0);

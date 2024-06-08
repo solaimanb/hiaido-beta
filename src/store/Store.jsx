@@ -5,9 +5,14 @@ const AppContext = createContext();
 
 export const StoreProvider = ({ children }) => {
   const [themeColor, setThemeColor] = useState("");
-  const navigate = useNavigate()
-  const [user, setUser] = useState({ name: "", email: "", isAuthenticated: false, firstTime: false })
-  const [start, setStart] = useState(false)
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    isAuthenticated: false,
+    firstTime: false,
+  });
+  const [start, setStart] = useState(false);
 
   const changeThemeColor = (color) => {
     setThemeColor(color);
@@ -15,7 +20,7 @@ export const StoreProvider = ({ children }) => {
 
   useEffect(() => {
     // Check if user data exists in local storage
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
 
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -26,28 +31,46 @@ export const StoreProvider = ({ children }) => {
     // Simulate user login
     if (userName === "karthik" && pass === "admin") {
       setUser({
-        name: userName, email: `${userName}@gmail.com`, isAuthenticated: true, firstTime: true
+        name: userName,
+        email: `${userName}@gmail.com`,
+        isAuthenticated: true,
+        firstTime: true,
       });
-      localStorage.setItem('user', JSON.stringify({
-        name: userName, email: `${userName}@gmail.com`, isAuthenticated: true, firstTime: true
-      }));
-      const from = location.state?.from || '/chat';
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: userName,
+          email: `${userName}@gmail.com`,
+          isAuthenticated: true,
+          firstTime: true,
+        })
+      );
+      const from = location.state?.from || "/chat";
       navigate(from);
     } else {
-      alert("Invalid Credential")
+      alert("Invalid Credential");
     }
   };
 
   const logout = () => {
     setUser({ name: "", email: "", isAuthenticated: false, firstTime: false });
 
-    localStorage.removeItem('user');
-    window.location.reload()
+    localStorage.removeItem("user");
+    window.location.reload();
   };
 
   return (
     <AppContext.Provider
-      value={{ themeColor, changeThemeColor, user, setUser, login, logout, start, setStart }}
+      value={{
+        themeColor,
+        changeThemeColor,
+        user,
+        setUser,
+        login,
+        logout,
+        start,
+        setStart,
+      }}
     >
       {children}
     </AppContext.Provider>
