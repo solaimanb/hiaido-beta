@@ -35,6 +35,7 @@ export default {
           12: "#2E2A41",
           13: "#6C7275",
         },
+        dark: "#040404",
       },
       fontFamily: {
         sans: ["var(--font-sora)", ...fontFamily.sans],
@@ -78,6 +79,7 @@ export default {
       },
     },
   },
+
   plugins: [
     tailwindScrollbar,
     plugin(function ({ addBase, addComponents, addUtilities }) {
@@ -134,6 +136,6 @@ export default {
         },
       });
     }),
-    require("tailwind-scrollbar"),
+    // require("tailwind-scrollbar"),
   ],
 };

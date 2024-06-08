@@ -73,6 +73,18 @@ import telegram from "./socials/telegram.svg";
 import twitter from "./socials/twitter.svg";
 import awsLogo from "./images/aws.webp";
 
+// Interactive Animations Gif's:
+import interactiveAnimationV1 from "./gif/Interactive-animation-v1.gif";
+import interactiveAnimationV2 from "./gif/Interactive-animation-v2.gif";
+import interactiveAnimationV3 from "./gif/Interactive-animation-v3.gif";
+import interactiveAnimationV4 from "./gif/Interactive-animation-v4.gif";
+import interactiveAnimationV5 from "./gif/Interactive-animation-v5.gif";
+
+// AWS, Azure, Google Cloud Services Icon's:
+import aws from "./icons/aws.svg"
+import azure from "./icons/azure.svg"
+import gcp from "./icons/google-cloud.svg"
+
 export {
   hiaido,
   check,
@@ -141,4 +153,12 @@ export {
   telegram,
   twitter,
   awsLogo,
+  interactiveAnimationV1,
+  interactiveAnimationV2,
+  interactiveAnimationV3,
+  interactiveAnimationV4,
+  interactiveAnimationV5,
+  aws,
+  azure,
+  gcp,
 };

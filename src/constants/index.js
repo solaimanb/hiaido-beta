@@ -39,31 +39,26 @@ import Stepper from "../components/ChatBot/Stepper";
 
 export const navigation = [
   {
-    id: "0",
+    id: "hiring",
     title: "Hiring",
     to: "/hiring",
     onlyMobile: true,
   },
   {
-    id: "1",
+    id: "contact",
     title: "Contact Us",
     to: "/contact",
     onlyMobile: true,
   },
   {
-    id: "2",
+    id: "pricing",
     title: "Pricing",
     to: "/pricing",
     onlyMobile: true,
   },
+
   {
-    id: "3",
-    title: "Sign in",
-    to: "/login",
-    onlyMobile: true,
-  },
-  {
-    id: "4",
+    id: "privacy",
     title: "Privacy",
     to: "/privacy",
     onlyMobile: true,

@@ -154,7 +154,6 @@ const CreateMemberAccountWarningBox = () => {
 };
 
 const ChatsList = memo(({ chats }) => {
-  console.log("ChatsList");
   return (
     <>
       {chats.map((chat, index) => (
@@ -367,7 +366,7 @@ const ChatContainer = () => {
         >
           <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-center gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
             {/* <PaperClipIcon className="w-6 ml-3" opacity={0} /> */}
-            <div className="flex min-w-0 flex-1 flex-col ml-4">
+            <div className="flex flex-col flex-1 min-w-0 ml-4">
               <textarea
                 disabled={memberAccounts && memberAccounts.length == 0}
                 rows={1}
@@ -387,7 +386,7 @@ const ChatContainer = () => {
             <button
               onClick={() => getChat()}
               disabled={chats.length > 0 && chats.at(-1).loading}
-              className="bg-neutral-100 w-8 h-8 rounded-full flex items-center justify-center mr-1 hover:bg-neutral-200 disabled:bg-neutral-500 disabled:cursor-not-allowed"
+              className="bg-neutral-100 hover:bg-neutral-200 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -410,7 +409,6 @@ const ChatContainer = () => {
   );
 };
 
-const buttons = ["Create", "Describe", "Update", "List", "Delete"];
 const buttonProps = {
   Create: {
     gradient: "from-[#4158D0] via-[#C850C0] to-[#FFCC70]",
@@ -429,123 +427,5 @@ const buttonProps = {
     buttonGradient: "!from-red-700 !to-orange-800 !bg-gradient-to-tr",
   },
 };
-
-const sampleChat = [
-  {
-    query: "Create lambda function using boto3",
-    result: `To create a Lambda function using the AWS CLI, we need to gather some required and optional fields. Here are the details:
-  
-  ### Required Fields:
-  1. **Function Name**: The name you want to assign to the Lambda function.
-  2. **Runtime**: The runtime environment for the Lambda function (e.g., \`python3.8\`, \`nodejs14.x\`).
-  3. **Role**: The ARN of the IAM role that Lambda assumes when it executes your function.
-  4. **Handler**: The function within your code that Lambda calls to begin execution (e.g., \`lambda_function.lambda_handler\`).
-  5. **Zip File**: The path to the deployment package (a .zip file) that contains your Lambda function code.
-  
-  ### Optional Fields:
-  1. **Description**: A description of the function.
-  2. **Timeout**: The amount of time that Lambda allows a function to run before stopping it (default is 3 seconds).
-  3. **Memory Size**: The amount of memory available to the function at runtime (default is 128 MB).
-  4. **Environment Variables**: Key-value pairs that Lambda sets in the execution environment.
-  
-  ### Steps:
-  1. **Specify the required fields.**
-  2. **Specify any optional fields if needed.**
-  3. **Confirm to proceed with the creation.**
-  
-  Let's start by gathering the required information.
-  
-  #### Required Fields:
-  1. **Function Name**: What would you like to name your Lambda function?
-  2. **Runtime**: Which runtime environment would you like to use (e.g., \`python3.8\`, \`nodejs14.x\`)?
-  3. **Role ARN**: Do you have the ARN of the IAM role that Lambda will assume?
-  4. **Handler**: What is the handler for your Lambda function (e.g., \`lambda_function.lambda_handler\`)?
-  5. **Zip File Path**: Where is the deployment package located?
-  
-  #### Optional Fields:
-  1. **Description**: Would you like to add a description for the function?
-  2. **Timeout**: Do you want to set a custom timeout (default is 3 seconds)?
-  3. **Memory Size**: Do you want to set a custom memory size (default is 128 MB)?
-  4. **Environment Variables**: Do you have any environment variables to set?
-  
-  Please provide the required information, and specify any optional fields if needed.`,
-  },
-  {
-    query: "Write python code to upload a docker container",
-    result: `To upload a Docker container to a repository, you typically need to follow these steps:
-  1. Build the Docker image.
-  2. Tag the Docker image.
-  3. Push the Docker image to a Docker registry (e.g., Docker Hub, Amazon ECR).
-      
-      Below is a Python script that uses the Docker SDK for Python to automate these steps. This example assumes you are pushing the Docker image to Docker Hub.
-      
-      First, you need to install the Docker SDK for Python:
-      \`\`\`sh
-      pip install docker
-      \`\`\`
-      
-      Here is the Python code:
-      
-      \`\`\`python
-      import docker
-      import os
-      
-      # Initialize the Docker client
-      client = docker.from_env()
-      
-      # Define variables
-      dockerfile_path = './Dockerfile'  # Path to your Dockerfile
-      image_name = 'your_image_name'    # Name of the Docker image
-      tag = 'latest'                    # Tag for the Docker image
-      repository = 'your_dockerhub_username/your_repository_name'  # Docker Hub repository
-  
-      # Build the Docker image
-      print("Building Docker image...")
-      image, build_logs = client.images.build(path='.', dockerfile=dockerfile_path, tag=f'{image_name}:{tag}')
-      for log in build_logs:
-          print(log)
-      
-      # Tag the Docker image
-      print("Tagging Docker image...")
-      image.tag(repository, tag=tag)
-      
-      # Log in to Docker Hub
-      print("Logging in to Docker Hub...")
-      dockerhub_username = os.getenv('DOCKERHUB_USERNAME')
-      dockerhub_password = os.getenv('DOCKERHUB_PASSWORD')
-      client.login(username=dockerhub_username, password=dockerhub_password)
-      
-      # Push the Docker image to Docker Hub
-      print("Pushing Docker image to Docker Hub...")
-      push_logs = client.images.push(repository, tag=tag, stream=True, decode=True)
-      for log in push_logs:
-          print(log)
-      
-      print("Docker image uploaded successfully.")
-      \`\`\`
-      
-      ### Explanation:
-      1. **Initialize the Docker client**: Connects to the Docker daemon.
-      2. **Define variables**: Set the path to your Dockerfile, the image name, tag, and repository.
-      3. **Build the Docker image**: Uses the Dockerfile to build the image.
-      4. **Tag the Docker image**: Tags the image with the repository and tag.
-      5. **Log in to Docker Hub**: Authenticates with Docker Hub using environment variables for security.
-      6. **Push the Docker image**: Pushes the tagged image to the specified Docker Hub repository.
-      
-      ### Prerequisites:
-      - Ensure Docker is installed and running on your machine.
-      - Replace \`your_image_name\`, \`your_dockerhub_username\`, and \`your_repository_name\` with your actual Docker image name, Docker Hub username, and repository name.
-      - Set the \`DOCKERHUB_USERNAME\` and \`DOCKERHUB_PASSWORD\` environment variables with your Docker Hub credentials.
-      
-      You can set the environment variables in your terminal like this:
-      \`\`\`sh
-      export DOCKERHUB_USERNAME='your_dockerhub_username'
-      export DOCKERHUB_PASSWORD='your_dockerhub_password'
-      \`\`\`
-      
-      This script will automate the process of building, tagging, and pushing a Docker image to Docker Hub.
-      `,
-  },
-];
 
 export default ChatContainer;

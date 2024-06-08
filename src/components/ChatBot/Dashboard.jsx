@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   ArrowRightIcon,
   CubeIcon,
@@ -15,7 +15,7 @@ import AnimatedMenuBar from "../shared/AnimatedMenuBar";
 
 export default function Dashboard() {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
-  console.log(user.signInDetails.loginId);
+
   return (
     <div className="flex flex-col justify-center w-full">
       <div className="flex justify-end w-full h-20 pr-10 my-6 text-4xl">
@@ -172,14 +172,14 @@ const SkySection = () => {
       <div className="h-[1px] dark:bg-neutral-700 bg-neutral-400 w-full"></div>
       <div className="w-full">
         <form
-          className="relative py-5 grid grid-cols-2 gap-3"
+          className="relative grid grid-cols-2 gap-3 py-5"
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
             form.handleSubmit();
           }}
         >
-          <div className="col-span-1 w-full">
+          <div className="w-full col-span-1">
             <form.Field
               name="firstName"
               validators={{
@@ -207,7 +207,8 @@ const SkySection = () => {
               )}
             />
           </div>
-          <div className="col-span-1 w-full">
+
+          <div className="w-full col-span-1">
             <form.Field
               name="lastName"
               validators={{
@@ -227,7 +228,7 @@ const SkySection = () => {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3 text-sm">
+                  <div className="h-3 text-sm text-red-500">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -235,7 +236,7 @@ const SkySection = () => {
               )}
             />
           </div>
-          <div className="col-span-2 w-full">
+          <div className="w-full col-span-2">
             <form.Field
               name="email"
               validators={{
@@ -255,7 +256,7 @@ const SkySection = () => {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  <div className="text-red-500 h-3 text-sm">
+                  <div className="h-3 text-sm text-red-500">
                     {field.state.meta.errors.length > 0 &&
                       field.state.meta.errors[0]}
                   </div>
@@ -263,7 +264,7 @@ const SkySection = () => {
               )}
             />
           </div>
-          <div className="flex relative justify-end w-full col-span-2">
+          <div className="relative flex justify-end w-full col-span-2">
             <button
               className={`dark:bg-cyan-100 bg-cyan-200 z-[100] text-black p-3 px-5 rounded-lg space-x-3 w-fit flex items-center disabled:cursor-not-allowed absolute disabled:bg-cyan-100/50 hover:scale-105 duration-200 ease-in delay-75`}
               disabled={isLoading}
@@ -271,7 +272,7 @@ const SkySection = () => {
             >
               <span>Start</span>
               {isLoading ? (
-                <ArrowPathIcon className="w-5 h-5 animate-spin" />
+                <ArrowPathIcon className="animate-spin w-5 h-5" />
               ) : (
                 <ArrowRightIcon className="w-5 h-5" />
               )}
@@ -279,7 +280,7 @@ const SkySection = () => {
             {/* <div className="bg-gradient-to-tr from-red-500 z-0 to-pink-500 rounded-lg absolute w-fit p-3 px-5 space-x-3 flex items-center blur-[7px]">
               <span>Start</span>
               {isLoading ? (
-                <ArrowPathIcon className="w-5 h-5 animate-spin" />
+                <ArrowPathIcon className="animate-spin w-5 h-5" />
               ) : (
                 <ArrowRightIcon className="w-5 h-5" />
               )}

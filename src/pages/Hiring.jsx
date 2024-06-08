@@ -1,10 +1,11 @@
-import "../index.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import "../index.css";
+import AnimatedBtn from "../components/Buttons/AnimatedBtn";
 
 // import { getCountryCallingCode } from "libphonenumber-js";
 // import countries from "i18n-iso-countries";
@@ -1008,13 +1009,10 @@ const Hiring = () => {
             </div>
 
             {/* Form Submission Button */}
-            <div className="mt-10">
-              <button
-                type="submit"
-                className="bg-orange-500/80 hover:bg-orange-500/70 hover:scale-105 w-full px-4 py-2 font-semibold transition duration-200 rounded-full"
-              >
+            <div className="w-full mt-10">
+              <AnimatedBtn additionalClasses="w-full" type="submit">
                 Submit
-              </button>
+              </AnimatedBtn>
               <ToastContainer />
             </div>
           </form>

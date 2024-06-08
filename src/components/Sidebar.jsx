@@ -22,7 +22,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Avatar, Flex, Text } from "@radix-ui/themes";
 import logo from "/hiaido-logo.png";
 import * as Menubar from "@radix-ui/react-menubar";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import { GlobalStateContext } from "../context/GlobalStateContext";
 import { fetchAuthSession } from "aws-amplify/auth";
@@ -85,8 +85,8 @@ const ToggleTheme = ({ isCollapsed }) => {
     theme === "dark" ? 1 : 0
   );
   const data = [
-    { label: "Light", icon: <SunIcon className="w-5 " /> },
-    { label: "Dark", icon: <MoonIcon className="w-5 " /> },
+    { label: "Light", icon: <SunIcon className=" w-5" /> },
+    { label: "Dark", icon: <MoonIcon className=" w-5" /> },
   ];
 
   return (
@@ -231,11 +231,14 @@ const Sidebar = () => {
         <div
           className={`flex items-center justify-start my-4 text-2xl pl-1 ${""}`}
         >
-          <img
-            className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
-            src={logo}
-            alt="Brand Logo"
-          />
+          <Link to={"/"}>
+            <img
+              className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
+              src={logo}
+              alt="Brand Logo"
+            />
+          </Link>
+
           <AnimatePresence>
             {isCollapsed || (
               <motion.h1
@@ -277,7 +280,7 @@ const Sidebar = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col h-fit items-center justify-end mx-3 space-y-2">
+        <div className="h-fit flex flex-col items-center justify-end mx-3 space-y-2">
           {
             // isCollapsed ? (
             //   <div className="">{data[parseInt(activeTabIndex)].icon}</div>
