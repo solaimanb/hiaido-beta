@@ -1,0 +1,71 @@
+.feature-slider .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-slider .swiper-button-next, .swiper-button-prev {
+  border: 3px solid #e75a27;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-slider .swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 20px;
+}
+
+.feature-slider .swiper-button-next {
+  right: 10%;
+  color: #e75a27;
+}
+
+.feature-slider .swiper-button-prev {
+  left: 10%;
+  color: #e75a27;
+}
+
+.feature-slider .swiper-button-next::after {
+  content: url(../../../../assets/icons/right-arrow.svg);
+}
+
+.feature-slider .swiper-button-prev::after {
+  content: url(../../../../assets/icons/left-arrow.svg);
+}
+
+/* ======================================== */
+/* Media queries for responsive positioning */
+/* ======================================== */
+@media (max-width: 768px) {
+  .feature-slider .swiper-button-next {
+    right: 6%;
+  }
+
+  .feature-slider .swiper-button-prev {
+    left: 6%;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-slider .swiper-button-next {
+    right: 4%;
+  }
+
+  .feature-slider .swiper-button-prev {
+    left: 4%;
+  }
+}
+
+/* Add margin on large screens to create space */
+@media (min-width: 1024px) {
+  .feature-slider .swiper-wrapper {
+    margin-left: calc(50% - (5 * 10px) - 50%);
+  }
+}

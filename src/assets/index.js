@@ -85,6 +85,12 @@ import aws from "./icons/aws.svg"
 import azure from "./icons/azure.svg"
 import gcp from "./icons/google-cloud.svg"
 
+// Feature Slider Images:
+import einstein from "./images/features/albert-einstein.png";
+import amazon from "./images/features/amazon-web-services.png";
+import rocket from "./images/features/rocket-60.png";
+import web from "./images/features/web-design.gif"
+
 export {
   hiaido,
   check,
@@ -161,4 +167,8 @@ export {
   aws,
   azure,
   gcp,
+  einstein,
+  amazon,
+  rocket,
+  web,
 };
