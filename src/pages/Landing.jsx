@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import Loading from "../components/shared/Loading";
+import FeatureSlider from "../components/page-components/homepage/feature-slider/FeatureSlider";
 
 // Using React.lazy to dynamically import components for the Landing page.
 const Hero = lazy(() =>
@@ -34,8 +35,9 @@ const Landing = () => {
       </Helmet>
 
       {/* MAIN CONTENT */}
-      <main className="bg-dark min-h-screen px-2 overflow-hidden">
+      <main className="min-h-screen px-2 overflow-hidden bg-dark">
         <Hero />
+        {/* <FeatureSlider /> */}
         <Benefits />
         <Contact />
       </main>
