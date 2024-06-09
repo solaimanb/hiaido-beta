@@ -1,15 +1,8 @@
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import { useAnimationFrame, useMotionValue } from "framer-motion";
+import Marquee from "react-fast-marquee";
 
 import "./featureSlider.css";
 
-// import required modules
-import { Navigation } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
 
 // Image Assets:
@@ -78,7 +71,7 @@ const FeatureSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
   const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
-  const swiperRef = useRef(null);
+  // const swiperRef = useRef(null);
 
   const handleResize = () => {
     setIsMdScreen(window.innerWidth >= 768);
@@ -91,17 +84,109 @@ const FeatureSlider = () => {
     };
   }, []);
 
-  const handleSlideClick = (index) => {
-    setActiveIndex(index);
-    const swiper = swiperRef.current.swiper;
-    const slidesPerView = swiper.params.slidesPerView;
-    const newIndex = Math.max(index - Math.floor(slidesPerView / 2), 0);
-    swiper.slideTo(newIndex);
-  };
+  const baseX = useMotionValue(0);
+  const directionFactor = useRef(1);
+  const baseVelocity = 3;
+
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+    baseX.set(baseX.get() - moveBy);
+  });
 
   return (
     <section className="flex items-center justify-center min-h-screen">
-      <Swiper
+      <section className="w-full">
+        <Marquee pauseOnHover pauseOnClick>
+          {sliders.map((slider, index) =>
+            (index !== 0 || (index === 0 && isMdScreen)) &&
+            (index !== 1 || (index === 1 && isMdScreen)) ? (
+              <div
+                key={index}
+                className={index !== 0 && index !== 1 ? "" : ""}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                onClick={() =>
+                  setActiveIndex((prevIndex) =>
+                    prevIndex === index ? null : index
+                  )
+                }
+              >
+                <div
+                  className={
+                    index !== 0 && index !== 1
+                      ? "relative py-20 flex flex-col gap-10 text-[#F9F7ED]"
+                      : ""
+                  }
+                >
+                  {(hoveredIndex === index || activeIndex === index) && (
+                    <div
+                      className={
+                        index !== 0 && index !== 1
+                          ? "absolute top-0 text-xl font-bold text-center w-full md:text-2xl"
+                          : ""
+                      }
+                    >
+                      {slider?.title}
+                    </div>
+                  )}
+
+                  <div
+                    className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${
+                      hoveredIndex === index || activeIndex === index
+                        ? "relative border-8 rounded p-6 border-[#03FF80]/10"
+                        : "border-8 border-transparent"
+                    } `}
+                  >
+                    <div
+                      className={
+                        index !== 0 && index !== 1
+                          ? "p-4 md:p-14 bg-[#F9F7ED] rounded-xl"
+                          : ""
+                      }
+                    >
+                      <img
+                        src={slider?.image}
+                        alt=""
+                        className={
+                          index !== 0 && index !== 1 ? "object-cover w-40" : ""
+                        }
+                      />
+                    </div>
+
+                    <span
+                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
+                        (hoveredIndex === index || activeIndex === index) &&
+                        "absolute p-3 -top-2 left-[45%] bg-dark"
+                      }`}
+                    ></span>
+
+                    <span
+                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
+                        (hoveredIndex === index || activeIndex === index) &&
+                        "absolute p-3 -bottom-2 left-[45%] bg-dark"
+                      }`}
+                    ></span>
+                  </div>
+
+                  {(hoveredIndex === index || activeIndex === index) && (
+                    <div
+                      className={
+                        index !== 0 && index !== 1
+                          ? "absolute -bottom-10 text-sm font-bold text-center w-full"
+                          : ""
+                      }
+                    >
+                      {slider?.description}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : null
+          )}
+        </Marquee>
+      </section>
+
+      {/* <Swiper
         ref={swiperRef}
         direction="horizontal"
         autoplay={{
@@ -213,7 +298,7 @@ const FeatureSlider = () => {
             </SwiperSlide>
           ) : null
         )}
-      </Swiper>
+      </Swiper> */}
     </section>
   );
 };

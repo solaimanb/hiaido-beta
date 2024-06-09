@@ -82,7 +82,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   return (
     <div className="flex items-center justify-center w-full h-full">
       {showSecondAnimation && (
-        <div className="flex flex-col items-start justify-center md:w-[80%] mx-auto">
+        <div className="flex flex-col items-start justify-center md:w-[80%]">
           {/* HiAiDo Process Animation */}
           {!showExample && (
             <img
@@ -166,7 +166,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 16 }}
-            className={`flex items-center justify-start w-full h-10 md:gap-4 ${
+            className={`flex items-center justify-start w-full md:gap-4 ${
               showExample ? "mt-6" : ""
             }`}
           >
@@ -239,7 +239,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             {/* AWS, AZURE, GCP Triggers */}
             {showExample && (
               <motion.div
-                className={`flex md:gap-2 text-sm font-semibold `}
+                className={`flex md:gap-2 text-sm font-semibold`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ staggerChildren: 0.5 }}
