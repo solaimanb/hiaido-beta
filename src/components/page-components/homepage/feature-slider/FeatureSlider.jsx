@@ -6,61 +6,71 @@ import "./featureSlider.css";
 import { useEffect, useRef, useState } from "react";
 
 // Image Assets:
-import { einstein, amazon, rocket, web } from "../../../../assets/index";
+import {
+  cloudEngineer,
+  webPortal,
+  naturalLanguage,
+  universalSearch,
+  einsteinCloud,
+  multiCloud,
+  jiraIntegration,
+  alerts,
+  sandhAi,
+} from "../../../../assets/index";
 
 const sliders = [
   "",
   "",
   {
-    image: amazon,
+    image: cloudEngineer,
     description:
       "Your digital assistant for seamless cloud management; assign tasks & get them delivered promptly.",
     title: "AI Cloud Engineer (Digital Edition)",
   },
   {
-    image: web,
+    image: webPortal,
     description:
       "Your intuitive hub for seamless cloud automation, management, and everything.",
     title: "Smart Web Portal",
   },
   {
-    image: amazon,
+    image: naturalLanguage,
     description:
       "Interact with the cloud platform using natural language commands, making it intuitive and user-friendly.",
     title: "Natural Language Interface",
   },
   {
-    image: rocket,
+    image: universalSearch,
     description:
       "Instantly access comprehensive details of your cloud ecosystem, resources, and predefined fields. This feature would greatly supplement your cloud operations. Enjoy quick and intuitive navigation for enhanced productivity.",
     title: "Universal Search Bar",
   },
   {
-    image: einstein,
+    image: einsteinCloud,
     description:
       "Meet Einstein, a super-intelligent framework we have built to handle special and complex requirements with unparalleled efficiency and intelligence.",
     title: "Einstein : Your Genius Cloud Champion",
   },
   {
-    image: amazon,
+    image: multiCloud,
     description:
       "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly.",
     title: "Multi Cloud Integration",
   },
   {
-    image: rocket,
+    image: jiraIntegration,
     description:
       "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly.",
     title: "Multi Cloud Integration",
   },
   {
-    image: amazon,
+    image: alerts,
     description:
       "Stay informed with actionable alerts that provide instant notifications when critical events occur in your cloud environment. Our intelligent alerts empower you to proactively address issues before they impact your users",
     title: "Sandh.ai",
   },
   {
-    image: web,
+    image: sandhAi,
     description:
       "Explore the world of serverless development with our interactive playground. This feature provides a sandbox environment where developers can experiment with serverless functions effortlessly.",
     title: "Serverless Functions Playground",
@@ -97,24 +107,17 @@ const FeatureSlider = () => {
     <section className="flex items-center justify-center min-h-screen">
       <section className="w-full">
         <Marquee pauseOnHover pauseOnClick>
-          {sliders.map((slider, index) =>
+          {sliders?.map((slider, index) =>
             (index !== 0 || (index === 0 && isMdScreen)) &&
             (index !== 1 || (index === 1 && isMdScreen)) ? (
               <div
                 key={index}
-                className={index !== 0 && index !== 1 ? "" : ""}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() =>
-                  setActiveIndex((prevIndex) =>
-                    prevIndex === index ? null : index
-                  )
-                }
+                className={index !== 0 && index !== 1 ? "py-20" : ""}
               >
                 <div
                   className={
                     index !== 0 && index !== 1
-                      ? "relative py-20 flex flex-col gap-10 text-[#F9F7ED]"
+                      ? "relative h-96  flex flex-col text-[#F9F7ED]"
                       : ""
                   }
                 >
@@ -133,46 +136,35 @@ const FeatureSlider = () => {
                   <div
                     className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${
                       hoveredIndex === index || activeIndex === index
-                        ? "relative border-8 rounded p-6 border-[#03FF80]/10"
-                        : "border-8 border-transparent"
+                        ? "relative"
+                        : ""
                     } `}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() =>
+                      setActiveIndex((prevIndex) =>
+                        prevIndex === index ? null : index
+                      )
+                    }
                   >
-                    <div
-                      className={
-                        index !== 0 && index !== 1
-                          ? "p-4 md:p-14 bg-[#F9F7ED] rounded-xl"
-                          : ""
-                      }
-                    >
+                    <div className={index !== 0 && index !== 1 ? "w-80" : ""}>
                       <img
                         src={slider?.image}
                         alt=""
                         className={
-                          index !== 0 && index !== 1 ? "object-cover w-40" : ""
+                          index !== 0 && index !== 1
+                            ? "object-cover w-full h-full"
+                            : ""
                         }
                       />
                     </div>
-
-                    <span
-                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
-                        (hoveredIndex === index || activeIndex === index) &&
-                        "absolute p-3 -top-2 left-[45%] bg-dark"
-                      }`}
-                    ></span>
-
-                    <span
-                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
-                        (hoveredIndex === index || activeIndex === index) &&
-                        "absolute p-3 -bottom-2 left-[45%] bg-dark"
-                      }`}
-                    ></span>
                   </div>
 
                   {(hoveredIndex === index || activeIndex === index) && (
                     <div
                       className={
                         index !== 0 && index !== 1
-                          ? "absolute -bottom-10 text-sm font-bold text-center w-full"
+                          ? "absolute -bottom-20 text-sm font-bold text-center w-full"
                           : ""
                       }
                     >
