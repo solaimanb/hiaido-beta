@@ -133,6 +133,11 @@ const Hero = () => {
     return isValid;
   };
 
+  const variants = {
+    hidden: { filter: "blur(10px)", opacity: 0 },
+    visible: { filter: "blur(0px)", opacity: 1 },
+  };
+
   return (
     <Section
       className=""
@@ -143,18 +148,13 @@ const Hero = () => {
     >
       <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-28 md:mt-18">
         <motion.div
-          initial={{ scale: 1.5 }}
-          animate={{ scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 90,
-            damping: 10,
-            duration: 1,
-            ease: "easeInOut",
-          }}
-          className="z-1 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 1 }}
+          variants={variants}
+          className="z-10 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex flex-col px-2 space-y-8 text-3xl font-bold lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10">
               <div className="inline-block text-white/90">
                 The Next Generation
@@ -189,7 +189,7 @@ const Hero = () => {
           {/* Request Demo Form */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col items-center mt-10 space-y-4 text-start"
+            className="flex flex-col items-center mt-10 space-y-3 text-start"
           >
             <p
               className="text-xs font-bold type1 lg:text-2xl md:text-sm"
