@@ -125,7 +125,7 @@ const FeatureSlider = () => {
                     <div
                       className={
                         index !== 0 && index !== 1
-                          ? "absolute top-0 text-xl font-bold text-center w-full md:text-2xl"
+                          ? "absolute -top-10 text-xl font-bold text-center w-full md:text-2xl"
                           : ""
                       }
                     >
