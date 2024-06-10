@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
 import Marquee from "react-fast-marquee";
 
@@ -59,6 +60,11 @@ const FeatureSlider = () => {
     baseX.set(baseX.get() - moveBy);
   });
 
+  const variants = {
+    hidden: { filter: "blur(10px)", opacity: 0 },
+    visible: { filter: "blur(0px)", opacity: 1 },
+  };
+
   return (
     <section className="flex items-center justify-center min-h-screen">
       <section className="w-full">
@@ -78,15 +84,19 @@ const FeatureSlider = () => {
                   }
                 >
                   {(hoveredIndex === index || activeIndex === index) && (
-                    <div
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      transition={{ duration: 0.5 }}
+                      variants={variants}
                       className={
                         index !== 0 && index !== 1
-                          ? "absolute -top-10 text-xl font-bold text-center w-full md:text-2xl"
+                          ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-3xl"
                           : ""
                       }
                     >
                       {slider?.title}
-                    </div>
+                    </motion.div>
                   )}
 
                   <div
@@ -117,7 +127,11 @@ const FeatureSlider = () => {
                   </div>
 
                   {(hoveredIndex === index || activeIndex === index) && (
-                    <div
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      transition={{ duration: 0.5 }}
+                      variants={variants}
                       className={
                         index !== 0 && index !== 1
                           ? "absolute -bottom-20 text-sm font-bold text-center w-full"
@@ -125,7 +139,7 @@ const FeatureSlider = () => {
                       }
                     >
                       {slider?.description}
-                    </div>
+                    </motion.div>
                   )}
                 </div>
               </div>
