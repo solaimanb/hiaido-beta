@@ -153,8 +153,8 @@ const FeatureSlider = () => {
                         alt=""
                         className={
                           index !== 0 && index !== 1
-                            ? "object-cover w-full h-full"
-                            : ""
+                            ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                            : "object-cover w-full h-full transition-all duration-300"
                         }
                       />
                     </div>
