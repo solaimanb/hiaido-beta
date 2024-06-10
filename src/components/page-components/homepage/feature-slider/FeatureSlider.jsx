@@ -66,87 +66,85 @@ const FeatureSlider = () => {
   };
 
   return (
-    <section className="flex items-center justify-center min-h-screen">
-      <section className="w-full">
-        <Marquee pauseOnHover pauseOnClick>
-          {Sliders?.map((slider, index) =>
-            (index !== 0 || (index === 0 && isMdScreen)) &&
-            (index !== 1 || (index === 1 && isMdScreen)) ? (
+    <section className="flex items-center justify-center">
+      <Marquee className="min-h-screen">
+        {Sliders?.map((slider, index) =>
+          (index !== 0 || (index === 0 && isMdScreen)) &&
+          (index !== 1 || (index === 1 && isMdScreen)) ? (
+            <div
+              key={index}
+              className={index !== 0 && index !== 1 ? "py-10" : ""}
+            >
               <div
-                key={index}
-                className={index !== 0 && index !== 1 ? "py-10" : ""}
+                className={
+                  index !== 0 && index !== 1
+                    ? "relative flex flex-col text-[#F9F7ED]"
+                    : ""
+                }
               >
-                <div
-                  className={
-                    index !== 0 && index !== 1
-                      ? "relative flex flex-col text-[#F9F7ED]"
-                      : ""
-                  }
-                >
-                  {(hoveredIndex === index || activeIndex === index) && (
-                    <motion.div
-                      initial="hidden"
-                      animate="visible"
-                      transition={{ duration: 0.5 }}
-                      variants={variants}
-                      className={
-                        index !== 0 && index !== 1
-                          ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-3xl"
-                          : ""
-                      }
-                    >
-                      {slider?.title}
-                    </motion.div>
-                  )}
-
-                  <div
-                    className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${
-                      hoveredIndex === index || activeIndex === index
-                        ? "relative"
+                {(hoveredIndex === index || activeIndex === index) && (
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.5 }}
+                    variants={variants}
+                    className={
+                      index !== 0 && index !== 1
+                        ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-3xl"
                         : ""
-                    } `}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() =>
-                      setActiveIndex((prevIndex) =>
-                        prevIndex === index ? null : index
-                      )
                     }
                   >
-                    <div className={index !== 0 && index !== 1 ? "w-80" : ""}>
-                      <img
-                        src={imageAssets[slider?.image]}
-                        alt={imageAssets[slider?.image]}
-                        className={
-                          index !== 0 && index !== 1
-                            ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                            : "object-cover w-full h-full transition-all duration-300"
-                        }
-                      />
-                    </div>
-                  </div>
+                    {slider?.title}
+                  </motion.div>
+                )}
 
-                  {(hoveredIndex === index || activeIndex === index) && (
-                    <motion.div
-                      initial="hidden"
-                      animate="visible"
-                      transition={{ duration: 0.5 }}
-                      variants={variants}
+                <div
+                  className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${
+                    hoveredIndex === index || activeIndex === index
+                      ? "relative"
+                      : ""
+                  } `}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() =>
+                    setActiveIndex((prevIndex) =>
+                      prevIndex === index ? null : index
+                    )
+                  }
+                >
+                  <div className={index !== 0 && index !== 1 ? "w-80" : ""}>
+                    <img
+                      src={imageAssets[slider?.image]}
+                      alt={imageAssets[slider?.image]}
                       className={
                         index !== 0 && index !== 1
-                          ? "absolute -bottom-20 text-sm font-bold text-center w-full"
-                          : ""
+                          ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                          : "object-cover w-full h-full transition-all duration-300"
                       }
-                    >
-                      {slider?.description}
-                    </motion.div>
-                  )}
+                    />
+                  </div>
                 </div>
+
+                {(hoveredIndex === index || activeIndex === index) && (
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.5 }}
+                    variants={variants}
+                    className={
+                      index !== 0 && index !== 1
+                        ? "absolute -bottom-20 text-sm font-bold text-center w-full"
+                        : ""
+                    }
+                  >
+                    {slider?.description}
+                  </motion.div>
+                )}
               </div>
-            ) : null
-          )}
-        </Marquee>
-      </section>
+            </div>
+          ) : null
+        )}
+      </Marquee>
 
       {/* <Swiper
         ref={swiperRef}
