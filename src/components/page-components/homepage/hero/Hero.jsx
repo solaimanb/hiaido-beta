@@ -187,17 +187,10 @@ const Hero = () => {
           </div>
 
           {/* Request Demo Form */}
-          <form
+          {/* <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center mt-10 space-y-3 text-start"
           >
-            <p
-              className="text-xs font-bold type1 lg:text-2xl md:text-sm"
-              onAnimationEnd={handleAnimationEnd}
-            >
-              &quot;Welcome to the future of automation with HIAIDO&quot;
-            </p>
-
             <div
               value={data.request_email}
               name="request_email"
@@ -214,7 +207,20 @@ const Hero = () => {
                 Request Demo
               </AnimatedBtn>
             </div>
-          </form>
+          </form> */}
+
+          <div className="flex flex-col items-center mt-10 space-y-3 text-start">
+            <p
+              className="text-xs font-bold type1 lg:text-2xl md:text-sm"
+              onAnimationEnd={handleAnimationEnd}
+            >
+              &quot;Welcome to the future of automation with HIAIDO&quot;
+            </p>
+
+            <AnimatedBtn to={"/login"} className="font-semibold">
+              Get Started
+            </AnimatedBtn>
+          </div>
 
           {/* Interactive Animation */}
           <InteractiveAnimation showSecondAnimation={showSecondAnimation} />
