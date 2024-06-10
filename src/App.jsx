@@ -12,6 +12,8 @@ import Loading from "./components/shared/Loading.jsx";
 const RootLayout = lazy(() => import("./layouts/RootLayout"));
 const Landing = lazy(() => import("./pages/Landing"));
 const Hiring = lazy(() => import("./pages/Hiring"));
+const About = lazy(() => import("./pages/About"));
+const Features = lazy(() => import("./pages/Features"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -43,6 +45,8 @@ const App = () => {
             <Route index element={<Landing />} />
 
             <Route path="/hiring" element={<Hiring />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/features" element={<Features />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/privacy" element={<Privacy />} />

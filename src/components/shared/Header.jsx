@@ -62,9 +62,11 @@ const Header = () => {
   }, [lastScrollTop]);
 
   const navItems = [
-    { name: "Hiring", path: "/hiring" },
-    { name: "Contact Us", path: "/contact" },
+    // { name: "Hiring", path: "/hiring" },
+    { name: "About", path: "/about" },
+    { name: "Features", path: "/features" },
     { name: "Pricing", path: "/pricing" },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   return (
@@ -73,9 +75,9 @@ const Header = () => {
       `}
     >
       <div className="container flex items-center justify-between w-full px-0">
-        <div className="z-50 flex items-center gap-x-10">
+        <div className="z-50 flex items-center py-2 gap-x-10">
           <NavLink className="block w-fit" to="/">
-            <img src={hiaido} alt="hiaido" className="md:w-48 w-28" />
+            <img src={hiaido} alt="hiaido" className="w-24 md:w-40" />
           </NavLink>
 
           <nav className="hidden lg:block">
@@ -93,7 +95,7 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className="flex items-center justify-center gap-8 px-5 ">
+        <div className="flex items-center justify-center gap-4 px-5 ">
           {user ? (
             <Link to={"/chat"}>
               <AvatarIcon
@@ -104,10 +106,21 @@ const Header = () => {
               />
             </Link>
           ) : (
-            <AnimatedBtn to={"/login"} className="hidden font-semibold lg:flex">
+            <AnimatedBtn
+              to={"/login"}
+              className="hidden font-semibold lg:block"
+            >
               Login
             </AnimatedBtn>
           )}
+
+          <AnimatedBtn
+            to={"/chat"}
+            className="hidden font-semibold lg:block"
+            outlined={true}
+          >
+            Start Free Trial
+          </AnimatedBtn>
 
           <button
             className={`${openNavigation ? "hidden" : ""} lg:hidden ml-auto`}

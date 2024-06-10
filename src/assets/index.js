@@ -86,10 +86,15 @@ import azure from "./icons/azure.svg"
 import gcp from "./icons/google-cloud.svg"
 
 // Feature Slider Images:
-import einstein from "./images/features/albert-einstein.png";
-import amazon from "./images/features/amazon-web-services.png";
-import rocket from "./images/features/rocket-60.png";
-import web from "./images/features/web-design.gif"
+import cloudEngineer from "./feature-images/01-ai-cloud-engineer.png";
+import webPortal from "./feature-images/02-smart-web-portal.png";
+import naturalLanguage from "./feature-images/03-natural-language-interface.png";
+import universalSearch from "./feature-images/04-universal-search-bar.png";
+import einsteinCloud from "./feature-images/05-einstein-genius-cloud-champion.png";
+import multiCloud from "./feature-images/06-multi-cloud-connectivity.png";
+import jiraIntegration from "./feature-images/07-jira-integration.png";
+import alerts from "./feature-images/08-alerts.png";
+import sandhAi from "./feature-images/09-sandh-ai.png";
 
 export {
   hiaido,
@@ -167,8 +172,13 @@ export {
   aws,
   azure,
   gcp,
-  einstein,
-  amazon,
-  rocket,
-  web,
+  cloudEngineer,
+  webPortal,
+  naturalLanguage,
+  universalSearch,
+  einsteinCloud,
+  multiCloud,
+  jiraIntegration,
+  alerts,
+  sandhAi,
 };
