@@ -133,7 +133,7 @@ const FeatureSlider = () => {
                     variants={variants}
                     className={
                       index !== 0 && index !== 1
-                        ? "absolute -bottom-20 text-sm font-bold text-center w-full"
+                        ? "absolute -bottom-10 text-sm font-bold text-center w-full"
                         : ""
                     }
                   >
