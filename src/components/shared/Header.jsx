@@ -96,6 +96,14 @@ const Header = () => {
         </div>
 
         <div className="flex items-center justify-center gap-4 px-5 ">
+          <AnimatedBtn
+            to={"/chat"}
+            className="hidden font-semibold lg:block"
+            outlined={true}
+          >
+            Start Free Trial
+          </AnimatedBtn>
+
           {user ? (
             <Link to={"/chat"}>
               <AvatarIcon
@@ -113,14 +121,6 @@ const Header = () => {
               Login
             </AnimatedBtn>
           )}
-
-          <AnimatedBtn
-            to={"/chat"}
-            className="hidden font-semibold lg:block"
-            outlined={true}
-          >
-            Start Free Trial
-          </AnimatedBtn>
 
           <button
             className={`${openNavigation ? "hidden" : ""} lg:hidden ml-auto`}
