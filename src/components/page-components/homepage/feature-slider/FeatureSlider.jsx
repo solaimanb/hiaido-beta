@@ -112,12 +112,12 @@ const FeatureSlider = () => {
             (index !== 1 || (index === 1 && isMdScreen)) ? (
               <div
                 key={index}
-                className={index !== 0 && index !== 1 ? "py-20" : ""}
+                className={index !== 0 && index !== 1 ? "py-10" : ""}
               >
                 <div
                   className={
                     index !== 0 && index !== 1
-                      ? "relative h-96  flex flex-col text-[#F9F7ED]"
+                      ? "relative flex flex-col text-[#F9F7ED]"
                       : ""
                   }
                 >

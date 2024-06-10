@@ -86,15 +86,15 @@ import azure from "./icons/azure.svg"
 import gcp from "./icons/google-cloud.svg"
 
 // Feature Slider Images:
-import cloudEngineer from "./feature-images/01-ai-cloud-engineer.webp";
-import webPortal from "./feature-images/02-smart-web-portal.webp";
-import naturalLanguage from "./feature-images/03-natural-language-interface.webp";
-import universalSearch from "./feature-images/04-universal-search-bar.webp";
-import einsteinCloud from "./feature-images/05-einstein-genius-cloud-champion.webp";
-import multiCloud from "./feature-images/06-multi-cloud-connectivity.webp";
-import jiraIntegration from "./feature-images/07-jira-integration.webp";
-import alerts from "./feature-images/08-alerts.webp";
-import sandhAi from "./feature-images/09-sandh-ai.webp";
+import cloudEngineer from "./feature-images/01-ai-cloud-engineer.png";
+import webPortal from "./feature-images/02-smart-web-portal.png";
+import naturalLanguage from "./feature-images/03-natural-language-interface.png";
+import universalSearch from "./feature-images/04-universal-search-bar.png";
+import einsteinCloud from "./feature-images/05-einstein-genius-cloud-champion.png";
+import multiCloud from "./feature-images/06-multi-cloud-connectivity.png";
+import jiraIntegration from "./feature-images/07-jira-integration.png";
+import alerts from "./feature-images/08-alerts.png";
+import sandhAi from "./feature-images/09-sandh-ai.png";
 
 export {
   hiaido,
