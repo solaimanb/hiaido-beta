@@ -115,6 +115,7 @@ const Header = () => {
           )}
 
           <AnimatedBtn
+            to={"/chat"}
             className="hidden font-semibold lg:block"
             outlined={true}
           >
