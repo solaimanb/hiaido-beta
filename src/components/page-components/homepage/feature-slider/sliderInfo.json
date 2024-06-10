@@ -1,0 +1,69 @@
+[
+  {},
+  {},
+  {
+    "image": "cloudEngineer",
+    "description": "Your digital assistant for seamless cloud management; assign tasks & get them delivered promptly.",
+    "title": "AI Cloud Engineer (Digital Edition)"
+  },
+  {
+    "image": "webPortal",
+    "description": "Your intuitive hub for seamless cloud automation, management, and everything. HIAIDO's smart web portal is designed to simplify cloud operations, enabling you to manage your cloud resources effortlessly.",
+    "title": "Smart Web Portal"
+  },
+  {
+    "image": "naturalLanguage",
+    "description": "Interact with the cloud platform using natural language commands, making it intuitive and user-friendly.",
+    "title": "Natural Language Interface"
+  },
+  {
+    "image": "universalSearch",
+    "description": "Instantly access comprehensive details of your cloud ecosystem, resources, and predefined fields.",
+    "title": "Universal Search Bar"
+  },
+  {
+    "image": "einsteinCloud",
+    "description": "Meet Einstein, a super-intelligent framework we have built to handle special and complex requirements with unparalleled efficiency and intelligence.",
+    "title": "Einstein : Your Genius Cloud Champion"
+  },
+  {
+    "image": "multiCloud",
+    "description": "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly.",
+    "title": "Multi Cloud Integration"
+  },
+  {
+    "image": "jiraIntegration",
+    "description": "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly.",
+    "title": "JIRA Integration"
+  },
+  {
+    "image": "alerts",
+    "description": "Stay informed with actionable alerts that provide instant notifications when critical events occur in your cloud environment. Our intelligent alerts empower you to proactively address issues before they impact your users, ensuring seamless operations.",
+    "title": "Alerts"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Stay informed with actionable alerts that provide instant notifications when critical events occur in your cloud environment. Our intelligent alerts empower you to proactively address issues before they impact your users, ensuring seamless operations.",
+    "title": "Sandh.ai"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Explore the world of serverless development with our interactive playground. This feature provides a sandbox environment where developers can experiment with serverless functions effortlessly. Say goodbye to infrastructure setup headaches and hello to playful experimentation.",
+    "title": "Serverless Functions Playground"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Stop wasting time on manual security tasks. Hiaido, the world's first AI-powered cloud automation platform, automates security configurations and compliance checks, freeing you to focus on innovation.",
+    "title": "Security. Automated"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Unlock the full potential of your cloud environment with personalized recommendations tailored to your specific usage patterns and business needs. Our AI-driven recommendation engine analyzes your cloud usage data and provides actionable insights to optimize performance, reduce costs, and enhance security.",
+    "title": "Recommendations Engine"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Introducing HIAIDO Sky, a revolutionary suite of features designed to supercharge your DevOps workflow and empower your development teams.",
+    "title": "SKY HIAIDO's DevOps Suite"
+  }
+]
