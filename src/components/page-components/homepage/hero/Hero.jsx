@@ -6,9 +6,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { PointMaterial, Points } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 import { motion } from "framer-motion";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import AnimatedText from "../../../shared/AnimatedText";
-import axios from "axios";
+// import axios from "axios";
 
 import AnimatedBtn from "../../../Buttons/AnimatedBtn";
 import InteractiveAnimation from "./InteractiveAnimation";
@@ -60,13 +60,13 @@ function Stars(props) {
 }
 
 const Hero = () => {
-  const [data, setData] = useState("");
-  const [isLoader, setIsLoader] = useState(false);
+  // const [data, setData] = useState("");
+  // const [isLoader, setIsLoader] = useState(false);
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
 
-  if (isLoader) {
-    console.log("submitting request..", isLoader);
-  }
+  // if (isLoader) {
+  //   console.log("submitting request..", isLoader);
+  // }
 
   const handleAnimationEnd = () => {
     setShowSecondAnimation(true);
@@ -75,63 +75,63 @@ const Hero = () => {
   //================================
   // 'Request Demo' Form Submission:
   //================================
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
 
-    if (checkEmail()) {
-      setIsLoader(true);
-      const bodyFormData = new FormData();
-      bodyFormData.append("email", data);
+  //   if (checkEmail()) {
+  //     setIsLoader(true);
+  //     const bodyFormData = new FormData();
+  //     bodyFormData.append("email", data);
 
-      axios({
-        method: "POST",
-        url: "https://api.hiaido.com/public/api/demo",
-        data: bodyFormData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-        .then((response) => {
-          if (response?.data.status === true) {
-            setIsLoader(false);
-            console.log(response.data);
-            toast.success(response?.data.message);
-            setData("");
-          } else {
-            setIsLoader(false);
-            toast.error("Something went wrong!");
-          }
-        })
-        .catch((err) => {
-          setIsLoader(false);
-          console.error("Error while saving data" + err);
-          toast.error("Internal Server Error!");
-        });
-    }
-  };
+  //     axios({
+  //       method: "POST",
+  //       url: "https://api.hiaido.com/public/api/demo",
+  //       data: bodyFormData,
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     })
+  //       .then((response) => {
+  //         if (response?.data.status === true) {
+  //           setIsLoader(false);
+  //           console.log(response.data);
+  //           toast.success(response?.data.message);
+  //           setData("");
+  //         } else {
+  //           setIsLoader(false);
+  //           toast.error("Something went wrong!");
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         setIsLoader(false);
+  //         console.error("Error while saving data" + err);
+  //         toast.error("Internal Server Error!");
+  //       });
+  //   }
+  // };
 
-  const checkEmail = () => {
-    var isValid = true;
+  // const checkEmail = () => {
+  //   var isValid = true;
 
-    if (typeof data !== "undefined") {
-      let lastAtPos = data.lastIndexOf("@");
-      let lastDotPos = data.lastIndexOf(".");
-      if (
-        !(
-          lastAtPos < lastDotPos &&
-          lastAtPos > 0 &&
-          data.indexOf("@@") === -1 &&
-          lastDotPos > 2 &&
-          data?.length - lastDotPos > 2
-        )
-      ) {
-        isValid = false;
-        toast.error("Email is not valid");
-      }
-    }
+  //   if (typeof data !== "undefined") {
+  //     let lastAtPos = data.lastIndexOf("@");
+  //     let lastDotPos = data.lastIndexOf(".");
+  //     if (
+  //       !(
+  //         lastAtPos < lastDotPos &&
+  //         lastAtPos > 0 &&
+  //         data.indexOf("@@") === -1 &&
+  //         lastDotPos > 2 &&
+  //         data?.length - lastDotPos > 2
+  //       )
+  //     ) {
+  //       isValid = false;
+  //       toast.error("Email is not valid");
+  //     }
+  //   }
 
-    return isValid;
-  };
+  //   return isValid;
+  // };
 
   const variants = {
     hidden: { filter: "blur(10px)", opacity: 0 },
