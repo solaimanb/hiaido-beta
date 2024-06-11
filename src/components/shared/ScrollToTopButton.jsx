@@ -1,4 +1,4 @@
-import {  ArrowUpIcon } from "@radix-ui/react-icons";
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { useState, useEffect } from "react";
 
 const ScrollToTopButton = () => {
@@ -31,7 +31,7 @@ const ScrollToTopButton = () => {
     isVisible && (
       <button
         onClick={scrollToTop}
-        className="scroll-to-top bottom-4 right-4 border-orange-500/50 bg-black/40 hover:bg-orange-500 hover:text-black fixed z-50 p-3 text-orange-500 transition-colors duration-200 border-2 rounded-full"
+        className="fixed z-50 p-3 text-orange-500 transition-colors duration-200 border-2 rounded-full scroll-to-top bottom-4 right-4 border-orange-500/50 bg-black/40 hover:bg-orange-500 hover:text-black"
       >
         <ArrowUpIcon width={20} height={20} />
       </button>

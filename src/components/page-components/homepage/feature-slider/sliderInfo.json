@@ -4,7 +4,7 @@
   {
     "image": "cloudEngineer",
     "description": "Your digital assistant for seamless cloud management; assign tasks & get them delivered promptly.",
-    "title": "AI Cloud Engineer (Digital Edition)"
+    "title": "AI Cloud Engineer\n (Digital Edition)"
   },
   {
     "image": "webPortal",
@@ -14,7 +14,7 @@
   {
     "image": "naturalLanguage",
     "description": "Interact with the cloud platform using natural language commands, making it intuitive and user-friendly.",
-    "title": "Natural Language Interface"
+    "title": "Natural Language\n Interface"
   },
   {
     "image": "universalSearch",
@@ -24,7 +24,7 @@
   {
     "image": "einsteinCloud",
     "description": "Meet Einstein, a super-intelligent framework we have built to handle special and complex requirements with unparalleled efficiency and intelligence.",
-    "title": "Einstein : Your Genius Cloud Champion"
+    "title": "Einstein : Your Genius\n Cloud Champion"
   },
   {
     "image": "multiCloud",
@@ -49,7 +49,7 @@
   {
     "image": "sandhAi",
     "description": "Explore the world of serverless development with our interactive playground. This feature provides a sandbox environment where developers can experiment with serverless functions effortlessly. Say goodbye to infrastructure setup headaches and hello to playful experimentation.",
-    "title": "Serverless Functions Playground"
+    "title": "Serverless Functions\n Playground"
   },
   {
     "image": "sandhAi",
@@ -64,6 +64,6 @@
   {
     "image": "sandhAi",
     "description": "Introducing HIAIDO Sky, a revolutionary suite of features designed to supercharge your DevOps workflow and empower your development teams.",
-    "title": "SKY HIAIDO's DevOps Suite"
+    "title": "SKY HIAIDO's\n DevOps Suite"
   }
 ]

@@ -11,7 +11,7 @@ const ScrollToTopButton = lazy(() =>
 
 const RootLayout = () => {
   return (
-    <div className="bg-dark relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-dark">
       <Suspense fallback={<Loading />}>
         <Header />
         <Outlet />
