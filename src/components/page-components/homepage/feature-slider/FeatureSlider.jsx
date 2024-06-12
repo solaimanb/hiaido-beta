@@ -193,20 +193,6 @@ const FeatureSlider = () => {
                         />
                       </div>
                     </div>
-
-                    <span
-                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
-                        (hoveredIndex === index || activeIndex === index) &&
-                        "absolute p-3 -top-2 left-[45%] bg-dark"
-                      }`}
-                    ></span>
-
-                    <span
-                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
-                        (hoveredIndex === index || activeIndex === index) &&
-                        "absolute p-3 -bottom-2 left-[45%] bg-dark"
-                      }`}
-                    ></span>
                   </div>
                 </div>
               </SwiperSlide>
