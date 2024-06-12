@@ -7,14 +7,45 @@ import { useEffect, useState } from "react";
 import AnimatedBtn from "../Buttons/AnimatedBtn";
 
 import { hiaido } from "../../assets";
-import AnimatedText from "./AnimatedText";
+// import AnimatedText from "./AnimatedText";
 import { AvatarIcon } from "@radix-ui/react-icons";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+
+const navItems = [
+  // { name: "Hiring", path: "/hiring" },
+  { name: "About", path: "/about" },
+  {
+    name: "Products",
+    path: "/products",
+    subNav: [
+      {
+        name: "AI Cloud Engineer",
+        description:
+          "Your intelligent assistant for streamlining cloud management tasks with efficiency and precision.",
+      },
+      {
+        name: "Einstein",
+        description:
+          "Unleash the power of AI with Einstein, your trusted ally for tackling complex cloud challenges effortlessly.",
+      },
+      {
+        name: "Sandh.ai",
+        description:
+          "Explore Sandh.ai, the marketplace for specialized AI agents tailored to your unique cloud automation needs.",
+      },
+    ],
+  },
+  { name: "Features", path: "/features" },
+  { name: "Integrations", path: "/integrations" },
+  { name: "Enterprise", path: "/enterprise" },
+  { name: "Pricing", path: "/pricing" },
+];
 
 const Header = () => {
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
   const [user, setUser] = useState();
+  const [hoveredNavItem, setHoveredNavItem] = useState(true);
 
   const { signOut } = useAuthenticator((context) => [
     context.signOut,
@@ -61,35 +92,73 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollTop]);
 
-  const navItems = [
-    // { name: "Hiring", path: "/hiring" },
-    { name: "About", path: "/about" },
-    { name: "Features", path: "/features" },
-    { name: "Pricing", path: "/pricing" },
-    { name: "Contact Us", path: "/contact" },
-  ];
-
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
       `}
     >
       <div className="container flex items-center justify-between w-full px-0">
-        <div className="z-50 flex items-center py-2 gap-x-10">
-          <NavLink className="block w-fit" to="/">
+        <div className="z-50 flex items-center py-2 gap-x-8">
+          <NavLink className="block" to="/">
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40" />
           </NavLink>
 
           <nav className="hidden lg:block">
-            <div className="flex">
+            <div className="relative flex gap-6">
               {navItems.map((item, index) => (
-                <NavLink
+                <div
                   key={index}
-                  className="w-28 hover:text-orange-400/100 font-[400] text-center text-white/70 transition-all duration-300 ease-in-out"
-                  to={item?.path}
+                  onMouseEnter={() => setHoveredNavItem(item.name)}
+                  onMouseLeave={() => setHoveredNavItem(null)}
                 >
-                  <AnimatedText text={` ${item?.name}`} />
-                </NavLink>
+                  <NavLink
+                    className="w-28 py-4 hover:text-orange-400/100 font-[400] text-center text-white/70 transition-all duration-300 ease-in-out"
+                    to={item?.path}
+                  >
+                    {` ${item?.name}`}
+                  </NavLink>
+
+                  {item.subNav && hoveredNavItem === item.name && (
+                    <div className="absolute left-0 z-10 w-full p-6 bg-gray-900 shadow-lg top-10 rounded-xl backdrop-blur-lg">
+                      <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
+                        {item.subNav.map((subItem, subIndex) => (
+                          <div
+                            key={subIndex}
+                            className="p-4 space-y-2 rounded-lg bg-gray-800/50 hover:bg-gray-700"
+                          >
+                            <NavLink
+                              className="block text-lg font-bold text-white"
+                              to={`#${subItem.name
+                                .replace(/\s+/g, "-")
+                                .toLowerCase()}`}
+                            >
+                              {subItem.name}
+                            </NavLink>
+
+                            <p className="text-sm text-gray-400">
+                              {subItem.description}
+                            </p>
+                          </div>
+                        ))}
+
+                        <div className="absolute z-0 w-10 h-10 rounded-lg -top-3 left-24">
+                          <svg
+                            width="40"
+                            height="30"
+                            viewBox="0 0 158 141"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M63.4115 9.00003C70.3397 -2.99997 87.6603 -3 94.5885 9L155.21 114C162.138 126 153.478 141 139.622 141H18.3783C4.52185 141 -4.13844 126 2.78976 114L63.4115 9.00003Z"
+                              fill="#111827"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </nav>

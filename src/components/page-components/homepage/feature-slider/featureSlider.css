@@ -8,7 +8,8 @@
   align-items: center;
 }
 
-.feature-slider .swiper-button-next, .swiper-button-prev {
+.feature-slider .swiper-button-next,
+.swiper-button-prev {
   border: 3px solid #e75a27;
   border-radius: 50%;
   width: 50px;
@@ -18,7 +19,8 @@
   align-items: center;
 }
 
-.feature-slider .swiper-button-next::after, .swiper-button-prev::after {
+.feature-slider .swiper-button-next::after,
+.swiper-button-prev::after {
   font-size: 20px;
 }
 
@@ -68,4 +70,14 @@
   .feature-slider .swiper-wrapper {
     margin-left: calc(50% - (5 * 10px) - 50%);
   }
+}
+
+.neon-bg:hover {
+  box-shadow: 0 0 50px 15px #e75a27;
+  border-radius: 40px;
+  scale: 1.02;
+}
+
+.text-glow {
+  text-shadow: 0 0 5px rgba(0, 0, 139, 0.7), 0 0 10px rgba(0, 0, 139, 0.651), 0 0 15px rgba(0, 0, 139, 0.6), 0 0 20px rgba(0, 0, 139, 0.5), 0 0 25px rgba(0, 0, 139, 0.4), 0 0 30px rgba(0, 0, 139, 0.3);
 }
