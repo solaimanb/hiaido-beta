@@ -5,6 +5,7 @@ import { navigation } from "../../constants";
 import MenuSvg from "../../assets/svg/MenuSvg";
 import { useEffect, useState } from "react";
 import AnimatedBtn from "../Buttons/AnimatedBtn";
+import { CloudFog, Cpu, ShoppingBag } from "lucide-react";
 
 import { hiaido } from "../../assets";
 // import AnimatedText from "./AnimatedText";
@@ -22,16 +23,19 @@ const navItems = [
         name: "AI Cloud Engineer",
         description:
           "Your intelligent assistant for streamlining cloud management tasks with efficiency and precision.",
+        icon: CloudFog,
       },
       {
         name: "Einstein",
         description:
           "Unleash the power of AI with Einstein, your trusted ally for tackling complex cloud challenges effortlessly.",
+        icon: Cpu,
       },
       {
         name: "Sandh.ai",
         description:
           "Explore Sandh.ai, the marketplace for specialized AI agents tailored to your unique cloud automation needs.",
+        icon: ShoppingBag,
       },
     ],
   },
@@ -121,25 +125,31 @@ const Header = () => {
                   {item.subNav && hoveredNavItem === item.name && (
                     <div className="absolute left-0 z-10 w-full p-6 bg-gray-900 shadow-lg top-10 rounded-xl backdrop-blur-lg">
                       <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
-                        {item.subNav.map((subItem, subIndex) => (
-                          <div
-                            key={subIndex}
-                            className="p-4 space-y-2 rounded-lg bg-gray-800/50 hover:bg-gray-700"
-                          >
-                            <NavLink
-                              className="block text-lg font-bold text-white"
-                              to={`#${subItem.name
-                                .replace(/\s+/g, "-")
-                                .toLowerCase()}`}
+                        {item.subNav.map((subItem, subIndex) => {
+                          const Icon = subItem.icon;
+                          return (
+                            <div
+                              key={subIndex}
+                              className="p-4 space-y-2 rounded-lg bg-gray-800/50 hover:bg-gray-700"
                             >
-                              {subItem.name}
-                            </NavLink>
-
-                            <p className="text-sm text-gray-400">
-                              {subItem.description}
-                            </p>
-                          </div>
-                        ))}
+                              <div className="flex items-center space-x-2">
+                                {/* icon */}
+                                <Icon className="w-5 h-5 text-white" />
+                                <NavLink
+                                  className="block text-lg font-bold text-white"
+                                  to={`#${subItem.name
+                                    .replace(/\s+/g, "-")
+                                    .toLowerCase()}`}
+                                >
+                                  {subItem.name}
+                                </NavLink>
+                              </div>
+                              <p className="text-sm text-gray-400">
+                                {subItem.description}
+                              </p>
+                            </div>
+                          );
+                        })}
 
                         <div className="absolute z-0 w-10 h-10 rounded-lg -top-3 left-24">
                           <svg
