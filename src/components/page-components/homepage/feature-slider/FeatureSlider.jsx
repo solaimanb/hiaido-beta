@@ -115,7 +115,7 @@ const FeatureSlider = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen">
+    <section className="flex flex-col items-center justify-center min-h-screen mt-10">
       <motion.div
         initial="hidden"
         animate="visible"
@@ -124,7 +124,7 @@ const FeatureSlider = () => {
         className="w-full md:h-40"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="w-full text-xl font-bold text-center text-glow bold-text md:text-6xl xl:text-7xl">
+          <div className="w-full text-3xl font-bold text-center text-glow bold-text md:text-6xl xl:text-7xl">
             {currentTitle.split("\n").map((line, index) => (
               <div key={index}>{line}</div>
             ))}
