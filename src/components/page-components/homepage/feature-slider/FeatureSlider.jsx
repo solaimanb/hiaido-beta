@@ -30,6 +30,7 @@ import {
   jiraIntegration,
   alerts,
   sandhAi,
+  devOpsSuite,
 } from "../../../../assets/index";
 
 const imageAssets = {
@@ -42,6 +43,7 @@ const imageAssets = {
   jiraIntegration,
   alerts,
   sandhAi,
+  devOpsSuite,
 };
 
 const FeatureSlider = () => {
@@ -113,7 +115,7 @@ const FeatureSlider = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen">
+    <section className="flex flex-col items-center justify-center min-h-screen mt-10">
       <motion.div
         initial="hidden"
         animate="visible"
@@ -122,7 +124,7 @@ const FeatureSlider = () => {
         className="w-full md:h-40"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="w-full text-xl font-bold text-center bold-text md:text-6xl xl:text-7xl">
+          <div className="w-full text-3xl font-bold text-center text-glow bold-text md:text-6xl xl:text-7xl">
             {currentTitle.split("\n").map((line, index) => (
               <div key={index}>{line}</div>
             ))}
@@ -140,7 +142,7 @@ const FeatureSlider = () => {
           }}
           modules={[Navigation]}
           className="flex items-center feature-slider"
-          spaceBetween={10}
+          spaceBetween={0}
           breakpoints={breakpoints}
         >
           {Sliders.map((slider, index) =>
@@ -173,7 +175,13 @@ const FeatureSlider = () => {
                           : ""
                       }
                     >
-                      <div className={index !== 0 && index !== 1 ? "w-80" : ""}>
+                      <div
+                        className={
+                          index !== 0 && index !== 1
+                            ? "w-80 neon-bg transition-all duration-200"
+                            : ""
+                        }
+                      >
                         <img
                           src={imageAssets[slider?.image]}
                           alt={imageAssets[slider?.image]}
@@ -185,20 +193,6 @@ const FeatureSlider = () => {
                         />
                       </div>
                     </div>
-
-                    <span
-                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
-                        (hoveredIndex === index || activeIndex === index) &&
-                        "absolute p-3 -top-2 left-[45%] bg-dark"
-                      }`}
-                    ></span>
-
-                    <span
-                      className={`${index !== 0 && index !== 1 ? "" : ""} ${
-                        (hoveredIndex === index || activeIndex === index) &&
-                        "absolute p-3 -bottom-2 left-[45%] bg-dark"
-                      }`}
-                    ></span>
                   </div>
                 </div>
               </SwiperSlide>

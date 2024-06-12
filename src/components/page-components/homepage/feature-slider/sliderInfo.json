@@ -43,7 +43,7 @@
   },
   {
     "image": "sandhAi",
-    "description": "Stay informed with actionable alerts that provide instant notifications when critical events occur in your cloud environment. Our intelligent alerts empower you to proactively address issues before they impact your users, ensuring seamless operations.",
+    "description": "Sandhai is Hiaido's marketplace to access a diverse array of specialized AI agents tailored to your unique requirements. Whether you need assistance with specific tasks or seek expertise in niche areas, our marketplace offers. Purpose-built AI agents available for hire or rent. Unlock the power of AI tailored to your needs, effortlessly.",
     "title": "Sandh.ai"
   },
   {
@@ -62,8 +62,38 @@
     "title": "Recommendations Engine"
   },
   {
-    "image": "sandhAi",
-    "description": "Introducing HIAIDO Sky, a revolutionary suite of features designed to supercharge your DevOps workflow and empower your development teams.",
+    "image": "devOpsSuite",
+    "description": "Unlock the full potential of your cloud environment with personalized recommendations tailored to your specific usage patterns and business needs. Our AI-driven recommendation engine analyzes your cloud usage data and provides actionable insights to optimize performance, reduce costs, and enhance security. ",
     "title": "SKY HIAIDO's\n DevOps Suite"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Elevate security and trust with our blockchain-powered security ledger. Maintain an immutable record of all access attempts and resource modifications, ensuring transparency and accountability within your cloud environment. Trust the ledger to safeguard your data and uphold integrity.",
+    "title": "Blockchain-based\n Security Ledger"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Proactively stress test your cloud infrastructure with integrated chaos engineering tools. This feature simulates disruptions and failures, allowing you to identify and address potential weak points before they impact your users. Embrace the chaos and fortify your cloud environment for resilience.",
+    "title": "Chaos Engineering\n Integration"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Maximize cost efficiency and optimize your cloud spending with Hiaido's Cost Optimization feature. Leverage AI-driven insights and recommendations to identify cost-saving opportunities, eliminate waste, and optimize resource utilization across your cloud environment.",
+    "title": "Cost Optimisation"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Stay compliant with industry regulations such as GDPR, HIPAA, PCI DSS, and more with Hiaido's Compliance Management pack. Seamlessly integrate with leading compliance frameworks and automate compliance checks to ensure adherence to regulatory requirements and security standards.",
+    "title": "Compliance\n Management Pack"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Get a comprehensive view of your entire cloud environment with Hiaido's Unified Dashboard feature. Consolidate metrics from multiple cloud platforms into a single, intuitive interface, allowing you to monitor performance, track costs, and manage resources effectively. With real-time insights and customizable dashboards, Hiaido's Unified Dashboard enables you to make informed decisions and optimize your cloud operations with ease.",
+    "title": "Unified Dashboard"
+  },
+  {
+    "image": "sandhAi",
+    "description": "Streamline your development process and ensure code quality with Hiaido's Automated Code Review & Optimization feature. Automatically analyze your codebase for best practices, security vulnerabilities, and performance optimizations, helping you deliver high-quality applications faster. With intelligent recommendations and automated fixes, Hiaido empowers your development team to write better code and improve application reliability without manual intervention.",
+    "title": "Code Review &\n Optimization. Automated."
   }
 ]

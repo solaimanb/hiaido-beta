@@ -95,6 +95,7 @@ import multiCloud from "./feature-images/06-multi-cloud-connectivity.png";
 import jiraIntegration from "./feature-images/07-jira-integration.png";
 import alerts from "./feature-images/08-alerts.png";
 import sandhAi from "./feature-images/09-sandh-ai.png";
+import devOpsSuite from "./feature-images/10-sky-devops-suite.png";
 
 export {
   hiaido,
@@ -181,4 +182,5 @@ export {
   jiraIntegration,
   alerts,
   sandhAi,
+  devOpsSuite
 };

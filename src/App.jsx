@@ -11,6 +11,9 @@ import Loading from "./components/shared/Loading.jsx";
 // Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout"));
 const Landing = lazy(() => import("./pages/Landing"));
+const Products = lazy(() => import("./pages/Products"));
+const Integrations = lazy(() => import("./pages/Integrations"));
+const Enterprise = lazy(() => import("./pages/Enterprise"));
 const Hiring = lazy(() => import("./pages/Hiring"));
 const About = lazy(() => import("./pages/About"));
 const Features = lazy(() => import("./pages/Features"));
@@ -44,6 +47,9 @@ const App = () => {
           <Route path="/" element={<RootLayout />}>
             <Route index element={<Landing />} />
 
+            <Route path="/products" element={<Products />} />
+            <Route path="/integrations" element={<Integrations />} />
+            <Route path="/enterprise" element={<Enterprise />} />
             <Route path="/hiring" element={<Hiring />} />
             <Route path="/about" element={<About />} />
             <Route path="/features" element={<Features />} />
