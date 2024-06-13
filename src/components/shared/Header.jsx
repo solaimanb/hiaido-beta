@@ -252,14 +252,14 @@ const Header = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
       `}
     >
-      <div className="container flex items-center justify-between w-full px-0">
+      <div className="container relative flex items-center justify-between w-full px-0">
         <div className="z-50 flex items-center w-full py-2 gap-x-8">
           <NavLink className="block" to="/">
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40" />
           </NavLink>
 
           <nav className="hidden w-full lg:block">
-            <div className="relative flex gap-6">
+            <div className="flex gap-6 ">
               {navItems.map((item, index) => (
                 <div
                   key={index}
@@ -274,8 +274,8 @@ const Header = () => {
                   </NavLink>
 
                   {item.subNav && hoveredNavItem === item.name && (
-                    <div className="absolute left-0 z-10 w-full p-4 bg-gray-900 shadow-lg top-10 rounded-xl backdrop-blur-lg">
-                      <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
+                    <div className="absolute left-0 z-10 w-full p-4 bg-gray-900 shadow-lg top-16 rounded-xl backdrop-blur-lg">
+                      <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
                         {item.subNav.map((subItem, subIndex) => {
                           const Icon = subItem.icon;
                           return (
