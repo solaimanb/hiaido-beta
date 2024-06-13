@@ -23,7 +23,6 @@ import {
   Brain,
   Server,
   TicketPercent,
-  Ratio,
   Workflow,
   HardDriveUpload,
   ShieldEllipsis,
@@ -201,7 +200,7 @@ const Header = () => {
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
   const [user, setUser] = useState();
-  const [hoveredNavItem, setHoveredNavItem] = useState(true);
+  const [hoveredNavItem, setHoveredNavItem] = useState(null);
 
   const { signOut } = useAuthenticator((context) => [
     context.signOut,
@@ -303,7 +302,7 @@ const Header = () => {
                           );
                         })}
 
-                        <div className="absolute z-0 w-10 h-10 rounded-lg -top-3 left-24">
+                        {/* <div className="absolute z-0 w-10 h-10 rounded-lg -top-3 left-24">
                           <svg
                             width="40"
                             height="30"
@@ -316,7 +315,7 @@ const Header = () => {
                               fill="#111827"
                             />
                           </svg>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   )}
