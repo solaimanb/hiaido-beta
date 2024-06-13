@@ -17,31 +17,161 @@ const navItems = [
   { name: "About", path: "/about" },
   {
     name: "Products",
-    path: "/products",
+    path: "/",
     subNav: [
       {
         name: "AI Cloud Engineer",
         description:
-          "Your intelligent assistant for streamlining cloud management tasks with efficiency and precision.",
+          "Your digital assistant for seamless cloud management. Assign tasks and get them delivered promptly with our AI-powered Cloud Engineer. Say goodbye to manual processes and hello to efficient cloud operations.",
         icon: CloudFog,
+      },
+      {
+        name: "Smart Web Portal",
+        description:
+          "Your intuitive hub for seamless cloud automation, management, and everything in between. Our Smart Web Portal simplifies complex tasks and provides a user-friendly experience for all your cloud needs.",
+        icon: Cpu,
       },
       {
         name: "Einstein",
         description:
-          "Unleash the power of AI with Einstein, your trusted ally for tackling complex cloud challenges effortlessly.",
+          "Meet Einstein, our super-intelligent framework built to handle special and complex requirements with unparalleled efficiency and intelligence. Let Einstein optimize your cloud operations and drive innovation in your organization.",
         icon: Cpu,
       },
       {
         name: "Sandh.ai",
         description:
-          "Explore Sandh.ai, the marketplace for specialized AI agents tailored to your unique cloud automation needs.",
+          "Hire or Rent AI Agents. Sandhai is Hiaido's marketplace offering purpose-built AI agents tailored to your unique requirements. Access a diverse array of specialized AI agents for specific tasks or expertise in niche areas.",
         icon: ShoppingBag,
       },
     ],
   },
-  { name: "Features", path: "/features" },
-  { name: "Integrations", path: "/integrations" },
-  { name: "Enterprise", path: "/enterprise" },
+  {
+    name: "Features",
+    path: "/",
+    subNav: [
+      {
+        name: "Natural Language Interface",
+        description:
+          "Interact with the cloud platform using natural language commands, making it intuitive and user-friendly. Our Natural Language Interface enables you to communicate with your cloud environment effortlessly, streamlining your workflow.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Universal Search Bar",
+        description:
+          "Instantly access comprehensive details of your cloud ecosystem, resources, and predefined fields with our Universal Search Bar. Enjoy quick and intuitive navigation for enhanced productivity.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Actionable Alerts",
+        description:
+          "Stay informed with actionable alerts that provide instant notifications when critical events occur in your cloud environment. Our intelligent alerts empower you to proactively address issues before they impact your users, ensuring seamless operations.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Security. Automated.",
+        description:
+          "Stop wasting time on manual security tasks. Hiaido automates security configurations and compliance checks, freeing you to focus on innovation. Our AI-powered platform ensures your cloud environment is secure, compliant, and efficient.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Recommendations Engine",
+        description:
+          "Unlock the full potential of your cloud environment with personalized recommendations tailored to your specific usage patterns and business needs. Our AI-driven recommendation engine analyzes your cloud usage data and provides actionable insights to optimize performance, reduce costs, and enhance security.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Blockchain-based Security Ledger",
+        description:
+          "Enhance security and trust with a blockchain-powered security ledger. This feature provides an immutable record of all access attempts and resource modifications, ensuring complete transparency and accountability within your cloud environment.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Chaos Engineering Integration",
+        description:
+          "Stress test your cloud infrastructure proactively with integrated chaos engineering tools. This feature simulates disruptions and failures, helping you identify and address potential weak points before they impact your users.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Cost Optimisation",
+        description:
+          "Get personalized recommendations to optimize your cloud spending. Leverage our insights to identify underutilized resources and find cost-saving opportunities.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Compliance Management Pack",
+        description:
+          "Ensure compliance with industry regulations and standards with our Compliance Management Pack. This feature provides pre-configured policies and automated checks to help you maintain compliance and mitigate risks in your cloud environment.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Unified Dashboard",
+        description:
+          "Gain visibility and control over your entire cloud environment with our Unified Dashboard. This feature provides a single pane of glass view of your resources and performance metrics, enabling you to monitor and manage your cloud infrastructure efficiently.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Code Review & Optimisation",
+        description:
+          "Automate code reviews and optimizations to ensure your cloud applications are secure, efficient, and scalable. This feature analyzes your codebase, identifies potential issues and bottlenecks, and provides recommendations for improvement, streamlining your development process.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Predictive Maintenance Suite",
+        description:
+          "Proactively maintain and optimize your cloud infrastructure with our Predictive Maintenance Suite. This feature leverages AI and machine learning algorithms to predict and prevent potential failures, minimizing downtime and maximizing resource utilization.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "AI-Powered Anomaly Detection",
+        description:
+          "Detect and respond to anomalies in your cloud environment in real-time with our AI-Powered Anomaly Detection feature. This feature analyzes telemetry data and identifies abnormal behavior patterns, helping you mitigate security threats and performance issues before they escalate.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Resource Fusion Engine",
+        description:
+          "Optimize resource allocation and utilization across your cloud environment with our Resource Fusion Engine. This feature aggregates and consolidates resources from multiple clouds, enabling you to maximize efficiency and reduce costs.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Autonomous Optimisation Matrix",
+        description:
+          "Streamline and automate optimization tasks with our Autonomous Optimisation Matrix. This feature uses AI algorithms to continuously analyze and adjust your cloud resources for optimal performance and cost efficiency, freeing you from manual optimization efforts.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Data Migration",
+        description:
+          "Effortlessly migrate data from local folders or on-prem to the cloud with HIAIDO's intuitive data migration feature, enabling smooth transition and accessibility.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Blockchain-Based Governance",
+        description:
+          "Ensure transparent and tamper-proof auditing of cloud operations, enhancing trust and accountability in multi-tenant environments with a blockchain-based governance framework.",
+        icon: ShoppingBag,
+      },
+    ],
+  },
+  {
+    name: "Integrations",
+    path: "/",
+    subNav: [
+      {
+        name: "Multi-Cloud Integration",
+        description:
+          "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly. Achieve flexibility and scalability without the hassle of managing multiple platforms.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "JIRA Integration",
+        description:
+          "Streamline your workflow with our JIRA integration. Connect HIAIDO with your existing project management tools to seamlessly manage tasks, track progress, and collaborate with your team. Increase efficiency and productivity with integrated workflows.",
+        icon: ShoppingBag,
+      },
+    ],
+  },
+  { name: "Enterprise", path: "/" },
   { name: "Pricing", path: "/pricing" },
 ];
 
@@ -102,12 +232,12 @@ const Header = () => {
       `}
     >
       <div className="container flex items-center justify-between w-full px-0">
-        <div className="z-50 flex items-center py-2 gap-x-8">
+        <div className="z-50 flex items-center w-full py-2 gap-x-8">
           <NavLink className="block" to="/">
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40" />
           </NavLink>
 
-          <nav className="hidden lg:block">
+          <nav className="hidden w-full lg:block">
             <div className="relative flex gap-6">
               {navItems.map((item, index) => (
                 <div
@@ -123,7 +253,7 @@ const Header = () => {
                   </NavLink>
 
                   {item.subNav && hoveredNavItem === item.name && (
-                    <div className="absolute left-0 z-10 w-full p-6 bg-gray-900 shadow-lg top-10 rounded-xl backdrop-blur-lg">
+                    <div className="absolute left-0 z-10 w-full p-4 bg-gray-900 shadow-lg top-10 rounded-xl backdrop-blur-lg">
                       <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
                         {item.subNav.map((subItem, subIndex) => {
                           const Icon = subItem.icon;
@@ -177,7 +307,7 @@ const Header = () => {
         <div className="flex items-center justify-center gap-4 px-5 ">
           <AnimatedBtn
             to={"/chat"}
-            className="hidden font-semibold lg:block"
+            className="hidden font-semibold text-nowrap lg:block"
             outlined={true}
           >
             Start Free Trial
