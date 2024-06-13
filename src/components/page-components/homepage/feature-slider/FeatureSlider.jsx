@@ -107,10 +107,10 @@ const FeatureSlider = () => {
       slidesPerView: 3,
     },
     768: {
-      slidesPerView: 4,
+      slidesPerView: 3,
     },
     1024: {
-      slidesPerView: 5,
+      slidesPerView: 4,
     },
   };
 
@@ -141,8 +141,8 @@ const FeatureSlider = () => {
             disableOnInteraction: false,
           }}
           modules={[Navigation]}
-          className="flex items-center feature-slider"
-          spaceBetween={0}
+          className="feature-slider"
+          spaceBetween={10}
           breakpoints={breakpoints}
         >
           {Sliders.map((slider, index) =>
@@ -156,7 +156,7 @@ const FeatureSlider = () => {
                 <div
                   className={
                     index !== 0 && index !== 1
-                      ? "relative py-4 flex  flex-col  text-[#F9F7ED]"
+                      ? "relative py-4 flex flex-col  text-[#F9F7ED]"
                       : ""
                   }
                 >
@@ -178,7 +178,7 @@ const FeatureSlider = () => {
                       <div
                         className={
                           index !== 0 && index !== 1
-                            ? "w-80 neon-bg transition-all duration-200"
+                            ? "min-w neon-bg transition-all duration-200"
                             : ""
                         }
                       >
