@@ -226,13 +226,13 @@ const CreateMemberAccountButton = ({ CustomButton, buttonOverride = true }) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        {buttonOverride ? (
+        {/* {buttonOverride ? (
           CustomButton
-        ) : (
-          <button className="bg-white text-black shadow-md p-2 rounded-full px-4 text-base mt-5">
-            Create member account
-          </button>
-        )}
+        ) : ( */}
+        <button className="dark:bg-white bg-black dark:text-black text-white shadow-md p-2 rounded-full px-4 text-base mt-5">
+          Create member account
+        </button>
+        {/* )} */}
       </AlertDialog.Trigger>
       <AlertDialog.Content className="!h-fit">
         <AlertDialog.Title>

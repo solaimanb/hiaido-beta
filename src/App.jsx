@@ -22,6 +22,31 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Login = lazy(() => import("./pages/Login"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
+import awsExports from "./awsExports.js";
+import { Amplify } from "aws-amplify";
+import "@aws-amplify/ui-react/styles.css";
+import { signInWithRedirect } from "aws-amplify/auth";
+
+// Amplify.configure(awsExports);
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      userPoolId: "us-east-1_kTokArf3J",
+      userPoolClientId: "3tj4g5qhml5kiu1ds37bogvol3",
+      signUpVerificationMethod: "code",
+      loginWith: {
+        oauth: {
+          domain: "hiaido.auth.us-east-1.amazoncognito.com",
+          redirectSignIn: ["http://localhost:5173/chat"],
+          redirectSignOut: ["http://localhost:5173"],
+          responseType: "code",
+          scopes: ["email", "phone"],
+          providers: ["Google", "Amazon"],
+        },
+      },
+    },
+  },
+});
 
 const App = () => {
   // useEffect(() => {
@@ -33,10 +58,12 @@ const App = () => {
   //   })();
   // }, []);
 
-  const { route, authStatus } = useAuthenticator((context) => [
+  const { route, authStatus, error, user } = useAuthenticator((context) => [
     context.route,
     context.authStatus,
   ]);
+
+  console.log(route, authStatus, error, user);
 
   return (
     <Suspense fallback={authStatus === "configuring" && <Loading />}>

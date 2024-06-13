@@ -2,29 +2,26 @@ import { hiaido } from "../assets";
 import { Helmet } from "react-helmet-async";
 
 import { useEffect } from "react";
-import { Amplify } from "aws-amplify";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
+import { Authenticator, Button, useAuthenticator } from "@aws-amplify/ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-
 import awsExports from "../awsExports";
-
-Amplify.configure(awsExports);
+import { AuthError, signInWithRedirect } from "aws-amplify/auth";
 
 const components = {
-  // Footer() {
-  //   const { toForgotPassword } = useAuthenticator();
-  //   return (
-  //     <Button
-  //       fontWeight="normal"
-  //       onClick={toForgotPassword}
-  //       size="small"
-  //       variation="link"
-  //     >
-  //       Forgot Password?
-  //     </Button>
-  //   );
-  // },
+  Footer() {
+    const { toForgotPassword } = useAuthenticator();
+    return (
+      <Button
+        fontWeight="normal"
+        onClick={toForgotPassword}
+        size="small"
+        variation="link"
+      >
+        Forgot Password?
+      </Button>
+    );
+  },
 };
 
 const formFields = {
@@ -34,6 +31,20 @@ const formFields = {
     },
     password: {
       placeholder: "Password",
+    },
+  },
+  signUp: {
+    username: {
+      placeholder: "Username",
+    },
+    password: {
+      placeholder: "Password",
+    },
+    confirm_password: {
+      placeholder: "Confirm Password",
+    },
+    email: {
+      placeholder: "Email",
     },
   },
   forgotPassword: {
@@ -73,7 +84,7 @@ const Login = () => {
       </Helmet>
 
       {/* MAIN CONTENT */}
-      <div className="bg-black/90 flex items-center justify-center w-full h-full min-h-screen p-4">
+      <div className="bg-black/90 flex items-center justify-center w-full h-full min-h-screen p-4 text-white">
         <div className="md:flex-row border-orange-400/10 backdrop-blur-sm flex flex-col items-center w-full h-[96vh] border rounded-lg space-y-6 md:space-y-0">
           {/* HiAiDo Image Banner */}
           <div className="lg:flex md:w-1/2 xl:w-2/3 relative flex items-center justify-center w-full p-10">
@@ -98,7 +109,16 @@ const Login = () => {
               </h1>
               <div className="horizon-bar opacity-30 container h-[1px] mt-10 bg-orange-400" />
 
-              <Authenticator formFields={formFields} components={components} />
+              <Authenticator
+                loginMechanisms={["email"]}
+                socialProviders={["google"]}
+              />
+              <button
+                onClick={() => signInWithRedirect({ provider: "Google" })}
+                className=""
+              >
+                Google sign in
+              </button>
             </div>
           </div>
         </div>

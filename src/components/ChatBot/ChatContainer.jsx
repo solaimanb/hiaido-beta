@@ -14,6 +14,8 @@ import toast from "react-hot-toast";
 import { ThemeContext } from "../../context/ThemeContext";
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 import CreateMemberAccountButton from "../CreateMemberAccountButton";
+import config from "../../config";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const copyContent = async (text) => {
   try {
@@ -142,7 +144,9 @@ const CreateMemberAccountWarningBox = () => {
   return (
     <div className="absolute top-32 flex justify-center w-full text-lg text-neutral-700">
       <div className="w-[600px] text-center bg-red-400/35 border-red-500 dark:bg-red-800/30 dark:border-red-900 border-[1px] rounded-xl p-3 py-5">
-        <h1 className="text-black dark:text-neutral-50 text-3xl">No member account found</h1>
+        <h1 className="text-black dark:text-neutral-50 text-3xl">
+          No member account found
+        </h1>
         <p className="mb-12 mt-5 mx-3 dark:text-neutral-400">
           You need to create a member account first before using the chatbot
         </p>
@@ -220,24 +224,29 @@ const ChatsList = memo(({ chats }) => {
 // contains the chats and query box
 const ChatContainer = () => {
   console.log("ChatContainer");
-  const { memberAccounts } = useContext(GlobalStateContext);
+  const { memberAccounts, currentMemberAccount } =
+    useContext(GlobalStateContext);
+  const { user } = useAuthenticator();
   const [query, setQuery] = useState("");
   const [chats, setChats] = useState([]);
   const [error, setError] = useState(null);
   const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
+  console.log(user.signInDetails.loginId);
+  // console.log(currentMemberAccount["email"]);
 
   useEffect(() => {
     const fetchResponse = async () => {
       console.log(newChat);
-      const response = await fetch(`http://localhost:8000/get-response`, {
+      const response = await fetch(`${config.baseURL}/get-response`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "advant.analytics+user014@gmail.com",
+          email: currentMemberAccount["email"],
+          owner: user.signInDetails.loginId,
           query: newChat.query,
         }),
       });
@@ -249,13 +258,14 @@ const ChatContainer = () => {
           response.status == 400 &&
           response_data["detail"].includes("CLI not configured")
         ) {
-          const res = await fetch("http://localhost:8000/configure-cli", {
+          const res = await fetch(`${config.baseURL}/configure-cli`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              email: "advant.analytics+user014@gmail.com",
+              email: currentMemberAccount["email"],
+              owner: user.signInDetails.loginId,
             }),
           });
           const res_data = await res.json();

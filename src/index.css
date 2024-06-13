@@ -364,9 +364,9 @@ input:focus::placeholder {
   background: rgba(139, 85, 41, 0.219);
 }
 
-[data-amplify-form] label {
+/* [data-amplify-form] label {
   display: none;
-}
+} */
 
 [data-amplify-form] button[type="submit"] {
   color: white;
@@ -427,16 +427,16 @@ input:focus::placeholder {
 }
 
 .amplify-tabs__list {
-  display: none;
+  display: flex;
 }
 
-.amplify-visually-hidden {
+/* .amplify-visually-hidden {
   display: none;
-}
+} */
 
-.amplify-icon {
+/* .amplify-icon {
   display: none;
-}
+} */
 
 .amplify-heading--3 {
   font-size: 14px;

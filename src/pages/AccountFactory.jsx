@@ -29,6 +29,7 @@ const MemberAccountsTable = () => {
   };
   // console.log(memberAccounts.length)
   // console.log(memberAccounts.length && memberAccounts.length == 0)
+  console.log(memberAccounts);
 
   if (!memberAccounts) return;
   else if (memberAccounts && memberAccounts.length == 0)
@@ -151,10 +152,8 @@ const AccountFactory = () => {
       if (response.ok) {
         console.log(response_json);
         return response_json;
-        // setMemberAccounts(response_json);
       } else {
         console.log(response_json);
-
         throw response_json;
       }
     } catch (err) {
