@@ -12,7 +12,7 @@ import { useAnimationFrame, useMotionValue } from "framer-motion";
 import "./featureSlider.css";
 
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
 
 import Sliders from "./sliderInfo.json";
@@ -30,7 +30,20 @@ import {
   jiraIntegration,
   alerts,
   sandhAi,
+  serverlessFunctions,
+  securityAutomated,
+  recommendationsEngine,
   devOpsSuite,
+  blockchainLedger,
+  chaosEngineering,
+  costOptimization,
+  complianceManagement,
+  unifiedDashboard,
+  codeReview,
+  predectiveMaintenance,
+  anomalyDetection,
+  resourceFusion,
+  autonomousOptimization,
 } from "../../../../assets/index";
 
 const imageAssets = {
@@ -43,7 +56,20 @@ const imageAssets = {
   jiraIntegration,
   alerts,
   sandhAi,
+  serverlessFunctions,
+  securityAutomated,
+  recommendationsEngine,
   devOpsSuite,
+  blockchainLedger,
+  chaosEngineering,
+  costOptimization,
+  complianceManagement,
+  unifiedDashboard,
+  codeReview,
+  predectiveMaintenance,
+  anomalyDetection,
+  resourceFusion,
+  autonomousOptimization,
 };
 
 const FeatureSlider = () => {
@@ -140,28 +166,39 @@ const FeatureSlider = () => {
             delay: 1000,
             disableOnInteraction: false,
           }}
-          modules={[Navigation]}
+          speed={1000}
+          modules={[Autoplay, Navigation]}
           className="feature-slider"
           spaceBetween={10}
           breakpoints={breakpoints}
+          onMouseEnter={() => {
+            if (swiperRef.current && swiperRef.current.swiper) {
+              swiperRef.current.swiper.autoplay.stop();
+            }
+          }}
+          onMouseLeave={() => {
+            if (swiperRef.current && swiperRef.current.swiper) {
+              swiperRef.current.swiper.autoplay.start();
+            }
+          }}
         >
           {Sliders.map((slider, index) =>
             (index !== 0 || (index === 0 && isMdScreen)) &&
             (index !== 1 || (index === 1 && isMdScreen)) ? (
               <SwiperSlide
                 key={index}
-                className={index !== 0 && index !== 1 ? "w-full" : ""}
+                className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
                 onClick={() => handleSlideClick(index)}
               >
                 <div
                   className={
                     index !== 0 && index !== 1
-                      ? "relative py-4 flex flex-col  text-[#F9F7ED]"
+                      ? "relative py-4 flex flex-col  text-[#F9F7ED] w-full h-full"
                       : ""
                   }
                 >
                   <div
-                    className={`${index !== 0 && index !== 1 ? "p-6 " : ""} ${
+                    className={`${index !== 0 && index !== 1 ? "p-6 w-full h-full" : ""} ${
                       hoveredIndex === index || activeIndex === index ? "" : ""
                     } `}
                     onMouseEnter={() => setHoveredIndex(index)}
@@ -171,14 +208,14 @@ const FeatureSlider = () => {
                     <div
                       className={
                         index !== 0 && index !== 1
-                          ? "p-4 md:p-14 rounded-xl"
+                          ? "p-4 md:p-14 rounded-xl w-full h-full"
                           : ""
                       }
                     >
                       <div
                         className={
                           index !== 0 && index !== 1
-                            ? "min-w neon-bg transition-all duration-200"
+                            ? "min-w neon-bg transition-all duration-200 w-full h-full"
                             : ""
                         }
                       >
