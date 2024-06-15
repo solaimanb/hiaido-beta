@@ -146,7 +146,7 @@ const Hero = () => {
       customPaddings
       id="hero"
     >
-      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-28 md:mt-18">
+      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-20 md:mt-18">
         <motion.div
           initial="hidden"
           animate="visible"
