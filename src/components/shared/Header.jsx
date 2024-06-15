@@ -9,7 +9,6 @@ import {
   BellRing,
   CloudFog,
   Cpu,
-  Globe,
   SearchCode,
   ShoppingBag,
   ShieldCheck,
@@ -26,6 +25,8 @@ import {
   Workflow,
   HardDriveUpload,
   ShieldEllipsis,
+  BrainCircuit,
+  LayoutPanelTop,
 } from "lucide-react";
 
 import { hiaido } from "../../assets";
@@ -50,7 +51,7 @@ const navItems = [
         name: "Smart Web Portal",
         description:
           "Your intuitive hub for seamless cloud automation, management, and everything in between. Our Smart Web Portal simplifies complex tasks and provides a user-friendly experience for all your cloud needs.",
-        icon: Cpu,
+        icon: LayoutPanelTop,
       },
       {
         name: "Einstein",
@@ -74,7 +75,7 @@ const navItems = [
         name: "Natural Language Interface",
         description:
           "Interact with the cloud platform using natural language commands, making it intuitive and user-friendly. Our Natural Language Interface enables you to communicate with your cloud environment effortlessly, streamlining your workflow.",
-        icon: Globe,
+        icon: BrainCircuit,
       },
       {
         name: "Universal Search Bar",
@@ -249,7 +250,7 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
       `}
     >
       <div className="container relative flex items-center justify-between w-full px-0 lg:px-4">
@@ -274,8 +275,8 @@ const Header = () => {
                   </NavLink>
 
                   {item.subNav && hoveredNavItem === item.name && (
-                    <div className="absolute left-0 z-10 w-full p-4 bg-gray-900 shadow-lg top-16 rounded-xl backdrop-blur-lg">
-                      <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
+                    <div className="absolute left-0 z-10 w-full pt-4 shadow-lg top-14">
+                      <div className="p-4 bg-gray-900 grid w-full grid-cols-1 gap-4 lg:grid-cols-3 overflow-y-scroll rounded-xl backdrop-blur-lg max-h-[60vh]">
                         {item.subNav.map((subItem, subIndex) => {
                           const Icon = subItem.icon;
                           return (
@@ -285,7 +286,7 @@ const Header = () => {
                             >
                               <div className="flex items-center space-x-2">
                                 {/* icon */}
-                                <Icon className="w-5 h-5 text-white" />
+                                <Icon className="w-6 h-6 text-orange-500/80" />
                                 <NavLink
                                   className="block text-lg font-bold text-white"
                                   to={`#${subItem.name

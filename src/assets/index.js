@@ -95,7 +95,20 @@ import multiCloud from "./feature-images/06-multi-cloud-connectivity.png";
 import jiraIntegration from "./feature-images/07-jira-integration.png";
 import alerts from "./feature-images/08-alerts.png";
 import sandhAi from "./feature-images/09-sandh-ai.png";
-import devOpsSuite from "./feature-images/10-sky-devops-suite.png";
+import serverlessFunctions from "./feature-images/10-serverless-functions.png";
+import securityAutomated from "./feature-images/11-security-automated.png";
+import recommendationsEngine from "./feature-images/12-recommendations-engine.png";
+import devOpsSuite from "./feature-images/13-hiaido-devops-suite.png";
+import blockchainLedger from "./feature-images/14-blockchain-ledger.png";
+import chaosEngineering from "./feature-images/15-chaos-engineering.png";
+import costOptimization from "./feature-images/16-cost-optimization.png";
+import complianceManagement from "./feature-images/17-compliance-management.png";
+import unifiedDashboard from "./feature-images/18-unified-dashboard.png";
+import codeReview from "./feature-images/19-code-review.png";
+import predectiveMaintenance from "./feature-images/20-predictive-maintenance.png";
+import anomalyDetection from "./feature-images/21-anomaly-detection.png";
+import resourceFusion from "./feature-images/22-resource-fusion.png";
+import autonomousOptimization from "./feature-images/23-autonomous-optimization.png";
 
 export {
   hiaido,
@@ -182,5 +195,18 @@ export {
   jiraIntegration,
   alerts,
   sandhAi,
-  devOpsSuite
+  serverlessFunctions,
+  securityAutomated,
+  recommendationsEngine,
+  devOpsSuite,
+  blockchainLedger,
+  chaosEngineering,
+  costOptimization,
+  complianceManagement,
+  unifiedDashboard,
+  codeReview,
+  predectiveMaintenance,
+  anomalyDetection,
+  resourceFusion,
+  autonomousOptimization,
 };
