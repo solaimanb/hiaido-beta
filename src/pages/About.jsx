@@ -1,22 +1,58 @@
 const About = () => {
   return (
     <main
-      className="min-h-[60vh] flex justify-center overflow-hidden"
-      id="pricing"
+      className=""
     >
-      <div className="container flex items-center justify-center text-center">
-        <div className="mx-auto text-center z-1">
-          <h1 className="w-auto mb-3 text-6xl text-orange-500">
-            Coming Soon..
-          </h1>
+      {/* <div>
+        <h1>About us</h1>
+      </div> */}
+{/*
+      <div>
+        <section>
+          <div>
+            <h2>Welcome to HIAIDO</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, accusantium.</p>
 
-          <div className="max-w-3xl mx-auto mb-6 text-xs font-bold body-1 lg:text-2xl font lg:mb-8">
-            <p className="text-xs font-bold type1 md:text-xl">
-              We are working hard to bring you something amazing. Stay tuned!
-            </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quod neque eaque exercitationem ipsam ad ipsa voluptatibus iure, harum obcaecati.</p>
           </div>
-        </div>
-      </div>
+
+          <div>
+            <h2>Core Functionalities</h2>
+            <ul>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2>Our Product Porfolio</h2>
+            <ul>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+            </ul> </div>
+        </section>
+
+        <section>
+
+        </section>
+
+        <section>
+          <h2>Key Features</h2>
+          <ul>
+            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, nesciunt.</li>
+          </ul>
+        </section>
+      </div> */}
     </main>
   );
 };

@@ -249,13 +249,13 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
+      className={`w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
       `}
     >
-      <div className="container relative flex items-center justify-between w-full px-0">
+      <div className="container relative flex items-center justify-between w-full px-0 lg:px-4">
         <div className="z-50 flex items-center w-full py-2 gap-x-8">
           <NavLink className="block" to="/">
-            <img src={hiaido} alt="hiaido" className="w-24 md:w-40" />
+            <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
           </NavLink>
 
           <nav className="hidden w-full lg:block">
