@@ -240,7 +240,7 @@ const Hero = () => {
           </mesh>
         </Canvas>
 
-        <div className="absolute inset-0 opacity-50 bg-dark" />
+        {/* <div className="absolute inset-0 opacity-50 bg-dark" /> */}
       </div>
     </Section>
   );
