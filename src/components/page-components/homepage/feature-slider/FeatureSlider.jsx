@@ -36,11 +36,11 @@ import {
   devOpsSuite,
   blockchainLedger,
   chaosEngineering,
-  costOptimization,
+  costOptimisation,
   complianceManagement,
   unifiedDashboard,
   codeReview,
-  predectiveMaintenance,
+  predictiveMaintenance,
   anomalyDetection,
   resourceFusion,
   autonomousOptimization,
@@ -62,11 +62,11 @@ const imageAssets = {
   devOpsSuite,
   blockchainLedger,
   chaosEngineering,
-  costOptimization,
+  costOptimisation,
   complianceManagement,
   unifiedDashboard,
   codeReview,
-  predectiveMaintenance,
+  predictiveMaintenance,
   anomalyDetection,
   resourceFusion,
   autonomousOptimization,
@@ -224,7 +224,7 @@ const FeatureSlider = () => {
                           alt={imageAssets[slider?.image]}
                           className={
                             index !== 0 && index !== 1
-                              ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                              ? "object-cover min-w-60 w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
                               : "object-cover w-full h-full transition-all duration-300"
                           }
                         />

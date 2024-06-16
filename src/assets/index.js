@@ -101,11 +101,11 @@ import recommendationsEngine from "./feature-images/12-recommendations-engine.pn
 import devOpsSuite from "./feature-images/13-hiaido-devops-suite.png";
 import blockchainLedger from "./feature-images/14-blockchain-ledger.png";
 import chaosEngineering from "./feature-images/15-chaos-engineering.png";
-import costOptimization from "./feature-images/16-cost-optimization.png";
+import costOptimisation from "./feature-images/16-cost-optimization.png";
 import complianceManagement from "./feature-images/17-compliance-management.png";
 import unifiedDashboard from "./feature-images/18-unified-dashboard.png";
 import codeReview from "./feature-images/19-code-review.png";
-import predectiveMaintenance from "./feature-images/20-predictive-maintenance.png";
+import predictiveMaintenance from "./feature-images/20-predictive-maintenance.png";
 import anomalyDetection from "./feature-images/21-anomaly-detection.png";
 import resourceFusion from "./feature-images/22-resource-fusion.png";
 import autonomousOptimization from "./feature-images/23-autonomous-optimization.png";
@@ -201,11 +201,11 @@ export {
   devOpsSuite,
   blockchainLedger,
   chaosEngineering,
-  costOptimization,
+  costOptimisation,
   complianceManagement,
   unifiedDashboard,
   codeReview,
-  predectiveMaintenance,
+  predictiveMaintenance,
   anomalyDetection,
   resourceFusion,
   autonomousOptimization,

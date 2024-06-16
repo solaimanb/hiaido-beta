@@ -27,6 +27,9 @@ import {
   ShieldEllipsis,
   BrainCircuit,
   LayoutPanelTop,
+  BotMessageSquare,
+  MessageCircleDashed,
+  ComputerIcon,
 } from "lucide-react";
 
 import { hiaido } from "../../assets";
@@ -46,6 +49,12 @@ const navItems = [
         description:
           "Your digital assistant for seamless cloud management. Assign tasks and get them delivered promptly with our AI-powered Cloud Engineer. Say goodbye to manual processes and hello to efficient cloud operations.",
         icon: CloudFog,
+      },
+      {
+        name: "Intelligent Chatbot",
+        description:
+          "Our state-of-the-art AI technology, get the job done with the power of natural language interaction with our advanced AI-driven chatbot. Seamlessly integrated into our cloud automation platform, it acts as a virtual assistant, executing commands, providing real-time insights, and guiding users through intricate processes effortlessly.",
+        icon: BotMessageSquare,
       },
       {
         name: "Smart Web Portal",
@@ -180,7 +189,7 @@ const navItems = [
     path: "/",
     subNav: [
       {
-        name: "Multi-Cloud Integration",
+        name: "Multi-Cloud Connectivity",
         description:
           "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly. Achieve flexibility and scalability without the hassle of managing multiple platforms.",
         icon: ShoppingBag,
@@ -191,6 +200,15 @@ const navItems = [
           "Streamline your workflow with our JIRA integration. Connect HIAIDO with your existing project management tools to seamlessly manage tasks, track progress, and collaborate with your team. Increase efficiency and productivity with integrated workflows.",
         icon: ShoppingBag,
       },
+      {
+        name: "Virtual Assistant",
+        description: "For advanced conversational AI capabilities, our Virtual Assistant empowers users to seamlessly interact with the platform using natural language voice commands. Fully integrated with HIAIDO, it delivers personalized assistance, tailored recommendations, and performs diverse functional tasks, elevating user experience and boosting productivity.",
+        icon: MessageCircleDashed,
+      }, {
+        name: "Chaos Engineering",
+        description: "Stress test your cloud infrastructure proactively with integrated chaos engineering tools. This feature simulates disruptions and failures, helping you identify and address potential weak points before they impact your users.",
+        icon: ComputerIcon,
+      }
     ],
   },
   { name: "Enterprise", path: "/" },
@@ -366,11 +384,10 @@ const Header = () => {
 
       {/* Small Screen Toggle Nav */}
       <nav
-        className={`${
-          openNavigation
+        className={`${openNavigation
             ? "fixed top-0 bottom-0 left-0 flex translate-x-0 transition duration-500 ease-in-out bg-black h-[100vh]"
             : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0 bg-black h-[100vh]"
-        } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[90%] md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
+          } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[90%] md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
       >
         <div className="p-2">
           {/* Brand Logo */}
@@ -390,13 +407,11 @@ const Header = () => {
                 key={item?.id}
                 to={item?.to}
                 onClick={handleClick}
-                className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold ${
-                  item?.onlyMobile ? "lg:hidden" : ""
-                } ${
-                  item?.url === pathname.hash
+                className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold ${item?.onlyMobile ? "lg:hidden" : ""
+                  } ${item?.url === pathname.hash
                     ? "font-bold text-orange-400/80"
                     : "lg:text-n-1/50"
-                }`}
+                  }`}
               >
                 {item?.title}
               </Link>
