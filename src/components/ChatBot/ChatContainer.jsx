@@ -17,6 +17,7 @@ import CreateMemberAccountButton from "../CreateMemberAccountButton";
 import config from "../../config";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { signOut, fetchUserAttributes } from "@aws-amplify/auth";
+import remarkGfm from "remark-gfm";
 
 const copyContent = async (text) => {
   try {
@@ -35,6 +36,7 @@ const MDX = ({ children }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
       className="markdown leading-relaxed text-[15px]"
       components={{
         code(props) {
@@ -57,6 +59,12 @@ const MDX = ({ children }) => {
             </code>
           );
         },
+        hr: (props) => (
+          <hr
+            className="!bg-neutral-300 !h-[1px]"
+          >
+          </hr>
+        ),
         // h1: ({ className, children, ...rest }) => (
         //   <h1 className={`mt-10`}>{children}</h1>
         // ),
@@ -229,12 +237,19 @@ const ChatContainer = () => {
     useContext(GlobalStateContext);
   const ctx = useAuthenticator();
   const [query, setQuery] = useState("");
-  const [chats, setChats] = useState([]);
+  // const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState([
+    {
+      query: "markdown test",
+      result: markdownData,
+    },
+  ]);
   const [error, setError] = useState(null);
   const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
   console.log(ctx);
+  const { user } = ctx;
   // console.log(currentMemberAccount["email"]);
   useEffect(() => {
     fetchUserAttributes().then((res) => console.log(res));
@@ -443,3 +458,106 @@ const buttonProps = {
 };
 
 export default ChatContainer;
+
+const markdownData = `
+# Heading Level 1
+
+## Heading Level 2
+
+### Heading Level 3
+
+#### Heading Level 4
+
+##### Heading Level 5
+
+###### Heading Level 6
+
+---
+
+**Bold Text**
+
+*Italic Text*
+
+~~Strikethrough Text~~
+
+**_Bold and Italic Text_**
+
+> Blockquote
+
+1. Ordered List Item 1
+2. Ordered List Item 2
+   - Nested Unordered Item 1
+   - Nested Unordered Item 2
+
+- Unordered List Item 1
+- Unordered List Item 2
+  1. Nested Ordered Item 1
+  2. Nested Ordered Item 2
+
+[Link to Google](https://www.google.com)
+
+![Sample Image](https://via.placeholder.com/150 "Sample Image")
+
+\`\`\`javascript
+// Code Block with Syntax Highlighting
+function greet(name) {
+  console.log(\`Hello, \${name}!\`);
+}
+\`\`\`
+
+\`Inline Code\`
+
+| Table Header 1 | Table Header 2 |
+| -------------- | -------------- |
+| Row 1, Cell 1  | Row 1, Cell 2  |
+| Row 2, Cell 1  | Row 2, Cell 2  |
+
+---
+
+### Task List
+
+- [x] Task 1
+- [ ] Task 2
+- [ ] Task 3
+
+---
+
+### Emojis
+
+Here are some emojis: 😃🎉🚀✨👍
+
+---
+
+### Horizontal Rule
+
+---
+
+### HTML Elements
+
+<p>This is a paragraph rendered using HTML within Markdown.</p>
+
+<details>
+  <summary>Expandable Content</summary>
+  <p>This content is hidden until expanded.</p>
+</details>
+
+---
+
+### Footnotes
+
+Here's a sentence with a footnote.[^1]
+
+[^1]: This is the footnote.
+
+---
+
+### Subscript and Superscript
+
+H~2~O (Subscript) and 10^2^ (Superscript)
+
+---
+
+### Escaping Characters
+
+Use a backslash to escape characters: \\*literal asterisks\\*
+`;
