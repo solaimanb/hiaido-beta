@@ -40,7 +40,7 @@ Amplify.configure({
           redirectSignIn: ["http://localhost:5173/chat"],
           redirectSignOut: ["http://localhost:5173"],
           responseType: "code",
-          scopes: ["email", "phone"],
+          scopes: ["email", "phone", "aws.cognito.signin.user.admin"],
           providers: ["Google", "Amazon"],
         },
       },

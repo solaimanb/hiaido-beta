@@ -346,10 +346,10 @@ input:focus::placeholder {
   width: 100%;
 }
 
-[data-amplify-form] {
+/* [data-amplify-form] {
   display: flex;
   width: 100%;
-}
+} */
 
 [data-amplify-form] input {
   width: 100%;

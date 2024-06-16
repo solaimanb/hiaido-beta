@@ -16,6 +16,7 @@ import { GlobalStateContext } from "../../context/GlobalStateContext";
 import CreateMemberAccountButton from "../CreateMemberAccountButton";
 import config from "../../config";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { signOut, fetchUserAttributes } from "@aws-amplify/auth";
 
 const copyContent = async (text) => {
   try {
@@ -226,15 +227,18 @@ const ChatContainer = () => {
   console.log("ChatContainer");
   const { memberAccounts, currentMemberAccount } =
     useContext(GlobalStateContext);
-  const { user } = useAuthenticator();
+  const ctx = useAuthenticator();
   const [query, setQuery] = useState("");
   const [chats, setChats] = useState([]);
   const [error, setError] = useState(null);
   const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
-  console.log(user.signInDetails.loginId);
+  console.log(ctx);
   // console.log(currentMemberAccount["email"]);
+  useEffect(() => {
+    fetchUserAttributes().then((res) => console.log(res));
+  }, []);
 
   useEffect(() => {
     const fetchResponse = async () => {

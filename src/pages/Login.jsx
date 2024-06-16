@@ -104,21 +104,15 @@ const Login = () => {
             </div>
 
             <div className="h-100 relative w-full space-y-10">
-              <h1 className="mt-12 text-xl font-bold leading-tight text-center">
+              {/* <h1 className="mt-12 text-xl font-bold leading-tight text-center">
                 Log in to your account
-              </h1>
-              <div className="horizon-bar opacity-30 container h-[1px] mt-10 bg-orange-400" />
+              </h1> */}
+              {/* <div className="horizon-bar opacity-30 container h-[1px] mt-10 bg-orange-400" /> */}
 
               <Authenticator
                 loginMechanisms={["email"]}
-                socialProviders={["google"]}
+                socialProviders={["google", "facebook", "amazon", "apple"]}
               />
-              <button
-                onClick={() => signInWithRedirect({ provider: "Google" })}
-                className=""
-              >
-                Google sign in
-              </button>
             </div>
           </div>
         </div>
