@@ -215,7 +215,7 @@ const FeatureSlider = () => {
                       <div
                         className={
                           index !== 0 && index !== 1
-                            ? "min-w neon-bg transition-all duration-200 w-full h-full"
+                            ? "min-w neon-bg transition-all duration-200 w-full h-full min-w-60"
                             : ""
                         }
                       >
@@ -224,7 +224,7 @@ const FeatureSlider = () => {
                           alt={imageAssets[slider?.image]}
                           className={
                             index !== 0 && index !== 1
-                              ? "object-cover min-w-60 w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                              ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
                               : "object-cover w-full h-full transition-all duration-300"
                           }
                         />

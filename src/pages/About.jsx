@@ -48,26 +48,26 @@ const About = () => {
           </div>
 
           <div>
-        <h2 className="text-2xl font-semibold mb-4">Core Functionalities</h2>
-        <ul className="space-y-2">
-          {coreFunctionalities.map((item, index) => (
-            <li key={index}>
-              <span className="font-bold inline-block">{item.title}:</span> {item.description}
-            </li>
-          ))}
-        </ul>
-      </div>
+            <h2 className="text-2xl font-semibold mb-4">Core Functionalities</h2>
+            <ul className="space-y-2">
+              {coreFunctionalities.map((item, index) => (
+                <li key={index}>
+                  <span className="font-bold inline-block">{item.title}:</span> {item.description}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Our Product Portfolio</h2>
-        <ul className="space-y-2">
-          {productPortfolio.map((item, index) => (
-            <li key={index}>
-              <span className="font-bold inline-block">{item.title}:</span> {item.description}
-            </li>
-          ))}
-        </ul>
-      </div>
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Our Product Portfolio</h2>
+            <ul className="space-y-2">
+              {productPortfolio.map((item, index) => (
+                <li key={index}>
+                  <span className="font-bold inline-block">{item.title}:</span> {item.description}
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         <section
@@ -85,14 +85,18 @@ const About = () => {
 
         <section className="">
           <div className="space-y-10 border border-orange-500/30 p-4 rounded-xl">
-          <h2 className="text-2xl font-semibold mb-4">Key Features</h2>
-        <ul className="space-y-2">
-          {keyFeatures.map((item, index) => (
-            <li key={index}>
-              <span className="font-bold inline-block">{item.title}:</span> {item.description}
-            </li>
-          ))}
-        </ul>
+            <h2 className="text-2xl font-semibold mb-4">Key Features</h2>
+            <ul className="space-y-2">
+              {keyFeatures.map((item, index) => (
+                <li key={index}>
+                  <span className="font-bold inline-block">{item.title}:</span> {item.description}
+                </li>
+              ))}
+            </ul>
+
+            <p>We hope you will love using our products and services as much as we enjoyed building them. Welcome to the world of cloud automation with HIAIDO.</p>
+
+            <p>Welcome to the world of cloud automation with <span className="font-bold inline-block">HIAIDO</span></p>
           </div>
 
           <div className="mt-20 lg:mt-40 flex justify-center opacity-20">
