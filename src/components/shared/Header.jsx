@@ -30,6 +30,8 @@ import {
   BotMessageSquare,
   MessageCircleDashed,
   ComputerIcon,
+  Cloudy,
+  Grid2x2Check,
 } from "lucide-react";
 
 import { hiaido } from "../../assets";
@@ -192,13 +194,13 @@ const navItems = [
         name: "Multi-Cloud Connectivity",
         description:
           "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly. Achieve flexibility and scalability without the hassle of managing multiple platforms.",
-        icon: ShoppingBag,
+        icon: Cloudy,
       },
       {
         name: "JIRA Integration",
         description:
           "Streamline your workflow with our JIRA integration. Connect HIAIDO with your existing project management tools to seamlessly manage tasks, track progress, and collaborate with your team. Increase efficiency and productivity with integrated workflows.",
-        icon: ShoppingBag,
+        icon: Grid2x2Check,
       },
       {
         name: "Virtual Assistant",
@@ -271,7 +273,7 @@ const Header = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
       `}
     >
-      <div className="container relative flex items-center justify-between w-full px-0 lg:px-4">
+      <div className="container relative flex items-center justify-between w-full px-4">
         <div className="z-50 flex items-center w-full py-2 gap-x-8">
           <NavLink className="block" to="/">
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
@@ -286,14 +288,33 @@ const Header = () => {
                   onMouseLeave={() => setHoveredNavItem(null)}
                 >
                   <NavLink
-                    className="w-28 py-4 hover:text-orange-400/100 font-[400] text-center text-white/70 transition-all duration-300 ease-in-out"
+                    className="w-28 py-4 hover:text-orange-400/100 font-[400] text-center text-white/70 transition-all duration-300 ease-in-out relative"
                     to={item?.path}
                   >
                     {` ${item?.name}`}
+
+                    {item.subNav && hoveredNavItem === item.name &&
+                      <div className="indicator absolute h-2 w-full bottom-0 left-[20%]">
+                        <svg
+                          width="40"
+                          height="30"
+                          viewBox="0 0 158 141"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M63.4115 9.00003C70.3397 -2.99997 87.6603 -3 94.5885 9L155.21 114C162.138 126 153.478 141 139.622 141H18.3783C4.52185 141 -4.13844 126 2.78976 114L63.4115 9.00003Z"
+                            fill="#111827"
+                          />
+                        </svg>
+                      </div>
+                    }
+
                   </NavLink>
 
+
                   {item.subNav && hoveredNavItem === item.name && (
-                    <div className="absolute left-0 z-10 w-full pt-4 shadow-lg top-14">
+                    <div className="absolute left-0 z-10 w-full pt-4 shadow-lg top-12 xl:top-14">
                       <div className="p-4 bg-gray-900 grid w-full grid-cols-1 gap-4 lg:grid-cols-3 overflow-y-scroll rounded-xl backdrop-blur-lg max-h-[60vh]">
                         {item.subNav.map((subItem, subIndex) => {
                           const Icon = subItem.icon;
@@ -385,8 +406,8 @@ const Header = () => {
       {/* Small Screen Toggle Nav */}
       <nav
         className={`${openNavigation
-            ? "fixed top-0 bottom-0 left-0 flex translate-x-0 transition duration-500 ease-in-out bg-black h-[100vh]"
-            : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0 bg-black h-[100vh]"
+          ? "fixed top-0 bottom-0 left-0 flex translate-x-0 transition duration-500 ease-in-out bg-black h-[100vh]"
+          : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0 bg-black h-[100vh]"
           } flex flex-col justify-between bg-black/90 fixed top-0 left-0 w-[90%] md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
       >
         <div className="p-2">
