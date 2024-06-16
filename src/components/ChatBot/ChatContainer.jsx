@@ -7,7 +7,7 @@ import {
 import logo from "/hiaido-logo.png";
 import Codeblock from "./Codeblock";
 import { AnimatePresence, motion } from "framer-motion";
-import { Dialog, Tooltip, AlertDialog } from "@radix-ui/themes";
+import { Tooltip } from "@radix-ui/themes";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { CopyIcon } from "@radix-ui/react-icons";
 import toast from "react-hot-toast";

@@ -26,6 +26,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import { GlobalStateContext } from "../context/GlobalStateContext";
 import { fetchAuthSession } from "aws-amplify/auth";
+import logoSidebar from "/logo-sidebar.png";
 
 export const navbarData = [
   { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
@@ -165,7 +166,7 @@ const Sidebar = () => {
   } = useContext(GlobalStateContext);
   const [isCollapsed, setIsCollapsed] = useState(false);
   console.log("sidebar");
-  console.log(memberAccounts)
+  console.log(memberAccounts);
 
   useEffect(() => {
     if (!memberAccounts) {
@@ -231,7 +232,7 @@ const Sidebar = () => {
         <div
           className={`flex items-center justify-start my-4 text-2xl pl-1 ${""}`}
         >
-          <Link to={"/"}>
+          {/* <Link to={"/"}>
             <img
               className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
               src={logo}
@@ -248,7 +249,10 @@ const Sidebar = () => {
                 HiAiDo
               </motion.h1>
             )}
-          </AnimatePresence>
+          </AnimatePresence> */}
+          <div className="w-[80%] p-2">
+            <img className="w-full" src={logoSidebar} alt="Hiaido logo" />
+          </div>
         </div>
         <div className="dark:divide-neutral-600 divide-neutral-600 h-full">
           <div className=" text-neutral-400 my-2 space-y-[5px]">
