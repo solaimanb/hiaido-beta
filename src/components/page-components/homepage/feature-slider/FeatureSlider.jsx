@@ -1,23 +1,24 @@
 "use client";
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
 
 import "./featureSlider.css";
 
 // import required modules
-import { Navigation, Autoplay } from "swiper/modules";
+// import { Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
 
 import Sliders from "./sliderInfo.json";
 
 import { motion } from "framer-motion";
+import Marquee from "react-fast-marquee";
 
 // Dynamic import for image assets
 import {
@@ -78,7 +79,7 @@ const FeatureSlider = () => {
   const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
-  const swiperRef = useRef(null);
+  // const swiperRef = useRef(null);
 
   const handleResize = () => {
     setIsMdScreen(window.innerWidth >= 768);
@@ -118,27 +119,27 @@ const FeatureSlider = () => {
     visible: { filter: "blur(0px)", opacity: 1 },
   };
 
-  const handleSlideClick = (index) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
-  };
+  // const handleSlideClick = (index) => {
+  //   setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  // };
 
-  const breakpoints = {
-    320: {
-      slidesPerView: 1,
-    },
-    480: {
-      slidesPerView: 2,
-    },
-    640: {
-      slidesPerView: 3,
-    },
-    768: {
-      slidesPerView: 3,
-    },
-    1024: {
-      slidesPerView: 4,
-    },
-  };
+  // const breakpoints = {
+  //   320: {
+  //     slidesPerView: 1,
+  //   },
+  //   480: {
+  //     slidesPerView: 2,
+  //   },
+  //   640: {
+  //     slidesPerView: 3,
+  //   },
+  //   768: {
+  //     slidesPerView: 3,
+  //   },
+  //   1024: {
+  //     slidesPerView: 4,
+  //   },
+  // };
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen mt-10">
@@ -158,85 +159,104 @@ const FeatureSlider = () => {
         )}
       </motion.div>
 
-      <div className="w-full">
-        <Swiper
-          ref={swiperRef}
-          direction="horizontal"
-          autoplay={{
-            delay: 1000,
-            disableOnInteraction: false,
-          }}
-          speed={1000}
-          modules={[Autoplay, Navigation]}
-          className="feature-slider"
-          spaceBetween={10}
-          breakpoints={breakpoints}
-          onMouseEnter={() => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-              swiperRef.current.swiper.autoplay.stop();
-            }
-          }}
-          onMouseLeave={() => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-              swiperRef.current.swiper.autoplay.start();
-            }
-          }}
-        >
-          {Sliders.map((slider, index) =>
-            (index !== 0 || (index === 0 && isMdScreen)) &&
-            (index !== 1 || (index === 1 && isMdScreen)) ? (
-              <SwiperSlide
-                key={index}
-                className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
-                onClick={() => handleSlideClick(index)}
-              >
-                <div
+       <Marquee className=""
+       pauseOnHover
+       >
+        {Sliders?.map((slider, index) =>
+          (index !== 0 || (index === 0 && isMdScreen)) &&
+          (index !== 1 || (index === 1 && isMdScreen)) ? (
+            <div
+              key={index}
+              className={index !== 0 && index !== 1 ? "py-10" : ""}
+            >
+              {/* {(hoveredIndex === index || activeIndex === index) && (
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ duration: 0.5 }}
+                  variants={variants}
                   className={
                     index !== 0 && index !== 1
-                      ? "relative py-4 flex flex-col  text-[#F9F7ED] w-full h-full"
+                      ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-6xl"
                       : ""
                   }
                 >
-                  <div
-                    className={`${index !== 0 && index !== 1 ? "p-6 w-full h-full" : ""} ${
-                      hoveredIndex === index || activeIndex === index ? "" : ""
-                    } `}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() => setActiveIndex(index)}
+                  {slider?.title}
+                </motion.div>
+              )} */}
+
+              <div
+                className={
+                  index !== 0 && index !== 1
+                    ? "relative flex flex-col text-[#F9F7ED]"
+                    : ""
+                }
+              >
+                {/* {(hoveredIndex === index || activeIndex === index) && (
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.5 }}
+                    variants={variants}
+                    className={
+                      index !== 0 && index !== 1
+                        ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-5xl"
+                        : ""
+                    }
                   >
-                    <div
+                    {slider?.title}
+                  </motion.div>
+                )} */}
+
+                <div
+                  className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${
+                    hoveredIndex === index || activeIndex === index
+                      ? "relative"
+                      : ""
+                  } `}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() =>
+                    setActiveIndex((prevIndex) =>
+                      prevIndex === index ? null : index
+                    )
+                  }
+                >
+                  <div className={index !== 0 && index !== 1 ? "w-80" : ""}>
+                    <img
+                      src={imageAssets[slider?.image]}
+                      alt={imageAssets[slider?.image]}
                       className={
                         index !== 0 && index !== 1
-                          ? "p-4 md:p-14 rounded-xl w-full h-full"
-                          : ""
+                          ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                          : "object-cover w-full h-full transition-all duration-300"
                       }
-                    >
-                      <div
-                        className={
-                          index !== 0 && index !== 1
-                            ? "min-w neon-bg transition-all duration-200 w-full h-full min-w-60"
-                            : ""
-                        }
-                      >
-                        <img
-                          src={imageAssets[slider?.image]}
-                          alt={imageAssets[slider?.image]}
-                          className={
-                            index !== 0 && index !== 1
-                              ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                              : "object-cover w-full h-full transition-all duration-300"
-                          }
-                        />
-                      </div>
-                    </div>
+                    />
                   </div>
                 </div>
-              </SwiperSlide>
-            ) : null
-          )}
-        </Swiper>
-      </div>
+
+                {/* {(hoveredIndex === index || activeIndex === index) && (
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.5 }}
+                    variants={variants}
+                    className={
+                      index !== 0 && index !== 1
+                        ? "absolute -bottom-10 text-sm font-bold text-center w-full"
+                        : ""
+                    }
+                  >
+                    {slider?.description}
+                  </motion.div>
+                )} */}
+              </div>
+            </div>
+          ) : null
+        )}
+      </Marquee>
+
+
 
       <motion.div
         initial="hidden"
@@ -353,3 +373,83 @@ export default FeatureSlider;
         )}
       </Marquee> */
 }
+
+{/* <div className="w-full">
+<Swiper
+  ref={swiperRef}
+  direction="horizontal"
+  autoplay={{
+    delay: 1000,
+    disableOnInteraction: false,
+  }}
+  speed={1000}
+  modules={[Autoplay, Navigation]}
+  className="feature-slider"
+  spaceBetween={10}
+  breakpoints={breakpoints}
+  onMouseEnter={() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.autoplay.stop();
+    }
+  }}
+  onMouseLeave={() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.autoplay.start();
+    }
+  }}
+>
+  {Sliders.map((slider, index) =>
+    (index !== 0 || (index === 0 && isMdScreen)) &&
+    (index !== 1 || (index === 1 && isMdScreen)) ? (
+      <SwiperSlide
+        key={index}
+        className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
+        onClick={() => handleSlideClick(index)}
+      >
+        <div
+          className={
+            index !== 0 && index !== 1
+              ? "relative py-4 flex flex-col  text-[#F9F7ED] w-full h-full"
+              : ""
+          }
+        >
+          <div
+            className={`${index !== 0 && index !== 1 ? "p-6 w-full h-full" : ""} ${
+              hoveredIndex === index || activeIndex === index ? "" : ""
+            } `}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            onClick={() => setActiveIndex(index)}
+          >
+            <div
+              className={
+                index !== 0 && index !== 1
+                  ? "p-4 md:p-14 rounded-xl w-full h-full"
+                  : ""
+              }
+            >
+              <div
+                className={
+                  index !== 0 && index !== 1
+                    ? "min-w neon-bg transition-all duration-200 w-full h-full min-w-60"
+                    : ""
+                }
+              >
+                <img
+                  src={imageAssets[slider?.image]}
+                  alt={imageAssets[slider?.image]}
+                  className={
+                    index !== 0 && index !== 1
+                      ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                      : "object-cover w-full h-full transition-all duration-300"
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+    ) : null
+  )}
+</Swiper>
+</div> */}
