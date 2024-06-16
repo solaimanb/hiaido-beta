@@ -29,7 +29,7 @@ const MemberAccountsTable = () => {
   };
   // console.log(memberAccounts.length)
   // console.log(memberAccounts.length && memberAccounts.length == 0)
-  console.log(memberAccounts);
+  // console.log(memberAccounts);
 
   if (!memberAccounts) return;
   else if (memberAccounts && memberAccounts.length == 0)
@@ -66,7 +66,10 @@ const MemberAccountsTable = () => {
           <Table.Row>
             {ATTRIBUTES.map((attr, i) => {
               return (
-                <Table.ColumnHeaderCell className={`${i == 0 ? "!pl-10" : ""}`}>
+                <Table.ColumnHeaderCell
+                  key={i}
+                  className={`${i == 0 ? "!pl-10" : ""}`}
+                >
                   {attr}
                 </Table.ColumnHeaderCell>
               );
@@ -81,6 +84,10 @@ const MemberAccountsTable = () => {
                 onClick={() => {
                   if (acc.email != currentMemberAccount.email) {
                     setCurrentMemberAccount(acc);
+                    localStorage.setItem(
+                      "current_member_account",
+                      JSON.stringify(acc)
+                    );
                   }
                 }}
                 className={`dark:hover:bg-neutral-700 hover:bg-neutral-200 duration-200 ${
@@ -126,7 +133,16 @@ const AccountFactory = () => {
       fetchMemberAccounts()
         .then((res) => {
           setMemberAccounts(res);
-          setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+          if (localStorage.getItem("current_member_account")) {
+            let ma = JSON.parse(localStorage.getItem("current_member_account"));
+            if (res?.length > 0 && res.some((val) => val.email === ma.email)) {
+              setCurrentMemberAccount(ma);
+            } else {
+              setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+            }
+          } else {
+            setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -136,24 +152,24 @@ const AccountFactory = () => {
   }, []);
 
   const fetchMemberAccounts = async () => {
-    console.log("FETCHING MEMBER ACCOUNTS");
+    // console.log("FETCHING MEMBER ACCOUNTS");
 
     try {
       let url =
         "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
       const result = await fetchAuthSession();
       const idToken = result.tokens.idToken.toString();
-      console.log(result);
+      // console.log(result);
       const response = await fetch(url, {
         method: "GET",
         headers: { Authorization: `Bearer ${idToken}` },
       });
       const response_json = await response.json();
       if (response.ok) {
-        console.log(response_json);
+        // console.log(response_json);
         return response_json;
       } else {
-        console.log(response_json);
+        // console.log(response_json);
         throw response_json;
       }
     } catch (err) {

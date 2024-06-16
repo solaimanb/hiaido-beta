@@ -174,7 +174,23 @@ const Sidebar = () => {
         .then((res) => {
           console.log(res);
           setMemberAccounts(res);
-          setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+          console.log(localStorage.getItem("current_member_account"));
+          console.log(
+            JSON.parse(localStorage.getItem("current_member_account")) ||
+              res?.length > 0
+              ? res[0]
+              : null
+          );
+          if (localStorage.getItem("current_member_account")) {
+            let ma = JSON.parse(localStorage.getItem("current_member_account"));
+            if (res?.length > 0 && res.some((val) => val.email === ma.email)) {
+              setCurrentMemberAccount(ma);
+            } else {
+              setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+            }
+          } else {
+            setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+          }
         })
         .catch((err) => {
           console.log(err);
