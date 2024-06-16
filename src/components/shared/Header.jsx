@@ -296,8 +296,10 @@ const Header = () => {
                               className="p-4 space-y-2 rounded-lg bg-gray-800/50 hover:bg-gray-700"
                             >
                               <div className="flex items-center space-x-2">
-                                {/* icon */}
+                                <div className="flex items-center text-orange-500/80">
                                 {subItem.icon}
+                                </div>
+
                                 <NavLink
                                   className="block text-lg font-bold text-white"
                                   to={`#${subItem.name
