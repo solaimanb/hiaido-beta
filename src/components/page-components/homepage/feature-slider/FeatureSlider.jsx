@@ -147,10 +147,10 @@ const FeatureSlider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="w-full md:h-40"
+        className="w-full md:h-36"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="w-full text-3xl font-bold text-center text-glow bold-text md:text-6xl xl:text-7xl">
+          <div className="w-full text-3xl font-bold text-center text-glow bold-text md:text-6xl">
             {currentTitle.split("\n").map((line, index) => (
               <div key={index}>{line}</div>
             ))}
@@ -243,7 +243,7 @@ const FeatureSlider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="h-40 max-w-2xl"
+        className="h-40 max-w-4xl"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
           <div className="w-full text-lg font-bold text-center">
