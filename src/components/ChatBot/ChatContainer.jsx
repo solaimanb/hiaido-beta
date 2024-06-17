@@ -237,13 +237,13 @@ const ChatContainer = () => {
     useContext(GlobalStateContext);
   const ctx = useAuthenticator();
   const [query, setQuery] = useState("");
-  // const [chats, setChats] = useState([]);
-  const [chats, setChats] = useState([
-    {
-      query: "markdown test",
-      result: markdownData,
-    },
-  ]);
+  const [chats, setChats] = useState([]);
+  // const [chats, setChats] = useState([
+  //   {
+  //     query: "markdown test",
+  //     result: markdownData,
+  //   },
+  // ]);
   const [error, setError] = useState(null);
   const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
@@ -486,13 +486,13 @@ const markdownData = `
 
 1. Ordered List Item 1
 2. Ordered List Item 2
-   - Nested Unordered Item 1
-   - Nested Unordered Item 2
+    - Nested Unordered Item 1
+    - Nested Unordered Item 2
 
 - Unordered List Item 1
 - Unordered List Item 2
-  1. Nested Ordered Item 1
-  2. Nested Ordered Item 2
+    1. Nested Ordered Item 1
+    2. Nested Ordered Item 2
 
 [Link to Google](https://www.google.com)
 

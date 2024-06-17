@@ -7,7 +7,6 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./layouts/AppLayout.jsx";
 import UnderConstruction from "./pages/UnderConstruction.jsx";
-import { navbarData } from "./components/Sidebar.jsx";
 import AccountFactory from "./pages/AccountFactory.jsx";
 import { Suspense, lazy } from "react";
 import Loading from "./components/shared/Loading.jsx";
@@ -22,10 +21,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Login = lazy(() => import("./pages/Login"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
-import awsExports from "./awsExports.js";
 import { Amplify } from "aws-amplify";
-import "@aws-amplify/ui-react/styles.css";
-import { signInWithRedirect } from "aws-amplify/auth";
 
 // Amplify.configure(awsExports);
 Amplify.configure({

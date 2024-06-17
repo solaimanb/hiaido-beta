@@ -16,6 +16,20 @@
 .markdown > * {
   all: revert !important;
 }
+.markdown ol,
+ul {
+  padding-left: 40px;
+}
+.markdown ol {
+  list-style: decimal;
+}
+.markdown ul {
+  list-style: disc;
+}
+.markdown blockquote {
+  font-family: 'Times New Roman', Times, serif !important;
+  font-size: larger !important;
+}
 .code-markdown > * {
   all: revert !important;
 }
@@ -93,7 +107,8 @@
   font-style: normal;
 }
 
-html, body {
+html,
+body {
   background: #040404;
 }
 
