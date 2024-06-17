@@ -1,153 +1,21 @@
 import { memo, useContext, useEffect, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import {
-  gruvboxDark,
-  materialLight,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
 import logo from "/hiaido-logo.png";
-import Codeblock from "./Codeblock";
 import { AnimatePresence, motion } from "framer-motion";
 import { Tooltip } from "@radix-ui/themes";
-import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon, PaperClipIcon } from "@heroicons/react/24/solid";
 import { CopyIcon } from "@radix-ui/react-icons";
 import toast from "react-hot-toast";
-import { ThemeContext } from "../../context/ThemeContext";
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 import CreateMemberAccountButton from "../CreateMemberAccountButton";
 import config from "../../config";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { signOut, fetchUserAttributes } from "@aws-amplify/auth";
-import remarkGfm from "remark-gfm";
-
-const copyContent = async (text) => {
-  try {
-    await navigator.clipboard.writeText(text);
-    toast.success("Copied to clipboard");
-  } catch (err) {
-    console.log(err);
-    alert("Failed to copy", err);
-  }
-};
+import MDX from "../MDX";
+import QueryTemplates from "./QueryTemplates";
+import ChatResponseButtonsGroup from "./ChatResponseButtonsGroup";
 
 const width = "840";
 const widthClass = `w-[${width}px]`;
-
-const MDX = ({ children }) => {
-  const { theme } = useContext(ThemeContext);
-  return (
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      className="markdown leading-relaxed text-[15px]"
-      components={{
-        code(props) {
-          const { children, className, node, ...rest } = props;
-          const match = /language-(\w+)/.exec(className || "");
-
-          return match ? (
-            <Codeblock
-              language={match[1]}
-              code={children[0].trim()}
-              // theme={theme === "dark" ? gruvboxDark : materialLight}
-              theme={gruvboxDark}
-            />
-          ) : (
-            <code
-              {...rest}
-              className={`${className} dark:text-yellow-200/50 text-yellow-800 dark:bg-neutral-900 bg-neutral-200 text-[13px] rounded-md p-[2px] px-1 font-mono`}
-            >
-              {children}
-            </code>
-          );
-        },
-        hr: (props) => (
-          <hr
-            className="!bg-neutral-300 !h-[1px]"
-          >
-          </hr>
-        ),
-        // h1: ({ className, children, ...rest }) => (
-        //   <h1 className={`mt-10`}>{children}</h1>
-        // ),
-        // h2: ({ className, children, ...rest }) => (
-        //   <h2 className={`${className} mt-10`} {...rest}>
-        //     {children}
-        //   </h2>
-        // ),
-        // h3: ({ className, children, ...rest }) => (
-        //   <h3 className={`${className} !mt-10`}>{children}</h3>
-        // ),
-        // h4: ({ className, children, ...rest }) => (
-        //   <h4 className={`${className} mt-10`} {...rest}>
-        //     {children}
-        //   </h4>
-        // ),
-        // h5: ({ className, children, ...rest }) => (
-        //   <h5 className={`${className} mt-10`} {...rest}>
-        //     {children}
-        //   </h5>
-        // ),
-        // h6: ({ className, children, ...rest }) => (
-        //   <h6 className={`${className} mt-10`} {...rest}>
-        //     {children}
-        //   </h6>
-        // ),
-      }}
-    >
-      {children}
-    </ReactMarkdown>
-  );
-};
-
-const QueryTemplates = ({ askQuery }) => {
-  const data = [
-    "How to create an S3 bucket?",
-    "How to create an ETL pipeline using AWS Glue?",
-    "How to monitor a Lambda function?",
-    "How to setup a Elastic Load Balancer for EC2?",
-  ];
-
-  return (
-    <div className="relative h-full">
-      <div className="absolute bottom-72 flex w-full justify-center space-x-4">
-        {data.map((item, i) => {
-          return (
-            <AnimatePresence key={i}>
-              <motion.button
-                onClick={() => askQuery(item)}
-                key={item}
-                className="p-4 w-40 rounded-2xl shadow-md dark:shadow-neutral-950 dark:bg-neutral-700/50 border-[1px] flex justify-start border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-100 text-left dark:hover:bg-neutral-700/75 hover:bg-neutral-200/60 hover:border-neutral-300 dark:hover:border-neutral-500 duration-300"
-              >
-                <span>{item}</span>
-              </motion.button>
-            </AnimatePresence>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-const ChatResponseButtonsGroup = ({ content }) => {
-  return (
-    <div className="my-2 flex space-x-3">
-      <Tooltip content="Regenerate">
-        <button className="hover:stroke-neutral-600 stroke-neutral-500 outline-none">
-          <ArrowPathIcon className="size-[18px]" />
-        </button>
-      </Tooltip>
-      <Tooltip content="Copy response">
-        <button
-          onClick={() => {
-            copyContent(content);
-          }}
-          className="hover:stroke-neutral-600 stroke-neutral-500 outline-none"
-        >
-          <CopyIcon className="size-[18px]" strokeWidth={0.5} />
-        </button>
-      </Tooltip>
-    </div>
-  );
-};
 
 const CreateMemberAccountWarningBox = () => {
   return (
@@ -215,7 +83,7 @@ const ChatsList = memo(({ chats }) => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                   >
-                    <MDX>{chat.result}</MDX>
+                    <MDX content={chat.result} />
                     {index == chats.length - 1 && (
                       <ChatResponseButtonsGroup content={chat.result} />
                     )}
@@ -248,9 +116,8 @@ const ChatContainer = () => {
   const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
   const inputRef = useRef(null);
-  console.log(ctx);
   const { user } = ctx;
-  // console.log(currentMemberAccount["email"]);
+
   useEffect(() => {
     fetchUserAttributes().then((res) => console.log(res));
   }, []);
@@ -265,6 +132,7 @@ const ChatContainer = () => {
         },
         body: JSON.stringify({
           email: currentMemberAccount["email"],
+          // TODO: may break during google sign in, fix it
           owner: user.signInDetails.loginId,
           query: newChat.query,
         }),
@@ -312,7 +180,7 @@ const ChatContainer = () => {
   }, [newChat]);
 
   const getChat = async (templateQuery) => {
-    // previous response is still loading
+    // debounce if previous response is still loading
     if (chats.length > 0 && chats.at(-1).loading) return;
 
     try {
@@ -349,7 +217,6 @@ const ChatContainer = () => {
 
   return (
     <>
-      {/* <div className="overflow-hidden h-full w-full"> */}
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto w-full">
           <div className="flex flex-col text-sm pb-48 " ref={chatBoxRef}>
@@ -368,73 +235,75 @@ const ChatContainer = () => {
                     <CreateMemberAccountWarningBox />
                   ) : (
                     <QueryTemplates
+                      inputRef={inputRef}
                       askQuery={(templateQuery) => getChat(templateQuery)}
                     />
                   )}
                 </motion.div>
               )}
             </AnimatePresence>
-            {/* <AnimatePresence>
-              {chats.length > 0 && (
-                <motion.div
-                  transition={{ duration: 0.5 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="h-full"
-                >
-                </motion.div>
-              )}
-            </AnimatePresence> */}
             <ChatsList chats={chats} />
           </div>
         </div>
       </div>
       <div className="w-full flex justify-center">
         <div
-          className={`mb-4 mt-2 w-full rounded-lg p-[3px] flex justify-center transition-all duration-200 ease-in bg-gradient-to-tr animated-background`}
+          className={`mb-4 mt-0 w-full rounded-lg flex justify-center bg-transparent`}
         >
-          <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-center gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
-            {/* <PaperClipIcon className="w-6 ml-3" opacity={0} /> */}
-            <div className="flex flex-col flex-1 min-w-0 ml-4">
-              <textarea
-                disabled={memberAccounts && memberAccounts.length == 0}
-                rows={1}
-                className="h-[40px] bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-hidden text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
-                ref={inputRef}
-                onChange={(e) => setQuery(e.target.value)}
-                name="query"
-                id="query-box"
-                value={query}
-                placeholder="Ask anything..."
-                onKeyUp={onKeyUp}
-                onKeyDown={(k) => {
-                  if (k.key == "Enter") k.preventDefault();
-                }}
-              ></textarea>
-            </div>
-            <button
-              onClick={() => getChat()}
-              disabled={chats.length > 0 && chats.at(-1).loading}
-              className="bg-neutral-100 hover:bg-neutral-200 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="#111111"
-                className="size-5"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
+          <QueryBox
+            inputRef={inputRef}
+            query={query}
+            disabled={chats.length > 0 && chats.at(-1).loading}
+            onKeyUp={onKeyUp}
+            setQuery={setQuery}
+          />
         </div>
       </div>
-      {/* </div> */}
     </>
+  );
+};
+
+const QueryBox = ({ inputRef, query, onKeyUp, setQuery, disabled }) => {
+  const { memberAccounts } = useContext(GlobalStateContext);
+  return (
+    <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
+      {/* <PaperClipIcon className="w-6 ml-3" /> */}
+      <div className="flex flex-col flex-1 min-w-0 ml-4">
+        <textarea
+          disabled={memberAccounts && memberAccounts.length == 0}
+          rows={1}
+          className="h-[40px] bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-hidden text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
+          ref={inputRef}
+          onChange={(e) => setQuery(e.target.value)}
+          name="query"
+          id="query-box"
+          value={query}
+          placeholder="Ask anything..."
+          onKeyUp={onKeyUp}
+          onKeyDown={(k) => {
+            if (k.key == "Enter") k.preventDefault();
+          }}
+        ></textarea>
+      </div>
+      <button
+        onClick={() => getChat()}
+        disabled={disabled}
+        className="bg-neutral-100 hover:bg-neutral-200 mb-1 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="#111111"
+          className="size-5"
+        >
+          <path
+            fillRule="evenodd"
+            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
   );
 };
 
