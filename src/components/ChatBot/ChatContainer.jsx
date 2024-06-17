@@ -263,7 +263,17 @@ const ChatContainer = () => {
   );
 };
 
-const QueryBox = ({ inputRef, query, onKeyUp, setQuery, disabled }) => {
+const QueryBox = ({ query, onKeyUp, setQuery, disabled, submitPrompt }) => {
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      console.log(inputRef.current.scrollHeight, inputRef.current.style.height);
+      inputRef.current.style.height = `inherit`;
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+      inputRef.current.scrollBy(0, inputRef.current.scrollHeight);
+    }
+  }, [query]);
+
   const { memberAccounts } = useContext(GlobalStateContext);
   return (
     <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
@@ -272,7 +282,7 @@ const QueryBox = ({ inputRef, query, onKeyUp, setQuery, disabled }) => {
         <textarea
           disabled={memberAccounts && memberAccounts.length == 0}
           rows={1}
-          className="h-[40px] bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-hidden text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
+          className="bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-scroll text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
           ref={inputRef}
           onChange={(e) => setQuery(e.target.value)}
           name="query"
