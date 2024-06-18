@@ -42,9 +42,9 @@ const About = () => {
         <section className="space-y-10 border border-orange-500/30 p-4 rounded-xl">
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold mb-4">Welcome to HIAIDO</h2>
-            <p>Your ultimate cloud automation platform tailored for comprehensive cloud management.</p>
+            <p className="opacity-80">Your ultimate cloud automation platform tailored for comprehensive cloud management.</p>
 
-            <p>We&apos;ve developed a powerful chat-based interface that lets you interact with the cloud using natural language commands, eliminating the need for complex scripts or manual configurations.</p>
+            <p className="opacity-80">We&apos;ve developed a powerful chat-based interface that lets you interact with the cloud using natural language commands, eliminating the need for complex scripts or manual configurations.</p>
           </div>
 
           <div>
@@ -52,7 +52,8 @@ const About = () => {
             <ul className="space-y-2">
               {coreFunctionalities.map((item, index) => (
                 <li key={index}>
-                  <span className="font-bold inline-block">{item.title}:</span> {item.description}
+                  <span className="font-bold inline-block">{item.title}:</span>{" "}
+                  <p className="opacity-80 inline">{item.description}</p>
                 </li>
               ))}
             </ul>
@@ -63,7 +64,8 @@ const About = () => {
             <ul className="space-y-2">
               {productPortfolio.map((item, index) => (
                 <li key={index}>
-                  <span className="font-bold inline-block">{item.title}:</span> {item.description}
+                  <span className="font-bold inline-block">{item.title}:</span>{" "}
+                  <p className="opacity-80 inline">{item.description}</p>
                 </li>
               ))}
             </ul>
@@ -89,7 +91,8 @@ const About = () => {
             <ul className="space-y-2">
               {keyFeatures.map((item, index) => (
                 <li key={index}>
-                  <span className="font-bold inline-block">{item.title}:</span> {item.description}
+                  <span className="font-bold inline-block">{item.title}:</span>{" "}
+                  <p className="opacity-80 inline">{item.description}</p>
                 </li>
               ))}
             </ul>
