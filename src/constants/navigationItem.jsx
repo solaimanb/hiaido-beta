@@ -1,8 +1,11 @@
 export const navigation = [
-  { name: "About", path: "/about" },
+  { name: "About", path: "/about",
+    onlyMobile: true,
+   },
   {
     name: "Products",
     path: "/",
+    onlyMobile: true,
     subNav: [
       {
         name: "AI Cloud Engineer",
@@ -36,6 +39,7 @@ export const navigation = [
   {
     name: "Features",
     path: "/",
+    onlyMobile: true,
     subNav: [
       {
         name: "Natural Language Interface",
@@ -143,6 +147,7 @@ export const navigation = [
   {
     name: "Integrations",
     path: "/",
+    onlyMobile: true,
     subNav: [
       {
         name: "Multi-Cloud Connectivity",
@@ -175,6 +180,10 @@ export const navigation = [
       },
     ],
   },
-  { name: "Enterprise", path: "/enterprise" },
-  { name: "Pricing", path: "/pricing" },
+  { name: "Enterprise", path: "/enterprise",
+    onlyMobile: true,
+   },
+  { name: "Pricing", path: "/pricing",
+    onlyMobile: true,
+   },
 ];

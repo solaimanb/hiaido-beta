@@ -15,11 +15,27 @@ const Header = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
   const [user, setUser] = useState();
   const [hoveredNavItem, setHoveredNavItem] = useState(null);
-
   const { signOut } = useAuthenticator((context) => [
     context.signOut,
     context.authStatus,
   ]);
+
+  const handleSubNavOpen = (navItem) => {
+    setHoveredNavItem(navItem);
+    disablePageScroll();
+  };
+
+  const handleSubNavClose = () => {
+    setHoveredNavItem(null);
+    enablePageScroll();
+  };
+
+  const handleClick = () => {
+    if (!openNavigation) return;
+
+    enablePageScroll();
+    setOpenNavigation(false);
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -28,6 +44,12 @@ const Header = () => {
       setUser(parsedUser);
     }
   }, []);
+
+  useEffect(() => {
+    if (!hoveredNavItem) {
+      enablePageScroll();
+    }
+  }, [hoveredNavItem]);
 
   const toggleNavigation = () => {
     setOpenNavigation((prevState) => !prevState);
@@ -39,12 +61,6 @@ const Header = () => {
     }
   };
 
-  const handleClick = () => {
-    if (!openNavigation) return;
-
-    enablePageScroll();
-    setOpenNavigation(false);
-  };
 
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
@@ -62,7 +78,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 px-4 md:px-2
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out transform backdrop-blur-2xl pt-3 lg:px-4 px-2
       `}
     >
       <div className="container relative flex items-center justify-between w-full px-4">
@@ -76,15 +92,16 @@ const Header = () => {
               {navigation.map((item, index) => (
                 <div
                   key={index}
-                  onMouseEnter={() => setHoveredNavItem(item.name)}
-                  onMouseLeave={() => setHoveredNavItem(null)}
+                  // onMouseEnter={() => setHoveredNavItem(item.name)}
+                  // onMouseLeave={() => setHoveredNavItem(null)}
+                  onMouseEnter={() => handleSubNavOpen(item.name)}
+                  onMouseLeave={handleSubNavClose}
                 >
                   <NavLink
-                   className={({ isActive }) =>
-                    `w-28 py-4 font-[400] text-center transition-all duration-300 ease-in-out relative ${
-                      isActive && !item.subNav ? 'text-orange-400' : 'text-white/70 hover:text-orange-400/100'
-                    }`
-                  }
+                    className={({ isActive }) =>
+                      `w-28 py-4 font-[400] text-center transition-all duration-300 ease-in-out relative ${isActive && !item.subNav ? 'text-orange-400' : 'text-white/70 hover:text-orange-400/100'
+                      }`
+                    }
                     to={item?.path}
                   >
                     {` ${item?.name}`}
@@ -119,8 +136,8 @@ const Header = () => {
                               className="p-4 space-y-2 rounded-lg border border-transparent bg-gray-800/5 hover:border-gray-700 hover:border"
                             >
                               <div className="flex items-center space-x-2">
-                                <div className="flex items-center text-orange-500/80">
-                                {subItem.icon}
+                                <div className="flex items-center text-orange-500/80 bg-orange-500/10 p-1 rounded">
+                                  {subItem.icon}
                                 </div>
 
                                 <NavLink
@@ -219,30 +236,32 @@ const Header = () => {
             </button>
           </div>
 
-          <div className="pt-4 space-y-6">
+          <div className="pt-6 space-y-6">
             {navigation.map((item) => (
               <Link
                 key={item?.id}
                 to={item?.to}
                 onClick={handleClick}
-                className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold ${item?.onlyMobile ? "lg:hidden" : ""
+                className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border py-1 rounded-md font-semibold ${item?.onlyMobile ? "lg:hidden" : ""
                   } ${item?.url === pathname.hash
                     ? "font-bold text-orange-400/80"
                     : "lg:text-n-1/50"
                   }`}
               >
-                {item?.title}
+                {item?.name}
               </Link>
             ))}
-            <Link
-              onClick={() => user && signOut()}
-              className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border p-2 rounded-md font-semibold
-                `}
-            >
-              {user ? "Sign Out" : "Sign In"}
-            </Link>
           </div>
         </div>
+
+        <Link
+          to={"/login"}
+          onClick={() => user && signOut()}
+          className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-500 py-1 my-4 rounded-full border w-full font-semibold text-center mt-auto
+                `}
+        >
+          {user ? "Sign Out" : "Sign In"}
+        </Link>
 
         <div className="space-y-2">
           <div className="horizon-bar opacity-30 h-[1px] bg-orange-400" />

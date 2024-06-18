@@ -77,7 +77,7 @@ const FeatureSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
   const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
-  const [currentTitle, setCurrentTitle] = useState("");
+  const [currentTitle, setCurrentTitle] = useState(" ");
   const [currentDescription, setCurrentDescription] = useState("");
   // const swiperRef = useRef(null);
 
@@ -141,6 +141,16 @@ const FeatureSlider = () => {
   //   },
   // };
 
+  const handleMouseEnter = (index) => {
+    console.log("Mouse entered:", index);
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    console.log("Mouse left");
+    setHoveredIndex(null);
+  };
+
   return (
     <section className="flex flex-col items-center justify-center min-h-screen mt-10">
       <motion.div
@@ -148,10 +158,10 @@ const FeatureSlider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="w-full md:h-36"
+        className="max-w-4xl md:h-36"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="w-full text-3xl font-bold text-center text-glow bold-text md:text-6xl">
+          <div className="text-3xl font-bold text-center text-glow bold-text md:text-6xl border w-fit mx-auto p-4 rounded-lg border-orange-500/10 shadow shadow-orange-500/30">
             {currentTitle.split("\n").map((line, index) => (
               <div key={index}>{line}</div>
             ))}
@@ -159,32 +169,16 @@ const FeatureSlider = () => {
         )}
       </motion.div>
 
-       <Marquee className=""
-       pauseOnHover
-       >
+      <Marquee className=""
+        pauseOnHover
+      >
         {Sliders?.map((slider, index) =>
           (index !== 0 || (index === 0 && isMdScreen)) &&
-          (index !== 1 || (index === 1 && isMdScreen)) ? (
+            (index !== 1 || (index === 1 && isMdScreen)) ? (
             <div
               key={index}
               className={index !== 0 && index !== 1 ? "py-10" : ""}
             >
-              {/* {(hoveredIndex === index || activeIndex === index) && (
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  transition={{ duration: 0.5 }}
-                  variants={variants}
-                  className={
-                    index !== 0 && index !== 1
-                      ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-6xl"
-                      : ""
-                  }
-                >
-                  {slider?.title}
-                </motion.div>
-              )} */}
-
               <div
                 className={
                   index !== 0 && index !== 1
@@ -192,37 +186,20 @@ const FeatureSlider = () => {
                     : ""
                 }
               >
-                {/* {(hoveredIndex === index || activeIndex === index) && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 0.5 }}
-                    variants={variants}
-                    className={
-                      index !== 0 && index !== 1
-                        ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-5xl"
-                        : ""
-                    }
-                  >
-                    {slider?.title}
-                  </motion.div>
-                )} */}
-
                 <div
-                  className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${
-                    hoveredIndex === index || activeIndex === index
+                  className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${hoveredIndex === index || activeIndex === index
                       ? "relative"
                       : ""
-                  } `}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                    } `}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave()}
                   onClick={() =>
                     setActiveIndex((prevIndex) =>
                       prevIndex === index ? null : index
                     )
                   }
                 >
-                  <div className={index !== 0 && index !== 1 ? "w-80" : ""}>
+                  <div className={index !== 0 && index !== 1 ? "w-80 neon-bg transition-all duration-200" : ""}>
                     <img
                       src={imageAssets[slider?.image]}
                       alt={imageAssets[slider?.image]}
@@ -235,28 +212,11 @@ const FeatureSlider = () => {
                   </div>
                 </div>
 
-                {/* {(hoveredIndex === index || activeIndex === index) && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 0.5 }}
-                    variants={variants}
-                    className={
-                      index !== 0 && index !== 1
-                        ? "absolute -bottom-10 text-sm font-bold text-center w-full"
-                        : ""
-                    }
-                  >
-                    {slider?.description}
-                  </motion.div>
-                )} */}
               </div>
             </div>
           ) : null
         )}
       </Marquee>
-
-
 
       <motion.div
         initial="hidden"
@@ -266,7 +226,7 @@ const FeatureSlider = () => {
         className="h-40 max-w-4xl"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="w-full text-lg font-bold text-center">
+          <div className="text-lg font-bold text-center border w-fit mx-auto p-4 rounded-lg border-orange-500/10 shadow shadow-orange-500/30">
             {currentDescription}
           </div>
         )}
