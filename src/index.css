@@ -18,6 +18,27 @@
   font-family: var(--font-sora);
 }
 
+/* scrollbar.css */
+::-webkit-scrollbar {
+  width: 8px; /* width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #bba596; /* color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #835333; /* color of the scroll thumb */
+  border-radius: 4px; /* rounded corners */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a75722; /* color when hovered */
+}
+
 /* FONT FAMILIES */
 .secondaryText {
   font-family: var(--font-playpen);
