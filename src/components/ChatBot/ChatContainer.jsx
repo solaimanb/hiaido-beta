@@ -125,16 +125,22 @@ const ChatContainer = () => {
   useEffect(() => {
     const fetchResponse = async () => {
       console.log(newChat);
-      const response = await fetch(`${config.baseURL}/get-response`, {
+      const response = await fetch(`${config.multiAgentULR}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        // body: JSON.stringify({
+        //   email: currentMemberAccount["email"],
+        //   // TODO: may break during google sign in, fix it
+        //   owner: user.signInDetails.loginId,
+        //   query: newChat.query,
+        // }),
         body: JSON.stringify({
           email: currentMemberAccount["email"],
           // TODO: may break during google sign in, fix it
           owner: user.signInDetails.loginId,
-          query: newChat.query,
+          user_query: newChat.query,
         }),
       });
       console.log("Completed request");
