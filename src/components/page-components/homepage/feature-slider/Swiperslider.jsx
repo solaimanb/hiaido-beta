@@ -257,7 +257,7 @@ const Swiperslider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="h-40 max-w-3xl"
+        className="h-40 max-w-3xl mt-10"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
           <div className="text-lg font-bold text-center w-fit mx-auto">
