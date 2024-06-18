@@ -125,7 +125,7 @@ const ChatContainer = () => {
   useEffect(() => {
     const fetchResponse = async () => {
       console.log(newChat);
-      const response = await fetch(`${config.multiAgentULR}/chat`, {
+      const response = await fetch(`${config.multiAgentURL}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -145,13 +145,13 @@ const ChatContainer = () => {
       });
       console.log("Completed request");
       const response_data = await response.json();
-      console.log(response_data);
+      console.log(response_data, response.status);
       if (!response.ok) {
         if (
           response.status == 400 &&
           response_data["detail"].includes("CLI not configured")
         ) {
-          const res = await fetch(`${config.baseURL}/configure-cli`, {
+          const res = await fetch(`${config.multiAgentURL}/configure-cli`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -162,7 +162,7 @@ const ChatContainer = () => {
             }),
           });
           const res_data = await res.json();
-          console.log(res_data);
+          console.log(res_data, res.status);
           if (res.ok) {
             await fetchResponse();
             return;
