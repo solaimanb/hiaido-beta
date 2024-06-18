@@ -117,13 +117,13 @@ const Swiperslider = () => {
       slidesPerView: 2,
     },
     640: {
-      slidesPerView: 3,
+      slidesPerView: 4,
     },
     768: {
-      slidesPerView: 3,
+      slidesPerView: 5,
     },
     1024: {
-      slidesPerView: 4,
+      slidesPerView: 6,
     },
   };
 
@@ -184,7 +184,7 @@ const Swiperslider = () => {
         }}
         speed={1500}
         modules={[Autoplay, Pagination]}
-        className="feature-slider w-full"
+        className="feature-slider w-full min-h-80"
         spaceBetween={2}
         pagination={{
           // el: '.swiper-pagination',
@@ -208,13 +208,13 @@ const Swiperslider = () => {
             (index !== 1 || (index === 1 && isMdScreen)) ? (
             <SwiperSlide
               key={index}
-              className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
+              className={index !== 0 && index !== 1 ? "w-full h-full min-w-80" : ""}
               onClick={() => handleSlideClick(index)}
             >
               <div
                 className={
                   index !== 0 && index !== 1
-                    ? "relative flex flex-col  text-[#F9F7ED] w-full h-full"
+                    ? "relative flex flex-col  text-[#F9F7ED] py-10 w-full h-full"
                     : ""
                 }
                 onMouseEnter={() => handleMouseEnter(index)}
@@ -230,27 +230,19 @@ const Swiperslider = () => {
                   <div
                     className={
                       index !== 0 && index !== 1
-                        ? "p-4 md:p-14 rounded-xl w-full h-full"
+                        ? "rounded-xl  min-w neon-bg transition-all duration-200 w-full h-full"
                         : ""
                     }
                   >
-                    <div
+                    <img
+                      src={imageAssets[slider?.image]}
+                      alt={imageAssets[slider?.image]}
                       className={
                         index !== 0 && index !== 1
-                          ? "min-w neon-bg transition-all duration-200 w-full h-full min-w-60"
-                          : ""
+                          ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                          : "object-cover w-full h-full transition-all duration-300"
                       }
-                    >
-                      <img
-                        src={imageAssets[slider?.image]}
-                        alt={imageAssets[slider?.image]}
-                        className={
-                          index !== 0 && index !== 1
-                            ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                            : "object-cover w-full h-full transition-all duration-300"
-                        }
-                      />
-                    </div>
+                    />
                   </div>
                 </div>
               </div>
