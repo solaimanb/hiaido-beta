@@ -86,29 +86,29 @@ import azure from "./icons/azure.svg"
 import gcp from "./icons/google-cloud.svg"
 
 // Feature Slider Images:
-import cloudEngineer from "./feature-images/01-ai-cloud-engineer.png";
-import webPortal from "./feature-images/02-smart-web-portal.png";
-import naturalLanguage from "./feature-images/03-natural-language-interface.png";
-import universalSearch from "./feature-images/04-universal-search-bar.png";
-import einsteinCloud from "./feature-images/05-einstein-genius-cloud-champion.png";
-import multiCloud from "./feature-images/06-multi-cloud-connectivity.png";
-import jiraIntegration from "./feature-images/07-jira-integration.png";
+import digitalWorkforce from "./feature-images/01-digital-workforce.png";
+import smartUserInterface from "./feature-images/02-smart-user-interface.png";
+import intelligentChatbot from "./feature-images/03-intelligent-chatbot.png";
+import cloudSearchEverywhere from "./feature-images/04-cloud-search-everywhere.png";
+import einsteinFramework from "./feature-images/05-einstein-framework.png";
+import multiCloudConnectivity from "./feature-images/06-multi-cloud-connectivity.png";
+import smarkTaskMangement from "./feature-images/07-smart-task-management.png";
 import alerts from "./feature-images/08-alerts.png";
 import sandhAi from "./feature-images/09-sandh-ai.png";
-import serverlessFunctions from "./feature-images/10-serverless-functions.png";
+import dataMigration from "./feature-images/10-data-migration.png";
 import securityAutomated from "./feature-images/11-security-automated.png";
-import recommendationsEngine from "./feature-images/12-recommendations-engine.png";
-import devOpsSuite from "./feature-images/13-hiaido-devops-suite.png";
-import blockchainLedger from "./feature-images/14-blockchain-ledger.png";
-import chaosEngineering from "./feature-images/15-chaos-engineering.png";
+import devOpsSuite from "./feature-images/12-devops-suite.png";
+import blockchainBasedSecurityLedger from "./feature-images/13-blockchain-based-security-ledger.png";
+import chaosEngineering from "./feature-images/14-chaos-engineering.png";
+import recommendationsEngine from "./feature-images/15-recommendations-engine.png";
 import costOptimisation from "./feature-images/16-cost-optimization.png";
-import complianceManagement from "./feature-images/17-compliance-management.png";
+import complianceManagementPack from "./feature-images/17-compliance-management-pack.png";
 import unifiedDashboard from "./feature-images/18-unified-dashboard.png";
-import codeReview from "./feature-images/19-code-review.png";
-import predictiveMaintenance from "./feature-images/20-predictive-maintenance.png";
-import anomalyDetection from "./feature-images/21-anomaly-detection.png";
-import resourceFusion from "./feature-images/22-resource-fusion.png";
-import autonomousOptimization from "./feature-images/23-autonomous-optimization.png";
+import codeReviewerAi from "./feature-images/19-code-reviewer-ai.png";
+import predictiveMaintenanceSuite from "./feature-images/20-predictive-maintenance-suite.png";
+import autonomousOptimizationMatrix from "./feature-images/21-autonomous-optimization-matrix.png";
+import anomalyDetectionEngine from "./feature-images/22-anomaly-detection-engine.png";
+import blockchainBasedGovernance from "./feature-images/23-blockchain-based-governance.png";
 
 export {
   hiaido,
@@ -186,27 +186,27 @@ export {
   aws,
   azure,
   gcp,
-  cloudEngineer,
-  webPortal,
-  naturalLanguage,
-  universalSearch,
-  einsteinCloud,
-  multiCloud,
-  jiraIntegration,
+  digitalWorkforce,
+  smartUserInterface,
+  intelligentChatbot,
+  cloudSearchEverywhere,
+  einsteinFramework,
+  multiCloudConnectivity,
+  smarkTaskMangement,
   alerts,
   sandhAi,
-  serverlessFunctions,
+  dataMigration,
   securityAutomated,
-  recommendationsEngine,
   devOpsSuite,
-  blockchainLedger,
+  blockchainBasedSecurityLedger,
   chaosEngineering,
+  recommendationsEngine,
   costOptimisation,
-  complianceManagement,
+  complianceManagementPack,
   unifiedDashboard,
-  codeReview,
-  predictiveMaintenance,
-  anomalyDetection,
-  resourceFusion,
-  autonomousOptimization,
+  codeReviewerAi,
+  predictiveMaintenanceSuite,
+  autonomousOptimizationMatrix,
+  anomalyDetectionEngine,
+  blockchainBasedGovernance,
 };
