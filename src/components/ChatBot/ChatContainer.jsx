@@ -15,82 +15,84 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/ui-components/ui/dropdown-menu";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { RefreshCcwDotIcon, RefreshCcwIcon } from "lucide-react";
 
 const width = "840";
 const widthClass = `w-[${width}px]`;
 
-function useChats() {
-  const [query, setQuery] = useState("");
-  const [chats, setChats] = useState([]);
-  // const [chats, setChats] = useState([
-  //   {
-  //     query: "markdown test",
-  //     result: markdownData,
-  //   },
-  // ]);
+// function useChats() {
+//   const [query, setQuery] = useState("");
+//   const [chats, setChats] = useState([]);
+//   // const [chats, setChats] = useState([
+//   //   {
+//   //     query: "markdown test",
+//   //     result: markdownData,
+//   //   },
+//   // ]);
 
-  useEffect(() => {
-    const fetchResponse = async () => {
-      console.log(newChat);
-      const response = await fetch(`${config.baseURL}/get-response`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: currentMemberAccount["email"],
-          // TODO: may break during google sign in, fix it
-          owner: user.signInDetails.loginId,
-          query: newChat.query,
-        }),
-      });
-      console.log("Completed request");
-      const response_data = await response.json();
-      console.log(response_data);
-      if (!response.ok) {
-        if (
-          response.status == 400 &&
-          response_data["detail"].includes("CLI not configured")
-        ) {
-          const res = await fetch(`${config.baseURL}/configure-cli`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: currentMemberAccount["email"],
-              owner: user.signInDetails.loginId,
-            }),
-          });
-          const res_data = await res.json();
-          console.log(res_data);
-          if (res.ok) {
-            await fetchResponse();
-            return;
-          } else {
-            setError(res_data);
-          }
-        } else {
-          throw new Error(res_data);
-        }
-      }
+//   useEffect(() => {
+//     const fetchResponse = async () => {
+//       console.log(newChat);
+//       const response = await fetch(`${config.baseURL}/get-response`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           email: currentMemberAccount["email"],
+//           // TODO: may break during google sign in, fix it
+//           owner: user.signInDetails.loginId,
+//           query: newChat.query,
+//         }),
+//       });
+//       console.log("Completed request");
+//       const response_data = await response.json();
+//       console.log(response_data);
+//       if (!response.ok) {
+//         if (
+//           response.status == 400 &&
+//           response_data["detail"].includes("CLI not configured")
+//         ) {
+//           const res = await fetch(`${config.baseURL}/configure-cli`, {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({
+//               email: currentMemberAccount["email"],
+//               owner: user.signInDetails.loginId,
+//             }),
+//           });
+//           const res_data = await res.json();
+//           console.log(res_data);
+//           if (res.ok) {
+//             await fetchResponse();
+//             return;
+//           } else {
+//             setError(res_data);
+//           }
+//         } else {
+//           throw new Error(res_data);
+//         }
+//       }
 
-      newChat.result = response_data.response;
-      newChat.loading = false;
+//       newChat.result = response_data.response;
+//       newChat.loading = false;
 
-      setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
-    };
+//       setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
+//     };
 
-    if (newChat) {
-      fetchResponse();
-    }
-  }, [newChat]);
+//     if (newChat) {
+//       fetchResponse();
+//     }
+//   }, [newChat]);
 
-  const submitPrompt = () => {};
-  const [error, setError] = useState(null);
+//   const submitPrompt = () => {};
+//   const [error, setError] = useState(null);
 
-  return { query, setQuery, chats };
-}
+//   return { query, setQuery, chats };
+// }
 
 const CreateMemberAccountWarningBox = () => {
   return (
@@ -154,8 +156,21 @@ const ChatsList = memo(({ chats }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
+                    className="w-full"
                   >
-                    <MDX content={chat.result} />
+                    {chat.error ? (
+                      <div className="dark:bg-red-800/25 bg-red-400/25 w-full p-2 my-3 rounded-lg px-5 py-3 flex flex-col gap-5">
+                        <span>{chat.error}</span>
+                        <button className="dark:bg-white dark:text-black bg-white text-black px-4 p-2 rounded-md w-fit flex gap-3 items-center hover:bg-neutral-100 dark:hover:bg-neutral-200">
+                          <span>
+                            <RefreshCcwIcon className="w-4 h-4" />
+                          </span>
+                          Retry
+                        </button>
+                      </div>
+                    ) : (
+                      <MDX content={chat.result} />
+                    )}
                     {index == chats.length - 1 && (
                       <ChatResponseButtonsGroup content={chat.result} />
                     )}
@@ -194,15 +209,8 @@ const ChatContainer = () => {
     fetchUserAttributes().then((res) => console.log(res));
   }, []);
 
-  // console.log({
-  //   email: currentMemberAccount ? currentMemberAccount["email"] : "",
-  //   // TODO: may break during google sign in, fix it
-  //   owner: user.signInDetails.loginId,
-  //   // user_query: newChat.query,
-  // })
   useEffect(() => {
     const fetchResponse = async () => {
-      console.log(newChat);
       let url =
         model === 0
           ? `${config.baseURL}/get-response`
@@ -259,7 +267,20 @@ const ChatContainer = () => {
             setError(res_data);
           }
         } else {
-          throw new Error(res_data);
+          console.log(response_data);
+          // setError(response_data);
+          let newChatCopy = structuredClone(newChat);
+          if (response.status >= 500) {
+            newChatCopy.error =
+              response_data?.detail || "Internal server error occured.";
+          } else {
+            newChatCopy.error =
+              response_data?.detail ||
+              "An unknown error occured. Please try again later.";
+          }
+          newChatCopy.loading = false;
+          setChats((prevChats) => [...prevChats.slice(0, -1), newChatCopy]);
+          throw new Error(response_data);
         }
       }
 
@@ -303,14 +324,24 @@ const ChatContainer = () => {
   };
 
   useEffect(() => {
-    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    if (chatBoxRef.current) {
+      // chatBoxRef.current.scroll({
+      //   top: chatBoxRef.current.scrollHeight,
+      //   behavior: "smooth",
+      // });
+      chatBoxRef.current.scrollBy({
+        top: chatBoxRef.current.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }, [chats]);
 
   return (
     <>
       <div className="flex-1 overflow-hidden">
-        <div className="h-full overflow-y-auto w-full">
-          <div className="flex flex-col text-sm pb-48 " ref={chatBoxRef}>
+        <div className="h-full overflow-y-auto w-full" ref={chatBoxRef}>
+          <div className="flex flex-col text-sm pb-48">
             <div className="flex justify-between items-center px-10">
               <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
                 Welcome To HIAIDO Cloud Assistant.

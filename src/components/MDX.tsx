@@ -22,7 +22,6 @@ const MDX: React.FC<MDXProps> = ({ content }) => {
         code(props) {
           const { children, className, node, ...rest } = props;
           const match = /language-(\w+)/.exec(className || "");
-          console.log(children);
 
           return match ? (
             <Codeblock
