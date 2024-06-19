@@ -125,12 +125,25 @@ const Swiperslider = () => {
       slidesPerView: 3,
     },
     768: {
-      slidesPerView: 5,
+      slidesPerView: 3,
     },
     1024: {
       slidesPerView: 5,
     },
+    1280: {
+      slidesPerView: 5,
+    },
+    1440: {
+      slidesPerView: 5,
+    },
+    1600: {
+      slidesPerView: 5,
+    },
+    1920: {
+      slidesPerView: 5,
+    },
   };
+
 
   const handleMouseEnter = (index) => {
     console.log("Mouse entered:", index);
@@ -170,7 +183,7 @@ const Swiperslider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="max-w-4xl md:h-36"
+        className="max-w-4xl md:h-32"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
           <div className="text-3xl font-bold text-center text-glow md:text-6xl w-fit mx-auto">
@@ -190,7 +203,7 @@ const Swiperslider = () => {
         }}
         speed={1000}
         modules={[Autoplay, Pagination]}
-        className="feature-slider w-full min-h-[55vh]"
+        className="feature-slider w-full min-h-[40vh] lg:min-h-[55vh]"
         spaceBetween={2}
         pagination={{
           clickable: true,
