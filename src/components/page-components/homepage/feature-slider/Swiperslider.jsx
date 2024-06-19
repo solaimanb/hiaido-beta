@@ -128,13 +128,13 @@ const Swiperslider = () => {
       slidesPerView: 3,
     },
     1024: {
-      slidesPerView: 5,
+      slidesPerView: 3,
     },
     1280: {
-      slidesPerView: 5,
+      slidesPerView: 3,
     },
     1440: {
-      slidesPerView: 5,
+      slidesPerView: 3,
     },
     1600: {
       slidesPerView: 5,
@@ -183,10 +183,10 @@ const Swiperslider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="max-w-4xl md:h-32"
+        className="max-w-5xl md:h-32 lg:h-36"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="text-3xl font-bold text-center text-glow md:text-6xl w-fit mx-auto">
+          <div className="text-3xl font-bold text-center text-glow md:text-6xl 2xl:text-7xl w-fit mx-auto">
             {currentTitle.split("\n").map((line, index) => (
               <div key={index}>{line}</div>
             ))}
@@ -203,7 +203,7 @@ const Swiperslider = () => {
         }}
         speed={1000}
         modules={[Autoplay, Pagination]}
-        className="feature-slider w-full min-h-[40vh] lg:min-h-[55vh]"
+        className="feature-slider w-full min-h-[40vh] md:min-h-[30vh] lg:min-h-[45vh] 2xl:min-h-[50vh]"
         spaceBetween={2}
         pagination={{
           clickable: true,
