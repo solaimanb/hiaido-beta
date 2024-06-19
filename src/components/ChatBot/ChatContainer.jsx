@@ -1,21 +1,96 @@
 import { memo, useContext, useEffect, useRef, useState } from "react";
 import logo from "/hiaido-logo.png";
 import { AnimatePresence, motion } from "framer-motion";
-import { Tooltip } from "@radix-ui/themes";
-import { ArrowPathIcon, PaperClipIcon } from "@heroicons/react/24/solid";
-import { CopyIcon } from "@radix-ui/react-icons";
-import toast from "react-hot-toast";
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 import CreateMemberAccountButton from "../CreateMemberAccountButton";
 import config from "../../config";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { signOut, fetchUserAttributes } from "@aws-amplify/auth";
+import { fetchUserAttributes } from "@aws-amplify/auth";
 import MDX from "../MDX";
 import QueryTemplates from "./QueryTemplates";
 import ChatResponseButtonsGroup from "./ChatResponseButtonsGroup";
+import { Button } from "@/ui-components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/ui-components/ui/dropdown-menu";
 
 const width = "840";
 const widthClass = `w-[${width}px]`;
+
+function useChats() {
+  const [query, setQuery] = useState("");
+  const [chats, setChats] = useState([]);
+  // const [chats, setChats] = useState([
+  //   {
+  //     query: "markdown test",
+  //     result: markdownData,
+  //   },
+  // ]);
+
+  useEffect(() => {
+    const fetchResponse = async () => {
+      console.log(newChat);
+      const response = await fetch(`${config.baseURL}/get-response`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: currentMemberAccount["email"],
+          // TODO: may break during google sign in, fix it
+          owner: user.signInDetails.loginId,
+          query: newChat.query,
+        }),
+      });
+      console.log("Completed request");
+      const response_data = await response.json();
+      console.log(response_data);
+      if (!response.ok) {
+        if (
+          response.status == 400 &&
+          response_data["detail"].includes("CLI not configured")
+        ) {
+          const res = await fetch(`${config.baseURL}/configure-cli`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: currentMemberAccount["email"],
+              owner: user.signInDetails.loginId,
+            }),
+          });
+          const res_data = await res.json();
+          console.log(res_data);
+          if (res.ok) {
+            await fetchResponse();
+            return;
+          } else {
+            setError(res_data);
+          }
+        } else {
+          throw new Error(res_data);
+        }
+      }
+
+      newChat.result = response_data.response;
+      newChat.loading = false;
+
+      setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
+    };
+
+    if (newChat) {
+      fetchResponse();
+    }
+  }, [newChat]);
+
+  const submitPrompt = () => {};
+  const [error, setError] = useState(null);
+
+  return { query, setQuery, chats };
+}
 
 const CreateMemberAccountWarningBox = () => {
   return (
@@ -41,9 +116,6 @@ const ChatsList = memo(({ chats }) => {
         <div key={index} className="w-full">
           <div className="py-2 px-3 text-base">
             <div className={`flex flex-1 mx-auto gap-3 ${widthClass}`}>
-              {/* <div className="flex flex-shrink-0 items-start">
-                <Avatar fallback="U" radius="full" size={"3"} color="cyan" />
-              </div> */}
               <p className="dark:text-neutral-300 text-white text-[15px] font-[500] ml-5 dark:bg-neutral-700/50 bg-neutral-800 p-2 rounded-[20px] px-5 dark:shadow-neutral-900 shadow-md max-w-[75%] mt-8">
                 {chat.query}
               </p>
@@ -103,6 +175,7 @@ const ChatContainer = () => {
   console.log("ChatContainer");
   const { memberAccounts, currentMemberAccount } =
     useContext(GlobalStateContext);
+  const [model, setModel] = useState(1);
   const ctx = useAuthenticator();
   const [query, setQuery] = useState("");
   const [chats, setChats] = useState([]);
@@ -115,33 +188,45 @@ const ChatContainer = () => {
   const [error, setError] = useState(null);
   const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef(null);
-  const inputRef = useRef(null);
   const { user } = ctx;
 
   useEffect(() => {
     fetchUserAttributes().then((res) => console.log(res));
   }, []);
 
+  // console.log({
+  //   email: currentMemberAccount ? currentMemberAccount["email"] : "",
+  //   // TODO: may break during google sign in, fix it
+  //   owner: user.signInDetails.loginId,
+  //   // user_query: newChat.query,
+  // })
   useEffect(() => {
     const fetchResponse = async () => {
       console.log(newChat);
-      const response = await fetch(`${config.multiAgentURL}/chat`, {
+      let url =
+        model === 0
+          ? `${config.baseURL}/get-response`
+          : `${config.multiAgentURL}/chat`;
+      let body =
+        model === 0
+          ? JSON.stringify({
+              email: currentMemberAccount["email"],
+              // TODO: may break during google sign in, fix it
+              owner: user.signInDetails.loginId,
+              query: newChat.query,
+            })
+          : JSON.stringify({
+              email: currentMemberAccount["email"],
+              // TODO: may break during google sign in, fix it
+              owner: user.signInDetails.loginId,
+              user_query: newChat.query,
+            });
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        // body: JSON.stringify({
-        //   email: currentMemberAccount["email"],
-        //   // TODO: may break during google sign in, fix it
-        //   owner: user.signInDetails.loginId,
-        //   query: newChat.query,
-        // }),
-        body: JSON.stringify({
-          email: currentMemberAccount["email"],
-          // TODO: may break during google sign in, fix it
-          owner: user.signInDetails.loginId,
-          user_query: newChat.query,
-        }),
+        body,
       });
       console.log("Completed request");
       const response_data = await response.json();
@@ -151,7 +236,11 @@ const ChatContainer = () => {
           response.status == 400 &&
           response_data["detail"].includes("CLI not configured")
         ) {
-          const res = await fetch(`${config.multiAgentURL}/configure-cli`, {
+          let configCliUrl =
+            model === 0
+              ? `${config.baseURL}/configure-cli`
+              : `${config.multiAgentURL}/configure-cli`;
+          const res = await fetch(configCliUrl, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -185,18 +274,14 @@ const ChatContainer = () => {
     }
   }, [newChat]);
 
-  const getChat = async (templateQuery) => {
+  const submitPrompt = async (prompt) => {
     // debounce if previous response is still loading
     if (chats.length > 0 && chats.at(-1).loading) return;
 
     try {
-      console.log(templateQuery, query.trim());
       // if template query is null then maybe user has typed the query
-      const queryToUse = templateQuery || query.trim();
-      if (queryToUse == "") return;
-
       const chat = {
-        query: queryToUse,
+        query: prompt,
         result: "",
         loading: true,
       };
@@ -213,7 +298,7 @@ const ChatContainer = () => {
     if (e.key === "Enter" && e.shiftKey) {
       setQuery((prev) => prev.slice().concat("\n"));
     } else if (e.key === "Enter") {
-      getChat();
+      submitPrompt(query);
     }
   };
 
@@ -226,8 +311,25 @@ const ChatContainer = () => {
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto w-full">
           <div className="flex flex-col text-sm pb-48 " ref={chatBoxRef}>
-            <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 mb-5 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
-              Welcome To HIAIDO Cloud Assistant.
+            <div className="flex justify-between items-center px-10">
+              <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
+                Welcome To HIAIDO Cloud Assistant.
+              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Button>
+                    {model === 1 ? "Multiagent model" : "Normal model"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <Button className="mx-3" onClick={() => setModel(0)}>
+                    Normal chatbot
+                  </Button>
+                  <Button onClick={() => setModel(1)}>
+                    Multiagent chatbot
+                  </Button>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
             <AnimatePresence>
               {chats.length == 0 && (
@@ -241,8 +343,7 @@ const ChatContainer = () => {
                     <CreateMemberAccountWarningBox />
                   ) : (
                     <QueryTemplates
-                      inputRef={inputRef}
-                      askQuery={(templateQuery) => getChat(templateQuery)}
+                      askQuery={(templateQuery) => submitPrompt(templateQuery)}
                     />
                   )}
                 </motion.div>
@@ -257,7 +358,6 @@ const ChatContainer = () => {
           className={`mb-4 mt-0 w-full rounded-lg flex justify-center bg-transparent`}
         >
           <QueryBox
-            inputRef={inputRef}
             query={query}
             disabled={chats.length > 0 && chats.at(-1).loading}
             onKeyUp={onKeyUp}
@@ -302,7 +402,7 @@ const QueryBox = ({ query, onKeyUp, setQuery, disabled, submitPrompt }) => {
         ></textarea>
       </div>
       <button
-        onClick={() => getChat()}
+        onClick={() => submitPrompt(query)}
         disabled={disabled}
         className="bg-neutral-100 hover:bg-neutral-200 mb-1 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
       >
