@@ -99,6 +99,19 @@ ul {
 .markdown ul {
   list-style: disc;
 }
+.markdown td {
+  border: 1px solid #777;
+  border-collapse: collapse;
+  padding: 5px 20px;
+}
+.markdown table {
+  width: 100%;
+}
+.markdown th {
+  border: 1px solid #777;
+  border-collapse: collapse;
+  padding: 5px 10px;
+}
 .markdown blockquote {
   font-family: 'Times New Roman', Times, serif !important;
   font-size: larger !important;

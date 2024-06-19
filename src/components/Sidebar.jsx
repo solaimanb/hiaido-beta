@@ -137,7 +137,7 @@ const ToggleTheme = ({ isCollapsed }) => {
                           layoutId="theme-bubble"
                           className={`${
                             isCollapsed ? "bg-black" : "bg-white"
-                          } mix-blend-difference absolute inset-0 z-10 rounded-full`}
+                          } mix-blend-difference absolute inset-0 !z-50 rounded-full`}
                           transition={{
                             type: "spring",
                             bounce: 0.1,

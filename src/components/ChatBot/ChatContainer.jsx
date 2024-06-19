@@ -342,7 +342,7 @@ const ChatContainer = () => {
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto w-full" ref={chatBoxRef}>
           <div className="flex flex-col text-sm pb-48">
-            <div className="flex justify-between items-center px-10">
+            <div className="flex justify-between items-center px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
               <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
                 Welcome To HIAIDO Cloud Assistant.
               </div>
@@ -363,12 +363,12 @@ const ChatContainer = () => {
               </DropdownMenu>
             </div>
             <AnimatePresence>
-              {chats.length == 0 && (
+              {chats.length == 0 ? (
                 <motion.div
                   transition={{ duration: 0.2 }}
                   initial={{ scale: 0.95, opacity: 0, y: "-5px" }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
-                  className="h-[800px]"
+                  className="h-[720px]"
                 >
                   {memberAccounts && memberAccounts.length == 0 ? (
                     <CreateMemberAccountWarningBox />
@@ -378,9 +378,10 @@ const ChatContainer = () => {
                     />
                   )}
                 </motion.div>
+              ) : (
+                <ChatsList chats={chats} />
               )}
             </AnimatePresence>
-            <ChatsList chats={chats} />
           </div>
         </div>
       </div>
