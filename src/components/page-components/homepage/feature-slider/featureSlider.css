@@ -118,9 +118,9 @@
 }
 
 .swiper-pagination .custom-bullet {
-  width: 8px;
-  height: 8px;
-  background-color: #85858538;
+  width: 10px;
+  height: 10px;
+  background-color: #e2e2e2e1;
   border-radius: 50px;
   border: transparent;
   display: inline-block;
@@ -137,5 +137,5 @@
 
 .swiper-pagination .custom-bullet.swiper-pagination-bullet-active {
   background-color: #e75a27;
-  width: 22px;
+  width: 24px;
 }

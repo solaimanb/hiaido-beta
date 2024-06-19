@@ -107,6 +107,11 @@ const Swiperslider = () => {
 
   const handleSlideClick = (index) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+    if (swiperRef.current && swiperRef.current.swiper) {
+      const slidesPerView = swiperRef.current.swiper.params.slidesPerView;
+      const targetIndex = index - Math.floor(slidesPerView / 2);
+      swiperRef.current.swiper.slideTo(targetIndex, 1000);
+    }
   };
 
   const breakpoints = {
@@ -117,13 +122,13 @@ const Swiperslider = () => {
       slidesPerView: 2,
     },
     640: {
-      slidesPerView: 4,
+      slidesPerView: 3,
     },
     768: {
       slidesPerView: 5,
     },
     1024: {
-      slidesPerView: 6,
+      slidesPerView: 5,
     },
   };
 
@@ -157,6 +162,7 @@ const Swiperslider = () => {
 
   };
 
+
   return (
     <div className="flex flex-col items-center h-screen mt-10">
       <motion.div
@@ -182,12 +188,11 @@ const Swiperslider = () => {
           delay: 1000,
           disableOnInteraction: false,
         }}
-        speed={1500}
+        speed={1000}
         modules={[Autoplay, Pagination]}
-        className="feature-slider w-full min-h-80"
+        className="feature-slider w-full min-h-[55vh]"
         spaceBetween={2}
         pagination={{
-          // el: '.swiper-pagination',
           clickable: true,
           renderBullet: renderCustomBullet,
         }}
@@ -208,7 +213,7 @@ const Swiperslider = () => {
             (index !== 1 || (index === 1 && isMdScreen)) ? (
             <SwiperSlide
               key={index}
-              className={index !== 0 && index !== 1 ? "w-full h-full min-w-80" : ""}
+              className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
               onClick={() => handleSlideClick(index)}
             >
               <div
@@ -230,7 +235,7 @@ const Swiperslider = () => {
                   <div
                     className={
                       index !== 0 && index !== 1
-                        ? "rounded-xl  min-w neon-bg transition-all duration-200 w-full h-full"
+                        ? "rounded-3xl neon-bg transition-all duration-200 w-full h-full"
                         : ""
                     }
                   >
@@ -257,7 +262,7 @@ const Swiperslider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="h-40 max-w-3xl mt-10"
+        className="h-40 max-w-3xl mt-6"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
           <div className="text-lg font-bold text-center w-fit mx-auto">

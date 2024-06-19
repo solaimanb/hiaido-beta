@@ -27,7 +27,6 @@ const keyFeatures = [
   { title: 'JIRA Integration', description: 'Streamline your workflow by integrating with JIRA, allowing you to seamlessly manage tasks and projects directly from the HIAIDO platform.' }
 ];
 
-
 const About = () => {
   return (
     <main
@@ -97,7 +96,7 @@ const About = () => {
               ))}
             </ul>
 
-            <p>We hope you will love using our products and services as much as we enjoyed building them. Welcome to the world of cloud automation with HIAIDO.</p>
+            <p>We hope you will love using our products and services as much as we enjoyed building them.</p>
 
             <p>Welcome to the world of cloud automation with <span className="font-bold inline-block">HIAIDO</span></p>
           </div>
