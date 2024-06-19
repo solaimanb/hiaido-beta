@@ -7,9 +7,8 @@ import { StoreProvider } from "./store/Store.jsx";
 import { Theme } from "@radix-ui/themes";
 import { Authenticator, View } from "@aws-amplify/ui-react";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
-import { GlobalStateProvider } from "./context/GlobalStateContext.jsx";
-import { ThemeProvider as TH } from "@aws-amplify/ui-react";
 import App from "./App.jsx";
+import { GlobalStateProvider } from "./context/GlobalStateContext";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

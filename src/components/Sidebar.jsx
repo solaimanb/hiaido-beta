@@ -24,9 +24,9 @@ import logo from "/hiaido-logo.png";
 import * as Menubar from "@radix-ui/react-menubar";
 import { Link, NavLink } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
-import { GlobalStateContext } from "../context/GlobalStateContext";
 import { fetchAuthSession } from "aws-amplify/auth";
 import logoSidebar from "/logo-sidebar.png";
+import { GlobalStateContext } from "@/context/GlobalStateContext";
 
 export const navbarData = [
   { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },

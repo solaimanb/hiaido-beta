@@ -222,7 +222,7 @@ const data = [
   },
 ];
 
-const CreateMemberAccountButton = ({ CustomButton, buttonOverride = true }) => {
+const CreateMemberAccountButton = () => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
@@ -238,10 +238,7 @@ const CreateMemberAccountButton = ({ CustomButton, buttonOverride = true }) => {
         <AlertDialog.Title>
           <div className="w-full text-2xl p-2">Create Member Account</div>
         </AlertDialog.Title>
-        <CreateMemberAccountForm
-          customButton={CustomButton}
-          Cancel={AlertDialog.Cancel}
-        />
+        <CreateMemberAccountForm Cancel={AlertDialog.Cancel} />
       </AlertDialog.Content>
     </AlertDialog.Root>
   );

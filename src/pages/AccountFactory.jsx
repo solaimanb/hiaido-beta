@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Panel } from "react-resizable-panels";
 import Dashboard from "../components/ChatBot/Dashboard";
-import { GlobalStateContext } from "../context/GlobalStateContext";
 import { Alert, useAuthenticator } from "@aws-amplify/ui-react";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { AlertDialog, Table } from "@radix-ui/themes";
 import CreateMemberAccountForm from "../components/CreateMemberAccountButton";
 import CreateMemberAccountButton from "../components/CreateMemberAccountButton";
+import { GlobalStateContext } from "@/context/GlobalStateContext";
 
 const MemberAccountsTable = () => {
   const { memberAccounts, currentMemberAccount, setCurrentMemberAccount } =

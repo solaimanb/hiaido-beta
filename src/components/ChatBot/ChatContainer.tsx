@@ -1,11 +1,14 @@
-import { memo, useContext, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEventHandler,
+  memo,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import logo from "/hiaido-logo.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 import CreateMemberAccountButton from "../CreateMemberAccountButton";
-import config from "../../config";
-import { useAuthenticator } from "@aws-amplify/ui-react";
-import { fetchUserAttributes } from "@aws-amplify/auth";
 import MDX from "../MDX";
 import QueryTemplates from "./QueryTemplates";
 import ChatResponseButtonsGroup from "./ChatResponseButtonsGroup";
@@ -15,8 +18,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/ui-components/ui/dropdown-menu";
-import { ReloadIcon } from "@radix-ui/react-icons";
-import { RefreshCcwDotIcon, RefreshCcwIcon } from "lucide-react";
+import { RefreshCcwIcon } from "lucide-react";
+import { useChats } from "@/context/ChatsContext";
 
 const width = "840";
 const widthClass = `w-[${width}px]`;
@@ -111,7 +114,8 @@ const CreateMemberAccountWarningBox = () => {
   );
 };
 
-const ChatsList = memo(({ chats }) => {
+const ChatsList = memo(() => {
+  const { chats } = useChats().state;
   return (
     <>
       {chats.map((chat, index) => (
@@ -125,21 +129,18 @@ const ChatsList = memo(({ chats }) => {
           </div>
           <div className="relative py-2">
             {chat.loading ? (
-              // <div className={`mx-auto pl-7 ${widthClass}`}>
-              //   <div className={`dot-typing mt-5 ml-5`}></div>
-              // </div>
-              <div class={`mx-auto w-[720px] mt-3`}>
-                <div class="animate-pulse flex space-x-4">
-                  <div class="flex-1 space-y-4">
-                    <div class="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded"></div>
-                    <div class="grid grid-cols-3 gap-4">
-                      <div class="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-2"></div>
-                      <div class="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-1"></div>
+              <div className={`mx-auto w-[720px] mt-3`}>
+                <div className="animate-pulse flex space-x-4">
+                  <div className="flex-1 space-y-4">
+                    <div className="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded"></div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-2"></div>
+                      <div className="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-1"></div>
                     </div>
-                    <div class="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded"></div>
-                    <div class="grid grid-cols-3 gap-4">
-                      <div class="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-1"></div>
-                      <div class="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-2"></div>
+                    <div className="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded"></div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-1"></div>
+                      <div className="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded col-span-2"></div>
                     </div>
                   </div>
                 </div>
@@ -169,10 +170,10 @@ const ChatsList = memo(({ chats }) => {
                         </button>
                       </div>
                     ) : (
-                      <MDX content={chat.result} />
+                      <MDX content={chat.response} />
                     )}
                     {index == chats.length - 1 && (
-                      <ChatResponseButtonsGroup content={chat.result} />
+                      <ChatResponseButtonsGroup content={chat.response} />
                     )}
                   </motion.div>
                 </AnimatePresence>
@@ -188,147 +189,132 @@ const ChatsList = memo(({ chats }) => {
 // contains the chats and query box
 const ChatContainer = () => {
   console.log("ChatContainer");
-  const { memberAccounts, currentMemberAccount } =
-    useContext(GlobalStateContext);
-  const [model, setModel] = useState(1);
-  const ctx = useAuthenticator();
-  const [query, setQuery] = useState("");
-  const [chats, setChats] = useState([]);
-  // const [chats, setChats] = useState([
-  //   {
-  //     query: "markdown test",
-  //     result: markdownData,
-  //   },
-  // ]);
-  const [error, setError] = useState(null);
-  const [newChat, setNewChat] = useState(null);
-  const chatBoxRef = useRef(null);
-  const { user } = ctx;
+  // const { memberAccounts, currentMemberAccount } =
+  //   useContext(GlobalStateContext);
+  // const [model, setModel] = useState(1);
+  // const ctx = useAuthenticator();
+  // const [query, setQuery] = useState("");
+  // const [chats, setChats] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [newChat, setNewChat] = useState(null);
+  const chatBoxRef = useRef<HTMLDivElement>(null);
+  const { setters, state, submitPrompt } = useChats();
+  const { query, chats, memberAccounts, model, newChat, currentMemberAccount } =
+    state;
+  const { setQuery, setChats, setModel } = setters;
 
-  useEffect(() => {
-    fetchUserAttributes().then((res) => console.log(res));
-  }, []);
+  // useEffect(() => {
+  //   fetchUserAttributes().then((res) => console.log(res));
+  // }, []);
 
-  useEffect(() => {
-    const fetchResponse = async () => {
-      let url =
-        model === 0
-          ? `${config.baseURL}/get-response`
-          : `${config.multiAgentURL}/chat`;
-      let body =
-        model === 0
-          ? JSON.stringify({
-              email: currentMemberAccount["email"],
-              // TODO: may break during google sign in, fix it
-              owner: user.signInDetails.loginId,
-              query: newChat.query,
-            })
-          : JSON.stringify({
-              email: currentMemberAccount["email"],
-              // TODO: may break during google sign in, fix it
-              owner: user.signInDetails.loginId,
-              user_query: newChat.query,
-            });
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
-      });
-      console.log("Completed request");
-      const response_data = await response.json();
-      console.log(response_data, response.status);
-      if (!response.ok) {
-        if (
-          response.status == 400 &&
-          response_data["detail"].includes("CLI not configured")
-        ) {
-          let configCliUrl =
-            model === 0
-              ? `${config.baseURL}/configure-cli`
-              : `${config.multiAgentURL}/configure-cli`;
-          const res = await fetch(configCliUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: currentMemberAccount["email"],
-              owner: user.signInDetails.loginId,
-            }),
-          });
-          const res_data = await res.json();
-          console.log(res_data, res.status);
-          if (res.ok) {
-            await fetchResponse();
-            return;
-          } else {
-            setError(res_data);
-          }
-        } else {
-          console.log(response_data);
-          // setError(response_data);
-          let newChatCopy = structuredClone(newChat);
-          if (response.status >= 500) {
-            newChatCopy.error =
-              response_data?.detail || "Internal server error occured.";
-          } else {
-            newChatCopy.error =
-              response_data?.detail ||
-              "An unknown error occured. Please try again later.";
-          }
-          newChatCopy.loading = false;
-          setChats((prevChats) => [...prevChats.slice(0, -1), newChatCopy]);
-          throw new Error(response_data);
-        }
-      }
+  // useEffect(() => {
+  //   const fetchResponse = async () => {
+  //     let url =
+  //       model === 0
+  //         ? `${config.baseURL}/get-response`
+  //         : `${config.multiAgentURL}/chat`;
+  //     let body =
+  //       model === 0
+  //         ? JSON.stringify({
+  //             email: currentMemberAccount["email"],
+  //             // TODO: may break during google sign in, fix it
+  //             owner: user.signInDetails.loginId,
+  //             query: newChat.query,
+  //           })
+  //         : JSON.stringify({
+  //             email: currentMemberAccount["email"],
+  //             // TODO: may break during google sign in, fix it
+  //             owner: user.signInDetails.loginId,
+  //             user_query: newChat.query,
+  //           });
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body,
+  //     });
+  //     console.log("Completed request");
+  //     const response_data = await response.json();
+  //     console.log(response_data, response.status);
+  //     if (!response.ok) {
+  //       if (
+  //         response.status == 400 &&
+  //         response_data["detail"].includes("CLI not configured")
+  //       ) {
+  //         let configCliUrl =
+  //           model === 0
+  //             ? `${config.baseURL}/configure-cli`
+  //             : `${config.multiAgentURL}/configure-cli`;
+  //         const res = await fetch(configCliUrl, {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({
+  //             email: currentMemberAccount["email"],
+  //             owner: user.signInDetails.loginId,
+  //           }),
+  //         });
+  //         const res_data = await res.json();
+  //         console.log(res_data, res.status);
+  //         if (res.ok) {
+  //           await fetchResponse();
+  //           return;
+  //         } else {
+  //           setError(res_data);
+  //         }
+  //       } else {
+  //         console.log(response_data);
+  //         // setError(response_data);
+  //         let newChatCopy = structuredClone(newChat);
+  //         if (response.status >= 500) {
+  //           newChatCopy.error =
+  //             response_data?.detail || "Internal server error occured.";
+  //         } else {
+  //           newChatCopy.error =
+  //             response_data?.detail ||
+  //             "An unknown error occured. Please try again later.";
+  //         }
+  //         newChatCopy.loading = false;
+  //         setChats((prevChats) => [...prevChats.slice(0, -1), newChatCopy]);
+  //         throw new Error(response_data);
+  //       }
+  //     }
 
-      newChat.result = response_data.response;
-      newChat.loading = false;
+  //     newChat.result = response_data.response;
+  //     newChat.loading = false;
 
-      setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
-    };
+  //     setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
+  //   };
 
-    if (newChat) {
-      fetchResponse();
-    }
-  }, [newChat]);
+  //   if (newChat) {
+  //     fetchResponse();
+  //   }
+  // }, [newChat]);
 
-  const submitPrompt = async (prompt) => {
-    // debounce if previous response is still loading
-    if (chats.length > 0 && chats.at(-1).loading) return;
+  // const submitPrompt = async (prompt) => {
+  //   // debounce if previous response is still loading
+  //   if (chats.length > 0 && chats.at(-1).loading) return;
 
-    try {
-      // if template query is null then maybe user has typed the query
-      const chat = {
-        query: prompt,
-        result: "",
-        loading: true,
-      };
-      setChats((prevChats) => [...prevChats, chat]);
-      setQuery("");
-      setNewChat(chat);
-    } catch (error) {
-      console.error("Error:", error);
-      setError("Failed to fetch data");
-    }
-  };
-
-  const onKeyUp = (e) => {
-    if (e.key === "Enter" && e.shiftKey) {
-      setQuery((prev) => prev.slice().concat("\n"));
-    } else if (e.key === "Enter") {
-      submitPrompt(query);
-    }
-  };
+  //   try {
+  //     // if template query is null then maybe user has typed the query
+  //     const chat = {
+  //       query: prompt,
+  //       result: "",
+  //       loading: true,
+  //     };
+  //     setChats((prevChats) => [...prevChats, chat]);
+  //     setQuery("");
+  //     setNewChat(chat);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     setError("Failed to fetch data");
+  //   }
+  // };
 
   useEffect(() => {
     if (chatBoxRef.current) {
-      // chatBoxRef.current.scroll({
-      //   top: chatBoxRef.current.scrollHeight,
-      //   behavior: "smooth",
-      // });
       chatBoxRef.current.scrollBy({
         top: chatBoxRef.current.scrollHeight,
         left: 0,
@@ -379,7 +365,7 @@ const ChatContainer = () => {
                   )}
                 </motion.div>
               ) : (
-                <ChatsList chats={chats} />
+                <ChatsList />
               )}
             </AnimatePresence>
           </div>
@@ -389,26 +375,37 @@ const ChatContainer = () => {
         <div
           className={`mb-4 mt-0 w-full rounded-lg flex justify-center bg-transparent`}
         >
-          <QueryBox
-            query={query}
-            disabled={chats.length > 0 && chats.at(-1).loading}
-            onKeyUp={onKeyUp}
-            setQuery={setQuery}
-          />
+          <QueryBox />
         </div>
       </div>
     </>
   );
 };
 
-const QueryBox = ({ query, onKeyUp, setQuery, disabled, submitPrompt }) => {
-  const inputRef = useRef(null);
+const QueryBox = () => {
+  const { state, setters, submitPrompt } = useChats();
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const { query, chats } = state;
+  const { setQuery } = setters;
+
+  const onKeyUp: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+    if (e.key === "Enter" && e.shiftKey) {
+      setQuery((prev) => prev.slice().concat("\n"));
+    } else if (e.key === "Enter") {
+      submitPrompt(query);
+    }
+  };
+
   useEffect(() => {
     if (inputRef.current) {
       console.log(inputRef.current.scrollHeight, inputRef.current.style.height);
       inputRef.current.style.height = `inherit`;
       inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
-      inputRef.current.scrollBy(0, inputRef.current.scrollHeight);
+      inputRef.current.scrollBy({
+        top: inputRef.current.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
     }
   }, [query]);
 
@@ -418,7 +415,7 @@ const QueryBox = ({ query, onKeyUp, setQuery, disabled, submitPrompt }) => {
       {/* <PaperClipIcon className="w-6 ml-3" /> */}
       <div className="flex flex-col flex-1 min-w-0 ml-4">
         <textarea
-          disabled={memberAccounts && memberAccounts.length == 0}
+          disabled={(memberAccounts && memberAccounts.length == 0) as boolean}
           rows={1}
           className="bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-scroll text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
           ref={inputRef}
@@ -435,7 +432,7 @@ const QueryBox = ({ query, onKeyUp, setQuery, disabled, submitPrompt }) => {
       </div>
       <button
         onClick={() => submitPrompt(query)}
-        disabled={disabled}
+        disabled={chats.length > 0 && chats.at(-1)?.loading}
         className="bg-neutral-100 hover:bg-neutral-200 mb-1 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
       >
         <svg
