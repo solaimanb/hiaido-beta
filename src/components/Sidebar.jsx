@@ -266,9 +266,19 @@ const Sidebar = () => {
               </motion.h1>
             )}
           </AnimatePresence> */}
-          <div className="w-[80%] p-2">
-            <img className="w-full" src={logoSidebar} alt="Hiaido logo" />
-          </div>
+          {isCollapsed ? (
+            <Link to={"/"}>
+              <img
+                className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
+                src={logo}
+                alt="Brand Logo"
+              />
+            </Link>
+          ) : (
+            <div className="w-[80%] p-2">
+              <img className="w-full" src={logoSidebar} alt="Hiaido logo" />
+            </div>
+          )}
         </div>
         <div className="dark:divide-neutral-600 divide-neutral-600 h-full">
           <div className=" text-neutral-400 my-2 space-y-[5px]">

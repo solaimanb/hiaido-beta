@@ -11,7 +11,7 @@ interface ChatResponseButtonsGroupProps {
 const copyContent = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text);
-    toast.success("Copied to clipboard");
+    toast.success("Copied to clipboard", { position: "bottom-left" });
   } catch (err) {
     console.log(err);
     alert("Failed to copy " + err);
