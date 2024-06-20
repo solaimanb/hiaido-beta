@@ -109,6 +109,13 @@ const termsSections = [
   },
 ];
 
+const processContent = (content) => {
+  const htmlContent = content
+    .replace(/\n/g, "<br/>")
+    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+  return { __html: htmlContent };
+};
+
 const Terms = () => {
   return (
     <>
@@ -148,14 +155,18 @@ const Terms = () => {
         {termsSections.map((section, index) => (
           <div key={index}>
             <h1 className="text-xl font-bold">{section.title}</h1>
-            <p className="opacity-90">
+            {/* <p className="opacity-90">
               {section.link
                 ? section.content.replace(
                   section.link.replace("mailto:", ""),
                   ""
                 )
                 : section.content}
-            </p>
+            </p> */}
+            <p
+              className=""
+              dangerouslySetInnerHTML={processContent(section.content)}
+            ></p>
 
             {section.link && (
               <a href={section.link} className="text-blue-300 underline">
