@@ -133,7 +133,7 @@ const Header = () => {
                           return (
                             <div
                               key={subIndex}
-                              className="p-4 space-y-2 rounded-lg border border-transparent bg-gray-800/5 hover:border-[#1E43DE] hover:border transition-all duration-200"
+                              className="p-4 space-y-2 rounded-lg border border-transparent bg-gray-800/20 hover:border-[#1E43DE] hover:border transition-all duration-200"
                             >
                               <div className="flex items-center space-x-2">
                                 <div className="flex items-center text-orange-500/80 bg-orange-500/10 p-1 rounded">

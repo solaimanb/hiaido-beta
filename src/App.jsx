@@ -7,6 +7,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
 import { Suspense, lazy } from "react";
 import Loading from "./components/shared/Loading.jsx";
+import Terms from "./pages/Terms.jsx";
 
 // Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout"));
@@ -23,6 +24,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Login = lazy(() => import("./pages/Login"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
+const EthicalAI = lazy(() => import("./pages/EthicalAI"));
 
 const App = () => {
   // useEffect(() => {
@@ -56,6 +58,8 @@ const App = () => {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/ethical-ai" element={<EthicalAI />} />
           </Route>
 
           {/* Others */}
