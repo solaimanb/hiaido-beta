@@ -93,7 +93,7 @@ const EthicalAI = () => {
       <div className="md:mt-40 max-w-4xl px-4 mx-auto mt-32 space-y-4">
         {ethicalSections.map((section, index) => (
           <div key={index}>
-            <h1 className="text-xl font-bold">{section.title}</h1>
+            <h1 className="text-3xl bold-title">{section.title}</h1>
             <div className="opacity-90">
               {section.content.map((paragraph, idx) => (
                  <p
