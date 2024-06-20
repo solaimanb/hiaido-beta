@@ -1,7 +1,12 @@
 import { MemberAccount } from "@/types";
+import {
+  FetchUserAttributesOutput,
+  fetchUserAttributes,
+} from "aws-amplify/auth";
 import React, {
   PropsWithChildren,
   createContext,
+  useContext,
   useEffect,
   useState,
 } from "react";
@@ -15,13 +20,25 @@ interface GlobalStateContextType {
   setCurrentMemberAccount: React.Dispatch<
     React.SetStateAction<MemberAccount | null>
   >;
+  userAttributes: FetchUserAttributesOutput | null;
 }
 export const GlobalStateContext = createContext<GlobalStateContextType>({
   memberAccounts: null,
   setMemberAccounts: () => {},
   currentMemberAccount: null,
   setCurrentMemberAccount: () => {},
+  userAttributes: null,
 });
+
+export const useGlobalState = () => {
+  const context = useContext(GlobalStateContext);
+  if (!context) {
+    throw new Error(
+      "useGlobalState must be used within an GlobalStateProvider"
+    );
+  }
+  return context;
+};
 
 export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
   children,
@@ -31,6 +48,26 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
   );
   const [currentMemberAccount, setCurrentMemberAccount] =
     useState<MemberAccount | null>(null);
+  const [userAttributes, setUserAttributes] =
+    useState<FetchUserAttributesOutput | null>(null);
+
+  useEffect(() => {
+    console.log("FETCH USER ATTRIBUTES");
+    // TODO: add error if no email
+    fetchUserAttributes()
+      .then((res) => {
+        console.log(res);
+        setUserAttributes(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    // // just testing
+    // fetchAuthSession()
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+  }, []);
 
   return (
     <GlobalStateContext.Provider
@@ -39,6 +76,7 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
         setMemberAccounts,
         currentMemberAccount,
         setCurrentMemberAccount,
+        userAttributes,
       }}
     >
       {children}

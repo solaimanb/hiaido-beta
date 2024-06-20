@@ -2,11 +2,16 @@ import { hiaido } from "../assets";
 import { Helmet } from "react-helmet-async";
 
 import { useEffect } from "react";
-import { Authenticator, Button, useAuthenticator } from "@aws-amplify/ui-react";
+import {
+  Authenticator,
+  Button,
+  ThemeProvider,
+  defaultDarkModeOverride,
+  useAuthenticator,
+} from "@aws-amplify/ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import awsExports from "../awsExports";
-import { AuthError, signInWithRedirect } from "aws-amplify/auth";
+import "@aws-amplify/ui-react/styles.css";
 
 const components = {
   Footer() {
@@ -68,7 +73,10 @@ const Login = () => {
   }, [route, navigate]);
 
   return (
-    <>
+    <ThemeProvider
+      colorMode="dark"
+      theme={{ name: "amplify-theme", overrides: [defaultDarkModeOverride] }}
+    >
       {/* SEO CONTENT */}
       <Helmet>
         <title>Hiaido | Sign In</title>
@@ -111,13 +119,13 @@ const Login = () => {
 
               <Authenticator
                 loginMechanisms={["email"]}
-                socialProviders={["google", "facebook", "amazon", "apple"]}
+                socialProviders={["google", "facebook"]}
               />
             </div>
           </div>
         </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

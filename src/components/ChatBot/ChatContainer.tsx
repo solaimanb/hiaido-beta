@@ -7,7 +7,10 @@ import {
 } from "react";
 import logo from "/hiaido-logo.png";
 import { AnimatePresence, motion } from "framer-motion";
-import { GlobalStateContext } from "../../context/GlobalStateContext";
+import {
+  GlobalStateContext,
+  useGlobalState,
+} from "../../context/GlobalStateContext";
 import CreateMemberAccountButton from "../CreateMemberAccountButton";
 import MDX from "../MDX";
 import QueryTemplates from "./QueryTemplates";
@@ -18,7 +21,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/ui-components/ui/dropdown-menu";
-import { RefreshCcwIcon } from "lucide-react";
+import { ArrowRight, RefreshCcwIcon, Send } from "lucide-react";
 import { useChats } from "@/context/ChatsContext";
 
 const width = "840";
@@ -199,8 +202,16 @@ const ChatContainer = () => {
   // const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef<HTMLDivElement>(null);
   const { setters, state, submitPrompt } = useChats();
-  const { query, chats, memberAccounts, model, newChat, currentMemberAccount } =
-    state;
+  const {
+    query,
+    chats,
+    memberAccounts,
+    idb,
+    model,
+    newChat,
+    currentMemberAccount,
+  } = state;
+  const { userAttributes } = useGlobalState();
   const { setQuery, setChats, setModel } = setters;
 
   // useEffect(() => {
@@ -348,26 +359,32 @@ const ChatContainer = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <AnimatePresence>
-              {chats.length == 0 ? (
-                <motion.div
-                  transition={{ duration: 0.2 }}
-                  initial={{ scale: 0.95, opacity: 0, y: "-5px" }}
-                  animate={{ scale: 1, opacity: 1, y: 0 }}
-                  className="h-[720px]"
-                >
-                  {memberAccounts && memberAccounts.length == 0 ? (
-                    <CreateMemberAccountWarningBox />
-                  ) : (
-                    <QueryTemplates
-                      askQuery={(templateQuery) => submitPrompt(templateQuery)}
-                    />
-                  )}
-                </motion.div>
-              ) : (
-                <ChatsList />
-              )}
-            </AnimatePresence>
+            {!userAttributes ? (
+              <div>Loading...</div>
+            ) : (
+              <AnimatePresence>
+                {chats.length == 0 ? (
+                  <motion.div
+                    transition={{ duration: 0.2 }}
+                    initial={{ scale: 0.95, opacity: 0, y: "-5px" }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    className="h-[720px]"
+                  >
+                    {memberAccounts && memberAccounts.length == 0 ? (
+                      <CreateMemberAccountWarningBox />
+                    ) : (
+                      <QueryTemplates
+                        askQuery={(templateQuery) =>
+                          submitPrompt(templateQuery)
+                        }
+                      />
+                    )}
+                  </motion.div>
+                ) : (
+                  <ChatsList />
+                )}
+              </AnimatePresence>
+            )}
           </div>
         </div>
       </div>
@@ -387,6 +404,7 @@ const QueryBox = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { query, chats } = state;
   const { setQuery } = setters;
+  console.log(query);
 
   const onKeyUp: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.key === "Enter" && e.shiftKey) {
@@ -433,20 +451,9 @@ const QueryBox = () => {
       <button
         onClick={() => submitPrompt(query)}
         disabled={chats.length > 0 && chats.at(-1)?.loading}
-        className="bg-neutral-100 hover:bg-neutral-200 mb-1 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
+        className="bg-neutral-800 dark:bg-neutral-100 hover:bg-neutral-200 mb-1 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="#111111"
-          className="size-5"
-        >
-          <path
-            fillRule="evenodd"
-            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <ArrowRight className="size-5 text-white dark:text-black" />
       </button>
     </div>
   );

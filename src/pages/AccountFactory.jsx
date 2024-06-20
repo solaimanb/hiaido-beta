@@ -118,8 +118,6 @@ const MemberAccountsTable = () => {
 };
 
 const AccountFactory = () => {
-  const { user } = useAuthenticator();
-  fetchAuthSession();
   const {
     memberAccounts,
     currentMemberAccount,
@@ -152,7 +150,7 @@ const AccountFactory = () => {
   }, []);
 
   const fetchMemberAccounts = async () => {
-    // console.log("FETCHING MEMBER ACCOUNTS");
+    console.log("FETCHING MEMBER ACCOUNTS");
 
     try {
       let url =

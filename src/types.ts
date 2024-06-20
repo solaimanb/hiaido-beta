@@ -13,3 +13,8 @@ export interface Chat {
   loading: boolean;
   error?: string;
 }
+
+export interface IDBchats {
+  email: string;
+  chats: Chat[];
+}

@@ -7,14 +7,16 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-import { GlobalStateContext } from "./GlobalStateContext";
+import { GlobalStateContext, useGlobalState } from "./GlobalStateContext";
 import config from "@/config";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import {
   FetchUserAttributesOutput,
   fetchUserAttributes,
 } from "aws-amplify/auth";
-import { Chat, MemberAccount, Model } from "@/types";
+import { Chat, IDBchats, MemberAccount, Model } from "@/types";
+import toast from "react-hot-toast";
+import { addChat, getChats, openDB, replaceChats } from "@/utils/indexed-db";
 
 interface ChatsContextType {
   state: {
@@ -25,7 +27,7 @@ interface ChatsContextType {
     memberAccounts: MemberAccount[] | null;
     currentMemberAccount: MemberAccount | null;
     error: string | null;
-    userAttributes: FetchUserAttributesOutput | null;
+    idb: IDBDatabase | null;
   };
   setters: {
     setChats: Dispatch<SetStateAction<Chat[]>>;
@@ -33,9 +35,6 @@ interface ChatsContextType {
     setModel: Dispatch<SetStateAction<Model>>;
     setNewChat: Dispatch<SetStateAction<Chat | null>>;
     setQuery: Dispatch<SetStateAction<string>>;
-    setUserAttributes: Dispatch<
-      SetStateAction<FetchUserAttributesOutput | null>
-    >;
   };
   submitPrompt: (prompt: string) => Promise<void>;
   fetchResponse: () => void;
@@ -49,7 +48,7 @@ const defaultChatsContextValue: ChatsContextType = {
     query: "",
     memberAccounts: null,
     error: null,
-    userAttributes: null,
+    idb: null,
   },
   setters: {
     setChats: () => {},
@@ -57,7 +56,6 @@ const defaultChatsContextValue: ChatsContextType = {
     setModel: () => {},
     setNewChat: () => {},
     setQuery: () => {},
-    setUserAttributes: () => {},
   },
   fetchResponse: () => {},
   submitPrompt: async () => {},
@@ -73,7 +71,7 @@ interface ChatsContextProviderProps {
 export const useChats = () => {
   const context = useContext(ChatsContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useChats must be used within an ChatsContextProvider");
   }
   return context;
 };
@@ -88,10 +86,10 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
   const [chats, setChats] = useState<Chat[]>([]);
   const [newChat, setNewChat] = useState<Chat | null>(null);
   const [error, setError] = useState<null | string>(null);
-  const [userAttributes, setUserAttributes] =
-    useState<FetchUserAttributesOutput | null>(null);
+  const [loadingChats, setLoadingChats] = useState(true);
+  const [idb, setIdb] = useState<IDBDatabase | null>(null);
 
-  const { user } = useAuthenticator();
+  const { userAttributes } = useGlobalState();
 
   // const [chats, setChats] = useState([
   //   {
@@ -100,18 +98,28 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
   //   },
   // ]);
 
-  // TODO: move to GlobalContext
   useEffect(() => {
-    // TODO: add error if no email
-    fetchUserAttributes().then((res) => {
-      console.log(res);
-      setUserAttributes(res);
+    const email: string = userAttributes?.email as string;
+    openDB().then(async (db) => {
+      setIdb(db);
+      // try {
+      const dbChats = await getChats(db, email);
+      setChats(dbChats);
+      // } catch (err) {
+      //   console.log(err);
+      // }
     });
   }, []);
 
   const fetchResponse = async () => {
     if (!currentMemberAccount) return;
-    if (!user.signInDetails?.loginId) return;
+    if (!userAttributes?.email) {
+      toast.error("An error occured. Please try again later.", {
+        position: "bottom-right",
+      });
+      console.error("userAttributes.email not found.", userAttributes);
+      return;
+    }
     if (!newChat) return;
     let url =
       model === 0
@@ -122,13 +130,13 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         ? JSON.stringify({
             email: currentMemberAccount["email"],
             // TODO: may break during google sign in, fix it
-            owner: user.signInDetails.loginId,
+            owner: userAttributes.email,
             query: newChat.query,
           })
         : JSON.stringify({
             email: currentMemberAccount["email"],
             // TODO: may break during google sign in, fix it
-            owner: user.signInDetails.loginId,
+            owner: userAttributes.email,
             user_query: newChat.query,
           });
     const response = await fetch(url, {
@@ -157,7 +165,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
           },
           body: JSON.stringify({
             email: currentMemberAccount["email"],
-            owner: user.signInDetails.loginId,
+            owner: userAttributes.email,
           }),
         });
         const res_data = await res.json();
@@ -170,7 +178,6 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         }
       } else {
         console.log(response_data);
-        // setError(response_data);
         let newChatCopy = structuredClone(newChat);
         if (response.status >= 500) {
           newChatCopy.error =
@@ -198,8 +205,19 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     }
   }, [newChat]);
 
+  useEffect(() => {
+    // // TODO: fix
+    if (idb && userAttributes?.email) {
+      replaceChats(idb, userAttributes.email, chats);
+    }
+  }, [chats]);
+  
+
   const submitPrompt = async (prompt: string) => {
-    if (!currentMemberAccount) return;
+    if (!currentMemberAccount) {
+      toast.error("You need to create a member account first.");
+      return;
+    }
 
     // debounce if previous response is still loading
     if (chats.length > 0 && chats.at(-1)?.loading) return;
@@ -231,7 +249,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
           error,
           memberAccounts,
           currentMemberAccount,
-          userAttributes,
+          idb,
         },
         setters: {
           setChats,
@@ -239,7 +257,6 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
           setModel,
           setNewChat,
           setQuery,
-          setUserAttributes,
         },
         submitPrompt,
         fetchResponse,

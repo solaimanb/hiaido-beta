@@ -22,6 +22,7 @@ const Login = lazy(() => import("./pages/Login"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
 import { Amplify } from "aws-amplify";
+import { useGlobalState } from "./context/GlobalStateContext";
 
 // Amplify.configure(awsExports);
 Amplify.configure({
@@ -58,8 +59,13 @@ const App = () => {
     context.route,
     context.authStatus,
   ]);
+  const { userAttributes } = useGlobalState();
 
   console.log(route, authStatus, error, user);
+
+  if (!userAttributes) {
+    return <Loading />;
+  }
 
   return (
     <Suspense fallback={authStatus === "configuring" && <Loading />}>
