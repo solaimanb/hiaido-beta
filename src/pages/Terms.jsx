@@ -4,7 +4,7 @@ const termsSections = [
   {
     title: "1. Definitions",
     content:
-      "Company: Refers to Hiaido Cloud Automation Pvt. Ltd, located at 24, Ranganathan St., OMR, Chennai - 600097.\nUser: Refers to the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.\n Refers to the website and related services provided by the Company, including cloud automation and AI workforce solutions.\nSubscription: Refers to the monthly payment plan provided by the Company.\nContent: Refers to any text, images, multimedia content, software, or other information or material submitted to or on the Service.",
+      "**Company:** Refers to Hiaido Cloud Automation Pvt. Ltd, located at 24, Ranganathan St., OMR, Chennai - 600097.\n**User:** Refers to the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.\n Refers to the website and related services provided by the Company, including cloud automation and AI workforce solutions.\n**Subscription:** Refers to the monthly payment plan provided by the Company.\n**Content:** Refers to any text, images, multimedia content, software, or other information or material submitted to or on the Service.",
   },
   {
     title: "2. Use of the Service",
@@ -109,6 +109,13 @@ const termsSections = [
   },
 ];
 
+const processContent = (content) => {
+  const htmlContent = content
+    .replace(/\n/g, "<br/>")
+    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+  return { __html: htmlContent };
+};
+
 const Terms = () => {
   return (
     <>
@@ -129,12 +136,13 @@ const Terms = () => {
       {/* MAIN CONTENT */}
       <div className="md:mt-40 max-w-4xl px-4 mx-auto mt-32 space-y-4">
         <div>
-          <h2 className="text-4xl font-bold">Terms and Conditions</h2>
+          <h2 className="bold-title text-5xl font-bold">Terms and Conditions</h2>
           <p className="font-semibold text-lg">Effective Date: January 1, 2024</p>
         </div>
 
-        <div>
-          <p>Welcome to Hiaido Cloud Automation Pvt. Ltd!</p>
+        <div className="space-y-4">
+          <p>Welcome to <span className="inline-block text-orange-500">Hiaido Cloud Automation Pvt. Ltd</span>!</p>
+
           <p>These terms and conditions outline the rules
             and regulations for the use of Hiaido Cloud
             Automation Pvt. Ltd&apos;s website, located at
@@ -147,14 +155,18 @@ const Terms = () => {
         {termsSections.map((section, index) => (
           <div key={index}>
             <h1 className="text-xl font-bold">{section.title}</h1>
-            <p className="opacity-90">
+            {/* <p className="opacity-90">
               {section.link
                 ? section.content.replace(
                   section.link.replace("mailto:", ""),
                   ""
                 )
                 : section.content}
-            </p>
+            </p> */}
+            <p
+              className=""
+              dangerouslySetInnerHTML={processContent(section.content)}
+            ></p>
 
             {section.link && (
               <a href={section.link} className="text-blue-300 underline">

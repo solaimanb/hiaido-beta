@@ -1,22 +1,15 @@
-// Import Swiper React components
-// import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-// Import Swiper styles
-// import "swiper/css";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
+import { useEffect, useRef, useState } from "react";
+import Sliders from "./sliderInfo.json";
+import { Autoplay, Pagination } from "swiper/modules";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 
 import "./featureSlider.css";
-
-// import required modules
-// import { Navigation, Autoplay } from "swiper/modules";
-import { useEffect, useRef, useState } from "react";
-
-import Sliders from "./sliderInfo.json";
-
-import { motion } from "framer-motion";
-import Marquee from "react-fast-marquee";
 
 // Dynamic import for image assets
 import {
@@ -77,7 +70,7 @@ const FeatureSlider = () => {
   const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
   const [currentTitle, setCurrentTitle] = useState(" ");
   const [currentDescription, setCurrentDescription] = useState("");
-  // const swiperRef = useRef(null);
+  const swiperRef = useRef(null);
 
   const handleResize = () => {
     setIsMdScreen(window.innerWidth >= 768);
@@ -112,54 +105,87 @@ const FeatureSlider = () => {
     baseX.set(baseX.get() - moveBy);
   });
 
-  const variants = {
-    hidden: { filter: "blur(10px)", opacity: 0 },
-    visible: { filter: "blur(0px)", opacity: 1 },
+  const handleSlideClick = (index) => {
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+    if (swiperRef.current && swiperRef.current.swiper) {
+      const slidesPerView = swiperRef.current.swiper.params.slidesPerView;
+      const targetIndex = index - Math.floor(slidesPerView / 2);
+      swiperRef.current.swiper.slideTo(targetIndex, 1000);
+    }
   };
 
-  // const handleSlideClick = (index) => {
-  //   setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
-  // };
-
-  // const breakpoints = {
-  //   320: {
-  //     slidesPerView: 1,
-  //   },
-  //   480: {
-  //     slidesPerView: 2,
-  //   },
-  //   640: {
-  //     slidesPerView: 3,
-  //   },
-  //   768: {
-  //     slidesPerView: 3,
-  //   },
-  //   1024: {
-  //     slidesPerView: 4,
-  //   },
-  // };
+  const breakpoints = {
+    320: {
+      slidesPerView: 1,
+    },
+    480: {
+      slidesPerView: 2,
+    },
+    640: {
+      slidesPerView: 3,
+    },
+    768: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 3,
+    },
+    1280: {
+      slidesPerView: 3,
+    },
+    1440: {
+      slidesPerView: 5,
+    },
+    1600: {
+      slidesPerView: 5,
+    },
+    1920: {
+      slidesPerView: 5,
+    },
+  };
 
   const handleMouseEnter = (index) => {
     console.log("Mouse entered:", index);
     setHoveredIndex(index);
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.autoplay.stop();
+    }
   };
 
   const handleMouseLeave = () => {
     console.log("Mouse left");
     setHoveredIndex(null);
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.autoplay.start();
+    }
   };
 
+  const variants = {
+    hidden: { filter: "blur(10px)", opacity: 0 },
+    visible: { filter: "blur(0px)", opacity: 1 },
+  };
+
+  const renderCustomBullet = (index, className) => {
+    if (index < 3) {
+      return `<span class="${className} custom-bullet"></span>`;
+    }
+
+    return `<span class="${className} custom-bullet"></span>`;
+
+  };
+
+
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen mt-10">
+    <div className="flex flex-col items-center h-screen mt-10">
       <motion.div
         initial="hidden"
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="max-w-4xl md:h-36"
+        className="max-w-5xl md:h-32 lg:h-36"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="text-3xl font-bold text-center text-glow bold-text md:text-6xl border w-fit mx-auto p-4 rounded-lg border-orange-500/10 shadow shadow-orange-500/30">
+          <div className="text-3xl font-bold text-center text-glow md:text-6xl 2xl:text-7xl w-fit mx-auto">
             {currentTitle.split("\n").map((line, index) => (
               <div key={index}>{line}</div>
             ))}
@@ -167,37 +193,64 @@ const FeatureSlider = () => {
         )}
       </motion.div>
 
-      <Marquee className=""
-        pauseOnHover
+      <Swiper
+        ref={swiperRef}
+        direction="horizontal"
+        autoplay={{
+          delay: 1000,
+          disableOnInteraction: false,
+        }}
+        speed={1000}
+        modules={[Autoplay, Pagination]}
+        className="feature-slider w-full min-h-[40vh] md:min-h-[30vh] lg:min-h-[45vh] 2xl:min-h-[50vh]"
+        spaceBetween={2}
+        pagination={{
+          clickable: true,
+          renderBullet: renderCustomBullet,
+        }}
+        breakpoints={breakpoints}
+        onMouseEnter={() => {
+          if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.autoplay.stop();
+          }
+        }}
+        onMouseLeave={() => {
+          if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.autoplay.start();
+          }
+        }}
       >
-        {Sliders?.map((slider, index) =>
+        {Sliders.map((slider, index) =>
           (index !== 0 || (index === 0 && isMdScreen)) &&
             (index !== 1 || (index === 1 && isMdScreen)) ? (
-            <div
+            <SwiperSlide
               key={index}
-              className={index !== 0 && index !== 1 ? "py-10" : ""}
+              className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
+              onClick={() => handleSlideClick(index)}
             >
               <div
                 className={
                   index !== 0 && index !== 1
-                    ? "relative flex flex-col text-[#F9F7ED]"
+                    ? "relative flex flex-col  text-[#F9F7ED] py-10 w-full h-full"
                     : ""
                 }
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
               >
                 <div
-                  className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${hoveredIndex === index || activeIndex === index
-                      ? "relative"
-                      : ""
+                  className={`${index !== 0 && index !== 1 ? "p-6 w-full h-full" : ""} ${hoveredIndex === index || activeIndex === index ? "" : ""
                     } `}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave()}
-                  onClick={() =>
-                    setActiveIndex((prevIndex) =>
-                      prevIndex === index ? null : index
-                    )
-                  }
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() => setActiveIndex(index)}
                 >
-                  <div className={index !== 0 && index !== 1 ? "w-80 neon-bg transition-all duration-200" : ""}>
+                  <div
+                    className={
+                      index !== 0 && index !== 1
+                        ? "rounded-3xl neon-bg transition-all duration-200 w-full h-full border-2 border-orange-500/5"
+                        : ""
+                    }
+                  >
                     <img
                       src={imageAssets[slider?.image]}
                       alt={imageAssets[slider?.image]}
@@ -209,29 +262,29 @@ const FeatureSlider = () => {
                     />
                   </div>
                 </div>
-
               </div>
-            </div>
+            </SwiperSlide>
           ) : null
         )}
-      </Marquee>
+      </Swiper>
+
 
       <motion.div
         initial="hidden"
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="h-40 max-w-4xl"
+        className="h-40 max-w-3xl mt-6"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="text-lg font-bold text-center border w-fit mx-auto p-4 rounded-lg border-orange-500/10 shadow shadow-orange-500/30">
+          <div className="text-lg font-bold text-center w-fit mx-auto">
             {currentDescription}
           </div>
         )}
       </motion.div>
-    </section>
-  );
-};
+    </div>
+  )
+}
 
 export default FeatureSlider;
 
