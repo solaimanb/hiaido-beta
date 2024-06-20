@@ -125,10 +125,10 @@ const Header = () => {
 
                   </NavLink>
 
-
                   {item.subNav && hoveredNavItem === item.name && (
                     <div className="absolute left-0 z-10 w-full pt-4 shadow-lg top-12 xl:top-14">
-                      <div className="p-4 bg-gray-900 grid w-full grid-cols-1 gap-4 lg:grid-cols-3 overflow-y-scroll rounded-xl backdrop-blur-lg max-h-[60vh]">
+                      <div className={`p-4 bg-gray-900 grid w-full grid-cols-1 gap-4 lg:grid-cols-3 ${item.subNav.length > 3 ? 'overflow-y-scroll max-h-[60vh]' : ''
+                        } rounded-xl backdrop-blur-lg`}>
                         {item.subNav.map((subItem, subIndex) => {
                           return (
                             <div

@@ -1,8 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import Loading from "../components/shared/Loading";
-// import FeatureSlider from "../components/page-components/homepage/feature-slider/FeatureSlider";
-import Swiperslider from "../components/page-components/homepage/feature-slider/Swiperslider";
+import FeatureSlider from "../components/page-components/homepage/feature-slider/FeatureSlider";
 
 // Using React.lazy to dynamically import components for the Landing page.
 const Hero = lazy(() =>
@@ -38,8 +37,7 @@ const Landing = () => {
       {/* MAIN CONTENT */}
       <main className="min-h-screen px-2 overflow-hidden bg-dark">
         <Hero />
-        {/* <FeatureSlider /> */}
-        <Swiperslider/>
+        <FeatureSlider />
         <Benefits />
         <Contact />
       </main>
