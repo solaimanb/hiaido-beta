@@ -157,7 +157,7 @@ export const navigation = [
         </span>,
       },
       {
-        name: "JIRA Integration",
+        name: "Smart Task mangement",
         description: "Streamline your project management and collaboration with HIAIDO's JIRA integration. Effortlessly track tasks, manage workflows, and ensure seamless coordination between development and operations teams. Enhance productivity and ensure alignment with your project goals.",
         icon: <span className="material-symbols-outlined">
         integration_instructions
@@ -168,16 +168,16 @@ export const navigation = [
         description: "Simplify your code management and collaboration with HIAIDO's GitHub integration. Seamlessly synchronize your repositories, track changes, and automate deployments for a streamlined development workflow. Enhance code quality and accelerate your software delivery.",
         icon: <span className="material-symbols-outlined">merge_type</span>,
       },
-      {
-        name: "Kubernetes Integration",
-        description: "Leverage the power of container orchestration with HIAIDO's Kubernetes integration. Easily manage and scale your containerized applications, automate deployments, and ensure seamless orchestration across your cloud environment. Achieve greater efficiency and reliability in your cloud-native infrastructure.",
-        icon: <span className="material-symbols-outlined">apps</span>,
-      },
-      {
-        name: "ServiceNow Integration",
-        description: "Enhance your IT service management with HIAIDO's ServiceNow integration. Streamline incident management, automate workflows, and ensure seamless coordination between your IT and cloud operations teams. Improve service delivery and minimize downtime.",
-        icon: <span className="material-symbols-outlined">support_agent</span>,
-      },
+      // {
+      //   name: "Kubernetes Integration",
+      //   description: "Leverage the power of container orchestration with HIAIDO's Kubernetes integration. Easily manage and scale your containerized applications, automate deployments, and ensure seamless orchestration across your cloud environment. Achieve greater efficiency and reliability in your cloud-native infrastructure.",
+      //   icon: <span className="material-symbols-outlined">apps</span>,
+      // },
+      // {
+      //   name: "ServiceNow Integration",
+      //   description: "Enhance your IT service management with HIAIDO's ServiceNow integration. Streamline incident management, automate workflows, and ensure seamless coordination between your IT and cloud operations teams. Improve service delivery and minimize downtime.",
+      //   icon: <span className="material-symbols-outlined">support_agent</span>,
+      // },
     ],
   },
   { name: "Enterprise", path: "/enterprise",

@@ -134,7 +134,7 @@ const Swiperslider = () => {
       slidesPerView: 3,
     },
     1440: {
-      slidesPerView: 3,
+      slidesPerView: 5,
     },
     1600: {
       slidesPerView: 5,
@@ -248,7 +248,7 @@ const Swiperslider = () => {
                   <div
                     className={
                       index !== 0 && index !== 1
-                        ? "rounded-3xl neon-bg transition-all duration-200 w-full h-full"
+                        ? "rounded-3xl neon-bg transition-all duration-200 w-full h-full border-2 border-orange-500/5"
                         : ""
                     }
                   >

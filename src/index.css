@@ -58,6 +58,8 @@
 
 html, body {
   background: #040404;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Star Canvas */
