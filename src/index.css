@@ -9,6 +9,7 @@
 :root {
   --font-playpen: "Playpen Sans", cursive;
   --font-sora: "Sora", sans-serif;
+  --font-lato: "Lato", sans-serif;
   --font-code: "Source Code Pro", monospace;
   --font-grotesk: "Space Grotesk", sans-serif;
   color-scheme: dark;
@@ -42,6 +43,12 @@
 /* FONT FAMILIES */
 .secondaryText {
   font-family: var(--font-playpen);
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.latoText {
+  font-family: var(--font-lato);
   font-optical-sizing: auto;
   font-style: normal;
 }
