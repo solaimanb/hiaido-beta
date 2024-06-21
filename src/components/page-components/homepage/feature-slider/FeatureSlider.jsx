@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 
 import { useEffect, useRef, useState } from "react";
 import Sliders from "./sliderInfo.json";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
 import { motion } from "framer-motion";
 
@@ -115,33 +115,15 @@ const FeatureSlider = () => {
   };
 
   const breakpoints = {
-    320: {
-      slidesPerView: 1,
-    },
-    480: {
-      slidesPerView: 2,
-    },
-    640: {
-      slidesPerView: 3,
-    },
-    768: {
-      slidesPerView: 3,
-    },
-    1024: {
-      slidesPerView: 3,
-    },
-    1280: {
-      slidesPerView: 3,
-    },
-    1440: {
-      slidesPerView: 5,
-    },
-    1600: {
-      slidesPerView: 5,
-    },
-    1920: {
-      slidesPerView: 5,
-    },
+    320: { slidesPerView: 1 },
+    480: { slidesPerView: 2 },
+    640: { slidesPerView: 3 },
+    768: { slidesPerView: 3 },
+    1024: { slidesPerView: 3 },
+    1280: { slidesPerView: 3 },
+    1440: { slidesPerView: 5 },
+    1600: { slidesPerView: 5 },
+    1920: { slidesPerView: 5 },
   };
 
   const handleMouseEnter = (index) => {
@@ -165,15 +147,6 @@ const FeatureSlider = () => {
     visible: { filter: "blur(0px)", opacity: 1 },
   };
 
-  const renderCustomBullet = (index, className) => {
-    if (index < 3) {
-      return `<span class="${className} custom-bullet"></span>`;
-    }
-
-    return `<span class="${className} custom-bullet"></span>`;
-
-  };
-
 
   return (
     <div className="flex flex-col items-center h-screen mt-10">
@@ -185,7 +158,7 @@ const FeatureSlider = () => {
         className="max-w-5xl md:h-32 lg:h-36"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="text-3xl font-bold text-center text-glow md:text-6xl 2xl:text-7xl w-fit mx-auto">
+          <div className="text-3xl font-bold text-center text-glow md:text-6xl 2xl:text-6xl w-fit mx-auto">
             {currentTitle.split("\n").map((line, index) => (
               <div key={index}>{line}</div>
             ))}
@@ -196,18 +169,22 @@ const FeatureSlider = () => {
       <Swiper
         ref={swiperRef}
         direction="horizontal"
-        autoplay={{
-          delay: 1000,
-          disableOnInteraction: false,
-        }}
+        autoplay={{ delay: 1000, disableOnInteraction: false }}
         speed={1000}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay, Pagination, Navigation]}
         className="feature-slider w-full min-h-[40vh] md:min-h-[30vh] lg:min-h-[45vh] 2xl:min-h-[50vh]"
         spaceBetween={2}
         pagination={{
           clickable: true,
-          renderBullet: renderCustomBullet,
+          renderBullet: function (index, className) {
+            if (index < 5) {
+              return `<span class="${className} custom-bullet"></span>`;
+            } else {
+              return '';
+            }
+          }
         }}
+        navigation={true}
         breakpoints={breakpoints}
         onMouseEnter={() => {
           if (swiperRef.current && swiperRef.current.swiper) {
@@ -231,7 +208,7 @@ const FeatureSlider = () => {
               <div
                 className={
                   index !== 0 && index !== 1
-                    ? "relative flex flex-col  text-[#F9F7ED] py-10 w-full h-full"
+                    ? "relative flex flex-col text-[#F9F7ED] py-10 w-full h-full"
                     : ""
                 }
                 onMouseEnter={() => handleMouseEnter(index)}
@@ -267,7 +244,6 @@ const FeatureSlider = () => {
           ) : null
         )}
       </Swiper>
-
 
       <motion.div
         initial="hidden"
