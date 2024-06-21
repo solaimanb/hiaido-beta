@@ -172,18 +172,43 @@ const FeatureSlider = () => {
         autoplay={{ delay: 1000, disableOnInteraction: false }}
         speed={1000}
         modules={[Autoplay, Pagination, Navigation]}
-        className="feature-slider w-full min-h-[40vh] md:min-h-[30vh] lg:min-h-[45vh] 2xl:min-h-[50vh]"
+        // className="feature-slider w-full min-h-[40vh] md:min-h-[30vh] lg:min-h-[45vh] 2xl:min-h-[50vh]"
+        className="feature-slider w-full"
         spaceBetween={2}
+        // pagination={{
+        //   clickable: true,
+        //   renderBullet: function (index, className) {
+        //     if (index < 5) {
+        //       return `<span class="${className} custom-bullet"></span>`;
+        //     } else {
+        //       return '';
+        //     }
+        //   }
+        // }}
+
         pagination={{
           clickable: true,
           renderBullet: function (index, className) {
+            // Always show active bullet for current slide
+            if (index === activeIndex) {
+              return `<span class="${className} custom-bullet swiper-pagination-bullet-active"></span>`;
+            }
+
+            // Show initial set of bullets (e.g., first 5)
             if (index < 5) {
               return `<span class="${className} custom-bullet"></span>`;
-            } else {
-              return '';
             }
+
+            // Show additional bullets when scrolled
+            if (index === 5) {
+              return `<span class="${className} custom-bullet active-bullet"></span>`;
+            }
+
+            // Hide bullets beyond the initial set
+            return '';
           }
         }}
+
         navigation={true}
         breakpoints={breakpoints}
         onMouseEnter={() => {
