@@ -154,7 +154,7 @@ const Terms = () => {
 
         {termsSections.map((section, index) => (
           <div key={index}>
-            <h1 className="text-3xl bold-title">{section.title}</h1>
+            <h1 className="text-2xl lg:text-3xl bold-title">{section.title}</h1>
             <p
               className=""
               dangerouslySetInnerHTML={processContent(section.content)}

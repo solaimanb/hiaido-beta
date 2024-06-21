@@ -10,13 +10,19 @@
 
 .feature-slider .swiper-button-next,
 .swiper-button-prev {
-  border: 3px solid #e75a27;
+  /* border: 3px solid #e75a27; */
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 50;
+}
+
+.feature-slider .swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #c4583110;
 }
 
 .feature-slider .swiper-button-next::after,
@@ -25,21 +31,25 @@
 }
 
 .feature-slider .swiper-button-next {
-  right: 10%;
+  right: 40%;
+  top: 95%;
   color: #e75a27;
+  cursor: pointer;
 }
 
 .feature-slider .swiper-button-prev {
-  left: 10%;
+  left: 40%;
+  top: 95%;
   color: #e75a27;
+  cursor: pointer;
 }
 
 .feature-slider .swiper-button-next::after {
-  content: url(../../../../assets/icons/right-arrow.svg);
+  content: url(../../../../assets/icons/right.svg);
 }
 
 .feature-slider .swiper-button-prev::after {
-  content: url(../../../../assets/icons/left-arrow.svg);
+  content: url(../../../../assets/icons/left.svg);
 }
 
 /* ======================================== */
@@ -83,7 +93,7 @@
 }
 
 /* Pagination Indicator */
-/* .swiper-pagination {
+.swiper-pagination {
   position: absolute;
   text-align: center;
   transition: 0.3s;
@@ -105,37 +115,5 @@
 .swiper-pagination .custom-bullet.swiper-pagination-bullet-active {
   background-color: #e75a27;
   opacity: 1;
-  width: 28px;
-} */
-
-/* Pagination Indicator */
-.swiper-pagination {
-  position: absolute;
-  text-align: center;
-  transition: 0.3s;
-  transform: translate3d(0, 0, 0);
-  z-index: 10;
-}
-
-.swiper-pagination .custom-bullet {
-  width: 10px;
-  height: 10px;
-  background-color: #e2e2e2e1;
-  border-radius: 50px;
-  border: transparent;
-  display: inline-block;
-  margin: 0 4px;
-  opacity: 1;
-  transition: opacity 0.3s, background-color 0.3s;
-}
-
-.swiper-pagination .custom-bullet.swiper-pagination-bullet-active,
-.swiper-pagination .custom-bullet.swiper-pagination-bullet-active ~ .custom-bullet,
-.swiper-pagination .custom-bullet.swiper-pagination-bullet-active ~ .swiper-pagination-bullet-active {
-  opacity: 1;
-}
-
-.swiper-pagination .custom-bullet.swiper-pagination-bullet-active {
-  background-color: #e75a27;
-  width: 24px;
+  width: 20px;
 }
