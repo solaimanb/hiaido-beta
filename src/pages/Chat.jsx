@@ -1,31 +1,16 @@
-import { lazy } from "react";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
-
-// Using React.lazy to dynamically import components for the Chat page.
-const Sidebar = lazy(() => import("../components/Sidebar"));
-const ChatContainer = lazy(() => import("../components/ChatBot/ChatContainer"));
-const Dashboard = lazy(() => import("../components/ChatBot/Dashboard"));
+import { ChatsContextProvider } from "@/context/ChatsContext";
+import ChatContainer from "../components/ChatBot/ChatContainer";
 
 const Chat = () => {
+  // console.log("Chat");
   return (
-    <div className="flex h-full">
-      <div className="p-3">
-        <Sidebar />
+    <ChatsContextProvider>
+      <div className="h-full focus-visible:outline-0 w-full" tabIndex={0}>
+        <div className="h-full w-full flex flex-col">
+          <ChatContainer />
+        </div>
       </div>
-
-      <PanelGroup direction="horizontal">
-        <Panel defaultSize={60} className="max-w-[1100px] min-w-[920px]">
-          <div className="pr-14 w-full px-4 pl-10">
-            <ChatContainer />
-          </div>
-        </Panel>
-
-        <PanelResizeHandle />
-        <Panel className="min-w-[600px]">
-          <Dashboard />
-        </Panel>
-      </PanelGroup>
-    </div>
+    </ChatsContextProvider>
   );
 };
 

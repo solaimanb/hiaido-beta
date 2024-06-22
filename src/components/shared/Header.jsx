@@ -61,7 +61,6 @@ const Header = () => {
     }
   };
 
-
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
   useEffect(() => {
@@ -92,8 +91,6 @@ const Header = () => {
               {navigation.map((item, index) => (
                 <div
                   key={index}
-                  // onMouseEnter={() => setHoveredNavItem(item.name)}
-                  // onMouseLeave={() => setHoveredNavItem(null)}
                   onMouseEnter={() => handleSubNavOpen(item.name)}
                   onMouseLeave={handleSubNavClose}
                 >

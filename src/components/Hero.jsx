@@ -24,7 +24,7 @@ const Hero = () => {
     const handleSubmit = (event) => {
       event.preventDefault();
       // Do something with the form data, for example, send it to a server
-      console.log(data);
+      // console.log(data);
       // Reset form fields
       setData({
         data
