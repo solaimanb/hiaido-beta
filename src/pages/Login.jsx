@@ -120,7 +120,7 @@ const Login = () => {
               <Authenticator
                 loginMechanisms={["email"]}
                 hideSignUp
-                // socialProviders={["google", "facebook"]}
+                socialProviders={[]}
               />
             </div>
           </div>
