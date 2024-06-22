@@ -64,6 +64,18 @@ const imageAssets = {
   blockchainBasedGovernance,
 };
 
+const breakpoints = {
+  320: { slidesPerView: 1 },
+  480: { slidesPerView: 2 },
+  640: { slidesPerView: 3 },
+  768: { slidesPerView: 3 },
+  1024: { slidesPerView: 3 },
+  1280: { slidesPerView: 3 },
+  1440: { slidesPerView: 5 },
+  1600: { slidesPerView: 5 },
+  1920: { slidesPerView: 5 },
+};
+
 const FeatureSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -105,25 +117,14 @@ const FeatureSlider = () => {
     baseX.set(baseX.get() - moveBy);
   });
 
+  // Function to handle slide click
   const handleSlideClick = (index) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
-    if (swiperRef.current && swiperRef.current.swiper) {
-      const slidesPerView = swiperRef.current.swiper.params.slidesPerView;
-      const targetIndex = index - Math.floor(slidesPerView / 2);
-      swiperRef.current.swiper.slideTo(targetIndex, 1000);
+    if (isMdScreen) {
+      setActiveIndex(index === activeIndex ? null : index);
+      if (swiperRef.current && swiperRef.current.swiper) {
+        swiperRef.current.swiper.slideTo(index, 1000);
+      }
     }
-  };
-
-  const breakpoints = {
-    320: { slidesPerView: 1 },
-    480: { slidesPerView: 2 },
-    640: { slidesPerView: 3 },
-    768: { slidesPerView: 3 },
-    1024: { slidesPerView: 3 },
-    1280: { slidesPerView: 3 },
-    1440: { slidesPerView: 5 },
-    1600: { slidesPerView: 5 },
-    1920: { slidesPerView: 5 },
   };
 
   const handleMouseEnter = (index) => {
@@ -172,9 +173,9 @@ const FeatureSlider = () => {
         autoplay={{ delay: 1000, disableOnInteraction: false }}
         speed={1000}
         modules={[Autoplay, Pagination, Navigation]}
-        // className="feature-slider w-full min-h-[40vh] md:min-h-[30vh] lg:min-h-[45vh] 2xl:min-h-[50vh]"
         className="feature-slider w-full"
         spaceBetween={2}
+        centeredSlides={true}
         // pagination={{
         //   clickable: true,
         //   renderBullet: function (index, className) {
@@ -227,20 +228,20 @@ const FeatureSlider = () => {
             (index !== 1 || (index === 1 && isMdScreen)) ? (
             <SwiperSlide
               key={index}
-              className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
+              className={index !== 0 && index !== 1 ? "w-full" : ""}
               onClick={() => handleSlideClick(index)}
             >
               <div
                 className={
                   index !== 0 && index !== 1
-                    ? "relative flex flex-col text-[#F9F7ED] py-10 w-full h-full"
+                    ? "relative flex flex-col text-[#F9F7ED] py-10 w-full"
                     : ""
                 }
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
                 <div
-                  className={`${index !== 0 && index !== 1 ? "p-6 w-full h-full" : ""} ${hoveredIndex === index || activeIndex === index ? "" : ""
+                  className={`${index !== 0 && index !== 1 ? "p-6 w-full" : ""} ${hoveredIndex === index || activeIndex === index ? "" : ""
                     } `}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
@@ -249,7 +250,7 @@ const FeatureSlider = () => {
                   <div
                     className={
                       index !== 0 && index !== 1
-                        ? "rounded-3xl neon-bg transition-all duration-200 w-full h-full border-2 border-orange-500/5"
+                        ? "rounded-3xl neon-bg transition-all duration-200 w-full border-2 border-orange-500/5"
                         : ""
                     }
                   >
