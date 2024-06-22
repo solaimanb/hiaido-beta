@@ -104,7 +104,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       //   console.log(err);
       // }
     });
-  }, []);
+  }, [currentMemberAccount]);
 
   const fetchResponse = async () => {
     if (!currentMemberAccount) return;
@@ -190,6 +190,10 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     newChat.loading = false;
 
     setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
+    // TODO: fix
+    if (idb && currentMemberAccount?.email) {
+      replaceChats(idb, currentMemberAccount.email, chats);
+    }
   };
 
   useEffect(() => {
@@ -198,12 +202,12 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     }
   }, [newChat]);
 
-  useEffect(() => {
-    // // TODO: fix
-    if (idb && currentMemberAccount?.email) {
-      replaceChats(idb, currentMemberAccount.email, chats);
-    }
-  }, [chats]);
+  // useEffect(() => {
+  //   // // TODO: fix
+  //   if (idb && currentMemberAccount?.email) {
+  //     replaceChats(idb, currentMemberAccount.email, chats);
+  //   }
+  // }, [chats, currentMemberAccount]);
 
   const submitPrompt = async (prompt: string) => {
     if (!currentMemberAccount) {
