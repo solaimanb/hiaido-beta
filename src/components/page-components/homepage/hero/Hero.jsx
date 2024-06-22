@@ -1,17 +1,19 @@
-import { curve } from "../../../../assets";
-import Section from "../../../Section";
-import "react-toastify/dist/ReactToastify.css";
+// External libraries
 import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PointMaterial, Points } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 import { motion } from "framer-motion";
-// import { toast } from "react-toastify";
-import AnimatedText from "../../../shared/AnimatedText";
-// import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 
+// Local components
+import Section from "../../../Section";
+import AnimatedText from "../../../shared/AnimatedText";
 import AnimatedBtn from "../../../Buttons/AnimatedBtn";
 import InteractiveAnimation from "./InteractiveAnimation";
+
+// Assets
+import { curve } from "../../../../assets";
 
 function Stars(props) {
   const ref = useRef();
@@ -60,78 +62,11 @@ function Stars(props) {
 }
 
 const Hero = () => {
-  // const [data, setData] = useState("");
-  // const [isLoader, setIsLoader] = useState(false);
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
-
-  // if (isLoader) {
-  //   console.log("submitting request..", isLoader);
-  // }
 
   const handleAnimationEnd = () => {
     setShowSecondAnimation(true);
   };
-
-  //================================
-  // 'Request Demo' Form Submission:
-  //================================
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   if (checkEmail()) {
-  //     setIsLoader(true);
-  //     const bodyFormData = new FormData();
-  //     bodyFormData.append("email", data);
-
-  //     axios({
-  //       method: "POST",
-  //       url: "https://api.hiaido.com/public/api/demo",
-  //       data: bodyFormData,
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     })
-  //       .then((response) => {
-  //         if (response?.data.status === true) {
-  //           setIsLoader(false);
-  //           console.log(response.data);
-  //           toast.success(response?.data.message);
-  //           setData("");
-  //         } else {
-  //           setIsLoader(false);
-  //           toast.error("Something went wrong!");
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         setIsLoader(false);
-  //         console.error("Error while saving data" + err);
-  //         toast.error("Internal Server Error!");
-  //       });
-  //   }
-  // };
-
-  // const checkEmail = () => {
-  //   var isValid = true;
-
-  //   if (typeof data !== "undefined") {
-  //     let lastAtPos = data.lastIndexOf("@");
-  //     let lastDotPos = data.lastIndexOf(".");
-  //     if (
-  //       !(
-  //         lastAtPos < lastDotPos &&
-  //         lastAtPos > 0 &&
-  //         data.indexOf("@@") === -1 &&
-  //         lastDotPos > 2 &&
-  //         data?.length - lastDotPos > 2
-  //       )
-  //     ) {
-  //       isValid = false;
-  //       toast.error("Email is not valid");
-  //     }
-  //   }
-
-  //   return isValid;
-  // };
 
   const variants = {
     hidden: { filter: "blur(10px)", opacity: 0 },
@@ -140,7 +75,6 @@ const Hero = () => {
 
   return (
     <Section
-      className=""
       crosses
       crossesOffset="lg:translate-y-[5.25rem]"
       customPaddings
@@ -186,29 +120,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Request Demo Form */}
-          {/* <form
-            onSubmit={handleSubmit}
-            className="flex flex-col items-center mt-10 space-y-3 text-start"
-          >
-            <div
-              value={data.request_email}
-              name="request_email"
-              className="flex flex-col items-center justify-center gap-4 md:flex-row"
-            >
-              <input
-                onChange={(e) => setData(e.target.value.replace(/\s/g, " "))}
-                className="py-2 pl-6 font-semibold rounded-full input-placeholder decoration-none focus:outline-none placeholder:text-black bg-white/80 text-black/80"
-                type="text"
-                placeholder="Enter your email"
-              />
-
-              <AnimatedBtn type="submit" className="font-semibold rounded-full">
-                Request Demo
-              </AnimatedBtn>
-            </div>
-          </form> */}
-
           <div className="flex flex-col items-center mt-10 space-y-3 text-start">
             <p
               className="text-xs font-bold type1 lg:text-2xl md:text-sm"
@@ -239,8 +150,6 @@ const Hero = () => {
             <Stars />
           </mesh>
         </Canvas>
-
-        {/* <div className="absolute inset-0 opacity-50 bg-dark" /> */}
       </div>
     </Section>
   );
