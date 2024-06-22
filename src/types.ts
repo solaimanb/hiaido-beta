@@ -1,6 +1,11 @@
 // TODO: update later
 export interface MemberAccount {
   email: string;
+  firstName: string;
+  lastName: string;
+  account_status: string;
+  account_id: string;
+  timestamp: string;
 }
 
 export type Model = 0 | 1;

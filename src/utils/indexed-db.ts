@@ -130,6 +130,7 @@ export async function getChats(
     };
 
     request.onerror = (event) => {
+      console.log(email);
       reject((event.target as IDBRequest).error);
     };
   });

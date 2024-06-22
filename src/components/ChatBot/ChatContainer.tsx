@@ -191,7 +191,7 @@ const ChatsList = memo(() => {
 
 // contains the chats and query box
 const ChatContainer = () => {
-  console.log("ChatContainer");
+  // console.log("ChatContainer");
   // const { memberAccounts, currentMemberAccount } =
   //   useContext(GlobalStateContext);
   // const [model, setModel] = useState(1);
@@ -213,116 +213,6 @@ const ChatContainer = () => {
   } = state;
   const { userAttributes } = useGlobalState();
   const { setQuery, setChats, setModel } = setters;
-
-  // useEffect(() => {
-  //   fetchUserAttributes().then((res) => console.log(res));
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchResponse = async () => {
-  //     let url =
-  //       model === 0
-  //         ? `${config.baseURL}/get-response`
-  //         : `${config.multiAgentURL}/chat`;
-  //     let body =
-  //       model === 0
-  //         ? JSON.stringify({
-  //             email: currentMemberAccount["email"],
-  //             // TODO: may break during google sign in, fix it
-  //             owner: user.signInDetails.loginId,
-  //             query: newChat.query,
-  //           })
-  //         : JSON.stringify({
-  //             email: currentMemberAccount["email"],
-  //             // TODO: may break during google sign in, fix it
-  //             owner: user.signInDetails.loginId,
-  //             user_query: newChat.query,
-  //           });
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body,
-  //     });
-  //     console.log("Completed request");
-  //     const response_data = await response.json();
-  //     console.log(response_data, response.status);
-  //     if (!response.ok) {
-  //       if (
-  //         response.status == 400 &&
-  //         response_data["detail"].includes("CLI not configured")
-  //       ) {
-  //         let configCliUrl =
-  //           model === 0
-  //             ? `${config.baseURL}/configure-cli`
-  //             : `${config.multiAgentURL}/configure-cli`;
-  //         const res = await fetch(configCliUrl, {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({
-  //             email: currentMemberAccount["email"],
-  //             owner: user.signInDetails.loginId,
-  //           }),
-  //         });
-  //         const res_data = await res.json();
-  //         console.log(res_data, res.status);
-  //         if (res.ok) {
-  //           await fetchResponse();
-  //           return;
-  //         } else {
-  //           setError(res_data);
-  //         }
-  //       } else {
-  //         console.log(response_data);
-  //         // setError(response_data);
-  //         let newChatCopy = structuredClone(newChat);
-  //         if (response.status >= 500) {
-  //           newChatCopy.error =
-  //             response_data?.detail || "Internal server error occured.";
-  //         } else {
-  //           newChatCopy.error =
-  //             response_data?.detail ||
-  //             "An unknown error occured. Please try again later.";
-  //         }
-  //         newChatCopy.loading = false;
-  //         setChats((prevChats) => [...prevChats.slice(0, -1), newChatCopy]);
-  //         throw new Error(response_data);
-  //       }
-  //     }
-
-  //     newChat.result = response_data.response;
-  //     newChat.loading = false;
-
-  //     setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
-  //   };
-
-  //   if (newChat) {
-  //     fetchResponse();
-  //   }
-  // }, [newChat]);
-
-  // const submitPrompt = async (prompt) => {
-  //   // debounce if previous response is still loading
-  //   if (chats.length > 0 && chats.at(-1).loading) return;
-
-  //   try {
-  //     // if template query is null then maybe user has typed the query
-  //     const chat = {
-  //       query: prompt,
-  //       result: "",
-  //       loading: true,
-  //     };
-  //     setChats((prevChats) => [...prevChats, chat]);
-  //     setQuery("");
-  //     setNewChat(chat);
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     setError("Failed to fetch data");
-  //   }
-  // };
 
   useEffect(() => {
     if (chatBoxRef.current) {
@@ -404,7 +294,6 @@ const QueryBox = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { query, chats } = state;
   const { setQuery } = setters;
-  console.log(query);
 
   const onKeyUp: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.key === "Enter" && e.shiftKey) {
@@ -416,7 +305,6 @@ const QueryBox = () => {
 
   useEffect(() => {
     if (inputRef.current) {
-      console.log(inputRef.current.scrollHeight, inputRef.current.style.height);
       inputRef.current.style.height = `inherit`;
       inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
       inputRef.current.scrollBy({

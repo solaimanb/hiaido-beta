@@ -1,28 +1,31 @@
 import { HelmetProvider } from "react-helmet-async";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import ButtonGradient from "./assets/svg/ButtonGradient";
+import ButtonGradient from "./assets/svg/ButtonGradient.jsx";
 import "@radix-ui/themes/styles.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./layouts/AppLayout.jsx";
 import UnderConstruction from "./pages/UnderConstruction.jsx";
-import AccountFactory from "./pages/AccountFactory.jsx";
 import { Suspense, lazy } from "react";
 import Loading from "./components/shared/Loading.jsx";
+import AccountFactory from "@/pages/AccountFactory";
 
 // Using React.lazy to dynamically import components for the App page.
-const RootLayout = lazy(() => import("./layouts/RootLayout"));
-const Landing = lazy(() => import("./pages/Landing"));
-const Hiring = lazy(() => import("./pages/Hiring"));
-const ContactUs = lazy(() => import("./pages/ContactUs"));
-const Pricing = lazy(() => import("./pages/Pricing"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const Login = lazy(() => import("./pages/Login"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));
+const Landing = lazy(() => import("./pages/Landing.jsx"));
+const Hiring = lazy(() => import("./pages/Hiring.jsx"));
+const ContactUs = lazy(() => import("./pages/ContactUs.jsx"));
+const Pricing = lazy(() => import("./pages/Pricing.jsx"));
+const Privacy = lazy(() => import("./pages/Privacy.jsx"));
+const Login = lazy(() => import("./pages/Login.jsx"));
+const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
 import { Amplify } from "aws-amplify";
-import { useGlobalState } from "./context/GlobalStateContext";
+import {
+  GlobalStateProvider,
+  useGlobalState,
+} from "./context/GlobalStateContext.js";
 
 // Amplify.configure(awsExports);
 Amplify.configure({
@@ -59,9 +62,7 @@ const App = () => {
     context.route,
     context.authStatus,
   ]);
-  const { userAttributes } = useGlobalState();
-
-  console.log(route, authStatus, error, user);
+  // console.log(route, authStatus, error, user);
 
   return (
     <Suspense fallback={authStatus === "configuring" && <Loading />}>
@@ -80,7 +81,9 @@ const App = () => {
           <Route
             element={
               authStatus === "authenticated" ? (
-                <AppLayout />
+                <GlobalStateProvider>
+                  <AppLayout />
+                </GlobalStateProvider>
               ) : (
                 <Navigate to="/login" />
               )

@@ -40,7 +40,7 @@ const MDX: React.FC<MDXProps> = ({ content }) => {
         },
         hr: (props) => <hr className="!bg-neutral-300 !h-[1px]"></hr>,
         table: (props) => {
-          console.log(props.children)
+          // console.log(props.children)
           return <table {...props} />
         }
         // h1: ({ className, children, ...rest }) => (

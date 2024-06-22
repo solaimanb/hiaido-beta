@@ -21,7 +21,7 @@ const CreateMemberAccountForm = ({ Cancel, customButton }) => {
       const authData = await fetchAuthSession();
       // TODO: does not work for google and facebook
       const idToken = authData.tokens.idToken.toString();
-      console.log(obj.value);
+      // console.log(obj.value);
       const response = await fetch(
         "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/create",
         {

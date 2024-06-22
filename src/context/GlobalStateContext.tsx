@@ -1,6 +1,7 @@
 import { MemberAccount } from "@/types";
 import {
   FetchUserAttributesOutput,
+  fetchAuthSession,
   fetchUserAttributes,
 } from "aws-amplify/auth";
 import React, {
@@ -46,6 +47,8 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
   const [memberAccounts, setMemberAccounts] = useState<MemberAccount[] | null>(
     null
   );
+  const [error, setError] = useState<string | null>(null);
+
   const [currentMemberAccount, setCurrentMemberAccount] =
     useState<MemberAccount | null>(null);
   const [userAttributes, setUserAttributes] =
@@ -67,6 +70,58 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
     // fetchAuthSession()
     //   .then((res) => console.log(res))
     //   .catch((err) => console.log(err));
+  }, []);
+
+  const fetchMemberAccounts: () => Promise<MemberAccount[]> = async () => {
+    // console.log("FETCHING MEMBER ACCOUNTS");
+
+    try {
+      let url =
+        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
+      const result = await fetchAuthSession();
+      // TODO: does not work for google and facebook
+      // TODO: fix
+      const idToken = result.tokens?.idToken?.toString();
+      // console.log(result);
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
+      const response_json = await response.json();
+      // console.log(response_json);
+      if (response.ok) {
+        return response_json;
+      } else {
+        throw response_json;
+      }
+    } catch (err) {
+      return err;
+    }
+  };
+
+  useEffect(() => {
+    fetchMemberAccounts()
+      .then((res) => {
+        setMemberAccounts(res);
+        let cma = localStorage.getItem("current_member_account");
+        if (cma) {
+          let cmaObj: MemberAccount = JSON.parse(cma);
+          if (
+            res?.length > 0 &&
+            res.some((val) => val.email === cmaObj.email)
+          ) {
+            setCurrentMemberAccount(cmaObj);
+          } else {
+            setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+          }
+        } else {
+          setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      });
   }, []);
 
   return (

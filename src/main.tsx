@@ -7,8 +7,8 @@ import { StoreProvider } from "./store/Store.jsx";
 import { Theme } from "@radix-ui/themes";
 import { Authenticator, View } from "@aws-amplify/ui-react";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
-import App from "./App.jsx";
 import { GlobalStateProvider } from "./context/GlobalStateContext";
+import App from "@/App";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -17,12 +17,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Authenticator.Provider>
           <View>
             <ThemeProvider>
-              <GlobalStateProvider>
                 <Theme accentColor="blue" className="h-screen">
                   <App />
                   {/* <ThemePanel /> */}
                 </Theme>
-              </GlobalStateProvider>
             </ThemeProvider>
           </View>
         </Authenticator.Provider>

@@ -9,14 +9,9 @@ import React, {
 } from "react";
 import { GlobalStateContext, useGlobalState } from "./GlobalStateContext";
 import config from "@/config";
-import { useAuthenticator } from "@aws-amplify/ui-react";
-import {
-  FetchUserAttributesOutput,
-  fetchUserAttributes,
-} from "aws-amplify/auth";
-import { Chat, IDBchats, MemberAccount, Model } from "@/types";
+import { Chat, MemberAccount, Model } from "@/types";
 import toast from "react-hot-toast";
-import { addChat, getChats, openDB, replaceChats } from "@/utils/indexed-db";
+import { getChats, openDB, replaceChats } from "@/utils/indexed-db";
 
 interface ChatsContextType {
   state: {
@@ -79,8 +74,7 @@ export const useChats = () => {
 export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
   children,
 }) => {
-  const { memberAccounts, currentMemberAccount } =
-    useContext(GlobalStateContext);
+  const { memberAccounts, currentMemberAccount } = useGlobalState();
   const [query, setQuery] = useState("");
   const [model, setModel] = useState<Model>(0);
   const [chats, setChats] = useState<Chat[]>([]);
@@ -99,7 +93,8 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
   // ]);
 
   useEffect(() => {
-    const email: string = userAttributes?.email as string;
+    const email: string = currentMemberAccount?.email as string;
+    console.log(email);
     openDB().then(async (db) => {
       setIdb(db);
       // try {
@@ -205,11 +200,10 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
 
   useEffect(() => {
     // // TODO: fix
-    if (idb && userAttributes?.email) {
-      replaceChats(idb, userAttributes.email, chats);
+    if (idb && currentMemberAccount?.email) {
+      replaceChats(idb, currentMemberAccount.email, chats);
     }
   }, [chats]);
-
 
   const submitPrompt = async (prompt: string) => {
     if (!currentMemberAccount) {

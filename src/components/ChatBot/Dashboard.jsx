@@ -95,7 +95,6 @@ const SkySection = () => {
     },
     onSubmit: async (obj) => {
       setIsLoading(true);
-      console.log(obj.value);
       const response = await fetch(
         "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/create",
         {

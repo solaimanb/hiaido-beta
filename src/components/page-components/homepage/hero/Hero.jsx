@@ -65,7 +65,7 @@ const Hero = () => {
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
 
   if (isLoader) {
-    console.log("submitting request..", isLoader);
+    // console.log("submitting request..", isLoader);
   }
 
   const handleAnimationEnd = () => {
@@ -94,7 +94,7 @@ const Hero = () => {
         .then((response) => {
           if (response?.data.status === true) {
             setIsLoader(false);
-            console.log(response.data);
+            // console.log(response.data);
             toast.success(response?.data.message);
             setData("");
           } else {

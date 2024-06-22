@@ -1,5 +1,4 @@
-import { useAnimationControls } from "framer-motion";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AtSymbolIcon,
   ChatBubbleLeftRightIcon,
@@ -27,6 +26,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import { fetchAuthSession } from "aws-amplify/auth";
 import logoSidebar from "/logo-sidebar.png";
 import { GlobalStateContext } from "@/context/GlobalStateContext";
+import { MemberAccount } from "@/types";
 
 export const navbarData = [
   { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
@@ -65,7 +65,7 @@ export const navbarData = [
 ];
 
 const labelTransitions = {
-  transition: { delay: "0.3", ease: "easeIn" },
+  transition: { delay: 0.3, ease: "easeIn" },
   initial: {
     opacity: 0,
     transition: { delay: 0.2 },
@@ -79,9 +79,9 @@ const labelTransitions = {
   },
 };
 
-const ToggleTheme = ({ isCollapsed }) => {
+const ToggleTheme: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  console.log(theme);
+  // console.log(theme);
   const [activeTabIndex, setActiveTabIndex] = useState(
     theme === "dark" ? 1 : 0
   );
@@ -101,7 +101,7 @@ const ToggleTheme = ({ isCollapsed }) => {
           <AnimatePresence key={i}>
             {(isCollapsed && i != activeTabIndex) || (
               <motion.div {...labelTransitions}>
-                <Menubar.Menu key={item.id || i}>
+                <Menubar.Menu key={item.label || i}>
                   <Menubar.Trigger
                     onClick={() => {
                       if (activeTabIndex != i) {
@@ -165,68 +165,62 @@ const Sidebar = () => {
     currentMemberAccount,
   } = useContext(GlobalStateContext);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  console.log("sidebar");
-  console.log(memberAccounts);
+  // console.log("sidebar");
+  // console.log(memberAccounts);
 
-  useEffect(() => {
-    if (!memberAccounts) {
-      fetchMemberAccounts()
-        .then((res) => {
-          console.log(res);
-          setMemberAccounts(res);
-          console.log(localStorage.getItem("current_member_account"));
-          console.log(
-            JSON.parse(localStorage.getItem("current_member_account")) ||
-              res?.length > 0
-              ? res[0]
-              : null
-          );
-          if (localStorage.getItem("current_member_account")) {
-            let ma = JSON.parse(localStorage.getItem("current_member_account"));
-            if (res?.length > 0 && res.some((val) => val.email === ma.email)) {
-              setCurrentMemberAccount(ma);
-            } else {
-              setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
-            }
-          } else {
-            setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          // setError(err);
-        });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!memberAccounts) {
+  //     fetchMemberAccounts()
+  //       .then((res) => {
+  //         setMemberAccounts(res);
+  //         let cma = localStorage.getItem("current_member_account");
+  //         if (cma) {
+  //           let cmaObj: MemberAccount = JSON.parse(cma);
+  //           if (
+  //             res?.length > 0 &&
+  //             res.some((val) => val.email === cmaObj.email)
+  //           ) {
+  //             setCurrentMemberAccount(cmaObj);
+  //           } else {
+  //             setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+  //           }
+  //         } else {
+  //           setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         // setError(err);
+  //       });
+  //   }
+  // }, []);
 
-  const fetchMemberAccounts = async () => {
-    console.log("FETCHING MEMBER ACCOUNTS");
-    try {
-      let url =
-        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
-      const result = await fetchAuthSession();
-      // TODO: does not work for google and facebook
-      const idToken = result.tokens.idToken.toString();
-      console.log(result);
-      const response = await fetch(url, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${idToken}` },
-      });
-      const response_json = await response.json();
-      if (response.ok) {
-        console.log(response_json);
-        return response_json;
-        // setMemberAccounts(response_json);
-      } else {
-        console.log(response_json);
+  // const fetchMemberAccounts: () => Promise<MemberAccount[]> = async () => {
+  //   // console.log("FETCHING MEMBER ACCOUNTS");
 
-        throw response_json;
-      }
-    } catch (err) {
-      return err;
-    }
-  };
-
+  //   try {
+  //     let url =
+  //       "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
+  //     const result = await fetchAuthSession();
+  //     // TODO: does not work for google and facebook
+  //     // TODO: fix
+  //     const idToken = result.tokens?.idToken?.toString();
+  //     // console.log(result);
+  //     const response = await fetch(url, {
+  //       method: "GET",
+  //       headers: { Authorization: `Bearer ${idToken}` },
+  //     });
+  //     const response_json = await response.json();
+  //     // console.log(response_json);
+  //     if (response.ok) {
+  //       return response_json;
+  //     } else {
+  //       throw response_json;
+  //     }
+  //   } catch (err) {
+  //     return err;
+  //   }
+  // };
   const sliceIndex = 9;
 
   return (
@@ -336,7 +330,9 @@ const Sidebar = () => {
   );
 };
 
-const CurrentMemberAccountComponent = ({ isCollapsed }) => {
+const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
+  isCollapsed,
+}) => {
   const { currentMemberAccount } = useContext(GlobalStateContext);
   if (!currentMemberAccount) return;
   // let currentMemberAccount = {
@@ -354,12 +350,12 @@ const CurrentMemberAccountComponent = ({ isCollapsed }) => {
   // };
   return (
     <div
-      align="center"
+      // align="center"
       className="!border-t-[1px] !border-neutral-600 pt-5 pb-1 flex w-full space-x-3 text-left"
     >
       <Avatar
         src=""
-        fallback={currentMemberAccount?.firstName[0] || "U"}
+        fallback={currentMemberAccount?.firstName || "U"}
         radius="full"
         size="2"
       />
@@ -381,14 +377,20 @@ const CurrentMemberAccountComponent = ({ isCollapsed }) => {
   );
 };
 
-const NavLinksGroup = ({ groupData, isCollapsed }) => {
+const NavLinksGroup: React.FC<{
+  groupData: {
+    label: string;
+    icon: JSX.Element;
+  }[];
+  isCollapsed: boolean;
+}> = ({ groupData, isCollapsed }) => {
   return (
     <>
       {groupData.map((item, i) => {
         return (
           <NavLink
             to={`/${item.label.replace(" ", "-").toLowerCase()}`}
-            key={item.id || i}
+            key={item.label || i}
             // onClick={() => setNavTabIndex(i)}
             className={({ isActive }) =>
               `rounded-lg flex items-center justify-start py-1 ${
