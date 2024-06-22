@@ -80,7 +80,7 @@ const FeatureSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
   const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
-  const [currentTitle, setCurrentTitle] = useState(" ");
+  const [currentTitle, setCurrentTitle] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
   const swiperRef = useRef(null);
 
@@ -121,6 +121,9 @@ const FeatureSlider = () => {
   const handleSlideClick = (index) => {
     if (isMdScreen) {
       setActiveIndex(index === activeIndex ? null : index);
+
+      setHoveredIndex(null);
+
       if (swiperRef.current && swiperRef.current.swiper) {
         swiperRef.current.swiper.slideTo(index, 1000);
       }
@@ -128,7 +131,10 @@ const FeatureSlider = () => {
   };
 
   const handleMouseEnter = (index) => {
-    console.log("Mouse entered:", index);
+    if (activeIndex !== null) {
+      setActiveIndex(null);
+    }
+
     setHoveredIndex(index);
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.autoplay.stop();
@@ -136,7 +142,6 @@ const FeatureSlider = () => {
   };
 
   const handleMouseLeave = () => {
-    console.log("Mouse left");
     setHoveredIndex(null);
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.autoplay.start();
