@@ -63,10 +63,6 @@ const App = () => {
 
   console.log(route, authStatus, error, user);
 
-  if (!userAttributes) {
-    return <Loading />;
-  }
-
   return (
     <Suspense fallback={authStatus === "configuring" && <Loading />}>
       <HelmetProvider>

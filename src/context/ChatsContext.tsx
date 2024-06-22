@@ -129,13 +129,11 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       model === 0
         ? JSON.stringify({
             email: currentMemberAccount["email"],
-            // TODO: may break during google sign in, fix it
             owner: userAttributes.email,
             query: newChat.query,
           })
         : JSON.stringify({
             email: currentMemberAccount["email"],
-            // TODO: may break during google sign in, fix it
             owner: userAttributes.email,
             user_query: newChat.query,
           });
@@ -211,7 +209,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       replaceChats(idb, userAttributes.email, chats);
     }
   }, [chats]);
-  
+
 
   const submitPrompt = async (prompt: string) => {
     if (!currentMemberAccount) {

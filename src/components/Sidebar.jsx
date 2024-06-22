@@ -205,6 +205,7 @@ const Sidebar = () => {
       let url =
         "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
       const result = await fetchAuthSession();
+      // TODO: does not work for google and facebook
       const idToken = result.tokens.idToken.toString();
       console.log(result);
       const response = await fetch(url, {

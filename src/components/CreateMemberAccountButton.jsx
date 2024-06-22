@@ -19,6 +19,7 @@ const CreateMemberAccountForm = ({ Cancel, customButton }) => {
     onSubmit: async (obj) => {
       setIsLoading(true);
       const authData = await fetchAuthSession();
+      // TODO: does not work for google and facebook
       const idToken = authData.tokens.idToken.toString();
       console.log(obj.value);
       const response = await fetch(

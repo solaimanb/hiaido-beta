@@ -29,7 +29,7 @@ const MemberAccountsTable = () => {
   };
   // console.log(memberAccounts.length)
   // console.log(memberAccounts.length && memberAccounts.length == 0)
-  // console.log(memberAccounts);
+  console.log(memberAccounts);
 
   if (!memberAccounts) return;
   else if (memberAccounts && memberAccounts.length == 0)
@@ -156,6 +156,7 @@ const AccountFactory = () => {
       let url =
         "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
       const result = await fetchAuthSession();
+      // TODO: does not work for google and facebook
       const idToken = result.tokens.idToken.toString();
       // console.log(result);
       const response = await fetch(url, {
