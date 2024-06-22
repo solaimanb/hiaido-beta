@@ -23,6 +23,7 @@ import {
 } from "@/ui-components/ui/dropdown-menu";
 import { ArrowRight, RefreshCcwIcon, Send } from "lucide-react";
 import { useChats } from "@/context/ChatsContext";
+import Loader from "../Loader";
 
 const width = "840";
 const widthClass = `w-[${width}px]`;
@@ -228,7 +229,7 @@ const ChatContainer = () => {
     <>
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto w-full" ref={chatBoxRef}>
-          <div className="flex flex-col text-sm pb-48">
+          <div className="flex flex-col text-sm flex-1 h-full">
             <div className="flex justify-between items-center px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
               <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
                 Welcome To HIAIDO Cloud Assistant.
@@ -250,7 +251,7 @@ const ChatContainer = () => {
               </DropdownMenu>
             </div>
             {!userAttributes ? (
-              <div>Loading...</div>
+              <Loader />
             ) : (
               <AnimatePresence>
                 {chats.length == 0 ? (
@@ -258,7 +259,7 @@ const ChatContainer = () => {
                     transition={{ duration: 0.2 }}
                     initial={{ scale: 0.95, opacity: 0, y: "-5px" }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}
-                    className="h-[720px]"
+                    className="h-full"
                   >
                     {memberAccounts && memberAccounts.length == 0 ? (
                       <CreateMemberAccountWarningBox />
@@ -271,7 +272,9 @@ const ChatContainer = () => {
                     )}
                   </motion.div>
                 ) : (
+                  <div className="h-full pb-48">
                   <ChatsList />
+                  </div>
                 )}
               </AnimatePresence>
             )}

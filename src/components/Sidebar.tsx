@@ -355,7 +355,7 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
     >
       <Avatar
         src=""
-        fallback={currentMemberAccount?.firstName || "U"}
+        fallback={currentMemberAccount?.firstName.at(0) || "U"}
         radius="full"
         size="2"
       />

@@ -14,8 +14,8 @@ const QueryTemplates: React.FC<QueryTemplatesProps> = ({ askQuery }) => {
   ];
 
   return (
-    <div className="relative h-full">
-      <div className="absolute bottom-72 flex w-full justify-center space-x-4">
+    <div className="relative h-full flex items-end pb-60">
+      <div className="flex w-full justify-center space-x-4">
         {data.map((item, i) => {
           return (
             <AnimatePresence key={i}>

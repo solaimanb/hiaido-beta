@@ -116,6 +116,10 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       return;
     }
     if (!newChat) return;
+    if (newChat.query === "") {
+      toast.error("Query cannot be empty");
+      return;
+    }
     let url =
       model === 0
         ? `${config.baseURL}/get-response`
@@ -210,6 +214,10 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
   // }, [chats, currentMemberAccount]);
 
   const submitPrompt = async (prompt: string) => {
+    if (prompt === "") {
+      toast.error("Query cannot be empty");
+      return;
+    }
     if (!currentMemberAccount) {
       toast.error("You need to create a member account first.");
       return;
