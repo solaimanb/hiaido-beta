@@ -42,7 +42,7 @@ Amplify.configure({
           redirectSignOut: ["http://localhost:5173"],
           responseType: "code",
           scopes: ["email", "phone", "aws.cognito.signin.user.admin"],
-          providers: ["Google", "Amazon"],
+          // providers: ["Google", "Facebook"],
         },
       },
     },
