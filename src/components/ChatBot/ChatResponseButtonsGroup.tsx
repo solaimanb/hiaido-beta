@@ -23,7 +23,7 @@ const ChatResponseButtonsGroup: React.FC<ChatResponseButtonsGroupProps> = ({
 }) => {
   const size = "size-[18px]";
   return (
-    <div className="my-3 flex space-x-3 mb-60">
+    <div className="my-3 flex space-x-3">
       <Tooltip content="Regenerate">
         <button className="hover:stroke-neutral-600 stroke-neutral-500 outline-none">
           <RefreshCw className={`${size}`} />
