@@ -66,8 +66,8 @@ const imageAssets = {
 };
 
 const breakpoints = {
-  320: { slidesPerView: 1 },
-  480: { slidesPerView: 2 },
+  320: { slidesPerView: 2 },
+  480: { slidesPerView: 3 },
   640: { slidesPerView: 3 },
   768: { slidesPerView: 3 },
   1024: { slidesPerView: 3 },
@@ -195,7 +195,7 @@ const FeatureSlider = () => {
           clickable: true,
         }}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-        className="feature-slide swiper-contanier w-full"
+        className="feature-slide swiper-contanier w-full px-20"
         breakpoints={breakpoints}
         onMouseEnter={() => {
           if (swiperRef.current && swiperRef.current.swiper) {
@@ -245,7 +245,7 @@ const FeatureSlider = () => {
                     // className={
                     //   `rounded-3xl hover:neon-bg transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg": ""}`
                     // }
-                    className={`rounded-3xl transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg" : "hover:neon-bg"}`}
+                    className={`rounded-3xl transition-all duration-200 border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg" : "hover:neon-bg"}`}
 
                     // className={activeIndex === index ? "highlight-slide" : ""}
                   >
@@ -258,7 +258,7 @@ const FeatureSlider = () => {
                       //     : "object-cover w-full h-full transition-all duration-300"
                       // }
                       className={
-                        "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                        "object-cover h-full grayscale hover:grayscale-0 transition-all duration-300"
                       }
                     />
                   </div>
