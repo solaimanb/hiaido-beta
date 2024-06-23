@@ -174,61 +174,6 @@ const FeatureSlider = () => {
       </motion.div>
 
       <Swiper
-        // ref={swiperRef}
-        // direction="horizontal"
-        // autoplay={{ delay: 1000, disableOnInteraction: false }}
-        // speed={1000}
-        // spaceBetween={2}
-
-        // centeredSlides={true}
-        // pagination={{
-        //   clickable: true,
-        //   renderBullet: function (index, className) {
-        //     if (index < 5) {
-        //       return `<span class="${className} custom-bullet"></span>`;
-        //     } else {
-        //       return '';
-        //     }
-        //   }
-        // }}
-
-        // pagination={{
-        //   clickable: true,
-        //   renderBullet: function (index, className) {
-        //     // Always show active bullet for current slide
-        //     if (index === activeIndex) {
-        //       return `<span class="${className} custom-bullet swiper-pagination-bullet-active"></span>`;
-        //     }
-
-        //     // Show initial set of bullets (e.g., first 5)
-        //     if (index < 5) {
-        //       return `<span class="${className} custom-bullet"></span>`;
-        //     }
-
-        //     // Show additional bullets when scrolled
-        //     if (index === 5) {
-        //       return `<span class="${className} custom-bullet active-bullet"></span>`;
-        //     }
-
-        //     // Hide bullets beyond the initial set
-        //     return '';
-        //   }
-        // }}
-
-        // navigation={true}
-        breakpoints={breakpoints}
-        onMouseEnter={() => {
-          if (swiperRef.current && swiperRef.current.swiper) {
-            swiperRef.current.swiper.autoplay.stop();
-          }
-        }}
-        onMouseLeave={() => {
-          if (swiperRef.current && swiperRef.current.swiper) {
-            swiperRef.current.swiper.autoplay.start();
-          }
-        }}
-
-        // EXTRA
         effect={'coverflow'}
         grabCursor={true}
         centeredSlides={true}
@@ -250,6 +195,17 @@ const FeatureSlider = () => {
         }}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
         className="feature-slide swiper-contanier w-full"
+        breakpoints={breakpoints}
+        onMouseEnter={() => {
+          if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.autoplay.stop();
+          }
+        }}
+        onMouseLeave={() => {
+          if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.autoplay.start();
+          }
+        }}
       >
         {Sliders.map((slider, index) =>
           (index !== 0 || (index === 0 && isMdScreen)) &&
