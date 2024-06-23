@@ -24,8 +24,9 @@ const Chat = lazy(() => import("./pages/Chat.jsx"));
 import { Amplify } from "aws-amplify";
 import {
   GlobalStateProvider,
-  useGlobalState,
 } from "./context/GlobalStateContext.js";
+import Enterprise from "./pages/Enterprise.jsx";
+import About from "./pages/About.jsx";
 
 // Amplify.configure(awsExports);
 Amplify.configure({
@@ -62,7 +63,6 @@ const App = () => {
     context.route,
     context.authStatus,
   ]);
-  // console.log(route, authStatus, error, user);
 
   return (
     <Suspense fallback={authStatus === "configuring" && <Loading />}>
@@ -76,6 +76,8 @@ const App = () => {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/enterprise" element={<Enterprise />} />
+            <Route path="/about" element={<About />} />
           </Route>
 
           <Route
@@ -110,13 +112,6 @@ const App = () => {
               route === "authenticated" ? <Navigate to="/chat" /> : <Login />
             }
           />
-
-          {/* <Route
-            path="/chat"
-            element={
-              route === "authenticated" ? <Chat /> : <Navigate to="/login" />
-            }
-          /> */}
 
           {/* Not Found */}
           <Route path="*" element={<NotFound />} />

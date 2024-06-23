@@ -1,23 +1,23 @@
-import hiaido from "../assets/hiaido.svg";
-import check from "./check.svg";
-import play from "./play.svg";
-import gradient from "./gradient.png";
-import smallSphere from "./4-small.png";
-import grid from "./grid.png";
-import check2 from "./check-02.svg";
-import loading1 from "./loading-01.svg";
-import yourlogo from "./yourlogo.svg";
-import homeSmile from "./home-smile.svg";
-import file02 from "./file-02.svg";
-import searchMd from "./search-md.svg";
-import plusSquare from "./plus-square.svg";
-import recording03 from "./recording-03.svg";
-import recording01 from "./recording-01.svg";
-import disc02 from "./disc-02.svg";
-import chromecast from "./chrome-cast.svg";
-import sliders04 from "./sliders-04.svg";
-import loading from "./loading.png";
-import background from "./background.jpg";
+import hiaido from "../assets/svg/hiaido.svg";
+import check from "../assets/svg/check.svg";
+import play from "../assets/svg/play.svg";
+import gradient from "../assets/images/gradient.png";
+import smallSphere from "../assets/images/4-small.png";
+import grid from "../assets/images/grid.png";
+import check2 from "../assets/svg/check-02.svg";
+import loading1 from "../assets/svg/loading-01.svg";
+import yourlogo from "../assets/svg/yourlogo.svg";
+import homeSmile from "../assets/svg/home-smile.svg";
+import file02 from "../assets/svg/file-02.svg";
+import searchMd from "../assets/svg/search-md.svg";
+import plusSquare from "../assets/svg/plus-square.svg";
+import recording03 from "../assets/svg/recording-03.svg";
+import recording01 from "../assets/svg/recording-01.svg";
+import disc02 from "../assets/svg/disc-02.svg";
+import chromecast from "../assets/svg/chrome-cast.svg";
+import sliders04 from "../assets/svg/sliders-04.svg";
+import loading from "../assets/images/loading.png";
+import background from "../assets/images/background.png";
 
 import curve from "./hero/curve.png";
 import robot from "./hero/robot.jpg";
@@ -84,6 +84,31 @@ import interactiveAnimationV5 from "./gif/Interactive-animation-v5.gif";
 import aws from "./icons/aws.svg"
 import azure from "./icons/azure.svg"
 import gcp from "./icons/google-cloud.svg"
+
+// Feature Slider Images:
+import digitalWorkforce from "./feature-images/01-digital-workforce.png";
+import smartUserInterface from "./feature-images/02-smart-user-interface.png";
+import intelligentChatbot from "./feature-images/03-intelligent-chatbot.png";
+import cloudSearchEverywhere from "./feature-images/04-cloud-search-everywhere.png";
+import einsteinFramework from "./feature-images/05-einstein-framework.png";
+import multiCloudConnectivity from "./feature-images/06-multi-cloud-connectivity.png";
+import smarkTaskMangement from "./feature-images/07-smart-task-management.png";
+import alerts from "./feature-images/08-alerts.png";
+import sandhAi from "./feature-images/09-sandh-ai.png";
+import dataMigration from "./feature-images/10-data-migration.png";
+import securityAutomated from "./feature-images/11-security-automated.png";
+import devOpsSuite from "./feature-images/12-devops-suite.png";
+import blockchainBasedSecurityLedger from "./feature-images/13-blockchain-based-security-ledger.png";
+import chaosEngineering from "./feature-images/14-chaos-engineering.png";
+import recommendationsEngine from "./feature-images/15-recommendations-engine.png";
+import costOptimisation from "./feature-images/16-cost-optimization.png";
+import complianceManagementPack from "./feature-images/17-compliance-management-pack.png";
+import unifiedDashboard from "./feature-images/18-unified-dashboard.png";
+import codeReviewerAi from "./feature-images/19-code-reviewer-ai.png";
+import predictiveMaintenanceSuite from "./feature-images/20-predictive-maintenance-suite.png";
+import autonomousOptimizationMatrix from "./feature-images/21-autonomous-optimization-matrix.png";
+import anomalyDetectionEngine from "./feature-images/22-anomaly-detection-engine.png";
+import blockchainBasedGovernance from "./feature-images/23-blockchain-based-governance.png";
 
 export {
   hiaido,
@@ -161,4 +186,27 @@ export {
   aws,
   azure,
   gcp,
+  digitalWorkforce,
+  smartUserInterface,
+  intelligentChatbot,
+  cloudSearchEverywhere,
+  einsteinFramework,
+  multiCloudConnectivity,
+  smarkTaskMangement,
+  alerts,
+  sandhAi,
+  dataMigration,
+  securityAutomated,
+  devOpsSuite,
+  blockchainBasedSecurityLedger,
+  chaosEngineering,
+  recommendationsEngine,
+  costOptimisation,
+  complianceManagementPack,
+  unifiedDashboard,
+  codeReviewerAi,
+  predictiveMaintenanceSuite,
+  autonomousOptimizationMatrix,
+  anomalyDetectionEngine,
+  blockchainBasedGovernance,
 };

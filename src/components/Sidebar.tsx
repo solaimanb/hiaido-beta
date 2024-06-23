@@ -26,7 +26,6 @@ import { ThemeContext } from "../context/ThemeContext";
 import { fetchAuthSession } from "aws-amplify/auth";
 import logoSidebar from "/logo-sidebar.png";
 import { GlobalStateContext } from "@/context/GlobalStateContext";
-import { MemberAccount } from "@/types";
 
 export const navbarData = [
   { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },

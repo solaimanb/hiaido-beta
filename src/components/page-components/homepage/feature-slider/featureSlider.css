@@ -1,0 +1,105 @@
+.neon-bg:hover {
+  box-shadow: 0 0 50px 15px #e75a27;
+  border-radius: 40px;
+  scale: 1.02;
+}
+
+.text-glow {
+  text-shadow: 0 0 2.5px rgba(231, 90, 39, 0.35), 0 0 5px rgba(231, 90, 39, 0.325), 0 0 7.5px rgba(231, 90, 39, 0.3), 0 0 10px rgba(231, 90, 39, 0.25), 0 0 12.5px rgba(231, 90, 39, 0.2), 0 0 15px rgba(231, 90, 39, 0.15);
+}
+
+/* Pagination Indicator */
+.swiper-pagination {
+  position: absolute;
+  text-align: center;
+  transition: 0.3s;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}
+
+/* ------------------Extra------------------ */
+.slider-controller .swiper-button-next {
+  right: 25%;
+  top: 95%;
+  color: #e75a27;
+  cursor: pointer;
+}
+
+.slider-controller .swiper-button-prev {
+  left: 25%;
+  top: 95%;
+  color: #e75a27;
+  cursor: pointer;
+}
+
+.slider-controller .swiper-button-next,
+.swiper-button-prev {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.slider-controller .swiper-button-next::after {
+  content: url(../../../../assets/icons/right.svg);
+}
+
+.slider-controller .swiper-button-prev::after {
+  content: url(../../../../assets/icons/left.svg);
+}
+
+.slider-arrow {
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-arrow:hover {
+  background: #e75a2741;
+  transition: all 0.3s ease-in-out;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #919191;
+  border-radius: 50px;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #e75a27;
+  opacity: 1;
+  width: 20px;
+}
+
+/* Media queries for responsive positioning */
+@media (max-width: 768px) {
+  .feature-slider .swiper-button-next {
+    right: 6%;
+  }
+
+  .feature-slider .swiper-button-prev {
+    left: 6%;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-slider .swiper-button-next {
+    right: 4%;
+  }
+
+  .feature-slider .swiper-button-prev {
+    left: 4%;
+  }
+}
+
+/* Add margin on large screens to create space */
+@media (min-width: 1024px) {
+  .feature-slider .swiper-wrapper {
+    margin-left: calc(50% - (5 * 10px) - 50%);
+  }
+}
