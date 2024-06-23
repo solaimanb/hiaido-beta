@@ -1,11 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 import { useEffect, useRef, useState } from "react";
 import Sliders from "./sliderInfo.json";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
 import { motion } from "framer-motion";
 
@@ -173,14 +174,13 @@ const FeatureSlider = () => {
       </motion.div>
 
       <Swiper
-        ref={swiperRef}
-        direction="horizontal"
-        autoplay={{ delay: 1000, disableOnInteraction: false }}
-        speed={1000}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="feature-slider w-full"
-        spaceBetween={2}
-        centeredSlides={true}
+        // ref={swiperRef}
+        // direction="horizontal"
+        // autoplay={{ delay: 1000, disableOnInteraction: false }}
+        // speed={1000}
+        // spaceBetween={2}
+
+        // centeredSlides={true}
         // pagination={{
         //   clickable: true,
         //   renderBullet: function (index, className) {
@@ -192,30 +192,30 @@ const FeatureSlider = () => {
         //   }
         // }}
 
-        pagination={{
-          clickable: true,
-          renderBullet: function (index, className) {
-            // Always show active bullet for current slide
-            if (index === activeIndex) {
-              return `<span class="${className} custom-bullet swiper-pagination-bullet-active"></span>`;
-            }
+        // pagination={{
+        //   clickable: true,
+        //   renderBullet: function (index, className) {
+        //     // Always show active bullet for current slide
+        //     if (index === activeIndex) {
+        //       return `<span class="${className} custom-bullet swiper-pagination-bullet-active"></span>`;
+        //     }
 
-            // Show initial set of bullets (e.g., first 5)
-            if (index < 5) {
-              return `<span class="${className} custom-bullet"></span>`;
-            }
+        //     // Show initial set of bullets (e.g., first 5)
+        //     if (index < 5) {
+        //       return `<span class="${className} custom-bullet"></span>`;
+        //     }
 
-            // Show additional bullets when scrolled
-            if (index === 5) {
-              return `<span class="${className} custom-bullet active-bullet"></span>`;
-            }
+        //     // Show additional bullets when scrolled
+        //     if (index === 5) {
+        //       return `<span class="${className} custom-bullet active-bullet"></span>`;
+        //     }
 
-            // Hide bullets beyond the initial set
-            return '';
-          }
-        }}
+        //     // Hide bullets beyond the initial set
+        //     return '';
+        //   }
+        // }}
 
-        navigation={true}
+        // navigation={true}
         breakpoints={breakpoints}
         onMouseEnter={() => {
           if (swiperRef.current && swiperRef.current.swiper) {
@@ -227,6 +227,29 @@ const FeatureSlider = () => {
             swiperRef.current.swiper.autoplay.start();
           }
         }}
+
+        // EXTRA
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        slidesPerView={'auto'}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 50,
+          modifier: 2.5,
+        }}
+        autoplay={{ delay: 1000, disableOnInteraction: false }}
+        speed={1000}
+        pagination={{ el: '.swiper-pagination', clickable: true }}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          clickable: true,
+        }}
+        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+        className="feature-slide swiper-contanier w-full"
       >
         {Sliders.map((slider, index) =>
           (index !== 0 || (index === 0 && isMdScreen)) &&
@@ -274,6 +297,15 @@ const FeatureSlider = () => {
             </SwiperSlide>
           ) : null
         )}
+
+        {/* Swiper Pagination */}
+        <div className="slider-controller">
+          <div className="swiper-button-prev slider-arrow">
+          </div>
+          <div className="swiper-button-next slider-arrow">
+          </div>
+          <div className="swiper-pagination mx-auto"></div>
+        </div>
       </Swiper>
 
       <motion.div
