@@ -72,14 +72,14 @@ const breakpoints = {
   768: { slidesPerView: 3 },
   1024: { slidesPerView: 3 },
   1280: { slidesPerView: 3 },
-  1440: { slidesPerView: 5 },
-  1600: { slidesPerView: 5 },
+  1440: { slidesPerView: 3 },
+  1600: { slidesPerView: 4 },
   1920: { slidesPerView: 5 },
 };
 
 const FeatureSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
@@ -162,7 +162,7 @@ const FeatureSlider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="max-w-5xl md:h-32 lg:h-36"
+        className="max-w-5xl md:h-32 lg:h-34"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
           <div className="text-3xl font-bold text-center text-glow md:text-6xl 2xl:text-6xl w-fit mx-auto">
@@ -187,6 +187,7 @@ const FeatureSlider = () => {
         }}
         autoplay={{ delay: 1000, disableOnInteraction: false }}
         speed={1000}
+        spaceBetween={10}
         pagination={{ el: '.swiper-pagination', clickable: true }}
         navigation={{
           nextEl: '.swiper-button-next',
@@ -206,52 +207,65 @@ const FeatureSlider = () => {
             swiperRef.current.swiper.autoplay.start();
           }
         }}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        ref={swiperRef}
       >
         {Sliders.map((slider, index) =>
-          (index !== 0 || (index === 0 && isMdScreen)) &&
-            (index !== 1 || (index === 1 && isMdScreen)) ? (
+          // (index !== 0 || (index === 0 && isMdScreen)) &&
+          //   (index !== 1 || (index === 1 && isMdScreen)) ? (
             <SwiperSlide
               key={index}
-              className={index !== 0 && index !== 1 ? "w-full" : ""}
               onClick={() => handleSlideClick(index)}
+              // className={index !== 0 && index !== 1 ? "w-full" : ""}
             >
               <div
-                className={
-                  index !== 0 && index !== 1
-                    ? "relative flex flex-col text-[#F9F7ED] py-10 w-full"
-                    : ""
-                }
+                // className={
+                //   index !== 0 && index !== 1
+                //     ? "relative flex flex-col text-[#F9F7ED] py-10 w-full"
+                //     : ""
+                // }
+
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
                 <div
-                  className={`${index !== 0 && index !== 1 ? "p-6 w-full" : ""} ${hoveredIndex === index || activeIndex === index ? "" : ""
+                  className={` ${hoveredIndex === index || activeIndex === index ? "" : ""
                     } `}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => setActiveIndex(index)}
                 >
                   <div
-                    className={
-                      index !== 0 && index !== 1
-                        ? "rounded-3xl neon-bg transition-all duration-200 w-full border-2 border-orange-500/5"
-                        : ""
-                    }
+                    // className={
+                    //   index !== 0 && index !== 1
+                    //     ? "rounded-3xl neon-bg transition-all duration-200 w-full border-2 border-orange-500/5"
+                    //     : ""
+                    // }
+
+                    // className={
+                    //   `rounded-3xl hover:neon-bg transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg": ""}`
+                    // }
+                    className={`rounded-3xl transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg" : "hover:neon-bg"}`}
+
+                    // className={activeIndex === index ? "highlight-slide" : ""}
                   >
                     <img
                       src={imageAssets[slider?.image]}
                       alt={imageAssets[slider?.image]}
+                      // className={
+                      //   index !== 0 && index !== 1
+                      //     ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                      //     : "object-cover w-full h-full transition-all duration-300"
+                      // }
                       className={
-                        index !== 0 && index !== 1
-                          ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                          : "object-cover w-full h-full transition-all duration-300"
+                        "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
                       }
                     />
                   </div>
                 </div>
               </div>
             </SwiperSlide>
-          ) : null
+          // ) : null
         )}
 
         {/* Swiper Pagination */}
@@ -269,10 +283,10 @@ const FeatureSlider = () => {
         animate="visible"
         transition={{ duration: 1 }}
         variants={variants}
-        className="h-40 max-w-3xl mt-6"
+        className="h-40 max-w-3xl mt-4"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="text-lg font-bold text-center w-fit mx-auto">
+          <div className="md:text-lg font-bold text-center w-fit mx-auto">
             {currentDescription}
           </div>
         )}
