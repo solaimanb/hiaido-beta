@@ -237,7 +237,7 @@ const Header = () => {
             {navigation.map((item) => (
               <Link
                 key={item?.id}
-                to={item?.to}
+                to={item?.path}
                 onClick={handleClick}
                 className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border py-1 rounded-md font-semibold ${item?.onlyMobile ? "lg:hidden" : ""
                   } ${item?.url === pathname.hash
