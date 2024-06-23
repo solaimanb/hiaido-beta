@@ -186,7 +186,7 @@ const FeatureSlider = () => {
           modifier: 2.5,
         }}
         autoplay={{ delay: 1000, disableOnInteraction: false }}
-        speed={1000}
+        speed={1200}
         spaceBetween={10}
         pagination={{ el: '.swiper-pagination', clickable: true }}
         navigation={{

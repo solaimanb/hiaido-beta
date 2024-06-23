@@ -1,12 +1,8 @@
 .neon-bg{
   box-shadow: 0 0 50px 10px #e75a27be;
-}
-
-/* .neon-bg:hover {
-  box-shadow: 0 0 50px 15px #e75a27;
   border-radius: 40px;
   scale: 1.02;
-} */
+}
 
 .text-glow {
   text-shadow: 0 0 2.5px rgba(231, 90, 39, 0.35), 0 0 5px rgba(231, 90, 39, 0.325), 0 0 7.5px rgba(231, 90, 39, 0.3), 0 0 10px rgba(231, 90, 39, 0.25), 0 0 12.5px rgba(231, 90, 39, 0.2), 0 0 15px rgba(231, 90, 39, 0.15);
