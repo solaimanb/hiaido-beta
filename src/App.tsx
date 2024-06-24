@@ -7,11 +7,10 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./layouts/AppLayout.jsx";
 import UnderConstruction from "./pages/UnderConstruction.jsx";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import Loading from "./components/shared/Loading.jsx";
 import AccountFactory from "@/pages/AccountFactory";
 
-// Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));
 const Landing = lazy(() => import("./pages/Landing.jsx"));
 const Hiring = lazy(() => import("./pages/Hiring.jsx"));
@@ -27,7 +26,6 @@ import {
   useGlobalState,
 } from "./context/GlobalStateContext.js";
 
-// Amplify.configure(awsExports);
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -49,29 +47,37 @@ Amplify.configure({
 });
 
 const App = () => {
-  // useEffect(() => {
-  //   // Smooth Scroll Trigger:
-  //   (async () => {
-  //     const LocomotiveScroll = (await import("locomotive-scroll")).default;
-  //     // eslint-disable-next-line no-unused-vars
-  //     const locomotiveScroll = new LocomotiveScroll();
-  //   })();
-  // }, []);
-
   const { route, authStatus, error, user } = useAuthenticator((context) => [
     context.route,
     context.authStatus,
   ]);
-  // console.log(route, authStatus, error, user);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        // Assume some function to check authentication status
+        // await someAuthCheckFunction();
+      } catch (e) {
+        console.error("Failed to check auth status", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkAuthStatus();
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Suspense fallback={authStatus === "configuring" && <Loading />}>
       <HelmetProvider>
         <Routes>
-          {/* Root Layout */}
           <Route path="/" element={<RootLayout />}>
             <Route index element={<Landing />} />
-
             <Route path="/hiring" element={<Hiring />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/pricing" element={<Pricing />} />
@@ -103,26 +109,9 @@ const App = () => {
             <Route path="/help" element={<UnderConstruction />} />
           </Route>
 
-          {/* Others */}
-          <Route
-            path="/login"
-            element={
-              route === "authenticated" ? <Navigate to="/chat" /> : <Login />
-            }
-          />
-
-          {/* <Route
-            path="/chat"
-            element={
-              route === "authenticated" ? <Chat /> : <Navigate to="/login" />
-            }
-          /> */}
-
-          {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />
-
         <ButtonGradient />
         <ToastContainer />
       </HelmetProvider>
