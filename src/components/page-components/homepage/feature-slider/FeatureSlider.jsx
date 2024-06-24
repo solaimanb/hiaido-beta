@@ -67,7 +67,7 @@ const imageAssets = {
 
 const breakpoints = {
   320: { slidesPerView: 2 },
-  480: { slidesPerView: 3 },
+  480: { slidesPerView: 2 },
   640: { slidesPerView: 3 },
   768: { slidesPerView: 3 },
   1024: { slidesPerView: 3 },
@@ -119,15 +119,22 @@ const FeatureSlider = () => {
   });
 
   // Function to handle slide click
+  // const handleSlideClick = (index) => {
+  //   if (isMdScreen) {
+  //     setActiveIndex(index === activeIndex ? null : index);
+  //     setHoveredIndex(null);
+
+  //     if (swiperRef.current && swiperRef.current.swiper) {
+  //       swiperRef.current.swiper.slideTo(index, 1000);
+  //     }
+  //   }
+  // };
   const handleSlideClick = (index) => {
-    if (isMdScreen) {
-      setActiveIndex(index === activeIndex ? null : index);
+    setActiveIndex(index);
+    setHoveredIndex(null);
 
-      setHoveredIndex(null);
-
-      if (swiperRef.current && swiperRef.current.swiper) {
-        swiperRef.current.swiper.slideTo(index, 1000);
-      }
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideToLoop(index, 1000);
     }
   };
 
@@ -258,7 +265,7 @@ const FeatureSlider = () => {
                       //     : "object-cover w-full h-full transition-all duration-300"
                       // }
                       className={
-                        "object-cover h-full grayscale hover:grayscale-0 transition-all duration-300"
+                        `object-cover h-full grayscale hover:grayscale-0 transition-all duration-300 ${activeIndex === index ? "grayscale-0" : ""}`
                       }
                     />
                   </div>
