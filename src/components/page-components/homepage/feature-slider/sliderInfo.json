@@ -56,7 +56,7 @@
   {
     "id": "H10",
     "image": "dataMigration",
-    "description": "Explore the world of serverless development with our interactive playground. This feature provides a sandbox environment where developers can experiment with serverless functions effortlessly. Say goodbye to infrastructure setup headaches and hello to playful experimentation.",
+    "description": "Effortlessly migrate data from local folders or on-prem to the cloud with HIAIDO's intuitive data migration feature, enabling smooth transition and accessibility.",
     "title": "Data Migration"
   },
   {
