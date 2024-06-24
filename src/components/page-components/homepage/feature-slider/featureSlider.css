@@ -10,7 +10,7 @@
 
 /* Pagination Indicator */
 .swiper-pagination {
-  position: absolute;
+  /* position: absolute; */
   text-align: center;
   z-index: 10;
 }
@@ -21,18 +21,18 @@ border: solid 1px #e75a27;
 
 .slider-controller .swiper-button-next {
   right: 25%;
-  top: 96%;
+  top: 97%;
   color: #e75a27;
   cursor: pointer;
-  border: 2px solid #e75a27;
+  /* border: 3px solid #e75a27; */
 }
 
 .slider-controller .swiper-button-prev {
   left: 25%;
-  top: 96%;
+  top: 97%;
   color: #e75a27;
   cursor: pointer;
-  border: 2px solid #e75a27;
+  /* border: 3px solid #e75a27; */
 }
 
 .slider-controller .swiper-button-next,
@@ -53,8 +53,8 @@ border: solid 1px #e75a27;
 }
 
 .slider-arrow {
-  width: 36px !important;
-  height: 36px !important;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
