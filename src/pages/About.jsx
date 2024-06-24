@@ -72,7 +72,7 @@ const About = () => {
         </section>
 
         <section
-          className="mt-auto flex flex-col justify-center items-center"
+          className="flex flex-col items-center"
         >
           {/* <img src={glow} alt="hiaido" className="scale-150" /> */}
           <img src={robot} alt="hiaido" className="lg:scale-150" />

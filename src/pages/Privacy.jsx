@@ -112,8 +112,8 @@ const Privacy = () => {
 
           {sections.map((section, index) => (
             <div key={index}>
-              <h1 className="text-2xl lg:text-3xl bold-title">{section.title}</h1>
-              <p className="opacity-90">
+              <h1 className="text-2xl bold-title">{section.title}</h1>
+              <p className="opacity-90 text-sm">
                 {section.link
                   ? section.content.replace(
                       section.link.replace("mailto:", ""),
