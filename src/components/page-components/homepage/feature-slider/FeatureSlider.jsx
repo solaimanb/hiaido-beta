@@ -203,7 +203,7 @@ const FeatureSlider = () => {
           clickable: true,
         }}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-        className="feature-slide swiper-contanier w-full px-20"
+        className="feature-slide swiper-contanier w-full"
         breakpoints={breakpoints}
         onMouseEnter={() => {
           if (swiperRef.current && swiperRef.current.swiper) {
@@ -253,7 +253,7 @@ const FeatureSlider = () => {
                     // className={
                     //   `rounded-3xl hover:neon-bg transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg": ""}`
                     // }
-                    className={`rounded-3xl transition-all duration-200 border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg" : "hover:neon-bg"}`}
+                    className={`rounded-3xl transition-all duration-200 border border-orange-500/10 mt-10 mb-20 ${activeIndex === index ? "neon-bg" : "hover:neon-bg"}`}
 
                     // className={activeIndex === index ? "highlight-slide" : ""}
                   >
