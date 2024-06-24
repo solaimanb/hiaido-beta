@@ -21,10 +21,9 @@ const Login = lazy(() => import("./pages/Login.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
 import { Amplify } from "aws-amplify";
-import {
-  GlobalStateProvider,
-  useGlobalState,
-} from "./context/GlobalStateContext.js";
+import { GlobalStateProvider } from "./context/GlobalStateContext.js";
+import Enterprise from "./pages/Enterprise.jsx";
+import About from "./pages/About.jsx";
 
 Amplify.configure({
   Auth: {
@@ -39,7 +38,7 @@ Amplify.configure({
           redirectSignOut: ["http://localhost:5173"],
           responseType: "code",
           scopes: ["email", "phone", "aws.cognito.signin.user.admin"],
-          providers: ["Google", "Amazon"],
+          // providers: ["Google", "Facebook"],
         },
       },
     },
@@ -82,6 +81,8 @@ const App = () => {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/enterprise" element={<Enterprise />} />
+            <Route path="/about" element={<About />} />
           </Route>
 
           <Route

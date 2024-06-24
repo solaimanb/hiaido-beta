@@ -8,12 +8,28 @@ const Footer = () => {
           Made with <span className="text-red-600">❤️</span> in India
         </p>
 
+        <div className="flex gap-2 flex-row">
         <NavLink
           to="/privacy"
           className="lg:block text-white/60 underline-offset-2 text-xs font-semibold text-center underline"
         >
           Privacy Policy
         </NavLink>
+
+        <NavLink
+          to="/terms"
+          className="lg:block text-white/60 underline-offset-2 text-xs font-semibold text-center underline"
+        >
+          Terms & Conditions
+        </NavLink>
+
+        <NavLink
+          to="/ethical-ai"
+          className="lg:block text-white/60 underline-offset-2 text-xs font-semibold text-center underline"
+        >
+          Ethical AI
+        </NavLink>
+        </div>
 
         <p className="lg:block text-white/80 gap-x-1 flex items-center text-sm font-semibold">
           &copy; {new Date().getFullYear()} <Link to="/">HIAIDO.</Link> All

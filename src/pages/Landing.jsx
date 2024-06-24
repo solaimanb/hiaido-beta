@@ -37,7 +37,7 @@ const Landing = () => {
       {/* MAIN CONTENT */}
       <main className="min-h-screen px-2 overflow-hidden bg-dark">
         <Hero />
-        {/* <FeatureSlider /> */}
+        <FeatureSlider />
         <Benefits />
         <Contact />
       </main>

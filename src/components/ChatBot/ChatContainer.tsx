@@ -121,7 +121,7 @@ const CreateMemberAccountWarningBox = () => {
 const ChatsList = memo(() => {
   const { chats } = useChats().state;
   return (
-    <>
+    <div className="pb-60">
       {chats.map((chat, index) => (
         <div key={index} className="w-full">
           <div className="py-2 px-3 text-base">
@@ -186,31 +186,19 @@ const ChatsList = memo(() => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 });
 
 // contains the chats and query box
 const ChatContainer = () => {
-  // console.log("ChatContainer");
-  // const { memberAccounts, currentMemberAccount } =
-  //   useContext(GlobalStateContext);
-  // const [model, setModel] = useState(1);
-  // const ctx = useAuthenticator();
-  // const [query, setQuery] = useState("");
-  // const [chats, setChats] = useState([]);
-  // const [error, setError] = useState(null);
-  // const [newChat, setNewChat] = useState(null);
   const chatBoxRef = useRef<HTMLDivElement>(null);
   const { setters, state, submitPrompt } = useChats();
   const {
     query,
     chats,
     memberAccounts,
-    idb,
     model,
-    newChat,
-    currentMemberAccount,
   } = state;
   const { userAttributes } = useGlobalState();
   const { setQuery, setChats, setModel } = setters;
@@ -273,7 +261,7 @@ const ChatContainer = () => {
                   </motion.div>
                 ) : (
                   <div className="h-full pb-48">
-                  <ChatsList />
+                    <ChatsList />
                   </div>
                 )}
               </AnimatePresence>

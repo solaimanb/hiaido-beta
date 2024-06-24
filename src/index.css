@@ -1,10 +1,14 @@
+/* Font Imports */
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+/* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Variables and Base Styles */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -38,6 +42,7 @@
     --radius: 0.5rem;
   }
 
+  /* Dark Mode */
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -73,6 +78,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -86,37 +92,46 @@
   animation: animation 3s ease infinite;
 }
 
-.markdown > * {
+/* Custom Components and Utilities */
+.markdown>* {
   all: revert !important;
 }
+
 .markdown ol,
 ul {
   padding-left: 40px;
 }
+
 .markdown ol {
   list-style: decimal;
 }
+
 .markdown ul {
   list-style: disc;
 }
+
 .markdown td {
   border: 1px solid #777;
   border-collapse: collapse;
   padding: 5px 20px;
 }
+
 .markdown table {
   width: 100%;
 }
+
 .markdown th {
   border: 1px solid #777;
   border-collapse: collapse;
   padding: 5px 10px;
 }
+
 .markdown blockquote {
   font-family: 'Times New Roman', Times, serif !important;
   font-size: larger !important;
 }
-.code-markdown > * {
+
+.code-markdown>* {
   all: revert !important;
 }
 
@@ -132,70 +147,56 @@ ul {
   animation: dot-typing 1.5s infinite linear;
 }
 
-@keyframes dot-typing {
-  0% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  16.667% {
-    box-shadow: 9984px -10px 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  33.333% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  50% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px -10px 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  66.667% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-  83.333% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px -10px 0 0 #9880ff;
-  }
-  100% {
-    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
-      10014px 0 0 0 #9880ff;
-  }
-}
-
-@keyframes animation {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* :root {
-  --font-playpen: "Playpen Sans", cursive;
-  --font-sora: "Sora", sans-serif;
-  --font-code: "Source Code Pro", monospace;
-  --font-grotesk: "Space Grotesk", sans-serif;
-  color-scheme: dark;
-} */
 
 * {
   font-family: var(--font-sora);
 }
 
-/* FONT FAMILIES */
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #bba596;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #835333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a75722;
+}
+
+/* Typography */
 .secondaryText {
   font-family: var(--font-playpen);
   font-optical-sizing: auto;
   font-style: normal;
 }
 
+.latoText {
+  font-family: var(--font-lato);
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.bold-title {
+  font-family: "Lato", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
 html,
 body {
   background: #040404;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Star Canvas */
@@ -320,27 +321,6 @@ input[type="file"]::file-selector-button:active {
   animation: typing 3.5s steps(50), blink-caret 0.75s infinite;
 }
 
-/* The typing effect */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: orange;
-  }
-}
-
 .type2 {
   max-width: fit-content;
   overflow: hidden;
@@ -350,27 +330,6 @@ input[type="file"]::file-selector-button:active {
   letter-spacing: 0.01rem;
   animation: typing 3.5s steps(50), blink-caret 0.75s infinite;
   animation-delay: 3000ms;
-}
-
-/* The typing effect */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: orange;
-  }
 }
 
 /* ----------CUSTOM---------- */
@@ -388,36 +347,6 @@ input[type="file"]::file-selector-button:active {
 .gradient-bg {
   background: linear-gradient(270deg, #df6336, rgba(255, 253, 251, 0.507));
   background-size: 200% 200%;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 100%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 0%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 .horizon-bar {
@@ -447,11 +376,6 @@ input:focus::placeholder {
   width: 100%;
 }
 
-/* [data-amplify-form] {
-  display: flex;
-  width: 100%;
-} */
-
 [data-amplify-form] input {
   width: 100%;
   padding: 10px;
@@ -464,10 +388,6 @@ input:focus::placeholder {
   outline: none;
   background: rgba(139, 85, 41, 0.219);
 }
-
-/* [data-amplify-form] label {
-  display: none;
-} */
 
 [data-amplify-form] button[type="submit"] {
   color: white;
@@ -484,13 +404,11 @@ input:focus::placeholder {
   text-align: center;
   border: none;
   background-size: 300% 100%;
-  background-image: linear-gradient(
-    to right,
-    #f5ce62,
-    #e43603,
-    #fa7199,
-    #e85a19
-  );
+  background-image: linear-gradient(to right,
+      #f5ce62,
+      #e43603,
+      #fa7199,
+      #e85a19);
   box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
   border-radius: 50px;
   transition: all 0.4s ease-in-out;
@@ -531,14 +449,6 @@ input:focus::placeholder {
   display: flex;
 }
 
-/* .amplify-visually-hidden {
-  display: none;
-} */
-
-/* .amplify-icon {
-  display: none;
-} */
-
 .amplify-heading--3 {
   font-size: 14px;
   font-weight: 600;
@@ -559,8 +469,10 @@ no-scrollbar::-webkit-scrollbar {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -598,7 +510,7 @@ no-scrollbar::-webkit-scrollbar {
   transform: scale(0);
 }
 
-.custom-radio :checked + label:before {
+.custom-radio :checked+label:before {
   content: "✓";
   background-color: rgb(34 197 94 / var(--tw-bg-opacity));
   transform: scale(1);
@@ -608,6 +520,7 @@ no-scrollbar::-webkit-scrollbar {
 .wrap {
   top: 6px;
 }
+
 p {
   overflow: hidden;
 }
@@ -615,29 +528,6 @@ p {
 .flip span {
   animation: flip 6s infinite;
   transition: 0.5s;
-}
-@keyframes flip {
-  0% {
-    transform: translateY(0);
-  }
-  33% {
-    transform: translateY(-100%);
-  }
-  66% {
-    transform: translateY(-200%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes checkmark {
-  0% {
-    stroke-dashoffset: 24px;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
 }
 
 .animate-checkmark .checkmark-circle {
@@ -684,4 +574,166 @@ p {
 
 .grayscale-0 {
   filter: grayscale(0%);
+}
+
+/* Keyframes */
+@keyframes dot-typing {
+  0% {
+    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
+      10014px 0 0 0 #9880ff;
+  }
+
+  16.667% {
+    box-shadow: 9984px -10px 0 0 #9880ff, 9999px 0 0 0 #9880ff,
+      10014px 0 0 0 #9880ff;
+  }
+
+  33.333% {
+    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
+      10014px 0 0 0 #9880ff;
+  }
+
+  50% {
+    box-shadow: 9984px 0 0 0 #9880ff, 9999px -10px 0 0 #9880ff,
+      10014px 0 0 0 #9880ff;
+  }
+
+  66.667% {
+    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
+      10014px 0 0 0 #9880ff;
+  }
+
+  83.333% {
+    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
+      10014px -10px 0 0 #9880ff;
+  }
+
+  100% {
+    box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff,
+      10014px 0 0 0 #9880ff;
+  }
+}
+
+@keyframes animation {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: translateY(0);
+  }
+
+  33% {
+    transform: translateY(-100%);
+  }
+
+  66% {
+    transform: translateY(-200%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 24px;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  25% {
+    background-position: 50% 100%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  75% {
+    background-position: 50% 0%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: orange;
+  }
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: orange;
+  }
 }

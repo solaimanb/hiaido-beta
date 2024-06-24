@@ -1,0 +1,143 @@
+[
+  {},
+  {},
+  {
+    "id": "H01",
+    "image": "digitalWorkforce",
+    "description": "Your digital assistant for seamless cloud management; assign tasks & get them delivered promptly.",
+    "title": "Digital Workforce\n (Production Grade)"
+  },
+  {
+    "id": "H02",
+    "image": "smartUserInterface",
+    "description": "Your intuitive hub for seamless cloud automation, management, and everything.",
+    "title": "Smart User Interface"
+  },
+  {
+    "id": "H03",
+    "image": "intelligentChatbot",
+    "description": "Interact with the cloud platform using natural language commands, making it intuitive and user-friendly.",
+    "title": "Intelligent Chatbot"
+  },
+  {
+    "id": "H04",
+    "image": "cloudSearchEverywhere",
+    "description": "Instantly access comprehensive details of your cloud ecosystem, resources, and predefined fields. This feature would greatly supplement your cloud operations. Enjoy quick and intuitive navigation for enhanced productivity.",
+    "title": "Cloud Search\n Everywhere"
+  },
+  {
+    "id": "H05",
+    "image": "einsteinFramework",
+    "description": "Meet Einstein, a super-intelligent framework we have built to handle special and complex requirements with unparalleled efficiency and intelligence.",
+    "title": "Einstein Framework"
+  },
+  {
+    "id": "H06",
+    "image": "multiCloudConnectivity",
+    "description": "Harness the power of multiple cloud providers with ease. HIAIDO seamlessly integrates with AWS, Azure, and GCP, enabling you to manage resources across different clouds effortlessly.",
+    "title": "Multi-Cloud Connectivity"
+  },
+  {
+    "id": "H07",
+    "image": "smarkTaskMangement",
+    "description": "Streamline your development process with seamless integration between HIAIDO and JIRA. Automate task fulfillment, track progress, and enhance collaboration by synchronizing cloud-related tasks directly within your existing project management workflow. With real-time updates and automated execution, accelerate development cycles and achieve greater efficiency in cloud management.",
+    "title": "Smart Task Management"
+  },
+  {
+    "id": "H08",
+    "image": "alerts",
+    "description": "Stay informed with actionable alerts that provide instant notifications when critical events occur in your cloud environment. Our intelligent alerts empower you to proactively address issues before they impact your users, ensuring seamless operations.",
+    "title": "Alerts"
+  },
+  {
+    "id": "H09",
+    "image": "sandhAi",
+    "description": "Sandhai is Hiaido's marketplace to access a diverse array of specialized AI agents tailored to your unique requirements. Whether you need assistance with specific tasks or seek expertise in niche areas, our marketplace offers. Purpose-built AI agents available for hire or rent. Unlock the power of AI tailored to your needs, effortlessly.",
+    "title": "Sandh.ai (AI Marketplace)"
+  },
+  {
+    "id": "H10",
+    "image": "dataMigration",
+    "description": "Explore the world of serverless development with our interactive playground. This feature provides a sandbox environment where developers can experiment with serverless functions effortlessly. Say goodbye to infrastructure setup headaches and hello to playful experimentation.",
+    "title": "Data Migration"
+  },
+  {
+    "id": "H11",
+    "image": "securityAutomated",
+    "description": "Stop wasting time on manual security tasks. Hiaido, the world's first AI-powered cloud automation platform, automates security configurations and compliance checks, freeing you to focus on innovation.",
+    "title": "Security. Automated"
+  },
+  {
+    "id": "H12",
+    "image": "devOpsSuite",
+    "description": "Unlock the full potential of your cloud environment with personalized recommendations tailored to your specific usage patterns and business needs. Our AI-driven recommendation engine analyzes your cloud usage data and provides actionable insights to optimize performance, reduce costs, and enhance security.",
+    "title": "DevOps Suite"
+  },
+  {
+    "id": "H13",
+    "image": "blockchainBasedSecurityLedger",
+    "description": "Elevate security and trust with our blockchain-powered security ledger. Maintain an immutable record of all access attempts and resource modifications, ensuring transparency and accountability within your cloud environment. Trust the ledger to safeguard your data and uphold integrity.",
+    "title": "Blockchain-based\n Security Ledger"
+  },
+  {
+    "id": "H14",
+    "image": "chaosEngineering",
+    "description": "Proactively stress test your cloud infrastructure with integrated chaos engineering tools. This feature simulates disruptions and failures, allowing you to identify and address potential weak points before they impact your users. Embrace the chaos and fortify your cloud environment for resilience.",
+    "title": "Chaos Engineering"
+  },
+  {
+    "id": "H15",
+    "image": "recommendationsEngine",
+    "description": "Unlock the full potential of your cloud environment with personalized recommendations tailored to your specific usage patterns and business needs. Our AI-driven recommendation engine analyzes your cloud usage data and provides actionable insights to optimize performance, reduce costs, and enhance security. ",
+    "title": "Recommendations Engine"
+  },
+  {
+    "id": "H16",
+    "image": "costOptimisation",
+    "description": "Maximize cost efficiency and optimize your cloud spending with Hiaido's Cost Optimization feature. Leverage AI-driven insights and recommendations to identify cost-saving opportunities, eliminate waste, and optimize resource utilization across your cloud environment.",
+    "title": "Cost Optimisation"
+  },
+  {
+    "id": "H17",
+    "image": "complianceManagementPack",
+    "description": "Stay compliant with industry regulations such as GDPR, HIPAA, PCI DSS, and more with Hiaido's Compliance Management pack. Seamlessly integrate with leading compliance frameworks and automate compliance checks to ensure adherence to regulatory requirements and security standards.",
+    "title": "Compliance\n Management Pack"
+  },
+  {
+    "id": "H18",
+    "image": "unifiedDashboard",
+    "description": "Get a comprehensive view of your entire cloud environment with Hiaido's Unified Dashboard feature. Consolidate metrics from multiple cloud platforms into a single, intuitive interface, allowing you to monitor performance, track costs, and manage resources effectively. With real-time insights and customizable dashboards, Hiaido's Unified Dashboard enables you to make informed decisions and optimize your cloud operations with ease.",
+    "title": "Unified Dashboard"
+  },
+  {
+    "id": "H19",
+    "image": "codeReviewerAi",
+    "description": "Streamline your development process and ensure code quality with Hiaido's Automated Code Review & Optimization feature. Automatically analyze your codebase for best practices, security vulnerabilities, and performance optimizations, helping you deliver high-quality applications faster. With intelligent recommendations and automated fixes, Hiaido empowers your development team to write better code and improve application reliability without manual intervention.",
+    "title": "Code Review &\n Optimization. Automated."
+  },
+
+  {
+    "id": "H20",
+    "image": "predictiveMaintenanceSuite",
+    "description": "Stay ahead of system failures and downtime with our Predictive Maintenance Suite. Proactively identify potential issues, predict maintenance needs, and schedule preventive measures based on real-time data and predictive analytics, minimizing disruptions and optimizing performance.",
+    "title": "Predictive Maintenance Suite"
+  },
+  {
+    "id": "H21",
+    "image": "autonomousOptimizationMatrix",
+    "description": "Unlock the full potential of your cloud infrastructure with our Autonomous Optimization Matrix. Leverage AI-driven algorithms to continuously analyze, optimize, and fine-tune your system configuration, ensuring peak performance, resilience, and cost-effectiveness.",
+    "title": "Autonomous Optimization Matrix"
+  },
+  {
+    "id": "H22",
+    "image": "anomalyDetectionEngine",
+    "description": "Detect and mitigate anomalies in real-time with our AI-Powered Anomaly Detection feature. Leverage machine learning algorithms to continuously monitor system behavior, identify deviations from normal patterns, and trigger alerts for prompt investigation and resolution.",
+    "title": "AI Powered Anomaly Detection Engine"
+  },
+  {
+    "id": "H23",
+    "image": "blockchainBasedGovernance",
+    "description": "Ensure transparent and tamper-proof auditing of cloud operations, enhancing trust and accountability in multi-tenant environments with a blockchain-based governance framework.",
+    "title": "Blockchain-based\n Governance"
+  }
+]
