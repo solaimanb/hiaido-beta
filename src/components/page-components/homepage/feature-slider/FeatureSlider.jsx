@@ -80,21 +80,21 @@ const breakpoints = {
 const FeatureSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
+  // const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
   const swiperRef = useRef(null);
 
-  const handleResize = () => {
-    setIsMdScreen(window.innerWidth >= 768);
-  };
+  // const handleResize = () => {
+  //   setIsMdScreen(window.innerWidth >= 768);
+  // };
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleResize);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (hoveredIndex !== null) {
@@ -129,6 +129,7 @@ const FeatureSlider = () => {
   //     }
   //   }
   // };
+
   const handleSlideClick = (index) => {
     setActiveIndex(index);
     setHoveredIndex(null);
@@ -139,9 +140,9 @@ const FeatureSlider = () => {
   };
 
   const handleMouseEnter = (index) => {
-    if (activeIndex !== null) {
-      setActiveIndex(null);
-    }
+    // if (activeIndex !== null) {
+    //   setActiveIndex(null);
+    // }
 
     setHoveredIndex(index);
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -264,9 +265,7 @@ const FeatureSlider = () => {
                       //     ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
                       //     : "object-cover w-full h-full transition-all duration-300"
                       // }
-                      className={
-                        `object-cover h-full grayscale hover:grayscale-0 transition-all duration-300 ${activeIndex === index ? "grayscale-0" : ""}`
-                      }
+                      className={`object-cover h-full transition-all duration-300 ${activeIndex === index || hoveredIndex === index ? "grayscale-0" : "grayscale"}`}
                     />
                   </div>
                 </div>
