@@ -21,7 +21,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/ui-components/ui/dropdown-menu";
-import { ArrowRight, RefreshCcwIcon, Send } from "lucide-react";
+import { ArrowRight, Paperclip, RefreshCcwIcon, Send } from "lucide-react";
 import { useChats } from "@/context/ChatsContext";
 import Loader from "../Loader";
 
@@ -288,13 +288,13 @@ const QueryBox = () => {
 
   const { memberAccounts } = useContext(GlobalStateContext);
   return (
-    <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
-      {/* <PaperClipIcon className="w-6 ml-3" /> */}
-      <div className="flex flex-col flex-1 min-w-0 ml-4">
+    <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[780px] p-1.5 outline-none appearance-none">
+      <Paperclip className="size-6 mb-2 ml-2" />
+      <div className="flex flex-col flex-1 min-w-0">
         <textarea
           disabled={(memberAccounts && memberAccounts.length == 0) as boolean}
           rows={1}
-          className="bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-scroll text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
+          className="bg-black/0 w-full max-h-52 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-scroll text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
           ref={inputRef}
           onChange={(e) => setQuery(e.target.value)}
           name="query"

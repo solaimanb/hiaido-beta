@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -58,7 +57,7 @@ const ChatPage = () => {
                     Normal
                   </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem
-                    className="flex items-center gap-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 animated-backgroun"
+                    className="flex items-center gap-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 animated-background"
                     value={1}
                   >
                     <Bot className="size-4" />
