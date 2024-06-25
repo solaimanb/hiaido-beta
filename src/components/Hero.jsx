@@ -1,43 +1,39 @@
-import { curve, heroBackground, robot } from "../assets";
+import { curve } from "../assets";
 import Button from "./Button";
 import Section from "./Section";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRef, useState } from "react";
-
 
 const Hero = () => {
   const parallaxRef = useRef(null);
 
   const [data, setData] = useState({
-		request_email: '',
-	  });
+    request_email: "",
+  });
 
-    const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setData({
-        ...data,
-        [name]: value
-      });
-      };
-    
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      // Do something with the form data, for example, send it to a server
-      // console.log(data);
-      // Reset form fields
-      setData({
-        data
-      });
-      };
-  
-      const refreshPage  = () => {
-        toast("Details submitted Successfully");
-       window.location.href = '/'
-       }
-  
-  
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Do something with the form data, for example, send it to a server
+    // console.log(data);
+    // Reset form fields
+    setData({
+      data,
+    });
+  };
+
+  const refreshPage = () => {
+    toast("Details submitted Successfully");
+    window.location.href = "/";
+  };
 
   return (
     <Section
@@ -72,23 +68,28 @@ const Hero = () => {
             solutions and ongoing innovation, redefining seamless cloud
             experiences. Experience efficiency like never before.
           </p>
+
           <p className="body-1 type1 font-mono max-w-2xl mx-auto mb-6 font-bold text-xs lg:text-2xl font text-n-2 lg:mb-8">
-            {" "}
-            "Welcome to the future of automation with HIAIDO"
+            &quote;Welcome to the future of automation with HIAIDO&quote;
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-        <div value={data.request_email} name="request_email"  className="flex flex-wrap justify-center items-center gap-6">
-        <input onChange={handleInputChange} 
-            className="bg-white text-black mr-6 placeholder:p-2 h-8 rounded decoration-none font-code placeholder:text-black "
-            type="text"
-            placeholder="email"
-          />
-          <Button onClick={refreshPage} type="submit">
-            Request a Demo
-          </Button>
+          <div
+            value={data.request_email}
+            name="request_email"
+            className="flex flex-wrap justify-center items-center gap-6"
+          >
+            <input
+              onChange={handleInputChange}
+              className="bg-white text-black mr-6 placeholder:p-2 h-8 rounded decoration-none font-code placeholder:text-black "
+              type="text"
+              placeholder="email"
+            />
+            <Button onClick={refreshPage} type="submit">
+              Request a Demo
+            </Button>
           </div>
-          </form>
+        </form>
       </div>
     </Section>
   );

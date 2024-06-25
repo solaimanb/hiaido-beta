@@ -140,7 +140,9 @@ export const navigation = [
       {
         name: "Blockchain-Based Governance",
         description: "Ensure transparent and tamper-proof auditing of cloud operations, enhancing trust and accountability in multi-tenant environments with a blockchain-based governance framework.",
-        icon: <span className="material-symbols-outlined">gavel</span>,
+        icon: <span className="material-symbols-outlined">
+        currency_bitcoin
+        </span>,
       },
     ],
   },
