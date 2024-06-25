@@ -1,22 +1,26 @@
-import { Button } from "@/ui-components/ui/button";
 import { check } from "../../../assets";
 import { pricing } from "../../../constants";
+import AnimatedBtn from "@/components/Buttons/AnimatedBtn";
 
 const PricingList = () => {
   return (
-    <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+    <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
       {pricing.map((item) => (
         <div
           key={item.id}
           className="w-full flex flex-col justify-between p-3 border rounded-[2rem] space-y-4 gradient-border"
         >
-          <div className="border-b border-orange-500/30">
-            <div className="space-y-4 mb-10">
+          <div className="border-b border-orange-500/30 pb-6">
+            <div
+              className={`space-y-4 mb-10  ${!item.price ? "space-y-6" : ""}`}
+            >
               <h4 className="h4 font-bold text-center border-b-2 pb-2 border-[#3675D3]">
                 {item.title}
               </h4>
 
-              <div className="flex items-center h-[2.5rem] justify-center mb-6">
+              <div
+                className={`flex items-center h-[2.5rem] justify-center mb-6`}
+              >
                 {item.price && (
                   <>
                     <div className="h3 text-[1.5rem] mb-[1.25rem]">$</div>
@@ -32,13 +36,13 @@ const PricingList = () => {
               </p>
             </div>
 
-            <Button
-              className="w-full mt-auto mb-6 bg-orange-500/80 hover:bg-orange-600 text-white font-semibold rounded-full transition-colors duration-200 text-lg"
+            <AnimatedBtn
+              className={`w-full mt-auto text-white font-semibold`}
               href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
               white={!!item.price}
             >
               {item.price ? "Get Started" : "Contact Sales"}
-            </Button>
+            </AnimatedBtn>
           </div>
 
           <div className="flex h-full w-full">
@@ -47,8 +51,8 @@ const PricingList = () => {
                 <li key={index} className="flex items-start py-4 gap-2">
                   <img
                     src={check}
-                    width={24}
-                    height={24}
+                    width={22}
+                    height={22}
                     alt="Check"
                     className=""
                   />

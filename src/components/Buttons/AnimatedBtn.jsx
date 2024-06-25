@@ -15,7 +15,7 @@ const AnimatedBtn = ({
     <Link to={to} className="rounded-full">
       <button
         id={outlined ? id || "animated-btn-outlined" : id || "animated-btn"}
-        className={`${additionalClasses} transition-all duration-200 ${
+        className={`${additionalClasses} transition-all w-full duration-200 ${
           outlined ? "outlined" : ""
         }`}
         style={style}
