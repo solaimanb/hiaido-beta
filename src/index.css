@@ -210,6 +210,12 @@ ul {
   border: none;
 }
 
+.pricing-card-bg {
+  background: linear-gradient(to top, #9000ff8f, #0077ff8f);
+  background-clip: border-box;
+  color: white;
+  border: none;
+}
 
 html,
 body {

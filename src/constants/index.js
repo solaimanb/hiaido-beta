@@ -187,7 +187,7 @@ export const pricing = [
       "Email support",
       "One cloud (AWS, Azure, GCP)"
     ],
-    trigger:"Get Started"
+    trigger:"Start 7-Day free trial"
   },
   {
     id: "1",
@@ -203,7 +203,7 @@ export const pricing = [
       "Email & chat support",
       "Access to multi-cloud"
     ],
-    trigger:"Get Started"
+    trigger:"Recommended"
   },
   {
     id: "2",
@@ -226,7 +226,7 @@ export const pricing = [
       "Recommendations engine",
       "Optimizations package"
     ],
-    trigger:"Get Started"
+    trigger:"Buy enterprise"
   },
   {
     id: "3",

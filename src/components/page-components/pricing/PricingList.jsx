@@ -8,11 +8,13 @@ const PricingList = () => {
       {pricing.map((item) => (
         <div
           key={item.id}
-          className="w-full flex flex-col justify-between p-3 border rounded-3xl space-y-4 shadow-md shadow-orange-500"
+          className="w-full flex flex-col justify-between overflow-hidden border rounded-3xl space-y-4 shadow-md shadow-orange-500"
         >
-          <div className="border-b border-orange-500/30 pb-6">
+          <div className="pricing-card-bg border-b border-orange-500/30 pb-6 flex flex-col justify-center">
             <div
-              className={`space-y-4 mb-10  ${!item.price ? "space-y-6" : ""}`}
+              className={`space-y-4 mb-10 p-2 ${
+                !item.price ? "space-y-6" : ""
+              }`}
             >
               <h4 className="h5 bold-title text-center border-b-2 pb-2 border-[#3675D3] text-orange-500/90">
                 {item.title}
@@ -45,15 +47,15 @@ const PricingList = () => {
             </div>
 
             <button
-              className={`bg-gradient w-full mt-auto text-white font-semibold p-2 rounded-lg`}
+              className={`bg-gradient w-[90%] mx-auto mt-auto text-white font-semibold p-2 rounded-lg`}
               href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
               // white={!!item.price}
             >
-              {item.price ? "Get Started" : "Contact Sales"}
+              {item.trigger}
             </button>
           </div>
 
-          <div className="flex h-full w-full">
+          <div className="flex h-full w-full p-2">
             <ul className="w-full flex flex-col h-full p-1">
               {item.features.map((feature, index) => (
                 <>
