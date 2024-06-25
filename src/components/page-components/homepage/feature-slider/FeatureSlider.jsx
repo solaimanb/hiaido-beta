@@ -260,11 +260,6 @@ const FeatureSlider = () => {
                     <img
                       src={imageAssets[slider?.image]}
                       alt={imageAssets[slider?.image]}
-                      // className={
-                      //   index !== 0 && index !== 1
-                      //     ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                      //     : "object-cover w-full h-full transition-all duration-300"
-                      // }
                       className={`object-cover h-full transition-all duration-300 ${activeIndex === index || hoveredIndex === index ? "grayscale-0" : "grayscale"}`}
                     />
                   </div>
