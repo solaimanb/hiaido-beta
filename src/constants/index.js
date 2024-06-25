@@ -175,21 +175,24 @@ export const pricing = [
   {
     id: "0",
     title: "Starter",
-    description: "month Per Workplace Billed Monthly",
+    description: "Per workspace\n billed monthly",
     price: "499",
     features: [
-      "Access to basic features",
-      "Restricted access to cloud console",
-      "Low rate limit",
+      "Access to core functionalities",
+      "Cloud resource management",
+      "Limited access to cloud console",
+      "Single agent system",
+      "Moderate rate limit",
       "Limited resource provisioning",
       "Email support",
-      "Single agent system",
+      "One cloud (AWS, Azure, GCP)"
     ],
+    trigger:"Get Started"
   },
   {
     id: "1",
     title: "Elite",
-    description: "month Per Workplace Billed Monthly",
+    description: "Per workspace\n billed monthly",
     price: "1599",
     features: [
       "Premium features and integrations",
@@ -198,36 +201,65 @@ export const pricing = [
       "Multi-agent system",
       "Moderate resource provisioning",
       "Email & chat support",
-      "Access to multi-cloud environments",
+      "Access to multi-cloud"
     ],
+    trigger:"Get Started"
   },
   {
     id: "2",
     title: "Enterprise",
-    description:
-      "month Per workspace Billed Annually",
+    description: "Per workspace\n billed annually",
     price: "3999",
     features: [
       "Advanced AI-driven automation for complex workflows",
       "Extensive resource provisioning and management",
       "Dedicated account manager",
+      "Access to sandh.ai and production grade AI workforce",
       "24x7 priority support",
-      "Access to sandh.ai & production grade AI workforce",
+      "Workforce cloner tool",
+      "Einstein framework",
+      "Multi-account environment",
+      "Enterprise-grade cloud management",
+      "Automate everything suite",
+      "Smart task management",
+      "Code reviewer AI",
+      "Recommendations engine",
+      "Optimizations package"
     ],
+    trigger:"Get Started"
   },
   {
     id: "3",
     title: "Xaas",
-    description:
-      "Contact Sales",
+    description: "Bring your own cloud account",
     price: null,
     features: [
       "Fully customizable AI automation tailored to specific business needs",
       "Unlimited resource provisioning and management",
       "Dedicated team of cloud experts",
       "SLA-backed 24/7 premium support",
-      "Advanced analytics & optimization tools",
+      "Advanced analytics and optimization tools",
+      "Advanced automation & orchestration",
+      "Hybrid cloud management",
+      "Vendor-specific optimizations"
     ],
+    trigger:"Contact Sales"
+  },
+  {
+    id: "4",
+    title: "Playground",
+    description: "Per workspace\n billed annually",
+    price: 99,
+    features: [
+      "Explore cloud tech with AI",
+      "Cloud free tier access",
+      "Limited resource set",
+      "Low rate limit",
+      "Sandbox environment",
+      "AI guided learning",
+      "Email support"
+    ],
+    trigger:"Go"
   },
 ];
 

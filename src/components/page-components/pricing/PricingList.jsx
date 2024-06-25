@@ -1,20 +1,20 @@
+import React from "react";
 import { check } from "../../../assets";
 import { pricing } from "../../../constants";
-import AnimatedBtn from "@/components/Buttons/AnimatedBtn";
 
 const PricingList = () => {
   return (
-    <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+    <div className="container grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-16 py-2 px-2">
       {pricing.map((item) => (
         <div
           key={item.id}
-          className="w-full flex flex-col justify-between p-3 border rounded-[2rem] space-y-4 gradient-border"
+          className="w-full flex flex-col justify-between p-3 border rounded-3xl space-y-4 shadow-md shadow-orange-500"
         >
           <div className="border-b border-orange-500/30 pb-6">
             <div
               className={`space-y-4 mb-10  ${!item.price ? "space-y-6" : ""}`}
             >
-              <h4 className="h4 font-bold text-center border-b-2 pb-2 border-[#3675D3]">
+              <h4 className="h5 bold-title text-center border-b-2 pb-2 border-[#3675D3] text-orange-500/90">
                 {item.title}
               </h4>
 
@@ -23,44 +23,57 @@ const PricingList = () => {
               >
                 {item.price && (
                   <>
-                    <div className="h3 text-[1.5rem] mb-[1.25rem]">$</div>
-                    <div className="text-[2.5rem] leading-none font-bold">
+                    <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
+                      $
+                    </div>
+                    <div className="text-4xl leading-none font-bold">
                       {item.price}
                     </div>
+                    <span className="text-base font-semibold mt-2">/month</span>
                   </>
                 )}
               </div>
 
-              <p className="text-center text-xl font-semibold opacity-80">
-                {item.description}
+              <p className="text-center font-semibold opacity-80">
+                {item.description.split("\n").map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
               </p>
             </div>
 
-            <AnimatedBtn
-              className={`w-full mt-auto text-white font-semibold`}
+            <button
+              className={`bg-gradient w-full mt-auto text-white font-semibold p-2 rounded-lg`}
               href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
-              white={!!item.price}
+              // white={!!item.price}
             >
               {item.price ? "Get Started" : "Contact Sales"}
-            </AnimatedBtn>
+            </button>
           </div>
 
           <div className="flex h-full w-full">
             <ul className="w-full flex flex-col h-full p-1">
               {item.features.map((feature, index) => (
-                <li key={index} className="flex items-start py-4 gap-2">
-                  <img
-                    src={check}
-                    width={22}
-                    height={22}
-                    alt="Check"
-                    className=""
-                  />
+                <>
+                  <li key={index} className="flex items-start py-2 gap-2">
+                    <img
+                      src={check}
+                      width={16}
+                      height={16}
+                      alt="Check"
+                      className="mt-1"
+                    />
 
-                  <p className="opacity-80 text-base font-semibold">
-                    {feature}
-                  </p>
-                </li>
+                    <p className="opacity-70 text-base font-semibold">
+                      {feature}
+                    </p>
+                  </li>
+                  {index < item.features.length - 1 && (
+                    <hr className="border-t border-orange-50/10 w-full" />
+                  )}
+                </>
               ))}
             </ul>
           </div>

@@ -192,6 +192,25 @@ ul {
     "width" 100;
 }
 
+.text-gradient {
+  background: linear-gradient(to right, #FF0AC9, #00FFE0);
+  -webkit-background-clip: text;  /* For Chrome, Safari */
+  -moz-background-clip: text;     /* For Firefox */
+  -ms-background-clip: text;      /* For Internet Explorer */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;  /* For Chrome, Safari */
+  -moz-text-fill-color: transparent;     /* For Firefox */
+  -ms-text-fill-color: transparent;      /* For Internet Explorer */
+}
+
+.bg-gradient {
+  background: linear-gradient(to right,#00ffe159, #ff0aca79 );
+  background-clip: border-box;
+  color: white;
+  border: none;
+}
+
+
 html,
 body {
   background: #040404;
