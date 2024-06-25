@@ -189,7 +189,7 @@ ul {
   font-weight: 800;
   font-style: normal;
   font-variation-settings:
-    "wdth" 100;
+    "width" 100;
 }
 
 html,
@@ -574,6 +574,35 @@ p {
 
 .grayscale-0 {
   filter: grayscale(0%);
+}
+
+/* Gradient */
+.gradient-border {
+  position: relative;
+  border-radius: 2rem;
+  background-clip: padding-box;
+  z-index: 0;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, #3675D3, #4CBAA0, #D5C25D, #CF87FB);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: subtract;
 }
 
 /* Keyframes */
