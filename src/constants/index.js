@@ -37,34 +37,6 @@ import {
 } from "../assets";
 import Stepper from "../components/ChatBot/Stepper";
 
-export const navigation = [
-  {
-    id: "hiring",
-    title: "Hiring",
-    to: "/hiring",
-    onlyMobile: true,
-  },
-  {
-    id: "contact",
-    title: "Contact Us",
-    to: "/contact",
-    onlyMobile: true,
-  },
-  {
-    id: "pricing",
-    title: "Pricing",
-    to: "/pricing",
-    onlyMobile: true,
-  },
-
-  {
-    id: "privacy",
-    title: "Privacy",
-    to: "/privacy",
-    onlyMobile: true,
-  },
-];
-
 export const heroIcons = [homeSmile, file02, searchMd, plusSquare];
 
 export const notificationImages = [notification4, notification3, notification2];
@@ -203,54 +175,58 @@ export const pricing = [
   {
     id: "0",
     title: "Starter",
-    description:
-      "Ideal for developers, cloud engineers, small businesses and startups",
-    price: "99",
+    description: "month Per Workplace Billed Monthly",
+    price: "499",
     features: [
-      "Basic AI-powered cloud automation",
+      "Access to basic features",
+      "Restricted access to cloud console",
+      "Low rate limit",
       "Limited resource provisioning",
       "Email support",
+      "Single agent system",
     ],
   },
   {
     id: "1",
-    title: "Premium",
-    description:
-      "Suitable for growing businesses with moderate cloud infrastructure needs",
-    price: "749",
+    title: "Elite",
+    description: "month Per Workplace Billed Monthly",
+    price: "1599",
     features: [
-      "Advanced AI capabilities for efficient automation",
-      "Expanded resource provisioning options",
-      "Priority email and chat support",
-      "Usage analytics and reporting",
+      "Premium features and integrations",
+      "Full access to cloud console",
+      "Moderate rate limit",
+      "Multi-agent system",
+      "Moderate resource provisioning",
+      "Email & chat support",
+      "Access to multi-cloud environments",
     ],
   },
   {
     id: "2",
-    title: "Business",
+    title: "Enterprise",
     description:
-      "Designed for established enterprises with substantial cloud infrastructure requirements",
-    price: "1599",
+      "month Per workspace Billed Annually",
+    price: "3999",
     features: [
-      "Comprehensive AI-driven automation for complex workflows",
+      "Advanced AI-driven automation for complex workflows",
       "Extensive resource provisioning and management",
       "Dedicated account manager",
-      "24/7 priority support",
-      "Customizable reporting and insights",
+      "24x7 priority support",
+      "Access to sandh.ai & production grade AI workforce",
     ],
   },
   {
     id: "3",
-    title: "Enterprise",
+    title: "Xaas",
     description:
-      "Tailored solution for large-scale enterprises with diverse cloud environments",
+      "Contact Sales",
     price: null,
     features: [
       "Fully customizable AI automation tailored to specific business needs",
       "Unlimited resource provisioning and management",
       "Dedicated team of cloud experts",
       "SLA-backed 24/7 premium support",
-      "Advanced analytics and optimization tools",
+      "Advanced analytics & optimization tools",
     ],
   },
 ];
@@ -347,12 +323,14 @@ export const colorVariants = {
   secondary: "bg-pink-500",
   blue: "bg-blue-800",
 };
+
 export const borderVariants = {
   primary: "border-orange-500",
   red: "border-red-700",
   secondary: "border-pink-500",
   blue: "border-blue-800",
 };
+
 export const topics = [
   {
     id: 1,
@@ -423,3 +401,31 @@ export const tabs = [
     content: "Profile Content",
   },
 ];
+
+// export const navigation = [
+//   {
+//     id: "hiring",
+//     title: "Hiring",
+//     to: "/hiring",
+//     onlyMobile: true,
+//   },
+//   {
+//     id: "contact",
+//     title: "Contact Us",
+//     to: "/contact",
+//     onlyMobile: true,
+//   },
+//   {
+//     id: "pricing",
+//     title: "Pricing",
+//     to: "/pricing",
+//     onlyMobile: true,
+//   },
+
+//   {
+//     id: "privacy",
+//     title: "Privacy",
+//     to: "/privacy",
+//     onlyMobile: true,
+//   },
+// ];
