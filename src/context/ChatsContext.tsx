@@ -101,6 +101,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       const dbChats = await getChats(db, email);
       setChats(dbChats);
       // } catch (err) {
+      //   // toast.error("Could not fetch chats");
       //   console.log(err);
       // }
     });

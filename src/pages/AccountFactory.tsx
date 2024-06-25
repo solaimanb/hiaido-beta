@@ -8,6 +8,7 @@ import CreateMemberAccountForm from "../components/CreateMemberAccountButton";
 import CreateMemberAccountButton from "../components/CreateMemberAccountButton";
 import { GlobalStateContext } from "@/context/GlobalStateContext";
 import { MemberAccount } from "@/types";
+import { Helmet } from "react-helmet-async";
 
 const MemberAccountsTable = () => {
   const { memberAccounts, currentMemberAccount, setCurrentMemberAccount } =
@@ -183,17 +184,22 @@ const AccountFactory = () => {
   };
 
   return (
-    <div className="w-full flex">
-      <div className="flex-1 p-10">
-        <h1 className="text-3xl font-semibold">Member accounts</h1>
-        <div className="flex justify-center">
-          {/* <span className="mt-10 text-neutral-500 text-lg">
+    <>
+      <Helmet>
+        <title>Hiaido | Account Factory</title>
+      </Helmet>
+      <div className="w-full flex">
+        <div className="flex-1 p-10">
+          <h1 className="text-3xl font-semibold">Member accounts</h1>
+          <div className="flex justify-center">
+            {/* <span className="mt-10 text-neutral-500 text-lg">
             No member accounts found.
           </span> */}
-          <MemberAccountsTable />
+            <MemberAccountsTable />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
