@@ -218,26 +218,6 @@ const ChatContainer = () => {
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto w-full" ref={chatBoxRef}>
           <div className="flex flex-col text-sm flex-1 h-full">
-            <div className="flex justify-between items-center px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
-              <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
-                Welcome To HIAIDO Cloud Assistant.
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Button>
-                    {model === 1 ? "Multiagent model" : "Normal model"}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <Button className="mx-3" onClick={() => setModel(0)}>
-                    Normal chatbot
-                  </Button>
-                  <Button onClick={() => setModel(1)}>
-                    Multiagent chatbot
-                  </Button>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
             {!userAttributes ? (
               <Loader />
             ) : (
