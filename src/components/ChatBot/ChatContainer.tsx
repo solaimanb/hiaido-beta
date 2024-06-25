@@ -121,14 +121,14 @@ const CreateMemberAccountWarningBox = () => {
 const ChatsList = memo(() => {
   const { chats } = useChats().state;
   return (
-    <div className="pb-60">
+    <div className="pb-60 w-full">
       {chats.map((chat, index) => (
-        <div key={index} className="w-full">
-          <div className="py-2 px-3 text-base">
-            <div className={`flex flex-1 mx-auto gap-3 ${widthClass}`}>
-              <p className="dark:text-neutral-300 text-white text-[15px] font-[500] ml-5 dark:bg-neutral-700/50 bg-neutral-800 p-2 rounded-[20px] px-5 dark:shadow-neutral-900 shadow-md max-w-[75%] mt-8">
+        <div key={index} className="w-[840px] mx-auto">
+          <div className="py-2 px-3 text-base flex justify-center">
+            <div className="flex flex-1 mx-auto gap-3 justify-center ">
+              <div className="dark:text-neutral-300 mx-auto text-white text-[15px] font-[500] -ml-3 dark:bg-neutral-700/50 bg-neutral-800 p-2 rounded-[20px] px-5 dark:shadow-neutral-900 shadow-md max-w-[75%] mt-8">
                 {chat.query}
-              </p>
+              </div>
             </div>
           </div>
           <div className="relative py-2">
@@ -150,7 +150,7 @@ const ChatsList = memo(() => {
                 </div>
               </div>
             ) : (
-              <div className={`flex flex-1 mx-auto gap-4 ${widthClass}`}>
+              <div className={`flex flex-1 mx-auto gap-4 w-[840px]`}>
                 <img
                   className="my-4 size-8 flex-shrink-0"
                   src={logo}
