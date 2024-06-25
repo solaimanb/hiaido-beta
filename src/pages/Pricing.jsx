@@ -35,6 +35,7 @@ const Pricing = () => {
           <div className="mt-10 flex justify-center flex-col items-center gap-y-4">
             <div className="flex gap-2 bg-orange-500/80 p-1 rounded-full text-lg">
               <Button
+                variant="sm"
                 className={`rounded-full font-semibold transition-colors duration-300 ${
                   selectedPlan === "Monthly"
                     ? "bg-white text-orange-500"
@@ -45,6 +46,7 @@ const Pricing = () => {
                 Monthly
               </Button>
               <Button
+                variant="sm"
                 className={`rounded-full font-semibold transition-colors duration-300 ${
                   selectedPlan === "Yearly"
                     ? "bg-white text-orange-500"

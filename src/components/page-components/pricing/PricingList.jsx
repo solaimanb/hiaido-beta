@@ -8,26 +8,28 @@ const PricingList = () => {
       {pricing.map((item) => (
         <div
           key={item.id}
-          className="w-full flex flex-col justify-between p-3 border border-orange-500/40 rounded-[2rem] space-y-4"
+          className="w-full flex flex-col justify-between p-3 border rounded-[2rem] space-y-4 gradient-border"
         >
           <div className="border-b border-orange-500/30">
-            <div className="space-y-2">
-              <h4 className="h4 font-bold text-center border-b-2 pb-2 border-orange-500/50">
+            <div className="space-y-4 mb-10">
+              <h4 className="h4 font-bold text-center border-b-2 pb-2 border-[#3675D3]">
                 {item.title}
               </h4>
 
-              <p className="text-center opacity-80">{item.description}</p>
-            </div>
+              <div className="flex items-center h-[2.5rem] justify-center mb-6">
+                {item.price && (
+                  <>
+                    <div className="h3 text-[1.5rem] mb-[1.25rem]">$</div>
+                    <div className="text-[2.5rem] leading-none font-bold">
+                      {item.price}
+                    </div>
+                  </>
+                )}
+              </div>
 
-            <div className="flex items-center h-[2.5rem] mb-6">
-              {item.price && (
-                <>
-                  <div className="h3 text-[1.5rem] mb-[1.25rem] ">$</div>
-                  <div className="text-[2.5rem] leading-none font-bold">
-                    {item.price}
-                  </div>
-                </>
-              )}
+              <p className="text-center text-xl font-semibold opacity-80">
+                {item.description}
+              </p>
             </div>
 
             <Button
