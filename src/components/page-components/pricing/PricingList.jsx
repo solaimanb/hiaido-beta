@@ -1,70 +1,109 @@
-// import { check } from "../../../assets";
-// import { pricing } from "../../../constants";
-// import Button from "../../Button";
+import React from "react";
+import { check } from "../../../assets";
+import { pricing } from "../../../constants";
 
 const PricingList = () => {
   return (
-    <>
-      {/* <div className="flex gap-[1rem] max-lg:flex-wrap">
-        {pricing.map((item) => (
-          <div
-            key={item.id}
-            className="w-[19rem] max-lg:w-full h-full px-6 bg-n-8 border border-n-6 rounded-[2rem] lg:w-auto even:py-14 odd:py-8 odd:my-4 "
-          >
-            <h4 className="mb-4 h4">{item.title}</h4>
+    <div className="container grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4 mt-16 py-2 px-4 md:px-2">
+      {pricing.map((item) => (
+        <div
+          key={item.id}
+          className="pricing-card-base-bg w-full flex flex-col justify-between overflow-hidden rounded-[2.5rem] space-y-3 shadow-md shadow-white"
+        >
+          <div className="pricing-card-bg border-b border-orange-500/30 pb-6 flex flex-col justify-center">
+            <div
+              className={`space-y-2 mb-6 p-2 ${!item.price ? "space-y-4" : ""}`}
+            >
+              <h4 className="h4 bold-title text-center text-orange-500 mt-2">
+                {item.title}
+              </h4>
 
-            <p className="body-2 min-h-[4rem] mb-3 text-n-1/50">
-              {item.description}
-            </p>
+              <div className={`flex items-center justify-center mb-6`}>
+                {item.price && (
+                  <>
+                    <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
+                      $
+                    </div>
+                    <div className="text-4xl xl:text-5xl leading-none font-bold">
+                      {item.price}
+                    </div>
+                    <span className="text-base font-semibold mt-2 xl:text-lg">
+                      /month
+                    </span>
+                  </>
+                )}
+              </div>
 
-            <div className="flex items-center h-[2.5rem] mb-6">
-              {item.price && (
-                <>
-                  <div className="h3 text-[1.5rem] mb-[1.25rem] ">$</div>
-                  <div className="text-[2.5rem] leading-none font-bold">
-                    {item.price}
+              <div>
+                <div
+                  className={`space-y-2 ${
+                    item.images && "bg-[#302473] p-2 rounded-lg shadow-md"
+                  } ${!item.price && "my-5"}`}
+                >
+                  <p
+                    className={`text-center xl:text-lg font-semibold ${
+                      item.images && "xl:text-sm"
+                    }`}
+                  >
+                    {item.description.split("\n").map((line, index) => (
+                      <React.Fragment key={index}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </p>
+
+                  {/* XaaS images */}
+                  <div className="flex items-center gap-3 justify-center">
+                    {item.images &&
+                      item.images.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt={`Image ${index}`}
+                          className="w-8"
+                        />
+                      ))}
                   </div>
-                </>
-              )}
+                </div>
+              </div>
             </div>
 
-            <Button
-              className="w-full mb-6"
+            <button
+              className={`bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white font-semibold p-2 rounded-lg`}
               href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
-              white={!!item.price}
             >
-              {item.price ? "Buy" : "Contact us"}
-            </Button>
+              {item.trigger}
+            </button>
+          </div>
 
-            <ul>
+          <div className="flex h-full w-full p-2">
+            <ul className="w-full flex flex-col h-full p-1">
               {item.features.map((feature, index) => (
-                <li
-                  key={index}
-                  className="flex items-start py-5 border-t border-n-6"
-                >
-                  <img src={check} width={24} height={24} alt="Check" />
-                  <p className="ml-4 body-2">{feature}</p>
-                </li>
+                <>
+                  <li key={index} className="flex items-start py-2 gap-2">
+                    <img
+                      src={check}
+                      width={16}
+                      height={16}
+                      alt="Check"
+                      className="mt-1"
+                    />
+
+                    <p className="opacity-70 text-base font-semibold">
+                      {feature}
+                    </p>
+                  </li>
+                  {index < item.features.length - 1 && (
+                    <hr className="border-t border-orange-50/10 w-full" />
+                  )}
+                </>
               ))}
             </ul>
           </div>
-        ))}
-      </div> */}
-
-      <div className="container flex items-center justify-center text-center">
-        <div className="mx-auto text-center z-1">
-          <h1 className="w-auto mb-3 text-6xl text-orange-500">
-            Coming Soon..
-          </h1>
-
-          <div className="max-w-3xl mx-auto mb-6 text-xs font-bold body-1 lg:text-2xl font lg:mb-8">
-            <p className="text-xs font-bold type1 md:text-xl">
-              We are working hard to bring you something amazing. Stay tuned!
-            </p>
-          </div>
         </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 };
 

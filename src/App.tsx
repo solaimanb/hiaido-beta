@@ -11,6 +11,12 @@ import { Suspense, lazy, useEffect, useState } from "react";
 import Loading from "./components/shared/Loading.jsx";
 import AccountFactory from "@/pages/AccountFactory";
 
+import { Amplify } from "aws-amplify";
+import { GlobalStateProvider } from "./context/GlobalStateContext.js";
+import Enterprise from "./pages/Enterprise.jsx";
+import About from "./pages/About.jsx";
+
+// Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));
 const Landing = lazy(() => import("./pages/Landing.jsx"));
 const Hiring = lazy(() => import("./pages/Hiring.jsx"));
@@ -20,10 +26,8 @@ const Privacy = lazy(() => import("./pages/Privacy.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
-import { Amplify } from "aws-amplify";
-import { GlobalStateProvider } from "./context/GlobalStateContext.js";
-import Enterprise from "./pages/Enterprise.jsx";
-import About from "./pages/About.jsx";
+const Terms = lazy(() => import("./pages/Terms.jsx"));
+const EthicalAI = lazy(() => import("./pages/EthicalAI.jsx"));
 
 Amplify.configure({
   Auth: {
@@ -83,7 +87,8 @@ const App = () => {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/enterprise" element={<Enterprise />} />
             <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/ethical-ai" element={<EthicalAI />} />
           </Route>
 
           <Route
@@ -110,6 +115,13 @@ const App = () => {
             <Route path="/settings" element={<UnderConstruction />} />
             <Route path="/help" element={<UnderConstruction />} />
           </Route>
+
+          <Route
+            path="/login"
+            element={
+              route === "authenticated" ? <Navigate to="/chat" /> : <Login />
+            }
+          />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

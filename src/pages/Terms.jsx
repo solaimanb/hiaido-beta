@@ -117,6 +117,8 @@ const processContent = (content) => {
 };
 
 const Terms = () => {
+  window.scrollTo(0, 0);
+
   return (
     <>
       {/* SEO CONTENT */}
@@ -140,10 +142,12 @@ const Terms = () => {
           <p className="font-semibold text-lg">Effective Date: January 1, 2024</p>
         </div>
 
+        <div className="horizon-bar opacity-30 container h-[1px] mt-4 bg-orange-400" />
+
         <div className="space-y-4">
           <p>Welcome to <span className="inline-block text-orange-500">Hiaido Cloud Automation Pvt. Ltd</span>!</p>
 
-          <p>These terms and conditions outline the rules
+          <p className="text-sm">These terms and conditions outline the rules
             and regulations for the use of Hiaido Cloud
             Automation Pvt. Ltd&apos;s website, located at
             hiaido.com. By accessing this website and
@@ -154,9 +158,9 @@ const Terms = () => {
 
         {termsSections.map((section, index) => (
           <div key={index}>
-            <h1 className="text-2xl lg:text-3xl bold-title">{section.title}</h1>
+            <h1 className="text-2xl bold-title">{section.title}</h1>
             <p
-              className=""
+              className="text-sm"
               dangerouslySetInnerHTML={processContent(section.content)}
             ></p>
 

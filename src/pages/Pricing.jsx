@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { lazy } from "react";
 
-// Using React.lazy to dynamically import components for the Pricing page.
 const PricingList = lazy(() =>
   import("../components/page-components/pricing/PricingList")
 );
@@ -30,7 +29,17 @@ const Pricing = () => {
         className="min-h-[60vh] flex justify-center overflow-hidden"
         id="pricing"
       >
-        <div className="flex justify-center mt-20">
+        <div className="flex flex-col items-center justify-center mt-20">
+          <div className="mt-16 flex justify-center flex-col items-center gap-y-4">
+            <h2 className="text-gradient capitalize text-4xl xl:text-5xl bold-title">
+              Choose your plan
+            </h2>
+
+            <p className="text-gradient text-xl md:text-2xl">
+              Unlock endless possibilities
+            </p>
+          </div>
+
           <PricingList />
         </div>
       </main>
