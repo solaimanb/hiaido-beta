@@ -208,7 +208,7 @@ export const pricing = [
   {
     id: "2",
     title: "Enterprise",
-    description: "Per workspace\n billed annually",
+    description: "Per workspace\n billed monthly",
     price: "3999",
     features: [
       "Advanced AI-driven automation for complex workflows",
@@ -255,7 +255,7 @@ export const pricing = [
   {
     id: "4",
     title: "Playground",
-    description: "Per workspace\n billed annually",
+    description: "Per workspace\n billed monthly",
     price: 99,
     features: [
       "Explore cloud tech with AI",
