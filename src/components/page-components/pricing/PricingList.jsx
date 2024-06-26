@@ -4,52 +4,76 @@ import { pricing } from "../../../constants";
 
 const PricingList = () => {
   return (
-    <div className="container grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-16 py-2 px-2">
+    <div className="container grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4 mt-16 py-2 px-4 md:px-2">
       {pricing.map((item) => (
         <div
           key={item.id}
-          className="w-full flex flex-col justify-between overflow-hidden border rounded-3xl space-y-4 shadow-md shadow-orange-500"
+          className="pricing-card-base-bg w-full flex flex-col justify-between overflow-hidden rounded-[2.5rem] space-y-3 shadow-md shadow-white"
         >
           <div className="pricing-card-bg border-b border-orange-500/30 pb-6 flex flex-col justify-center">
             <div
-              className={`space-y-4 mb-10 p-2 ${
-                !item.price ? "space-y-6" : ""
+              className={`space-y-2 mb-10 p-2 ${
+                !item.price ? "space-y-4" : ""
               }`}
             >
-              <h4 className="h5 bold-title text-center border-b-2 pb-2 border-[#3675D3] text-orange-500/90">
+              <h4 className="h4 bold-title text-center text-orange-500 mt-2">
                 {item.title}
               </h4>
 
-              <div
-                className={`flex items-center h-[2.5rem] justify-center mb-6`}
-              >
+              <div className={`flex items-center justify-center mb-6`}>
                 {item.price && (
                   <>
                     <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
                       $
                     </div>
-                    <div className="text-4xl leading-none font-bold">
+                    <div className="text-4xl xl:text-5xl leading-none font-bold">
                       {item.price}
                     </div>
-                    <span className="text-base font-semibold mt-2">/month</span>
+                    <span className="text-base font-semibold mt-2 xl:text-lg">
+                      /month
+                    </span>
                   </>
                 )}
               </div>
 
-              <p className="text-center font-semibold opacity-80">
-                {item.description.split("\n").map((line, index) => (
-                  <React.Fragment key={index}>
-                    {line}
-                    <br />
-                  </React.Fragment>
-                ))}
-              </p>
+              <div>
+                <div
+                  className={`space-y-2 ${
+                    item.images && "bg-[#302473] p-2 rounded-lg shadow-md"
+                  } ${!item.price && "my-5"}`}
+                >
+                  <p
+                    className={`text-center xl:text-lg font-semibold ${
+                      item.images && "xl:text-sm"
+                    }`}
+                  >
+                    {item.description.split("\n").map((line, index) => (
+                      <React.Fragment key={index}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </p>
+
+                  {/* XaaS images */}
+                  <div className="flex items-center gap-3 justify-center">
+                    {item.images &&
+                      item.images.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt={`Image ${index}`}
+                          className="w-8"
+                        />
+                      ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
             <button
               className={`bg-gradient w-[90%] mx-auto mt-auto text-white font-semibold p-2 rounded-lg`}
               href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
-              // white={!!item.price}
             >
               {item.trigger}
             </button>

@@ -187,7 +187,7 @@ export const pricing = [
       "Email support",
       "One cloud (AWS, Azure, GCP)"
     ],
-    trigger:"Start 7-Day free trial"
+    trigger:"Start 7-Day Free Trial"
   },
   {
     id: "1",
@@ -214,8 +214,8 @@ export const pricing = [
       "Advanced AI-driven automation for complex workflows",
       "Extensive resource provisioning and management",
       "Dedicated account manager",
-      "Access to sandh.ai and production grade AI workforce",
       "24x7 priority support",
+      "Access to sandh.ai and production grade AI workforce",
       "Workforce cloner tool",
       "Einstein framework",
       "Multi-account environment",
@@ -226,11 +226,11 @@ export const pricing = [
       "Recommendations engine",
       "Optimizations package"
     ],
-    trigger:"Buy enterprise"
+    trigger:"Buy Enterprise"
   },
   {
     id: "3",
-    title: "Xaas",
+    title: "XaaS",
     description: "Bring your own cloud account",
     price: null,
     features: [
@@ -243,6 +243,13 @@ export const pricing = [
       "Hybrid cloud management",
       "Vendor-specific optimizations"
     ],
+    images: [
+      "/aws.svg",
+      "/azure.svg",
+      "/google-cloud.svg",
+      "/snowflake.svg",
+      "/oracle.svg",
+    ],
     trigger:"Contact Sales"
   },
   {
@@ -252,7 +259,8 @@ export const pricing = [
     price: 99,
     features: [
       "Explore cloud tech with AI",
-      "Cloud free tier access",
+      "Hiaido Organizations",
+      "Cloud free-tier access",
       "Limited resource set",
       "Low rate limit",
       "Sandbox environment",
