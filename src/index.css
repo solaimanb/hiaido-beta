@@ -230,6 +230,27 @@ ul {
   border: none;
 }
 
+.pricing-btn {
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  background-image: linear-gradient(
+    to right,
+    #2b88f35b,
+    #0fffe36c,
+    #9000ff42,
+    #7e689293
+  );
+  transition: all 0.4s ease-in-out;
+}
+
+.pricing-btn:hover {
+  background-position: 100% 0;
+  transition: all 0.4s ease-in-out;
+}
+
 html,
 body {
   background: #040404;
