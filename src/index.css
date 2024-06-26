@@ -79,7 +79,7 @@
 }
 
 @layer utilities{
-  .text-gradient {
+  .gradient-text-welcome {
     @apply bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent
   }
 }

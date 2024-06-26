@@ -60,7 +60,7 @@ const QueryTemplates: React.FC<QueryTemplatesProps> = ({ askQuery }) => {
   return (
     <div className="relative h-full flex justify-center pt-10 pb-60 flex-col">
       <div className="w-[700px] welcome-texts mx-auto my-20">
-        <div className="text-8xl font-bold text-gradient h-[100px] my-5 inline-block">Hello, {currentMemberAccount?.firstName}</div>
+        <div className="text-8xl font-bold gradient-text-welcome h-[100px] my-5 inline-block">Hello, {currentMemberAccount?.firstName}</div>
         <div className="text-5xl dark:text-neutral-500 text-neutral-700 font-semibold">
           <TypingText text="How can I help you today?" />
           {/* How can I help you today? */}
