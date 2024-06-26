@@ -7,14 +7,12 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./layouts/AppLayout.jsx";
 import UnderConstruction from "./pages/UnderConstruction.jsx";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import Loading from "./components/shared/Loading.jsx";
 import AccountFactory from "@/pages/AccountFactory";
 
 import { Amplify } from "aws-amplify";
-import {
-  GlobalStateProvider,
-} from "./context/GlobalStateContext.js";
+import { GlobalStateProvider } from "./context/GlobalStateContext.js";
 import Enterprise from "./pages/Enterprise.jsx";
 import About from "./pages/About.jsx";
 
@@ -31,7 +29,6 @@ const Chat = lazy(() => import("./pages/Chat.jsx"));
 const Terms = lazy(() => import("./pages/Terms.jsx"));
 const EthicalAI = lazy(() => import("./pages/EthicalAI.jsx"));
 
-// Amplify.configure(awsExports);
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -53,28 +50,37 @@ Amplify.configure({
 });
 
 const App = () => {
-  // useEffect(() => {
-  //   // Smooth Scroll Trigger:
-  //   (async () => {
-  //     const LocomotiveScroll = (await import("locomotive-scroll")).default;
-  //     // eslint-disable-next-line no-unused-vars
-  //     const locomotiveScroll = new LocomotiveScroll();
-  //   })();
-  // }, []);
-
   const { route, authStatus, error, user } = useAuthenticator((context) => [
     context.route,
     context.authStatus,
   ]);
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        // Assume some function to check authentication status
+        // await someAuthCheckFunction();
+      } catch (e) {
+        console.error("Failed to check auth status", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkAuthStatus();
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Suspense fallback={authStatus === "configuring" && <Loading />}>
       <HelmetProvider>
         <Routes>
-          {/* Root Layout */}
           <Route path="/" element={<RootLayout />}>
             <Route index element={<Landing />} />
-
             <Route path="/hiring" element={<Hiring />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/pricing" element={<Pricing />} />
@@ -110,7 +116,6 @@ const App = () => {
             <Route path="/help" element={<UnderConstruction />} />
           </Route>
 
-          {/* Others */}
           <Route
             path="/login"
             element={
@@ -118,11 +123,9 @@ const App = () => {
             }
           />
 
-          {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />
-
         <ButtonGradient />
         <ToastContainer />
       </HelmetProvider>
