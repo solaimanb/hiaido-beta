@@ -204,14 +204,27 @@ ul {
 }
 
 .bg-gradient {
-  background: linear-gradient(to right,#00ffe159, #ff0aca79 );
+  background: linear-gradient(to right, #0fffe3a2, #9000ffbd);
+  background-clip: border-box;
+  color: white;
+  border: none;
+  transition: background-position 0.4s ease, transform 0.2s ease;
+}
+
+.bg-gradient:hover {
+  background-position: 100% 0;
+  transform: scale(1.05);
+}
+
+.pricing-card-bg {
+  background: linear-gradient(to top, #0077ffc0, #9000ff4f);
   background-clip: border-box;
   color: white;
   border: none;
 }
 
-.pricing-card-bg {
-  background: linear-gradient(to top, #9000ff8f, #0077ff8f);
+.pricing-card-base-bg{
+  background: linear-gradient(to top, #2E363E, #241e24b7);
   background-clip: border-box;
   color: white;
   border: none;

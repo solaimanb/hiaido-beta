@@ -31,11 +31,11 @@ const Pricing = () => {
       >
         <div className="flex flex-col items-center justify-center mt-20">
           <div className="mt-16 flex justify-center flex-col items-center gap-y-4">
-            <h2 className="text-gradient capitalize text-2xl md:text-4xl xl:text-5xl bold-title">
+            <h2 className="text-gradient capitalize text-4xl xl:text-5xl bold-title">
               Choose your plan
             </h2>
 
-            <p className="text-gradient text-xl lg:text-2xl">
+            <p className="text-gradient text-xl md:text-2xl">
               Unlock endless possibilities
             </p>
           </div>
