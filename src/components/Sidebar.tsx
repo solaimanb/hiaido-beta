@@ -382,11 +382,15 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
           // align="center"
           className="!border-t-[1px] !border-neutral-600 pt-5 pb-1 flex w-full space-x-3 text-left cursor-pointer"
         >
-          <Avatar>
-            <AvatarFallback className="bg-neutral-500 dark:bg-neutral-700">
-              {currentMemberAccount.firstName.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
+          {isCollapsed ? (
+            <span className="text-center mx-auto">{currentMemberAccount.firstName.charAt(0)}</span>
+          ) : (
+            <Avatar>
+              <AvatarFallback className="bg-neutral-500 dark:bg-neutral-700">
+                {currentMemberAccount.firstName.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+          )}
           <AnimatePresence>
             {isCollapsed || (
               <motion.div className="max-w-[70%]" {...labelTransitions}>
