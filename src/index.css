@@ -8,6 +8,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: inherit;
+}
+
 /* Custom Variables and Base Styles */
 @layer base {
   :root {
@@ -71,6 +75,12 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
+  }
+}
+
+@layer utilities{
+  .text-gradient {
+    @apply bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent
   }
 }
 
