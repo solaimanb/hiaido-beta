@@ -21,7 +21,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/ui-components/ui/dropdown-menu";
-import { ArrowRight, RefreshCcwIcon, Send } from "lucide-react";
+import { ArrowRight, Paperclip, RefreshCcwIcon, Send } from "lucide-react";
 import { useChats } from "@/context/ChatsContext";
 import Loader from "../Loader";
 
@@ -121,14 +121,14 @@ const CreateMemberAccountWarningBox = () => {
 const ChatsList = memo(() => {
   const { chats } = useChats().state;
   return (
-    <div className="pb-60">
+    <div className="pb-60 w-full">
       {chats.map((chat, index) => (
-        <div key={index} className="w-full">
-          <div className="py-2 px-3 text-base">
-            <div className={`flex flex-1 mx-auto gap-3 ${widthClass}`}>
-              <p className="dark:text-neutral-300 text-white text-[15px] font-[500] ml-5 dark:bg-neutral-700/50 bg-neutral-800 p-2 rounded-[20px] px-5 dark:shadow-neutral-900 shadow-md max-w-[75%] mt-8">
+        <div key={index} className="w-[840px] mx-auto">
+          <div className="py-2 px-3 text-base flex justify-center">
+            <div className="flex flex-1 mx-auto gap-3 justify-center ">
+              <div className="dark:text-neutral-300 mx-auto text-white text-[15px] font-[500] -ml-3 dark:bg-neutral-700/50 bg-neutral-800 p-2 rounded-[20px] px-5 dark:shadow-neutral-900 shadow-md max-w-[75%] mt-8">
                 {chat.query}
-              </p>
+              </div>
             </div>
           </div>
           <div className="relative py-2">
@@ -150,7 +150,7 @@ const ChatsList = memo(() => {
                 </div>
               </div>
             ) : (
-              <div className={`flex flex-1 mx-auto gap-4 ${widthClass}`}>
+              <div className={`flex flex-1 mx-auto gap-4 w-[840px]`}>
                 <img
                   className="my-4 size-8 flex-shrink-0"
                   src={logo}
@@ -218,26 +218,6 @@ const ChatContainer = () => {
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto w-full" ref={chatBoxRef}>
           <div className="flex flex-col text-sm flex-1 h-full">
-            <div className="flex justify-between items-center px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
-              <div className="md:text-2xl p-4 pt-6 text-3xl text-center sticky top-0 pb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
-                Welcome To HIAIDO Cloud Assistant.
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Button>
-                    {model === 1 ? "Multiagent model" : "Normal model"}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <Button className="mx-3" onClick={() => setModel(0)}>
-                    Normal chatbot
-                  </Button>
-                  <Button onClick={() => setModel(1)}>
-                    Multiagent chatbot
-                  </Button>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
             {!userAttributes ? (
               <Loader />
             ) : (
@@ -308,13 +288,13 @@ const QueryBox = () => {
 
   const { memberAccounts } = useContext(GlobalStateContext);
   return (
-    <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[840px] p-1.5 outline-none appearance-none">
-      {/* <PaperClipIcon className="w-6 ml-3" /> */}
-      <div className="flex flex-col flex-1 min-w-0 ml-4">
+    <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[780px] p-1.5 outline-none appearance-none">
+      <Paperclip className="size-6 mb-2 ml-2" />
+      <div className="flex flex-col flex-1 min-w-0">
         <textarea
           disabled={(memberAccounts && memberAccounts.length == 0) as boolean}
           rows={1}
-          className="bg-black/0 w-full max-h-52 px-2 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-scroll text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
+          className="bg-black/0 w-full max-h-52 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-scroll text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
           ref={inputRef}
           onChange={(e) => setQuery(e.target.value)}
           name="query"
