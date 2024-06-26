@@ -12,9 +12,7 @@ const PricingList = () => {
         >
           <div className="pricing-card-bg border-b border-orange-500/30 pb-6 flex flex-col justify-center">
             <div
-              className={`space-y-2 mb-10 p-2 ${
-                !item.price ? "space-y-4" : ""
-              }`}
+              className={`space-y-2 mb-6 p-2 ${!item.price ? "space-y-4" : ""}`}
             >
               <h4 className="h4 bold-title text-center text-orange-500 mt-2">
                 {item.title}
