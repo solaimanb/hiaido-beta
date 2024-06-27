@@ -1,11 +1,11 @@
 import React from "react";
 import { check } from "../../../assets";
-import { pricing } from "../../../constants";
+import { pricing } from "../../../constants/pricing";
 import "./PricingList.css";
 
-const PricingList = () => {
+const PricingList = ({ convertPrice, currencySymbol, conversionRate }) => {
   return (
-    <div className="container grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4 mt-16 py-2 px-4 md:px-2">
+    <div className="container grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4 mt-8 py-2 px-4 md:px-2">
       {pricing.map((item) => (
         <div
           key={item.id}
@@ -16,7 +16,6 @@ const PricingList = () => {
               <h4 className="text-4xl bold-title text-center text-orange-500 mt-2">
                 {item.title}
               </h4>
-
               <div className="h-36">
                 <div
                   className={`flex items-center justify-center mb-6 ${
@@ -26,12 +25,12 @@ const PricingList = () => {
                   {item.price && (
                     <>
                       <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
-                        $
+                        {currencySymbol}
                       </div>
-                      <div className="text-4xl xl:text-5xl leading-none bold-title">
-                        {item.price}
+                      <div className="text-4xl leading-none bold-title">
+                        {convertPrice(item.price, conversionRate)}
                       </div>
-                      <span className="font-bold mt-5 text-lg">/month</span>
+                      <span className="font-bold mt-3 text-lg">/month</span>
                     </>
                   )}
                 </div>
