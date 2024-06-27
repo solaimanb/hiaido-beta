@@ -1,6 +1,6 @@
 .pricing-card:hover {
   border: 1px solid #00ff00;
-  scale: 1.005;
+  transition: all 0.4s ease-in-out;
 }
 
 .pricing-bg-gradient {
@@ -8,7 +8,7 @@
   background-clip: border-box;
   color: white;
   border: none;
-  transition: background-position 0.4s ease, transform 0.2s ease;
+  transition: background-position 0.4s ease, transform 0.4s ease;
 }
 
 .pricing-bg-gradient:hover {
