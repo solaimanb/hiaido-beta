@@ -74,7 +74,7 @@ const PricingList = () => {
             </div>
 
             <button
-              className={`bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white bold-title p-2 rounded-lg text-lg`}
+              className={`bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white bold-title p-2 rounded-lg text-lg hover:scale-105`}
               href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
             >
               {item.trigger}
