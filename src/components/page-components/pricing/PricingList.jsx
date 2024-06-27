@@ -1,6 +1,7 @@
 import React from "react";
 import { check } from "../../../assets";
 import { pricing } from "../../../constants";
+import "./PricingList.css";
 
 const PricingList = () => {
   return (
@@ -8,13 +9,11 @@ const PricingList = () => {
       {pricing.map((item) => (
         <div
           key={item.id}
-          className="pricing-card-base-bg w-full flex flex-col justify-between overflow-hidden rounded-[2.5rem] space-y-3 shadow-md shadow-white"
+          className="pricing-card-base-bg pricing-card transition-all duration-300 ease-in-out w-full flex flex-col justify-between overflow-hidden rounded-[2.5rem] space-y-3 shadow-md shadow-white"
         >
           <div className="pricing-card-bg border-b border-orange-500/30 pb-6 flex flex-col justify-center">
-            <div
-              className={`space-y-2 mb-6 p-2 ${!item.price ? "space-y-4" : ""}`}
-            >
-              <h4 className="h4 bold-title text-center text-orange-500 mt-2">
+            <div className={`space-y-2 mb-6 p-2 ${!item.price ? "" : ""}`}>
+              <h4 className="text-4xl bold-title text-center text-orange-500 mt-2">
                 {item.title}
               </h4>
 
@@ -24,12 +23,10 @@ const PricingList = () => {
                     <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
                       $
                     </div>
-                    <div className="text-4xl xl:text-5xl leading-none font-bold">
+                    <div className="text-4xl xl:text-5xl leading-none bold-title">
                       {item.price}
                     </div>
-                    <span className="text-base font-semibold mt-2 xl:text-lg">
-                      /month
-                    </span>
+                    <span className="font-bold mt-5 text-lg">/month</span>
                   </>
                 )}
               </div>
@@ -37,11 +34,12 @@ const PricingList = () => {
               <div>
                 <div
                   className={`space-y-2 ${
-                    item.images && "bg-[#302473] p-2 rounded-lg shadow-md"
+                    item.images &&
+                    "bg-[#312373] p-2 rounded-lg shadow-lg border-r-2 border-b-2 border-[#201746]"
                   } ${!item.price && "my-5"}`}
                 >
                   <p
-                    className={`text-center xl:text-lg font-semibold ${
+                    className={`text-center text-lg font-semibold ${
                       item.images && "xl:text-sm"
                     }`}
                   >

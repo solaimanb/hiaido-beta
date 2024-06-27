@@ -175,7 +175,7 @@ export const pricing = [
   {
     id: "0",
     title: "Starter",
-    description: "Per workspace\n billed monthly",
+    description: "Per workspace\n Billed monthly",
     price: "499",
     features: [
       "Access to core functionalities",
@@ -192,7 +192,7 @@ export const pricing = [
   {
     id: "1",
     title: "Elite",
-    description: "Per workspace\n billed monthly",
+    description: "Per workspace\n Billed monthly",
     price: "1599",
     features: [
       "Premium features and integrations",
@@ -208,7 +208,7 @@ export const pricing = [
   {
     id: "2",
     title: "Enterprise",
-    description: "Per workspace\n billed monthly",
+    description: "Per workspace\n Billed yearly",
     price: "3999",
     features: [
       "Advanced AI-driven automation for complex workflows",
@@ -231,7 +231,7 @@ export const pricing = [
   {
     id: "3",
     title: "XaaS",
-    description: "Bring your own cloud account",
+    description: "Bring Your Own Cloud Account",
     price: null,
     features: [
       "Fully customizable AI automation tailored to specific business needs",
@@ -255,7 +255,7 @@ export const pricing = [
   {
     id: "4",
     title: "Playground",
-    description: "Per workspace\n billed monthly",
+    description: "Per workspace\n Billed monthly",
     price: 99,
     features: [
       "Explore cloud tech with AI",
