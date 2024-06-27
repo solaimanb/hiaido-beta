@@ -36,15 +36,9 @@
   text-align: center;
   border: none;
   background-size: 300% 100%;
-  background-image: linear-gradient(
-    to right,
-    #006400, /* Dark green */
-    #00ff00bd, /* Pure green */
-    #ffffff, /* White */
-    #00ff00a8, /* Pure green */
-    #006400  /* Dark green */
-  );
+  background-image: radial-gradient(circle, #004d7a, #006400, #00ff00bd, #006400);
   transition: all 0.4s ease-in-out;
+  box-shadow: #b6e4b6 0px 0px 3px 0px;
 }
 
 
