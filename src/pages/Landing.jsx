@@ -10,7 +10,6 @@ const Hero = lazy(() =>
 const Benefits = lazy(() =>
   import("../components/page-components/homepage/Benefits")
 );
-const Contact = lazy(() => import("../components/shared/Contact"));
 
 const Landing = () => {
   window.scrollTo(0, 0);
@@ -39,7 +38,6 @@ const Landing = () => {
         <Hero />
         <FeatureSlider />
         <Benefits />
-        <Contact />
       </main>
     </Suspense>
   );
