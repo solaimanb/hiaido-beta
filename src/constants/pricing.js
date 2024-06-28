@@ -6,13 +6,14 @@ export const pricing = [
     price: "499",
     features: [
       "Access to core functionalities",
+      "Full access to Cloud Engineer AI agent",
       "Cloud resource management",
-      "Limited access to cloud console",
+      "Full acess to cloud console",
       "Single agent system",
       "Moderate rate limit",
       "Limited resource provisioning",
       "Email support",
-      "One cloud (AWS, Azure, GCP)"
+      "One cloud (AWS)"
     ],
     trigger:"Start 7-Day Free Trial"
   },
@@ -86,8 +87,8 @@ export const pricing = [
     price: 99,
     features: [
       "Explore cloud tech with AI",
-      "Hiaido Organizations",
-      "Cloud free-tier access",
+      "Hiaido organizations",
+      "AWS free-tier access",
       "Limited resource set",
       "Low rate limit",
       "Sandbox environment",
