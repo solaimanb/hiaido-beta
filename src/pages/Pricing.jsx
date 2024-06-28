@@ -8,7 +8,7 @@ const PricingList = lazy(() =>
 
 const Pricing = () => {
   const [currency, setCurrency] = useState("INR");
-  const conversionRate = 83.44;
+  const conversionRate = 83.37;
 
   const handleCurrencyChange = () => {
     setCurrency((prevCurrency) => (prevCurrency === "USD" ? "INR" : "USD"));
@@ -55,19 +55,19 @@ const Pricing = () => {
             </p>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10 flex items-center gap-2">
+            <span className="bold-title">USD</span>
             <Text as="label" size="7">
               <Flex gap="2" align="center">
-                <span className="bold-title">USD</span>
                 <Switch
                   size="3"
                   color="green"
                   checked={currency === "INR"}
                   onCheckedChange={handleCurrencyChange}
                 />
-                <span className="bold-title">INR</span>
               </Flex>
             </Text>
+            <span className="bold-title">INR</span>
           </div>
 
           <PricingList

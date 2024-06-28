@@ -76,38 +76,41 @@ const Hero = () => {
   return (
     <Section
       crosses
-      crossesOffset="lg:translate-y-[5.25rem]"
+      // crossesOffset="lg:translate-y-[5.25rem]"
       customPaddings
       id="hero"
+      className="flex justify-center"
     >
-      <div className="flex justify-center h-[80vh] relative md:min-h-screen mt-20 md:mt-18">
+      <div className="absolute flex justify-center h-[80vh] z-1 min-h-screen mt-40 md:mt-10 xl:mt-0">
         <motion.div
           initial="hidden"
           animate="visible"
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.2 }}
           variants={variants}
-          className="z-10 absolute flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
+          className="flex flex-col items-center justify-center h-[80vh]  text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
           <div className="space-y-3">
             <div className="flex flex-col px-2 space-y-8 text-3xl font-bold lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10">
-              <div className="inline-block text-white/90">
-                The Next Generation
-                <br />
-                <span className="relative inline-block">
-                  <AnimatedText text="AI Powered" />
-                  <img
-                    src={curve}
-                    className="absolute left-0 w-full top-full"
-                    width={624}
-                    height={28}
-                    alt=""
-                  />
-                </span>
+              <div>
+                <h1 className="hero-title inline-block ">
+                  The Next Generation
+                  <br />
+                  <span className="relative inline-block">
+                    <AnimatedText text="AI Powered" />
+                    <img
+                      src={curve}
+                      className="absolute left-0 w-full top-full"
+                      width={624}
+                      height={28}
+                      alt=""
+                    />
+                  </span>
+                </h1>
               </div>
 
-              <span className="relative inline-block text-orange-500">
+              <h1 className="relative hero-title inline-block text-orange-500">
                 Cloud Automation Platform
-              </span>
+              </h1>
             </div>
 
             <div className="w-full mx-auto space-y-2 text-base text-white/80 md:text-xl xl:text-2xl">
@@ -139,11 +142,11 @@ const Hero = () => {
       </div>
 
       {/* Star Canvas */}
-      <div className="absolute inset-0 w-full h-auto">
+      <div className="inset-0 w-full h-auto">
         <Canvas
           events={false}
           camera={{ position: [0, 0, 1] }}
-          className="min-h-screen opacity-75 canvas-container bg-dark/90"
+          className="min-h-screen opacity-60 canvas-container"
           background="#000"
         >
           <mesh>
