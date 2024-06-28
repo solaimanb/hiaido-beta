@@ -1,6 +1,6 @@
 export const pricing = [
   {
-    id: "4",
+    id: "0",
     title: "Playground",
     description: "Per workspace\n Billed monthly",
     price: 99,
@@ -17,7 +17,7 @@ export const pricing = [
     trigger: "Go",
   },
   {
-    id: "0",
+    id: "1",
     title: "Starter",
     description: "Per workspace\n Billed monthly",
     price: "499",
@@ -35,7 +35,7 @@ export const pricing = [
     trigger: "Start 7-Day Free Trial",
   },
   {
-    id: "1",
+    id: "2",
     title: "Elite",
     description: "Per workspace\n Billed monthly",
     price: "1599",
@@ -51,7 +51,7 @@ export const pricing = [
     trigger: "Recommended",
   },
   {
-    id: "2",
+    id: "3",
     title: "Enterprise",
     description: "Per workspace\n Billed yearly",
     price: "3999",
@@ -74,7 +74,7 @@ export const pricing = [
     trigger: "Buy Enterprise",
   },
   {
-    id: "3",
+    id: "4",
     title: "XaaS",
     description: "Bring Your Own Cloud Account",
     price: null,
