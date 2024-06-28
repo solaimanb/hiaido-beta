@@ -7,9 +7,7 @@ const PricingList = lazy(() =>
 );
 
 const Pricing = () => {
-  window.scrollTo(0, 0);
-
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("INR");
   const conversionRate = 83.44;
 
   const handleCurrencyChange = () => {
@@ -17,10 +15,13 @@ const Pricing = () => {
   };
 
   const convertPrice = (price, rate) => {
-    return currency === "INR" ? price * rate : price;
+    const convertedPrice = currency === "INR" ? price * rate : price;
+    return Math.round(convertedPrice);
   };
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
+
+  window.scrollTo(0, 0);
 
   return (
     <>

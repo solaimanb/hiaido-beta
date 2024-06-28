@@ -27,7 +27,7 @@ const PricingList = ({ convertPrice, currencySymbol, conversionRate }) => {
                       <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
                         {currencySymbol}
                       </div>
-                      <div className="text-4xl leading-none bold-title">
+                      <div className="text-3xl leading-none bold-title">
                         {convertPrice(item.price, conversionRate)}
                       </div>
                       <span className="font-bold mt-3 text-lg">/month</span>
