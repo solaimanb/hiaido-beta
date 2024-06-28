@@ -111,7 +111,7 @@ const CreateMemberAccountWarningBox = () => {
         <p className="mb-12 mt-5 mx-3 dark:text-neutral-400">
           You need to create a member account first before using the chatbot
         </p>
-        <CreateMemberAccountButton />
+        <CreateMemberAccountButton className={""} />
       </div>
       <div></div>
     </div>
@@ -194,12 +194,7 @@ const ChatsList = memo(() => {
 const ChatContainer = () => {
   const chatBoxRef = useRef<HTMLDivElement>(null);
   const { setters, state, submitPrompt } = useChats();
-  const {
-    query,
-    chats,
-    memberAccounts,
-    model,
-  } = state;
+  const { query, chats, memberAccounts, model } = state;
   const { userAttributes } = useGlobalState();
   const { setQuery, setChats, setModel } = setters;
 

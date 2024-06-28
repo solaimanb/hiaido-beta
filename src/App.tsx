@@ -87,8 +87,8 @@ const App = () => {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/enterprise" element={<Enterprise />} />
             <Route path="/about" element={<About />} />
-            <Route path="/terms" element={<Terms />} />
             <Route path="/ethical-ai" element={<EthicalAI />} />
+            <Route path="/login" element={<Login />} />
           </Route>
 
           <Route
@@ -102,6 +102,7 @@ const App = () => {
               )
             }
           >
+            <Route path="/terms" element={<Terms />} />
             <Route path="/dashboard" element={<UnderConstruction />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/account-factory" element={<AccountFactory />} />
