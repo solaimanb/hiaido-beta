@@ -1,10 +1,10 @@
-import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet-async";
 
 const termsSections = [
   {
     title: "1. Definitions",
     content:
-      "**Company:** Refers to Hiaido Cloud Automation Pvt. Ltd, located at 24, Ranganathan St., OMR, Chennai - 600097.\n**User:** Refers to the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.\n Refers to the website and related services provided by the Company, including cloud automation and AI workforce solutions.\n**Subscription:** Refers to the monthly payment plan provided by the Company.\n**Content:** Refers to any text, images, multimedia content, software, or other information or material submitted to or on the Service.",
+      "**Company:** Refers to Hiaido Cloud Automation Pvt. Ltd, located at 24, Ranganathan St., OMR, Chennai - 600097.\n**User:** Refers to the individual accessing or using the Service, or the company or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.\n**Service:** Refers to the website and related services provided by the Company, including cloud automation and AI workforce solutions.\n**Subscription:** Refers to the monthly payment plan provided by the Company.\n**Content:** Refers to any text, images, multimedia content, software, or other information or material submitted to or on the Service.",
   },
   {
     title: "2. Use of the Service",
@@ -138,21 +138,30 @@ const Terms = () => {
       {/* MAIN CONTENT */}
       <div className="md:mt-40 max-w-4xl px-4 mx-auto mt-32 space-y-4">
         <div>
-          <h2 className="bold-title text-5xl font-bold">Terms and Conditions</h2>
-          <p className="font-semibold text-lg">Effective Date: January 1, 2024</p>
+          <h2 className="bold-title text-5xl font-bold">
+            Terms and Conditions
+          </h2>
+          <p className="font-semibold text-lg">
+            Effective Date: March 29, 2024
+          </p>
         </div>
 
         <div className="horizon-bar opacity-30 container h-[1px] mt-4 bg-orange-400" />
 
         <div className="space-y-4">
-          <p>Welcome to <span className="inline-block text-orange-500">Hiaido Cloud Automation Pvt. Ltd</span>!</p>
+          <p>
+            Welcome to{" "}
+            <span className="inline-block">
+              Hiaido Cloud Automation Pvt. Ltd
+            </span>
+            !
+          </p>
 
-          <p className="text-sm">These terms and conditions outline the rules
-            and regulations for the use of Hiaido Cloud
-            Automation Pvt. Ltd&apos;s website, located at
-            hiaido.com. By accessing this website and
-            the customer web portal, you accept these
-            terms and conditions.
+          <p className="text-sm">
+            These terms and conditions outline the rules and regulations for the
+            use of Hiaido Cloud Automation Pvt. Ltd&apos;s website, located at
+            hiaido.com. By accessing this website and the customer web portal,
+            you accept these terms and conditions.
           </p>
         </div>
 
@@ -160,7 +169,7 @@ const Terms = () => {
           <div key={index}>
             <h1 className="text-2xl bold-title">{section.title}</h1>
             <p
-              className="text-sm"
+              className="text-sm mt-1"
               dangerouslySetInnerHTML={processContent(section.content)}
             ></p>
 
@@ -173,7 +182,7 @@ const Terms = () => {
         ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Terms
+export default Terms;
