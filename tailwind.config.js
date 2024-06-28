@@ -81,7 +81,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sora)", ...fontFamily.sans],
+        sans: fontFamily.sans,
         code: "var(--font-code)",
         grotesk: "var(--font-grotesk)",
         roboto: ["Reddit Mono", "monospace"],
