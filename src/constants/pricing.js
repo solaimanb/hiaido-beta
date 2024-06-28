@@ -1,20 +1,38 @@
 export const pricing = [
   {
+    id: "4",
+    title: "Playground",
+    description: "Per workspace\n Billed monthly",
+    price: 99,
+    features: [
+      "Explore cloud tech with AI",
+      "Hiaido organizations",
+      "AWS free-tier access",
+      "Limited resource set",
+      "Low rate limit",
+      "Sandbox environment",
+      "AI guided learning",
+      "Email support",
+    ],
+    trigger: "Go",
+  },
+  {
     id: "0",
     title: "Starter",
     description: "Per workspace\n Billed monthly",
     price: "499",
     features: [
       "Access to core functionalities",
+      "Full access to Cloud Engineer AI agent",
       "Cloud resource management",
-      "Limited access to cloud console",
+      "Full acess to cloud console",
       "Single agent system",
       "Moderate rate limit",
       "Limited resource provisioning",
       "Email support",
-      "One cloud (AWS, Azure, GCP)"
+      "One cloud (AWS)",
     ],
-    trigger:"Start 7-Day Free Trial"
+    trigger: "Start 7-Day Free Trial",
   },
   {
     id: "1",
@@ -28,9 +46,9 @@ export const pricing = [
       "Multi-agent system",
       "Moderate resource provisioning",
       "Email & chat support",
-      "Access to multi-cloud"
+      "Access to multi-cloud",
     ],
-    trigger:"Recommended"
+    trigger: "Recommended",
   },
   {
     id: "2",
@@ -51,9 +69,9 @@ export const pricing = [
       "Smart task management",
       "Code reviewer AI",
       "Recommendations engine",
-      "Optimizations package"
+      "Optimizations package",
     ],
-    trigger:"Buy Enterprise"
+    trigger: "Buy Enterprise",
   },
   {
     id: "3",
@@ -68,7 +86,7 @@ export const pricing = [
       "Advanced analytics and optimization tools",
       "Advanced automation & orchestration",
       "Hybrid cloud management",
-      "Vendor-specific optimizations"
+      "Vendor-specific optimizations",
     ],
     images: [
       "/aws.svg",
@@ -77,23 +95,6 @@ export const pricing = [
       "/snowflake.svg",
       "/oracle.svg",
     ],
-    trigger:"Contact Sales"
-  },
-  {
-    id: "4",
-    title: "Playground",
-    description: "Per workspace\n Billed monthly",
-    price: 99,
-    features: [
-      "Explore cloud tech with AI",
-      "Hiaido Organizations",
-      "Cloud free-tier access",
-      "Limited resource set",
-      "Low rate limit",
-      "Sandbox environment",
-      "AI guided learning",
-      "Email support"
-    ],
-    trigger:"Go"
+    trigger: "Contact Sales",
   },
 ];

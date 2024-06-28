@@ -259,7 +259,7 @@ const FeatureSlider = () => {
                     // className={
                     //   `rounded-3xl hover:neon-bg transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg": ""}`
                     // }
-                    className={`rounded-3xl transition-all duration-200 border border-orange-500/10 mt-10 mb-20 ${
+                    className={`rounded-3xl transition-all duration-200 mx-4 md:mx-0 mt-10 mb-20 ${
                       activeIndex === index ? "neon-bg" : "hover:neon-bg"
                     }`}
 
