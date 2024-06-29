@@ -64,6 +64,7 @@ const Pricing = () => {
                   color="green"
                   checked={currency === "INR"}
                   onCheckedChange={handleCurrencyChange}
+                  className="cursor-pointer"
                 />
               </Flex>
             </Text>
