@@ -1,15 +1,15 @@
 // External libraries
-import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
 import { PointMaterial, Points } from "@react-three/drei";
-import * as random from "maath/random/dist/maath-random.esm";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { motion } from "framer-motion";
+import * as random from "maath/random/dist/maath-random.esm";
+import { useRef, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
 // Local components
+import AnimatedBtn from "../../../Buttons/AnimatedBtn";
 import Section from "../../../Section";
 import AnimatedText from "../../../shared/AnimatedText";
-import AnimatedBtn from "../../../Buttons/AnimatedBtn";
 import InteractiveAnimation from "./InteractiveAnimation";
 
 // Assets
@@ -90,7 +90,7 @@ const Hero = () => {
           className="flex flex-col items-center justify-center h-[80vh] text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
           <div className="space-y-3">
-            <div className="flex flex-col px-2 space-y-8 text-3xl lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10">
+            <div className="flex flex-col px-2 space-y-8 text-4xl lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10">
               <div>
                 <h1 className="hero-title inline-block ">
                   The Next Generation
@@ -113,7 +113,7 @@ const Hero = () => {
               </h1>
             </div>
 
-            <div className="w-full mx-auto space-y-2 text-base text-white/80 md:text-xl xl:text-2xl">
+            <div className="w-full mx-auto space-y-2 text-white/80 text-xl xl:text-2xl">
               <p className="secondaryText">
                 HIAIDO is your intelligent cloud assistant, enabling you to
                 effortlessly manage your
@@ -125,7 +125,7 @@ const Hero = () => {
 
           <div className="flex flex-col items-center mt-10 space-y-3 text-start">
             <p
-              className="text-xs font-bold type1 lg:text-2xl md:text-sm"
+              className="font-bold type1 lg:text-2xl md:text-sm"
               onAnimationEnd={handleAnimationEnd}
             >
               &quot;Welcome to the future of automation with HIAIDO&quot;
