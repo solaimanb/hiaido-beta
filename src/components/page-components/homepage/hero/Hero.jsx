@@ -87,7 +87,7 @@ const Hero = () => {
           animate="visible"
           transition={{ duration: 0.2 }}
           variants={variants}
-          className="flex flex-col items-center justify-center h-[80vh] text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4 2xl:gap-1"
+          className="flex flex-col items-center justify-center h-[80vh] text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
           <div className="space-y-3">
             <div className="flex flex-col space-y-8 2xl:space-y-14  lg:pt-10">
