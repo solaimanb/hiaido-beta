@@ -81,7 +81,7 @@ const Hero = () => {
       id="hero"
       className="flex justify-center"
     >
-      <div className="absolute flex justify-center h-[80vh] z-1 min-h-screen mt-36 md:mt-10 xl:mt-0">
+      <div className="absolute flex justify-center h-[80vh] z-1 min-h-screen mt-32 md:mt-10 xl:mt-0">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -90,9 +90,9 @@ const Hero = () => {
           className="flex flex-col items-center justify-center h-[80vh] text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
           <div className="space-y-3">
-            <div className="flex flex-col space-y-8 lg:text-6xl xl:text-7xl md:text-5xl lg:pt-10 border">
+            <div className="flex flex-col space-y-8 lg:text-6xl xl:text-7xl md:text-5xl lg:pt-10">
               <div>
-                <h1 className="hero-title text-4xl inline-block border">
+                <h1 className="hero-title text-4xl inline-block tracking-tight">
                   The Next Generation
                   <br />
                   <span className="relative inline-block">
