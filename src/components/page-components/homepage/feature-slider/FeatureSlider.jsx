@@ -1,47 +1,46 @@
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Sliders from "./sliderInfo.json";
 import {
   Autoplay,
-  Pagination,
-  Navigation,
   EffectCoverflow,
+  Navigation,
+  Pagination,
 } from "swiper/modules";
-import { useAnimationFrame, useMotionValue } from "framer-motion";
-import { motion } from "framer-motion";
+import Sliders from "./sliderInfo.json";
 
 import "./featureSlider.css";
 
 // Dynamic import for image assets
 import {
-  digitalWorkforce,
-  smartUserInterface,
-  intelligentChatbot,
-  cloudSearchEverywhere,
-  einsteinFramework,
-  multiCloudConnectivity,
-  smarkTaskMangement,
   alerts,
-  sandhAi,
-  dataMigration,
-  securityAutomated,
-  devOpsSuite,
+  anomalyDetectionEngine,
+  autonomousOptimizationMatrix,
+  blockchainBasedGovernance,
   blockchainBasedSecurityLedger,
   chaosEngineering,
-  recommendationsEngine,
-  costOptimisation,
-  complianceManagementPack,
-  unifiedDashboard,
+  cloudSearchEverywhere,
   codeReviewerAi,
+  complianceManagementPack,
+  costOptimisation,
+  dataMigration,
+  devOpsSuite,
+  digitalWorkforce,
+  einsteinFramework,
+  intelligentChatbot,
+  multiCloudConnectivity,
   predictiveMaintenanceSuite,
-  autonomousOptimizationMatrix,
-  anomalyDetectionEngine,
-  blockchainBasedGovernance,
+  recommendationsEngine,
+  sandhAi,
+  securityAutomated,
+  smarkTaskMangement,
+  smartUserInterface,
+  unifiedDashboard,
 } from "../../../../assets/index";
 
 const imageAssets = {
@@ -298,7 +297,7 @@ const FeatureSlider = () => {
         className="h-40 max-w-3xl mt-4"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="md:text-lg font-bold text-center w-fit mx-auto">
+          <div className="text-lg font-semibold text-center w-fit mx-auto">
             {currentDescription}
           </div>
         )}
