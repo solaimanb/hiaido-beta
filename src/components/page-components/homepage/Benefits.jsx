@@ -49,16 +49,16 @@ const Benefits = () => {
     threshold: 0.1,
   });
 
-  const variants = {
-    hidden: { opacity: 0, y: -50 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-      },
-    },
-  };
+  // const variants = {
+  //   hidden: { opacity: 0, y: -50 },
+  //   show: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       type: "spring",
+  //     },
+  //   },
+  // };
 
   return (
     <motion.div

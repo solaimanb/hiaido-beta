@@ -123,7 +123,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="flex flex-col items-center mt-10 space-y-3 text-start">
+          <div className="flex flex-col items-center mt-6 space-y-3 text-start">
             <p
               className="font-bold type1 lg:text-2xl md:text-sm"
               onAnimationEnd={handleAnimationEnd}
