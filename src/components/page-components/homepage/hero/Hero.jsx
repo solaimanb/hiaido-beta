@@ -90,7 +90,7 @@ const Hero = () => {
           className="flex flex-col items-center justify-center h-[80vh] text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
           <div className="space-y-3">
-            <div className="flex flex-col px-2 space-y-8 text-4xl lg:text-6xl xl:text-7xl md:px-0 md:text-5xl lg:pt-10">
+            <div className="flex flex-col space-y-8 text-4xl lg:text-6xl xl:text-7xl md:text-5xl lg:pt-10">
               <div>
                 <h1 className="hero-title inline-block ">
                   The Next Generation
@@ -113,7 +113,7 @@ const Hero = () => {
               </h1>
             </div>
 
-            <div className="w-full mx-auto space-y-2 text-white/80 text-xl xl:text-2xl">
+            <div className="w-full mx-auto space-y-2 text-white/80 text-lg md:text-xl xl:text-2xl">
               <p className="secondaryText">
                 HIAIDO is your intelligent cloud assistant, enabling you to
                 effortlessly manage your
