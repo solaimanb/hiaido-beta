@@ -10,7 +10,6 @@
 
 /* Pagination Indicator */
 .swiper-pagination {
-  /* position: absolute; */
   text-align: center;
   z-index: 10;
 }
@@ -24,7 +23,6 @@ border: solid 1px #e75a27;
   top: 97%;
   color: #e75a27;
   cursor: pointer;
-  /* border: 3px solid #e75a27; */
 }
 
 .slider-controller .swiper-button-prev {
@@ -32,7 +30,6 @@ border: solid 1px #e75a27;
   top: 97%;
   color: #e75a27;
   cursor: pointer;
-  /* border: 3px solid #e75a27; */
 }
 
 .slider-controller .swiper-button-next,
