@@ -81,7 +81,7 @@ const Hero = () => {
       id="hero"
       className="flex justify-center"
     >
-      <div className="absolute flex justify-center h-[80vh] z-1 min-h-screen mt-40 md:mt-10 xl:mt-0">
+      <div className="absolute flex justify-center h-[80vh] z-1 min-h-screen mt-36 md:mt-10 xl:mt-0">
         <motion.div
           initial="hidden"
           animate="visible"
