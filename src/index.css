@@ -202,6 +202,15 @@ ul {
     "width" 100;
 }
 
+.hero-title {
+  font-family: "Sora", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings:
+    "width" 100;
+}
+
 .text-gradient {
   background: linear-gradient(to right, #FF0AC9, #00FFE0);
   -webkit-background-clip: text;  /* For Chrome, Safari */
@@ -232,7 +241,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, #040404, transparent);
+  /* background: linear-gradient(to top, #040404, transparent); */
   pointer-events: none;
 }
 

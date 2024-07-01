@@ -1,12 +1,17 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import { useEffect, useRef, useState } from "react";
 import Sliders from "./sliderInfo.json";
-import { Autoplay, Pagination, Navigation, EffectCoverflow } from "swiper/modules";
+import {
+  Autoplay,
+  Pagination,
+  Navigation,
+  EffectCoverflow,
+} from "swiper/modules";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
 import { motion } from "framer-motion";
 
@@ -66,7 +71,7 @@ const imageAssets = {
 };
 
 const breakpoints = {
-  320: { slidesPerView: 2 },
+  320: { slidesPerView: 1 },
   480: { slidesPerView: 2 },
   640: { slidesPerView: 3 },
   768: { slidesPerView: 3 },
@@ -162,9 +167,8 @@ const FeatureSlider = () => {
     visible: { filter: "blur(0px)", opacity: 1 },
   };
 
-
   return (
-    <div className="flex flex-col items-center h-screen mt-10">
+    <div className="flex flex-col items-center h-screen mt-20 sm:mt-10">
       <motion.div
         initial="hidden"
         animate="visible"
@@ -182,11 +186,11 @@ const FeatureSlider = () => {
       </motion.div>
 
       <Swiper
-        effect={'coverflow'}
+        effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
         loop={true}
-        slidesPerView={'auto'}
+        slidesPerView={"auto"}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
@@ -196,10 +200,10 @@ const FeatureSlider = () => {
         autoplay={{ delay: 1000, disableOnInteraction: false }}
         speed={1200}
         spaceBetween={10}
-        pagination={{ el: '.swiper-pagination', clickable: true }}
+        pagination={{ el: ".swiper-pagination", clickable: true }}
         navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
           clickable: true,
         }}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
@@ -218,9 +222,10 @@ const FeatureSlider = () => {
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         ref={swiperRef}
       >
-        {Sliders.map((slider, index) =>
-          // (index !== 0 || (index === 0 && isMdScreen)) &&
-          //   (index !== 1 || (index === 1 && isMdScreen)) ? (
+        {Sliders.map(
+          (slider, index) => (
+            // (index !== 0 || (index === 0 && isMdScreen)) &&
+            //   (index !== 1 || (index === 1 && isMdScreen)) ? (
             <SwiperSlide
               key={index}
               onClick={() => handleSlideClick(index)}
@@ -237,8 +242,9 @@ const FeatureSlider = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <div
-                  className={` ${hoveredIndex === index || activeIndex === index ? "" : ""
-                    } `}
+                  className={` ${
+                    hoveredIndex === index || activeIndex === index ? "" : ""
+                  } `}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => setActiveIndex(index)}
@@ -253,28 +259,33 @@ const FeatureSlider = () => {
                     // className={
                     //   `rounded-3xl hover:neon-bg transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg": ""}`
                     // }
-                    className={`rounded-3xl transition-all duration-200 border border-orange-500/10 mt-10 mb-20 ${activeIndex === index ? "neon-bg" : "hover:neon-bg"}`}
+                    className={`rounded-3xl transition-all duration-200 border border-orange-500/10 mt-10 mb-20 ${
+                      activeIndex === index ? "neon-bg" : "hover:neon-bg"
+                    }`}
 
                     // className={activeIndex === index ? "highlight-slide" : ""}
                   >
                     <img
                       src={imageAssets[slider?.image]}
                       alt={imageAssets[slider?.image]}
-                      className={`object-cover h-full transition-all duration-300 ${activeIndex === index || hoveredIndex === index ? "grayscale-0" : "grayscale"}`}
+                      className={`object-cover h-full transition-all duration-300 ${
+                        activeIndex === index || hoveredIndex === index
+                          ? "grayscale-0"
+                          : "grayscale"
+                      }`}
                     />
                   </div>
                 </div>
               </div>
             </SwiperSlide>
+          )
           // ) : null
         )}
 
         {/* Swiper Pagination */}
         <div className="slider-controller">
-          <div className="swiper-button-prev slider-arrow">
-          </div>
-          <div className="swiper-button-next slider-arrow">
-          </div>
+          <div className="swiper-button-prev slider-arrow"></div>
+          <div className="swiper-button-next slider-arrow"></div>
           <div className="swiper-pagination mx-auto"></div>
         </div>
       </Swiper>
@@ -293,8 +304,8 @@ const FeatureSlider = () => {
         )}
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
 export default FeatureSlider;
 
@@ -395,7 +406,8 @@ export default FeatureSlider;
       </Marquee> */
 }
 
-{/* <div className="w-full">
+{
+  /* <div className="w-full">
 <Swiper
   ref={swiperRef}
   direction="horizontal"
@@ -473,4 +485,5 @@ export default FeatureSlider;
     ) : null
   )}
 </Swiper>
-</div> */}
+</div> */
+}
