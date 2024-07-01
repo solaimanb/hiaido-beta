@@ -206,7 +206,7 @@ const FeatureSlider = () => {
           clickable: true,
         }}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-        className="feature-slide swiper-contanier w-full"
+        className="feature-slider swiper-contanier w-full"
         breakpoints={breakpoints}
         onMouseEnter={() => {
           if (swiperRef.current && swiperRef.current.swiper) {
