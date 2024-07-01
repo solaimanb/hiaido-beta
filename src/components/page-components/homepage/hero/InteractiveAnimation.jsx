@@ -6,23 +6,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 import { PlayIcon } from "@radix-ui/react-icons";
+import { aws, azure, gcp, interactiveAnimationV5 } from "../../../../assets";
 import "./spinner.css";
-import { interactiveAnimationV5, aws, azure, gcp } from "../../../../assets";
 
 // Animation Text Array & Asset Imports:
 import { TextArrays } from "./index";
 import {
-  getTextArrayData,
-  getAllTextLines,
   filterByCategory,
   filterSubCategoryTexts,
+  getAllTextLines,
+  getTextArrayData,
 } from "./textArrayMapping";
 
 //==============================================
