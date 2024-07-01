@@ -25,7 +25,7 @@ const AnimatedBtn = ({
             white ? "text-white" : ""
           } ${className}`}
         >
-          <span className="">{children}</span>
+        {children}
         </div>
       </button>
     </Link>
