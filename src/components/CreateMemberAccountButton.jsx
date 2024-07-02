@@ -223,14 +223,14 @@ const data = [
   },
 ];
 
-const CreateMemberAccountButton = () => {
+const CreateMemberAccountButton = ({ className }) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
         {/* {buttonOverride ? (
           CustomButton
         ) : ( */}
-        <button className="dark:bg-white bg-black dark:text-black text-white shadow-md p-2 rounded-full px-4 text-base mt-5">
+        <button className={` dark:bg-white bg-black shadow-orange-400 dark:text-black text-orange-400 shadow p-2 rounded-full px-4 text-base mt-5 ${className}`}>
           Create member account
         </button>
         {/* )} */}

@@ -9,21 +9,24 @@ const AnimatedBtn = ({
   id,
   style,
   additionalClasses,
+  linkClassName,
   outlined,
+  onClick,
+  disabled
 }) => {
   return (
-    <Link to={to} className="rounded-full">
+    <Link to={to} className={`${linkClassName} rounded-full`}>
       <button
+        disabled={disabled}
         id={outlined ? id || "animated-btn-outlined" : id || "animated-btn"}
-        className={`${additionalClasses} transition-all w-full duration-200 ${
-          outlined ? "outlined" : ""
-        }`}
+        className={`${additionalClasses} transition-all  duration-200 ${outlined ? "outlined" : ""
+          } ${disabled ? "disable" : ""}`}
+        onClick={onClick}
         style={style}
       >
         <div
-          className={`z-50 px-6 py-2 text-center ${
-            white ? "text-white" : ""
-          } ${className}`}
+          className={`z-50 px-6 py-2 text-center ${white ? "text-white" : ""
+            } ${className}`}
         >
           <span className="">{children}</span>
         </div>
