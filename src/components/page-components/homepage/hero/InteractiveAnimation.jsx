@@ -82,7 +82,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   return (
     <div className="flex items-center justify-center w-full h-full">
       {showSecondAnimation && (
-        <div className="flex flex-col items-start justify-center md:w-[80%]">
+        <div className="flex flex-col items-start justify-center max-w-[80%]">
           {/* HiAiDo Process Animation */}
           {!showExample && (
             <img
