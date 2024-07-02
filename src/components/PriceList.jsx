@@ -1,7 +1,7 @@
 import { check } from '@/assets'
-import { pricing } from '@/constants'
+import { pricing } from '@/constants/pricing'
 import React from 'react'
-import AnimatedBtn from './Buttons/AnimatedBtn'
+import "./page-components/pricing/PricingList.css"
 
 const NewPriceList = ({ setactiveTab }) => {
     return (
@@ -104,8 +104,9 @@ const NewPriceList = ({ setactiveTab }) => {
                 ))}
             </div>
             <div className="w-full flex gap-4 items-center justify-end mt-3 md:pr-4">
-                <button type="button" className="bg-white text-black py-2 px-4 rounded-3xl text-md font-bold">Decline</button>
-                <AnimatedBtn type="button" onClick={() => setactiveTab(e => e + 1)}>Accept</AnimatedBtn>
+                <button type="button" className="bg-white text-black py-2 px-4 rounded text-md font-bold">Decline</button>
+                {/* <AnimatedBtn type="button" onClick={() => setactiveTab(e => e + 1)}>Accept</AnimatedBtn> */}
+                <button className={`bg-orange-400 px-4 py-2 rounded font-bold`} onClick={() => setactiveTab(e => e + 1)} >Accept</button>
             </div>
         </div>
     )

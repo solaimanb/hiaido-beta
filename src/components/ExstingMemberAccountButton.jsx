@@ -1,11 +1,11 @@
-import { AlertDialog, Radio } from "@radix-ui/themes";
+import { AlertDialog } from "@radix-ui/themes";
 import AnimatedBtn from "./Buttons/AnimatedBtn";
 
-const ExstingMemberAccountButton = () => {
+const ExstingMemberAccountButton = ({ disabled }) => {
     return (
         <AlertDialog.Root>
             <AlertDialog.Trigger className="flex justify-center w-full">
-                <AnimatedBtn type="button" additionalClasses={'px-2 mt-3 w-xl'}>Connect</AnimatedBtn>
+                <AnimatedBtn type="button" additionalClasses={'px-2 mt-3 w-xl'} disabled={disabled}>Connect</AnimatedBtn>
             </AlertDialog.Trigger>
             <AlertDialog.Content className="!h-fit">
                 <AlertDialog.Title>

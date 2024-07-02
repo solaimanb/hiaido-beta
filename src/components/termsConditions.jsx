@@ -1,5 +1,4 @@
-import React from 'react'
-import AnimatedBtn from './Buttons/AnimatedBtn';
+
 const termsSections = [
     {
         title: "1. Definitions",
@@ -157,10 +156,16 @@ const TermsConditions = ({ setactiveTab }) => {
                     ))}
                 </div>
             </div>
-            <div className="w-full flex gap-4 items-center justify-end mt-3 md:pr-4">
-                <button type="button" className="bg-white text-black py-2 px-4 rounded-3xl text-md font-bold">Decline</button>
-
-                <AnimatedBtn  type="button" onClick={() => setactiveTab(e => e + 1)} >Accept</AnimatedBtn>
+            <div className="w-full flex gap-4 items-center justify-between border-t pt-3 md:pr-4 border-orange-400">
+                <div className='flex gap-2 justify-center md:justify-start w-full items-center'>
+                    <input type="radio" name="terms" id="terms" className='' />
+                    <label htmlFor="terms">I agree with the terms & Conditions</label>
+                </div>
+                <div className='flex gap-4 items-center'>
+                    <button type="button" className="bg-white text-black py-2 px-4 rounded text-md font-bold">Decline</button>
+                    {/* <AnimatedBtn type="button" onClick={() => setactiveTab(e => e + 1)} >Accept</AnimatedBtn> */}
+                    <button className={`bg-orange-400 px-4 py-2 rounded font-bold`} onClick={() => setactiveTab(e => e + 1)} >Accept</button>
+                </div>
             </div>
         </div>
     )
