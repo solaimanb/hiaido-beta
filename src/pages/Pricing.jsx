@@ -1,11 +1,26 @@
 import { Helmet } from "react-helmet-async";
-import { lazy } from "react";
+import { lazy, useState } from "react";
+import { Flex, Switch, Text } from "@radix-ui/themes";
 
 const PricingList = lazy(() =>
   import("../components/page-components/pricing/PricingList")
 );
 
 const Pricing = () => {
+  const [currency, setCurrency] = useState("INR");
+  const conversionRate = 83.37;
+
+  const handleCurrencyChange = () => {
+    setCurrency((prevCurrency) => (prevCurrency === "USD" ? "INR" : "USD"));
+  };
+
+  const convertPrice = (price, rate) => {
+    const convertedPrice = currency === "INR" ? price * rate : price;
+    return Math.round(convertedPrice);
+  };
+
+  const currencySymbol = currency === "USD" ? "$" : "₹";
+
   window.scrollTo(0, 0);
 
   return (
@@ -40,7 +55,27 @@ const Pricing = () => {
             </p>
           </div>
 
-          <PricingList />
+          <div className="mt-10 flex items-center gap-2">
+            <span className="bold-title">USD</span>
+            <Text as="label" size="7">
+              <Flex gap="2" align="center">
+                <Switch
+                  size="3"
+                  color="green"
+                  checked={currency === "INR"}
+                  onCheckedChange={handleCurrencyChange}
+                />
+              </Flex>
+            </Text>
+            <span className="bold-title">INR</span>
+          </div>
+
+          <PricingList
+            currency={currency}
+            convertPrice={convertPrice}
+            currencySymbol={currencySymbol}
+            conversionRate={conversionRate}
+          />
         </div>
       </main>
     </>

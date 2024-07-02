@@ -47,7 +47,7 @@ const Terms = () => {
         <VerticalTabs tabs={tabs} activeTab={activeTab} setactiveTab={setactiveTab} />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Terms
+export default Terms;

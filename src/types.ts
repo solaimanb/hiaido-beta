@@ -8,8 +8,6 @@ export interface MemberAccount {
   timestamp: string;
 }
 
-export type Model = 0 | 1;
-
 export type Query = string;
 
 export interface Chat {
@@ -22,4 +20,11 @@ export interface Chat {
 export interface IDBchats {
   email: string;
   chats: Chat[];
+}
+
+export enum Model {
+  BASE = 0,
+  MULTI_AGENT = 1,
+  ADVANCED = 2,
+  BASE_CLAUDE = 3,
 }

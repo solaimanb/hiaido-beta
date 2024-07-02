@@ -12,6 +12,8 @@ import {
 } from "@/ui-components/ui/dropdown-menu";
 import { Button } from "@/ui-components/ui/button";
 import { Bot, ChevronDown } from "lucide-react";
+import { Model } from "@/types";
+import { memo } from "react";
 
 const Chat = () => {
   return (
@@ -50,14 +52,30 @@ const options = [
   },
 ];
 
-const modelNames = ["Normal", "Multiagent", "Advanced"];
+const modelNames = [];
+modelNames[Model.BASE] = "Normal";
+modelNames[Model.BASE_CLAUDE] = "Normal - Claude";
+modelNames[Model.MULTI_AGENT] = "Multiagent";
+modelNames[Model.ADVANCED] = "Advanced";
+
+const ChatPageHeader = memo(() => {
+  const option = Math.floor(Math.random() * 4);
+  return (
+    <>
+      <div>{options[option].title}</div>
+      <div className="dark:text-neutral-500 text-neutral-500 text-sm">
+        {options[option].description}
+      </div>
+    </>
+  );
+});
+
 const ChatPage = () => {
   const {
     state: { model, chats },
     setters: { setModel },
   } = useChats();
   console.log(model);
-  const option = Math.floor(Math.random() * 4);
   // console.log("Chat");
   return (
     <>
@@ -68,16 +86,7 @@ const ChatPage = () => {
         <div className="h-full w-full flex flex-col">
           <div className="flex justify-between items-center px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
             <div className="md:text-2xl text-3xl mt-6 text-left sticky top-0 mb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
-              {chats.length === 0 ? (
-                ""
-              ) : (
-                <>
-                  <div>{options[option].title}</div>
-                  <div className="dark:text-neutral-500 text-neutral-500 text-sm">
-                    {options[option].description}
-                  </div>
-                </>
-              )}
+              {chats.length === 0 ? "" : <ChatPageHeader />}
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -86,27 +95,36 @@ const ChatPage = () => {
                   <ChevronDown className="size-4 ml-2" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-40">
-                <DropdownMenuLabel>Model</DropdownMenuLabel>
+              <DropdownMenuContent className="w-fit">
+                <DropdownMenuLabel>Models</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
                   <DropdownMenuRadioItem
                     className="flex items-center gap-1"
-                    value={0}
+                    value={Model.BASE}
                   >
                     <Bot className="size-4" />
                     Normal
                   </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem
                     className="flex items-center gap-1"
-                    value={1}
+                    value={Model.BASE_CLAUDE}
+                  >
+                    <Bot className="size-4" />
+                    Normal - Claude
+                  </DropdownMenuRadioItem>
+
+                  <DropdownMenuRadioItem
+                    className="flex items-center gap-1"
+                    value={Model.MULTI_AGENT}
                   >
                     <Bot className="size-4" />
                     Multiagent
                   </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem
-                    className="flex items-center gap-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 animated-background text-black"
-                    value={2}
+                    className="flex items-center gap-1"
+                    // bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 animated-background text-black"
+                    value={Model.ADVANCED}
                   >
                     <Bot className="size-4" />
                     Advanced

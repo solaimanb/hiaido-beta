@@ -202,6 +202,15 @@ ul {
     "width" 100;
 }
 
+.hero-title {
+  font-family: "Sora", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings:
+    "width" 100;
+}
+
 .text-gradient {
   background: linear-gradient(to right, #FF0AC9, #00FFE0);
   -webkit-background-clip: text;  /* For Chrome, Safari */
@@ -211,54 +220,6 @@ ul {
   -webkit-text-fill-color: transparent;  /* For Chrome, Safari */
   -moz-text-fill-color: transparent;     /* For Firefox */
   -ms-text-fill-color: transparent;      /* For Internet Explorer */
-}
-
-.bg-gradient {
-  background: linear-gradient(to right, #0fffe3a2, #9000ffbd);
-  background-clip: border-box;
-  color: white;
-  border: none;
-  transition: background-position 0.4s ease, transform 0.2s ease;
-}
-
-.bg-gradient:hover {
-  background-position: 100% 0;
-  transform: scale(1.05);
-}
-
-.pricing-card-bg {
-  background: linear-gradient(to top, #0077ffc0, #9000ff4f);
-  background-clip: border-box;
-  color: white;
-  border: none;
-}
-
-.pricing-card-base-bg{
-  background: linear-gradient(to top, #2E363E, #241e24b7);
-  background-clip: border-box;
-  color: white;
-  border: none;
-}
-
-.pricing-btn {
-  color: #fff;
-  cursor: pointer;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  background-image: linear-gradient(
-    to right,
-    #2b88f35b,
-    #0fffe36c,
-    #9000ff42,
-    #7e689293
-  );
-  transition: all 0.4s ease-in-out;
-}
-
-.pricing-btn:hover {
-  background-position: 100% 0;
-  transition: all 0.4s ease-in-out;
 }
 
 html,
@@ -280,7 +241,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, #040404, transparent);
+  /* background: linear-gradient(to top, #040404, transparent); */
   pointer-events: none;
 }
 
