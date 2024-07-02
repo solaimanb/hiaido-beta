@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import logo from "/hiaido-logo.png";
 import { AnimatePresence, motion } from "framer-motion";
@@ -193,15 +194,9 @@ const ChatsList = memo(() => {
 // contains the chats and query box
 const ChatContainer = () => {
   const chatBoxRef = useRef<HTMLDivElement>(null);
-  const { setters, state, submitPrompt } = useChats();
-  const {
-    query,
-    chats,
-    memberAccounts,
-    model,
-  } = state;
+  const { state, submitPrompt } = useChats();
+  const { chats, memberAccounts } = state;
   const { userAttributes } = useGlobalState();
-  const { setQuery, setChats, setModel } = setters;
 
   useEffect(() => {
     if (chatBoxRef.current) {
@@ -261,16 +256,18 @@ const ChatContainer = () => {
 };
 
 const QueryBox = () => {
-  const { state, setters, submitPrompt } = useChats();
+  const { state, submitPrompt } = useChats();
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { query, chats } = state;
-  const { setQuery } = setters;
+  const { chats } = state;
+  // const { setQuery } = setters;
+  const [query, setQuery] = useState("");
 
   const onKeyUp: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.key === "Enter" && e.shiftKey) {
       setQuery((prev) => prev.slice().concat("\n"));
     } else if (e.key === "Enter") {
       submitPrompt(query);
+      setQuery("");
     }
   };
 
@@ -308,7 +305,10 @@ const QueryBox = () => {
         ></textarea>
       </div>
       <button
-        onClick={() => submitPrompt(query)}
+        onClick={() => {
+          submitPrompt(query);
+          setQuery("");
+        }}
         disabled={chats.length > 0 && chats.at(-1)?.loading}
         className="bg-neutral-800 dark:bg-neutral-100 hover:bg-neutral-200 mb-1 disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center w-8 h-8 mr-1 rounded-full"
       >
