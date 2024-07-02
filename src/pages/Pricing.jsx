@@ -12,7 +12,7 @@ const Pricing = () => {
   const [currency, setCurrency] = useState("INR");
   const conversionRate = 83.37;
 
-    const handleUsdClick = () => {
+  const handleUsdClick = () => {
     if (!usdClicked) {
       setCurrency("USD");
       setUsdClicked(true);
@@ -74,7 +74,11 @@ const Pricing = () => {
               className={`bold-title cursor-pointer ${currency === 'USD' ? 'text-green-100' : ''}`}
               onClick={handleUsdClick}
             >
-              USD
+              <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-USD-Monthly"
+                data-cb-item-quantity="1"
+              >
+                USD
+              </a>
             </span>
             <Text as="label" size="7">
               <Flex gap="2" align="center">
@@ -91,7 +95,11 @@ const Pricing = () => {
               className={`bold-title cursor-pointer ${currency === 'INR' ? 'text-green-100' : ''}`}
               onClick={handleInrClick}
             >
-              INR
+              <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-INR-Monthly"
+              data-cb-item-quantity="1"
+              >
+                INR
+              </a>
             </span>
           </div>
 
