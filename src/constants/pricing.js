@@ -1,9 +1,14 @@
+import prices from './prices.json';
+
 export const pricing = [
   {
     id: "0",
     title: "Playground",
     description: "Per workspace\n Billed monthly",
-    price: 99,
+    price: {
+      INR: prices.INR.Playground,
+      USD: prices.USD.Playground,
+    },
     features: [
       "Explore cloud tech with AI",
       "Hiaido organizations",
@@ -20,7 +25,10 @@ export const pricing = [
     id: "1",
     title: "Starter",
     description: "Per workspace\n Billed monthly",
-    price: "499",
+    price: {
+      INR: prices.INR.Starter,
+      USD: prices.USD.Starter,
+    },
     features: [
       "Access to core functionalities",
       "Full access to Cloud Engineer AI agent",
@@ -38,7 +46,10 @@ export const pricing = [
     id: "2",
     title: "Elite",
     description: "Per workspace\n Billed monthly",
-    price: "1599",
+    price: {
+      INR: prices.INR.Elite,
+      USD: prices.USD.Elite,
+    },
     features: [
       "Premium features and integrations",
       "Full access to cloud console",
@@ -54,7 +65,10 @@ export const pricing = [
     id: "3",
     title: "Enterprise",
     description: "Per workspace\n Billed yearly",
-    price: "3999",
+    price: {
+      INR: prices.INR.Enterprise,
+      USD: prices.USD.Enterprise,
+    },
     features: [
       "Advanced AI-driven automation for complex workflows",
       "Extensive resource provisioning and management",
@@ -77,7 +91,10 @@ export const pricing = [
     id: "4",
     title: "XaaS",
     description: "Bring Your Own Cloud Account",
-    price: null,
+    price: {
+      INR: prices.INR.XaaS,
+      USD: prices.USD.XaaS,
+    },
     features: [
       "Fully customizable AI automation tailored to specific business needs",
       "Unlimited resource provisioning and management",

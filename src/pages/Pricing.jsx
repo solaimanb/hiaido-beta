@@ -10,7 +10,6 @@ const Pricing = () => {
   const [usdClicked, setUsdClicked] = useState(false);
   const [inrClicked, setInrClicked] = useState(false);
   const [currency, setCurrency] = useState("INR");
-  const conversionRate = 83.37;
 
   const handleUsdClick = () => {
     if (!usdClicked) {
@@ -28,10 +27,10 @@ const Pricing = () => {
     }
   };
 
-  const convertPrice = (price, rate) => {
-    const convertedPrice = currency === "INR" ? price * rate : price;
-    return Math.round(convertedPrice);
-  };
+ const convertPrice = (price) => {
+  return currency === 'INR' ? price.INR : price.USD;
+};
+
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
 
@@ -107,7 +106,6 @@ const Pricing = () => {
             currency={currency}
             convertPrice={convertPrice}
             currencySymbol={currencySymbol}
-            conversionRate={conversionRate}
           />
         </div>
       </main>

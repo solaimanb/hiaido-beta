@@ -1,0 +1,16 @@
+{
+  "INR": {
+    "Playground": 8099,
+    "Starter": 40999,
+    "Elite": 130999,
+    "Enterprise": 333099,
+    "XaaS": null
+  },
+  "USD": {
+    "Playground": 99,
+    "Starter": 499,
+    "Elite": 1599,
+    "Enterprise": 3999,
+    "XaaS": null
+  }
+}

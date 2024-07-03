@@ -3,7 +3,8 @@ import { check } from "../../../assets";
 import { pricing } from "../../../constants/pricing";
 import "./PricingList.css";
 
-const PricingList = ({ convertPrice, currencySymbol, conversionRate }) => {
+const PricingList = ({ convertPrice, currencySymbol }) => {
+
   return (
     <div className="container grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4 mt-8 py-2 px-4 md:px-2">
       {pricing.map((item) => (
@@ -24,13 +25,13 @@ const PricingList = ({ convertPrice, currencySymbol, conversionRate }) => {
                 >
                   {item.price && (
                     <>
-                      <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
+                      <div className={`text-xl bold-title mb-4 text-cyan-500 p-1 ${item.price.INR === null ? "hidden": ""}`}>
                         {currencySymbol}
                       </div>
                       <div className="text-3xl leading-none bold-title">
-                        {convertPrice(item.price, conversionRate)}
+                        {convertPrice(item.price)}
                       </div>
-                      <span className="font-bold mt-3 text-lg">/month</span>
+                      <span className={`font-bold mt-2 text-lg ${item.price.INR === null ? "hidden": ""}`}>/month</span>
                     </>
                   )}
                 </div>
