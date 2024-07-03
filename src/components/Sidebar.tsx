@@ -20,7 +20,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "/hiaido-logo.png";
 import * as Menubar from "@radix-ui/react-menubar";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import { fetchAuthSession, signOut } from "aws-amplify/auth";
 import logoSidebar from "/logo-sidebar.png";
@@ -347,6 +347,7 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
 }) => {
   const { currentMemberAccount, memberAccounts, setCurrentMemberAccount } =
     useContext(GlobalStateContext);
+  const navigate = useNavigate()
   if (!currentMemberAccount) return;
   // let currentMemberAccount = {
   //   role_arn: "arn:aws:iam::730335590432:role/OrganizationAccountAccessRole",
@@ -447,9 +448,10 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
         </ScrollArea>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => {
+          onClick={async () => {
             localStorage.removeItem("current_member_account");
-            signOut();
+            await signOut();
+            navigate("/login");
           }}
           className="py-2"
         >
