@@ -141,14 +141,23 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         });
         configCliUrl = `${config.multiAgentURL}/configure-cli`;
         break;
-      case Model.BASE_CLAUDE:
-        url = `${config.baseURL}/claude/get-response`;
+      case Model.CLAUDE_HAIKU:
+        url = `${config.baseURL}/get-response/claude-haiku`;
         body = JSON.stringify({
           email: currentMemberAccount["email"],
           owner: userAttributes.email,
           query: newChat.query,
         });
-        configCliUrl = `${config.baseURL}/claude/configure-cli`;
+        configCliUrl = `${config.baseURL}/configure-cli`;
+        break;
+      case Model.CLAUDE_SONNET:
+        url = `${config.baseURL}/get-response/claude-sonnet`;
+        body = JSON.stringify({
+          email: currentMemberAccount["email"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/configure-cli`;
         break;
       default:
         url = `${config.baseURL}/get-response`;
@@ -160,7 +169,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         configCliUrl = `${config.baseURL}/configure-cli`;
     }
 
-    console.log(url, configCliUrl);
+    console.log(url, configCliUrl, model);
 
     const response = await fetch(url, {
       method: "POST",

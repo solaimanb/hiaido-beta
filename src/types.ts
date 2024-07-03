@@ -26,5 +26,6 @@ export enum Model {
   BASE = 0,
   MULTI_AGENT = 1,
   ADVANCED = 2,
-  BASE_CLAUDE = 3,
+  CLAUDE_HAIKU = 3,
+  CLAUDE_SONNET = 4,
 }
