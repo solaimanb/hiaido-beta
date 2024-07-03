@@ -5,7 +5,7 @@ import { hiaido } from "../assets";
 const VerticalTabs = ({ tabs, activeTab, setactiveTab }) => {
     return (
         <div className='max-w-6xl mx-auto  flex flex-col md:flex-row gap-2 items-center bg-black p-3 rounded-lg text-white'>
-            <div className='w-full max-w-xs flex flex-col justify-between items-center h-[calc(100dvh_-_30dvh)] md:h-[calc(100dvh_-_10dvh)]'>
+            <div className='w-full max-w-lg flex flex-col justify-between items-center h-[calc(100dvh_-_30dvh)] md:h-[calc(100dvh_-_10dvh)]'>
                 <NavLink className="block mt-3" to="/">
                     <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
                 </NavLink>
@@ -13,7 +13,7 @@ const VerticalTabs = ({ tabs, activeTab, setactiveTab }) => {
                     {tabs.map((child, index) => (
                         <button
                             key={index}
-                            className={`p-3 font-bold text-left transition-all delay-75 hover:text-orange-400  ${activeTab === index ? '  text-orange-400 border-b md:border-b-0 md:border-l border-orange-400' : ''}`}
+                            className={`p-3 text-nowrap font-bold text-left transition-all delay-75 hover:text-orange-400  ${activeTab === index ? '  text-orange-400 border-b md:border-b-0 md:border-l border-orange-400' : ''}`}
                             onClick={() => setactiveTab(index)}
                         >
                             {child.title}

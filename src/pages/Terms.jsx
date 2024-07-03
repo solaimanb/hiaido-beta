@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async"
 import Pricing from "./Pricing";
 import NewPriceList from "@/components/PriceList";
 import MemberAccountPage from "./MemberAccountPage";
+import NewTermsConditions from "@/components/NewTermsConditions";
 
 const Terms = () => {
   window.scrollTo(0, 0);
@@ -14,7 +15,8 @@ const Terms = () => {
   const tabs = [
     {
       title: "Terms & Conditions",
-      content: <TermsConditions setactiveTab={setactiveTab} />
+      // content: <TermsConditions setactiveTab={setactiveTab} />
+      content: <NewTermsConditions setactiveTab={setactiveTab} />
     },
     {
       title: "Free Trial & Paid Subscription",

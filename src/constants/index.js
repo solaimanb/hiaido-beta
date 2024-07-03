@@ -343,30 +343,30 @@ export const tabs = [
   },
 ];
 
-// export const navigation = [
-//   {
-//     id: "hiring",
-//     title: "Hiring",
-//     to: "/hiring",
-//     onlyMobile: true,
-//   },
-//   {
-//     id: "contact",
-//     title: "Contact Us",
-//     to: "/contact",
-//     onlyMobile: true,
-//   },
-//   {
-//     id: "pricing",
-//     title: "Pricing",
-//     to: "/pricing",
-//     onlyMobile: true,
-//   },
+export const navigation = [
+  {
+    id: "hiring",
+    title: "Hiring",
+    to: "/hiring",
+    onlyMobile: true,
+  },
+  {
+    id: "contact",
+    title: "Contact Us",
+    to: "/contact",
+    onlyMobile: true,
+  },
+  {
+    id: "pricing",
+    title: "Pricing",
+    to: "/pricing",
+    onlyMobile: true,
+  },
 
-//   {
-//     id: "privacy",
-//     title: "Privacy",
-//     to: "/privacy",
-//     onlyMobile: true,
-//   },
-// ];
+  {
+    id: "privacy",
+    title: "Privacy",
+    to: "/privacy",
+    onlyMobile: true,
+  },
+];
