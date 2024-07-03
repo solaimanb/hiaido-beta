@@ -9,12 +9,12 @@ const Footer = () => {
         </p>
 
         <div className="flex gap-2 flex-row">
-        <NavLink
+        {/* <NavLink
           to="/privacy"
           className="lg:block text-white/60 underline-offset-2 text-xs font-semibold text-center underline"
         >
           Privacy Policy
-        </NavLink>
+        </NavLink> */}
 
         <NavLink
           to="/terms"
@@ -23,12 +23,12 @@ const Footer = () => {
           Terms & Conditions
         </NavLink>
 
-        <NavLink
+        {/* <NavLink
           to="/ethical-ai"
           className="lg:block text-white/60 underline-offset-2 text-xs font-semibold text-center underline"
         >
           Ethical AI
-        </NavLink>
+        </NavLink> */}
         </div>
 
         <p className="lg:block text-white/80 gap-x-1 flex items-center text-sm font-semibold">
