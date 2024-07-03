@@ -92,7 +92,7 @@ const ChatPage = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost">
-                  {modelNames[model]}
+                  Model: <div className="ml-2">{modelNames[model]}</div>
                   <ChevronDown className="size-4 ml-2" />
                 </Button>
               </DropdownMenuTrigger>
