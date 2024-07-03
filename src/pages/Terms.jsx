@@ -11,7 +11,7 @@ import terms from "@/constants/terms.json";
 // };
 
 const Terms = () => {
-  // window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
 
   return (
     <>
