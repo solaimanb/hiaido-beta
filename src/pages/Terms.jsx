@@ -2,16 +2,8 @@ import TableOfContents from "@/components/page-components/terms/TableOfContents"
 import { Helmet } from "react-helmet-async";
 import terms from "@/constants/terms.json";
 
-
-// const processContent = (content) => {
-//   const htmlContent = content
-//     .replace(/\n/g, "<br/>")
-//     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
-//   return { __html: htmlContent };
-// };
-
 const Terms = () => {
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
 
   return (
     <>
@@ -40,7 +32,6 @@ const Terms = () => {
           </p>
         </div>
 
-
         <div className="space-y-4">
           <h4 className="font-bold text-lg">
             AGREEMENT TO OUR LEGAL TERMS
@@ -59,8 +50,8 @@ const Terms = () => {
             AWS, Azure, and GCP, through our cloud automation platform.
             <br />
             <br />
-            For inquiries, please contact us via email at
-            <a href="mailto:contact@hiaido.com" className="font-bold"> contact@hiaido.com</a>.
+            For inquiries, please contact us via email at {""}
+            <a href="mailto:contact@hiaido.com" className="font-bold text-blue-300 hover:underline">contact@hiaido.com</a>.
             <br />
             <br />
             These Legal Terms constitute a legally binding agreement made
@@ -101,116 +92,129 @@ const Terms = () => {
           </p>
         </div>
 
-
         <TableOfContents />
-
-        {/* <div>
-          {terms.map((term, index) => (
-            <div key={index} className="my-4">
-              <h4 className="font-bold text-">{term.title}</h4>
-              {Array.isArray(term.content) ? (
-                term.content.map((subTerm, subIndex) => (
-                  <div key={subIndex} className="my-2 ml-1">
-                    <h5 className="font-semibold">{subTerm["sub-title"]}</h5>
-                    <p className="text-sm">{subTerm["sub-content"]}</p>
-                  </div>
-                ))
-              ) : (
-                  <p className="text-sm">{term.content}</p>
-              )}
-            </div>
-          ))}
-        </div> */}
-
-        {/* <div>
-          {terms.map((term, index) => (
-            <div key={index} className="my-4">
-              <h4 className="font-bold text-lg">{term.title}</h4>
-              {Array.isArray(term.content) ? (
-                term.content.map((subTerm, subIndex) => (
-                  <div key={subIndex} className="my-2 ml-1 space-y-1">
-                    <h5 className="font-semibold">{subTerm["sub-title"]}</h5>
-                    {subTerm["sub-content"].split('\n').map((paragraph, paraIndex) => (
-                      <p key={paraIndex} className="text-sm">{paragraph}</p>
-                    ))}
-                  </div>
-                ))
-              ) : (
-
-                term.content.split('\n').map((paragraph, paraIndex) => (
-                  <p key={paraIndex} className="text-sm">{paragraph}</p>
-                ))
-              )}
-            </div>
-          ))}
-        </div> */}
 
         <div>
           {terms.map((term, index) => (
-            <div key={index} className="my-4">
+            <div key={index} id={term.id} className="my-4">
               <h4 className="font-bold text-lg">{term.title}</h4>
               {Array.isArray(term.content) ? (
                 term.content.map((subTerm, subIndex) => (
                   <div key={subIndex} className="my-2 ml-1">
                     <h5 className="font-semibold">{subTerm["sub-title"]}</h5>
-                    {/* Split sub-content by '\n' and map each segment to a <p> element */}
                     {subTerm["sub-content"].split('\n').map((paragraph, paraIndex) => {
-                      // Regular expression to find text wrapped in ** **
                       const boldRegex = /\*\*(.*?)\*\*/g;
+                      const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
                       let match;
                       let lastIndex = 0;
                       const parts = [];
 
                       while ((match = boldRegex.exec(paragraph)) !== null) {
-                        // Push non-bold text before the match
                         if (match.index > lastIndex) {
                           parts.push(paragraph.substring(lastIndex, match.index));
                         }
-                        // Push bold text with '**' removed
                         parts.push(<strong key={`${paraIndex}-${parts.length}`}>{match[1]}</strong>);
                         lastIndex = boldRegex.lastIndex;
                       }
 
-                      // Push remaining non-bold text after the last match
                       if (lastIndex < paragraph.length) {
                         parts.push(paragraph.substring(lastIndex));
                       }
 
-                      return <p key={paraIndex} className="text-sm">{parts}</p>;
+                      const contentWithLinks = parts.map((part, partIndex) => {
+                        if (typeof part === 'string') {
+                          const subParts = [];
+                          let emailMatch;
+                          let subLastIndex = 0;
+
+                          while ((emailMatch = emailRegex.exec(part)) !== null) {
+                            if (emailMatch.index > subLastIndex) {
+                              subParts.push(part.substring(subLastIndex, emailMatch.index));
+                            }
+                            subParts.push(
+                              <a
+                                key={`${paraIndex}-${partIndex}-${subParts.length}`}
+                                href={`mailto:${emailMatch[1]}`}
+                                className="text-blue-300 hover:underline"
+                              >
+                                {emailMatch[1]}
+                              </a>
+                            );
+                            subLastIndex = emailRegex.lastIndex;
+                          }
+
+                          if (subLastIndex < part.length) {
+                            subParts.push(part.substring(subLastIndex));
+                          }
+
+                          return subParts;
+                        }
+                        return part;
+                      }).flat();
+
+                      return <p key={paraIndex} className="text-sm">{contentWithLinks}</p>;
                     })}
                   </div>
                 ))
               ) : (
                 term.content.split('\n').map((paragraph, paraIndex) => {
-                  // Regular expression to find text wrapped in ** **
                   const boldRegex = /\*\*(.*?)\*\*/g;
+                  const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
                   let match;
                   let lastIndex = 0;
                   const parts = [];
 
                   while ((match = boldRegex.exec(paragraph)) !== null) {
-                    // Push non-bold text before the match
                     if (match.index > lastIndex) {
                       parts.push(paragraph.substring(lastIndex, match.index));
                     }
-                    // Push bold text with '**' removed
                     parts.push(<strong key={`${paraIndex}-${parts.length}`}>{match[1]}</strong>);
                     lastIndex = boldRegex.lastIndex;
                   }
 
-                  // Push remaining non-bold text after the last match
                   if (lastIndex < paragraph.length) {
                     parts.push(paragraph.substring(lastIndex));
                   }
 
-                  return <p key={paraIndex} className="text-sm">{parts}</p>;
+                  const contentWithLinks = parts.map((part, partIndex) => {
+                    if (typeof part === 'string') {
+                      const subParts = [];
+                      let emailMatch;
+                      let subLastIndex = 0;
+
+                      while ((emailMatch = emailRegex.exec(part)) !== null) {
+                        if (emailMatch.index > subLastIndex) {
+                          subParts.push(part.substring(subLastIndex, emailMatch.index));
+                        }
+                        subParts.push(
+                          <a
+                            key={`${paraIndex}-${partIndex}-${subParts.length}`}
+                            href={`mailto:${emailMatch[1]}`}
+                            className="text-blue-300 hover:underline"
+                          >
+                            {emailMatch[1]}
+                          </a>
+                        );
+                        subLastIndex = emailRegex.lastIndex;
+                      }
+
+                      if (subLastIndex < part.length) {
+                        subParts.push(part.substring(subLastIndex));
+                      }
+
+                      return subParts;
+                    }
+                    return part;
+                  }).flat();
+
+                  return <p key={paraIndex} className="text-sm">{contentWithLinks}</p>;
                 })
               )}
             </div>
           ))}
         </div>
 
-        <div>
+        <div id="contact">
           <h4 className="font-bold text-lg">
             CONTACT US
           </h4>
@@ -230,7 +234,7 @@ const Terms = () => {
               <div>
                 Phone:</div> <div>
                 <a href="tel:+918939979393">+91 8939 979 393</a><br />
-              <a href="tel:+919911195555">+91 9911 195 555</a>
+                <a href="tel:+919911195555">+91 9911 195 555</a>
               </div>
             </div>
             <p>Email: <a href="mailto:contact@hiaido.com"> contact@hiaido.com</a></p>
