@@ -36,7 +36,7 @@ interface ChatsContextType {
 }
 const defaultChatsContextValue: ChatsContextType = {
   state: {
-    model: Model.BASE,
+    model: Model.CLAUDE_SONNET,
     chats: [],
     newChat: null,
     currentMemberAccount: null,
@@ -76,7 +76,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
 }) => {
   const { memberAccounts, currentMemberAccount } = useGlobalState();
   const [query, setQuery] = useState("");
-  const [model, setModel] = useState<Model>(Model.BASE);
+  const [model, setModel] = useState<Model>(Model.CLAUDE_SONNET);
   const [chats, setChats] = useState<Chat[]>([]);
   const [newChat, setNewChat] = useState<Chat | null>(null);
   const [error, setError] = useState<null | string>(null);
@@ -123,8 +123,26 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     }
     let url, body, configCliUrl;
     switch (model) {
-      case Model.BASE:
-        url = `${config.baseURL}/get-response`;
+      // case Model.BASE:
+      //   url = `${config.baseURL}/get-response`;
+      //   body = JSON.stringify({
+      //     email: currentMemberAccount["email"],
+      //     owner: userAttributes.email,
+      //     query: newChat.query,
+      //   });
+      //   configCliUrl = `${config.baseURL}/configure-cli`;
+      //   break;
+      // case Model.MULTI_AGENT:
+      //   url = `${config.multiAgentURL}/chat`;
+      //   body = JSON.stringify({
+      //     email: currentMemberAccount["email"],
+      //     owner: userAttributes.email,
+      //     user_query: newChat.query,
+      //   });
+      //   configCliUrl = `${config.multiAgentURL}/configure-cli`;
+      //   break;
+      case Model.CLAUDE_HAIKU:
+        url = `${config.baseURL}/get-response/claude-haiku`;
         body = JSON.stringify({
           email: currentMemberAccount["email"],
           owner: userAttributes.email,
@@ -132,23 +150,14 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         });
         configCliUrl = `${config.baseURL}/configure-cli`;
         break;
-      case Model.MULTI_AGENT:
-        url = `${config.multiAgentURL}/chat`;
-        body = JSON.stringify({
-          email: currentMemberAccount["email"],
-          owner: userAttributes.email,
-          user_query: newChat.query,
-        });
-        configCliUrl = `${config.multiAgentURL}/configure-cli`;
-        break;
-      case Model.BASE_CLAUDE:
-        url = `${config.baseURL}/claude/get-response`;
+      case Model.CLAUDE_SONNET:
+        url = `${config.baseURL}/get-response/claude-sonnet`;
         body = JSON.stringify({
           email: currentMemberAccount["email"],
           owner: userAttributes.email,
           query: newChat.query,
         });
-        configCliUrl = `${config.baseURL}/claude/configure-cli`;
+        configCliUrl = `${config.baseURL}/configure-cli`;
         break;
       default:
         url = `${config.baseURL}/get-response`;
@@ -160,7 +169,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         configCliUrl = `${config.baseURL}/configure-cli`;
     }
 
-    console.log(url, configCliUrl);
+    console.log(url, configCliUrl, model);
 
     const response = await fetch(url, {
       method: "POST",

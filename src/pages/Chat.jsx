@@ -54,7 +54,8 @@ const options = [
 
 const modelNames = [];
 modelNames[Model.BASE] = "Normal";
-modelNames[Model.BASE_CLAUDE] = "Normal - Claude";
+modelNames[Model.CLAUDE_HAIKU] = "General Purpose";
+modelNames[Model.CLAUDE_SONNET] = "Advanced";
 modelNames[Model.MULTI_AGENT] = "Multiagent";
 modelNames[Model.ADVANCED] = "Advanced";
 
@@ -91,7 +92,7 @@ const ChatPage = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost">
-                  {modelNames[model]}
+                  Model: <div className="ml-2">{modelNames[model]}</div>
                   <ChevronDown className="size-4 ml-2" />
                 </Button>
               </DropdownMenuTrigger>
@@ -99,36 +100,43 @@ const ChatPage = () => {
                 <DropdownMenuLabel>Models</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
-                  <DropdownMenuRadioItem
+                  {/* <DropdownMenuRadioItem
                     className="flex items-center gap-1"
                     value={Model.BASE}
                   >
                     <Bot className="size-4" />
                     Normal
+                  </DropdownMenuRadioItem> */}
+                  <DropdownMenuRadioItem
+                    className="flex items-center gap-1"
+                    value={Model.CLAUDE_HAIKU}
+                  >
+                    <Bot className="size-4" />
+                    {modelNames[Model.CLAUDE_HAIKU]}
                   </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem
                     className="flex items-center gap-1"
-                    value={Model.BASE_CLAUDE}
+                    value={Model.CLAUDE_SONNET}
                   >
                     <Bot className="size-4" />
-                    Normal - Claude
+                    {modelNames[Model.CLAUDE_SONNET]}
                   </DropdownMenuRadioItem>
 
-                  <DropdownMenuRadioItem
+                  {/* <DropdownMenuRadioItem
                     className="flex items-center gap-1"
                     value={Model.MULTI_AGENT}
                   >
                     <Bot className="size-4" />
                     Multiagent
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem
+                  </DropdownMenuRadioItem> */}
+                  {/* <DropdownMenuRadioItem
                     className="flex items-center gap-1"
                     // bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 animated-background text-black"
                     value={Model.ADVANCED}
                   >
                     <Bot className="size-4" />
                     Advanced
-                  </DropdownMenuRadioItem>
+                  </DropdownMenuRadioItem> */}
                 </DropdownMenuRadioGroup>
                 {/* <DropdownMenuItem className="p-3" onClick={() => setModel(0)}>
                   Normal chatbot
