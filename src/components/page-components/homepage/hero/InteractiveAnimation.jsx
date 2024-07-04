@@ -82,7 +82,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   return (
     <div className="flex items-center justify-center w-full h-full">
       {showSecondAnimation && (
-        <div className="flex flex-col items-start justify-center max-w-[80%]">
+        <div className="flex flex-col items-start justify-center w-full md:max-w-[80%]">
           {/* HiAiDo Process Animation */}
           {!showExample && (
             <img
@@ -127,7 +127,7 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
               </div>
 
               {/* Animation Outlet */}
-              <div className="flex w-full gap-2">
+              <div className="flex w-full gap-2 justify-between flex-row">
                 {/* Self-Scroll Animation Swiper */}
                 <Swiper
                   slidesPerView={1}
@@ -138,11 +138,11 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
                     disableOnInteraction: false,
                   }}
                   modules={[Autoplay, Pagination, Navigation]}
-                  className="h-16 text-start"
+                  className="h-14 md:h-16 w-full"
                 >
                   {shuffledTexts.map((text, index) => (
                     <SwiperSlide key={index}>
-                      <p className="relative text-xs p-1 h-14 md:text-lg font-semibold text-[#BBBBBB]">
+                      <p className="relative text-xs p-1 h-14 md:text-lg font-semibold text-[#BBBBBB] text-start w-full">
                         {text}
                       </p>
                     </SwiperSlide>
