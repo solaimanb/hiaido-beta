@@ -81,7 +81,7 @@ const Hero = () => {
       id="hero"
       className="flex justify-center"
     >
-      <div className="absolute container flex justify-center h-[80vh] z-1 min-h-screen mt-32 md:mt-10 xl:mt-0">
+      <div className="absolute container flex justify-center h-[80vh] z-1 min-h-screen mt-32 md:mt-10 xl:mt-0 px-2">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -92,7 +92,7 @@ const Hero = () => {
           <div className="space-y-3">
             <div className="flex flex-col space-y-8 2xl:space-y-14  lg:pt-10">
               <div>
-                <h1 className="hero-title text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl inline-block tracking-tight">
+                <h1 className="hero-title text-3xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl inline-block tracking-tight">
                   The Next Generation
                   <br />
                   <span className="relative inline-block">
@@ -108,7 +108,7 @@ const Hero = () => {
                 </h1>
               </div>
 
-              <h1 className="relative hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl inline-block text-orange-500">
+              <h1 className="relative hero-title text-3xl md:text-5xl lg:text-6xl xl:text-7xl inline-block text-orange-500">
                 Cloud Automation Platform
               </h1>
             </div>
@@ -125,7 +125,7 @@ const Hero = () => {
 
           <div className="flex flex-col items-center mt-6 space-y-3 text-start">
             <p
-              className="font-bold type1 lg:text-2xl md:text-sm"
+              className="font-bold type1 text-xs lg:text-2xl md:text-sm"
               onAnimationEnd={handleAnimationEnd}
             >
               &quot;Welcome to the future of automation with HIAIDO&quot;
