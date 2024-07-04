@@ -25,11 +25,15 @@ const ConnectExstingMemberAccountForm = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [externalId, setExternalId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingExternalId, setLoadingExternalId] = useState(false);
   const navigate = useNavigate();
 
   const handleExternalIdGeneration = async () => {
+    if (loadingExternalId) return;
     const authData = await fetchAuthSession();
     const idToken = authData.tokens?.idToken?.toString();
+
+    setLoadingExternalId(true);
 
     try {
       const response = await fetch(
@@ -56,7 +60,7 @@ const ConnectExstingMemberAccountForm = () => {
       toast.error("An error occured");
       setErrorMsg("An error occured");
     } finally {
-      setLoading(false);
+      setLoadingExternalId(false);
     }
   };
 
@@ -136,11 +140,14 @@ const ConnectExstingMemberAccountForm = () => {
           <button
             className="flex items-center gap-2 cursor-pointer"
             onClick={async () => {
-              await copyContent("1232e32r344324");
+              await copyContent(externalId);
               toast.success("External Id Copied!");
             }}
           >
-            <label htmlFor="addPolicy" className="cursor-pointer flex gap-2 justify-center">
+            <label
+              htmlFor="addPolicy"
+              className="cursor-pointer flex gap-2 justify-center"
+            >
               <CopyIcon
                 id="addPolicy"
                 className={`cursor-pointer size-5 ${"hover:text-orange-400"}`}
@@ -154,7 +161,9 @@ const ConnectExstingMemberAccountForm = () => {
             className="text-orange-400"
             onClick={handleExternalIdGeneration}
           >
-            {loading && <Loader2 className="animate-spin mr-2 size-4" />}
+            {loadingExternalId && (
+              <Loader2 className="animate-spin mr-2 size-4" />
+            )}
             Generate External Id
           </Button>
         )}

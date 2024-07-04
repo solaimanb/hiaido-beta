@@ -5,18 +5,17 @@ import ButtonGradient from "./assets/svg/ButtonGradient.jsx";
 import "@radix-ui/themes/styles.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
-import AppLayout from "./layouts/AppLayout.jsx";
 import UnderConstruction from "./pages/UnderConstruction.jsx";
 import { Suspense, lazy, useEffect, useState } from "react";
 import Loading from "./components/shared/Loading.jsx";
 import AccountFactory from "@/pages/AccountFactory";
+import AppLayout from "@/layouts/AppLayout";
 
 import { Amplify } from "aws-amplify";
 import { GlobalStateProvider } from "./context/GlobalStateContext.js";
 import Enterprise from "./pages/Enterprise.jsx";
 import About from "./pages/About.jsx";
 import Loader from "./components/Loader.js";
-
 // Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));
 const Landing = lazy(() => import("./pages/Landing.jsx"));
@@ -86,7 +85,6 @@ const App = () => {
     <Suspense fallback={authStatus === "configuring" && <Loader />}>
       <HelmetProvider>
         <Routes>
-          
           <Route path="/" element={<RootLayout />}>
             <Route index element={<Landing />} />
             <Route path="/hiring" element={<Hiring />} />

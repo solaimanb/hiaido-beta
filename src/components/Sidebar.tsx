@@ -39,6 +39,7 @@ import { LogOut } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/ui-components/ui/avatar";
 import { ScrollArea } from "@/ui-components/ui/scroll-area";
 import toast from "react-hot-toast";
+import Loader from "./Loader";
 
 export const navbarData = [
   { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
@@ -347,8 +348,11 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
 }) => {
   const { currentMemberAccount, memberAccounts, setCurrentMemberAccount } =
     useContext(GlobalStateContext);
-  const navigate = useNavigate()
-  if (!currentMemberAccount) return;
+  const navigate = useNavigate();
+  console.log(currentMemberAccount);
+  if (!currentMemberAccount || !memberAccounts) {
+    return <Loader />;
+  }
   // let currentMemberAccount = {
   //   role_arn: "arn:aws:iam::730335590432:role/OrganizationAccountAccessRole",
   //   account_name: "advant.analytics+1user012334",
@@ -368,7 +372,7 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
 
   useEffect(() => {
     if (!memberAccounts) return;
-    for (let acc of memberAccounts) {
+    for (let acc of memberAccounts.memberAccounts) {
       if (acc.account_id === memberAccountId) {
         setCurrentMemberAccount(acc);
         console.log("Switching");
@@ -376,6 +380,7 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
       }
     }
   }, [memberAccountId, memberAccounts]);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -384,11 +389,13 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
           className="!border-t-[1px] !border-neutral-600 pt-5 pb-1 flex w-full space-x-3 text-left cursor-pointer"
         >
           {isCollapsed ? (
-            <span className="text-center mx-auto">{currentMemberAccount.firstName.charAt(0)}</span>
+            <span className="text-center mx-auto">
+              {/* {currentMemberAccount.firstName.charAt(0)} */}U
+            </span>
           ) : (
             <Avatar>
               <AvatarFallback className="bg-neutral-500 dark:bg-neutral-700">
-                {currentMemberAccount.firstName.charAt(0)}
+                {/* {currentMemberAccount.firstName.charAt(0)} */}U
               </AvatarFallback>
             </Avatar>
           )}
@@ -396,12 +403,14 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
             {isCollapsed || (
               <motion.div className="max-w-[70%]" {...labelTransitions}>
                 <p className="truncate text-neutral-100">
-                  {currentMemberAccount.firstName +
+                  {/* {currentMemberAccount.firstName +
                     " " +
-                    currentMemberAccount.lastName}
+                    currentMemberAccount.lastName} */}
+                  Test user
                 </p>
                 <p className="truncate text-neutral-500/90">
-                  {currentMemberAccount.email}
+                  {/* {currentMemberAccount.email} */}
+                  email
                 </p>
               </motion.div>
             )}
@@ -411,14 +420,14 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <ScrollArea className="h-60">
+        <ScrollArea className="max-h-60">
           <DropdownMenuRadioGroup
             value={currentMemberAccount.account_id}
             onValueChange={(accId) => {
               setMemberAccountId(accId);
             }}
           >
-            {memberAccounts?.map((acc) => (
+            {memberAccounts.memberAccounts.map((acc) => (
               <DropdownMenuRadioItem
                 value={acc.account_id}
                 key={acc.email}
@@ -440,6 +449,34 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
                   </p>
                   <p className="text-neutral-500/90 text-xs truncate">
                     {acc.email}
+                  </p>
+                </div>
+              </DropdownMenuRadioItem>
+            ))}
+            {memberAccounts.connectedAccounts.map((acc) => (
+              <DropdownMenuRadioItem
+                value={acc.account_id}
+                key={acc.account_id}
+                onClick={() => {
+                  setCurrentMemberAccount(acc);
+                  localStorage.setItem(
+                    "current_member_account",
+                    JSON.stringify(acc)
+                  );
+                }}
+                className="gap-2"
+              >
+                {/* <Avatar className="text-xs">
+                <AvatarFallback>{acc.firstName.charAt(0)}</AvatarFallback>
+              </Avatar> */}
+                <div className="flex flex-col pr-2 max-w-[75%]">
+                  <p className="text-black dark:text-neutral-100 text-sm truncate">
+                    {acc.account_id}
+                    {/* {acc.firstName + " " + acc.lastName} */}
+                  </p>
+                  <p className="text-neutral-500/90 text-xs truncate">
+                    {/* {acc.email} */}
+                    {acc.externalId}
                   </p>
                 </div>
               </DropdownMenuRadioItem>

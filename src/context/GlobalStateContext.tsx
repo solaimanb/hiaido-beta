@@ -1,4 +1,8 @@
-import { MemberAccount } from "@/types";
+import {
+  ConnectedAccount,
+  ManagedMemberAccount,
+  MemberAccounts,
+} from "@/types";
 import {
   FetchUserAttributesOutput,
   fetchAuthSession,
@@ -13,13 +17,13 @@ import React, {
 } from "react";
 
 interface GlobalStateContextType {
-  memberAccounts: MemberAccount[] | null;
+  memberAccounts: MemberAccounts | null;
   setMemberAccounts: React.Dispatch<
-    React.SetStateAction<MemberAccount[] | null>
+    React.SetStateAction<MemberAccounts | null>
   >;
-  currentMemberAccount: MemberAccount | null;
+  currentMemberAccount: ManagedMemberAccount | ConnectedAccount | null;
   setCurrentMemberAccount: React.Dispatch<
-    React.SetStateAction<MemberAccount | null>
+    React.SetStateAction<ManagedMemberAccount | ConnectedAccount | null>
   >;
   userAttributes: FetchUserAttributesOutput | null;
 }
@@ -44,13 +48,14 @@ export const useGlobalState = () => {
 export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
   children,
 }) => {
-  const [memberAccounts, setMemberAccounts] = useState<MemberAccount[] | null>(
+  const [memberAccounts, setMemberAccounts] = useState<MemberAccounts | null>(
     null
   );
   const [error, setError] = useState<string | null>(null);
 
-  const [currentMemberAccount, setCurrentMemberAccount] =
-    useState<MemberAccount | null>(null);
+  const [currentMemberAccount, setCurrentMemberAccount] = useState<
+    ManagedMemberAccount | ConnectedAccount | null
+  >(null);
   const [userAttributes, setUserAttributes] =
     useState<FetchUserAttributesOutput | null>(null);
 
@@ -72,7 +77,7 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
     //   .catch((err) => console.log(err));
   }, []);
 
-  const fetchMemberAccounts: () => Promise<MemberAccount[]> = async () => {
+  const fetchMemberAccounts: () => Promise<MemberAccounts> = async () => {
     // console.log("FETCHING MEMBER ACCOUNTS");
 
     try {
@@ -95,27 +100,43 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
         throw response_json;
       }
     } catch (err) {
-      return err;
+      console.log(err);
+      throw err;
     }
   };
 
   useEffect(() => {
     fetchMemberAccounts()
       .then((res) => {
+        console.log(res);
         setMemberAccounts(res);
         let cma = localStorage.getItem("current_member_account");
         if (cma) {
-          let cmaObj: MemberAccount = JSON.parse(cma);
+          let cmaObj = JSON.parse(cma);
           if (
-            res?.length > 0 &&
-            res.some((val) => val.email === cmaObj.email)
+            res.memberAccounts.some((val) => val.email === cmaObj.email) ||
+            res.connectedAccounts.some(
+              (val) => val.account_id === cmaObj.account_id
+            )
           ) {
             setCurrentMemberAccount(cmaObj);
           } else {
-            setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+            setCurrentMemberAccount(
+              res.memberAccounts.length > 0
+                ? res.memberAccounts[0]
+                : res.connectedAccounts.length > 0
+                ? res.connectedAccounts[0]
+                : null
+            );
           }
         } else {
-          setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
+          setCurrentMemberAccount(
+            res.memberAccounts.length > 0
+              ? res.memberAccounts[0]
+              : res.connectedAccounts.length > 0
+              ? res.connectedAccounts[0]
+              : null
+          );
         }
       })
       .catch((err) => {
