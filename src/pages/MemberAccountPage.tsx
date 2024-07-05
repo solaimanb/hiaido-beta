@@ -8,10 +8,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { Loader2, VerifiedIcon } from "lucide-react";
-import { fetchAuthSession } from "aws-amplify/auth";
 import AnimatedBtn from "../components/Buttons/AnimatedBtn";
 import { Button } from "@/ui-components/ui/button";
 import ConnectAccountFormButton from "@/components/ConnectAccountFormButton";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 const copyContent = async (text: string) => {
   try {

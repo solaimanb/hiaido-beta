@@ -145,7 +145,8 @@ const ConnectAccountForm = () => {
       if (response.ok) {
         toast.success("Account connected successfully");
         setTimeout(() => {
-          navigate("/chat");
+          // navigate("/chat");
+          window.location.reload();
         }, 1000);
       } else {
         setErrorMessage(res_body.message || "An error occured");
