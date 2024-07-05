@@ -390,12 +390,16 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
         >
           {isCollapsed ? (
             <span className="text-center mx-auto">
-              {/* {currentMemberAccount.firstName.charAt(0)} */}U
+              {currentMemberAccount.alias
+                ? currentMemberAccount.alias.charAt(0)
+                : currentMemberAccount.firstName.charAt(0)}
             </span>
           ) : (
             <Avatar>
               <AvatarFallback className="bg-neutral-500 dark:bg-neutral-700">
-                {/* {currentMemberAccount.firstName.charAt(0)} */}U
+                {currentMemberAccount.alias
+                  ? currentMemberAccount.alias.charAt(0)
+                  : currentMemberAccount.firstName.charAt(0)}
               </AvatarFallback>
             </Avatar>
           )}
@@ -403,14 +407,16 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
             {isCollapsed || (
               <motion.div className="max-w-[70%]" {...labelTransitions}>
                 <p className="truncate text-neutral-100">
-                  {/* {currentMemberAccount.firstName +
-                    " " +
-                    currentMemberAccount.lastName} */}
-                  Test user
+                  {currentMemberAccount.alias
+                    ? currentMemberAccount.alias
+                    : currentMemberAccount.firstName +
+                      " " +
+                      currentMemberAccount.lastName}
                 </p>
                 <p className="truncate text-neutral-500/90">
-                  {/* {currentMemberAccount.email} */}
-                  email
+                  {currentMemberAccount.alias
+                    ? currentMemberAccount.account_id
+                    : currentMemberAccount.email}
                 </p>
               </motion.div>
             )}
@@ -471,12 +477,12 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
               </Avatar> */}
                 <div className="flex flex-col pr-2 max-w-[75%]">
                   <p className="text-black dark:text-neutral-100 text-sm truncate">
-                    {acc.account_id}
+                    {acc.alias}
                     {/* {acc.firstName + " " + acc.lastName} */}
                   </p>
                   <p className="text-neutral-500/90 text-xs truncate">
                     {/* {acc.email} */}
-                    {acc.externalId}
+                    {acc.account_id}
                   </p>
                 </div>
               </DropdownMenuRadioItem>

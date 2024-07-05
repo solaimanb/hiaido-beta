@@ -2,29 +2,43 @@ import VerticalTabs from "@/components/VerticalTabs";
 import TermsConditions from "@/components/termsConditions";
 import { Tabs } from "@radix-ui/themes";
 import { useState } from "react";
-import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet-async";
 import Pricing from "./Pricing";
 import NewPriceList from "@/components/PriceList";
 import MemberAccountPage from "./MemberAccountPage";
+import { useGlobalState } from "@/context/GlobalStateContext";
+import Loader from "@/components/Loader";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Terms = () => {
   window.scrollTo(0, 0);
-  const [activeTab, setactiveTab] = useState(0)
+  const { memberAccounts } = useGlobalState();
+  const navigate = useNavigate();
+  const [activeTab, setactiveTab] = useState(0);
 
   const tabs = [
     {
       title: "Terms & Conditions",
-      content: <TermsConditions setactiveTab={setactiveTab} />
+      content: <TermsConditions setactiveTab={setactiveTab} />,
     },
     {
       title: "Free Trial & Paid Subscription",
-      content: <NewPriceList setactiveTab={setactiveTab} />
+      content: <NewPriceList setactiveTab={setactiveTab} />,
     },
     {
       title: "Choose Cloud Account",
-      content: <MemberAccountPage />
-    }
-  ]
+      content: <MemberAccountPage />,
+    },
+  ];
+  if (!memberAccounts) return <Loader />;
+
+  if (
+    memberAccounts.connectedAccounts.length > 0 ||
+    memberAccounts.memberAccounts.length > 0
+  ) {
+    console.log("NAVIGATING");
+    return <Navigate to={"/chat"} />;
+  }
 
   return (
     <>
@@ -44,7 +58,11 @@ const Terms = () => {
 
       {/* MAIN CONTENT */}
       <div className="w-full p-3 bg-orange-200 flex justify-center items-center">
-        <VerticalTabs tabs={tabs} activeTab={activeTab} setactiveTab={setactiveTab} />
+        <VerticalTabs
+          tabs={tabs}
+          activeTab={activeTab}
+          setactiveTab={setactiveTab}
+        />
       </div>
     </>
   );
