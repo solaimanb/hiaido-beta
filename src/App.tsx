@@ -17,6 +17,7 @@ import Enterprise from "./pages/Enterprise.jsx";
 import About from "./pages/About.jsx";
 import Loader from "./components/Loader.js";
 // Using React.lazy to dynamically import components for the App page.
+const Onboarding = lazy(() => import("./pages/Onboarding.js"));
 const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));
 const Landing = lazy(() => import("./pages/Landing.jsx"));
 const Hiring = lazy(() => import("./pages/Hiring.jsx"));
@@ -95,7 +96,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/ethical-ai" element={<EthicalAI />} />
             {/* <Route path="/login" element={<Login />} /> */}
-              <Route path="/terms" element={<Terms />} />
+            <Route path="/terms" element={<Terms />} />
           </Route>
 
           {authStatus === "authenticated" ? (
@@ -106,7 +107,7 @@ const App = () => {
                 </GlobalStateProvider>
               }
             >
-              {/* <Route path="/terms" element={<Terms />} /> */}
+              <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/dashboard" element={<UnderConstruction />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/account-factory" element={<AccountFactory />} />
