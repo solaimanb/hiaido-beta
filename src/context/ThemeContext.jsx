@@ -12,8 +12,8 @@ export const ThemeProvider = ({ children }) => {
       setTheme(storedTheme);
       document.body.classList.add(storedTheme);
     } else {
-      setTheme("light");
-      document.body.classList.add("light");
+      setTheme("dark");
+      document.body.classList.add("dark");
     }
   }, []);
 

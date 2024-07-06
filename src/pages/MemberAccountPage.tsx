@@ -11,6 +11,7 @@ import { Loader2, VerifiedIcon } from "lucide-react";
 import { fetchAuthSession } from "aws-amplify/auth";
 import AnimatedBtn from "../components/Buttons/AnimatedBtn";
 import { Button } from "@/ui-components/ui/button";
+import ConnectAccountFormButton from "@/components/ConnectAccountFormButton";
 
 const copyContent = async (text: string) => {
   try {
@@ -25,11 +26,15 @@ const ConnectExstingMemberAccountForm = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [externalId, setExternalId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingExternalId, setLoadingExternalId] = useState(false);
   const navigate = useNavigate();
 
   const handleExternalIdGeneration = async () => {
+    if (loadingExternalId) return;
     const authData = await fetchAuthSession();
     const idToken = authData.tokens?.idToken?.toString();
+
+    setLoadingExternalId(true);
 
     try {
       const response = await fetch(
@@ -56,7 +61,7 @@ const ConnectExstingMemberAccountForm = () => {
       toast.error("An error occured");
       setErrorMsg("An error occured");
     } finally {
-      setLoading(false);
+      setLoadingExternalId(false);
     }
   };
 
@@ -114,7 +119,10 @@ const ConnectExstingMemberAccountForm = () => {
       <h2 className="font-bold text-2xl text-nowrap">
         Are you an existing AWS user ?
       </h2>
-      <div className="w-full flex justify-center mt-4 relative">
+      <p className="my-10 mt-5">
+        Connect your existing AWS account to Hiaido to start using the chatbot
+      </p>
+      {/* <div className="w-full flex justify-center mt-4 relative">
         <button
           className="flex items-center gap-2 cursor-pointer"
           onClick={async () => {
@@ -130,17 +138,20 @@ const ConnectExstingMemberAccountForm = () => {
             Account Id: 381492248344
           </label>
         </button>
-      </div>
-      <div className="w-full flex justify-center mt-4 relative mx-auto">
+      </div> */}
+      {/* <div className="w-full flex justify-center mt-4 relative mx-auto">
         {externalId ? (
           <button
             className="flex items-center gap-2 cursor-pointer"
             onClick={async () => {
-              await copyContent("1232e32r344324");
+              await copyContent(externalId);
               toast.success("External Id Copied!");
             }}
           >
-            <label htmlFor="addPolicy" className="cursor-pointer flex gap-2 justify-center">
+            <label
+              htmlFor="addPolicy"
+              className="cursor-pointer flex gap-2 justify-center"
+            >
               <CopyIcon
                 id="addPolicy"
                 className={`cursor-pointer size-5 ${"hover:text-orange-400"}`}
@@ -154,13 +165,15 @@ const ConnectExstingMemberAccountForm = () => {
             className="text-orange-400"
             onClick={handleExternalIdGeneration}
           >
-            {loading && <Loader2 className="animate-spin mr-2 size-4" />}
+            {loadingExternalId && (
+              <Loader2 className="animate-spin mr-2 size-4" />
+            )}
             Generate External Id
           </Button>
         )}
-      </div>
+      </div> */}
 
-      <div className="mt-5 w-full flex justify-center">
+      {/* <div className="mt-5 w-full flex justify-center">
         <input
           type="text"
           name="role"
@@ -172,10 +185,11 @@ const ConnectExstingMemberAccountForm = () => {
             setErrorMsg(null);
           }}
         />
-      </div>
-      <div className="text-left text-red-400 mt-3 text-sm">{errorMsg}</div>
+      </div> */}
+      {/* <div className="text-left text-red-400 mt-3 text-sm">{errorMsg}</div> */}
       {/* <ExstingMemberAccountButton disabled={!roleARN.length} /> */}
-      <Button onClick={submitRoleArn}>Connect</Button>
+      {/* <Button onClick={submitRoleArn}>Connect</Button> */}
+      <ConnectAccountFormButton />
     </div>
   );
 };

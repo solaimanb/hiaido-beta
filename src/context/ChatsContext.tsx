@@ -9,7 +9,13 @@ import React, {
 } from "react";
 import { GlobalStateContext, useGlobalState } from "./GlobalStateContext";
 import config from "@/config";
-import { Chat, MemberAccount, Model } from "@/types";
+import {
+  Chat,
+  MemberAccounts,
+  Model,
+  ManagedMemberAccount,
+  ConnectedAccount,
+} from "@/types";
 import toast from "react-hot-toast";
 import { getChats, openDB, replaceChats } from "@/utils/indexed-db";
 
@@ -19,8 +25,8 @@ interface ChatsContextType {
     query: string;
     newChat: Chat | null;
     chats: Chat[];
-    memberAccounts: MemberAccount[] | null;
-    currentMemberAccount: MemberAccount | null;
+    memberAccounts: MemberAccounts | null;
+    currentMemberAccount: ManagedMemberAccount | ConnectedAccount | null;
     error: string | null;
     idb: IDBDatabase | null;
   };
@@ -144,7 +150,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       case Model.CLAUDE_HAIKU:
         url = `${config.baseURL}/get-response/claude-haiku`;
         body = JSON.stringify({
-          email: currentMemberAccount["email"],
+          email: currentMemberAccount["email"] || currentMemberAccount["externalId"],
           owner: userAttributes.email,
           query: newChat.query,
         });
@@ -153,7 +159,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       case Model.CLAUDE_SONNET:
         url = `${config.baseURL}/get-response/claude-sonnet`;
         body = JSON.stringify({
-          email: currentMemberAccount["email"],
+          email: currentMemberAccount["email"] || currentMemberAccount["externalId"],
           owner: userAttributes.email,
           query: newChat.query,
         });
@@ -162,7 +168,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       default:
         url = `${config.baseURL}/get-response`;
         body = JSON.stringify({
-          email: currentMemberAccount["email"],
+          email: currentMemberAccount["email"] || currentMemberAccount["externalId"],
           owner: userAttributes.email,
           query: newChat.query,
         });

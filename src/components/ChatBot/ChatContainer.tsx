@@ -120,7 +120,10 @@ const CreateMemberAccountWarningBox = () => {
 };
 
 const ChatsList = memo(() => {
-  const { chats } = useChats().state;
+  const {
+    state: { chats, newChat },
+    setters: { setNewChat },
+  } = useChats();
   return (
     <div className="pb-60 w-full">
       {chats.map((chat, index) => (
@@ -167,7 +170,17 @@ const ChatsList = memo(() => {
                     {chat.error ? (
                       <div className="dark:bg-red-800/25 bg-red-400/25 w-full p-2 my-3 rounded-lg px-5 py-3 flex flex-col gap-5">
                         <span>{chat.error}</span>
-                        <button className="dark:bg-white dark:text-black bg-white text-black px-4 p-2 rounded-md w-fit flex gap-3 items-center hover:bg-neutral-100 dark:hover:bg-neutral-200">
+                        <button
+                          onClick={() => {
+                            if (newChat) {
+                              let newChatCopy = structuredClone(newChat);
+                              newChatCopy.error = undefined;
+                              newChatCopy.loading = true;
+                              setNewChat(newChatCopy);
+                            }
+                          }}
+                          className="dark:bg-white dark:text-black bg-white text-black px-4 p-2 rounded-md w-fit flex gap-3 items-center hover:bg-neutral-100 dark:hover:bg-neutral-200"
+                        >
                           <span>
                             <RefreshCcwIcon className="w-4 h-4" />
                           </span>
@@ -257,6 +270,7 @@ const ChatContainer = () => {
 
 const QueryBox = () => {
   const { state, submitPrompt } = useChats();
+  const { memberAccounts } = useContext(GlobalStateContext);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { chats } = state;
   // const { setQuery } = setters;
@@ -283,13 +297,16 @@ const QueryBox = () => {
     }
   }, [query]);
 
-  const { memberAccounts } = useContext(GlobalStateContext);
   return (
     <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[780px] p-1.5 outline-none appearance-none">
       <Paperclip className="size-6 mb-2 ml-2" />
       <div className="flex flex-col flex-1 min-w-0">
         <textarea
-          disabled={(memberAccounts && memberAccounts.length == 0) as boolean}
+          disabled={
+            (memberAccounts &&
+              memberAccounts.connectedAccounts.length == 0 &&
+              memberAccounts.memberAccounts.length == 0) as boolean
+          }
           rows={1}
           className="bg-black/0 w-full max-h-52 py-2 resize-none focus:ring-0 border-none outline-none overflow-y-scroll text-black dark:text-neutral-100 placeholder-neutral-700 dark:placeholder-neutral-400"
           ref={inputRef}

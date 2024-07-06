@@ -5,17 +5,17 @@ import ButtonGradient from "./assets/svg/ButtonGradient.jsx";
 import "@radix-ui/themes/styles.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Toaster } from "react-hot-toast";
-import AppLayout from "./layouts/AppLayout.jsx";
 import UnderConstruction from "./pages/UnderConstruction.jsx";
 import { Suspense, lazy, useEffect, useState } from "react";
 import Loading from "./components/shared/Loading.jsx";
 import AccountFactory from "@/pages/AccountFactory";
+import AppLayout from "@/layouts/AppLayout";
 
 import { Amplify } from "aws-amplify";
 import { GlobalStateProvider } from "./context/GlobalStateContext.js";
 import Enterprise from "./pages/Enterprise.jsx";
 import About from "./pages/About.jsx";
-
+import Loader from "./components/Loader.js";
 // Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));
 const Landing = lazy(() => import("./pages/Landing.jsx"));
@@ -71,12 +71,18 @@ const App = () => {
     checkAuthStatus();
   }, []);
 
+  console.log(authStatus);
+
+  // if (authStatus === "configuring") {
+  //   return <Loader />;
+  // }
+
   if (loading) {
     return <Loading />;
   }
 
   return (
-    <Suspense fallback={authStatus === "configuring" && <Loading />}>
+    <Suspense fallback={authStatus === "configuring" && <Loader />}>
       <HelmetProvider>
         <Routes>
           <Route path="/" element={<RootLayout />}>
@@ -88,41 +94,47 @@ const App = () => {
             <Route path="/enterprise" element={<Enterprise />} />
             <Route path="/about" element={<About />} />
             <Route path="/ethical-ai" element={<EthicalAI />} />
-            <Route path="/login" element={<Login />} />
+            {/* <Route path="/login" element={<Login />} /> */}
           </Route>
 
-          <Route
-            element={
-              authStatus === "authenticated" ? (
+          {authStatus === "authenticated" ? (
+            <Route
+              element={
                 <GlobalStateProvider>
                   <AppLayout />
                 </GlobalStateProvider>
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          >
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/dashboard" element={<UnderConstruction />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/account-factory" element={<AccountFactory />} />
-            <Route path="/usage-analytics" element={<UnderConstruction />} />
-            <Route path="/deployments" element={<UnderConstruction />} />
-            <Route path="/scheduler" element={<UnderConstruction />} />
-            <Route path="/feature-requests" element={<UnderConstruction />} />
-            <Route path="/user-management" element={<UnderConstruction />} />
-            <Route path="/billing" element={<UnderConstruction />} />
-            <Route path="/tickets" element={<UnderConstruction />} />
-            <Route path="/settings" element={<UnderConstruction />} />
-            <Route path="/help" element={<UnderConstruction />} />
-          </Route>
+              }
+            >
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/dashboard" element={<UnderConstruction />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/account-factory" element={<AccountFactory />} />
+              <Route path="/usage-analytics" element={<UnderConstruction />} />
+              <Route path="/deployments" element={<UnderConstruction />} />
+              <Route path="/scheduler" element={<UnderConstruction />} />
+              <Route path="/feature-requests" element={<UnderConstruction />} />
+              <Route path="/user-management" element={<UnderConstruction />} />
+              <Route path="/billing" element={<UnderConstruction />} />
+              <Route path="/tickets" element={<UnderConstruction />} />
+              <Route path="/settings" element={<UnderConstruction />} />
+              <Route path="/help" element={<UnderConstruction />} />
+              <Route path="/login" element={<Navigate to="/chat" />} />
+            </Route>
+          ) : (
+            <Route
+              path="/login"
+              element={
+                route === "authenticated" ? <Navigate to="/chat" /> : <Login />
+              }
+            />
+          )}
 
-          <Route
+          {/* <Route
             path="/login"
             element={
               route === "authenticated" ? <Navigate to="/chat" /> : <Login />
             }
-          />
+          /> */}
 
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,11 +1,25 @@
 // TODO: update later
-export interface MemberAccount {
+export interface ManagedMemberAccount {
   email: string;
   firstName: string;
   lastName: string;
   account_status: string;
   account_id: string;
   timestamp: string;
+}
+
+export interface ConnectedAccount {
+  role_arn: string;
+  owner: string;
+  externalId: string;
+  account_id: string;
+  owner_id: string;
+  timestamp: string;
+}
+
+export interface MemberAccounts {
+  memberAccounts: ManagedMemberAccount[];
+  connectedAccounts: ConnectedAccount[];
 }
 
 export type Query = string;

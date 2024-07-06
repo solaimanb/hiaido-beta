@@ -17,7 +17,7 @@ const MDX: React.FC<MDXProps> = ({ content }) => {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
-      className="markdown leading-relaxed text-[15px]"
+      className="markdown leading-relaxed text-[15px] w-full"
       components={{
         code(props) {
           const { children, className, node, ...rest } = props;
@@ -41,7 +41,7 @@ const MDX: React.FC<MDXProps> = ({ content }) => {
         hr: (props) => <hr className="!bg-neutral-300 !h-[1px]"></hr>,
         table: (props) => {
           // console.log(props.children)
-          return <table {...props} />
+          return <table {...props} className="!overflow-x-hidden w-[200px]" />
         }
         // h1: ({ className, children, ...rest }) => (
         //   <h1 className={`mt-10`}>{children}</h1>
