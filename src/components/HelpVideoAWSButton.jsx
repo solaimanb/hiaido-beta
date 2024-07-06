@@ -1,40 +1,51 @@
-import dummy from "../assets/dummy.mp4"
-import Dialog from "./Dialog";
+import dummy from "../assets/dummy.mp4";
+// import Dialog from "./Dialog";
 import { useState } from "react";
-import InformationCircleIcon from "../assets/icons/informationIcon.svg"
+import InformationCircleIcon from "../assets/icons/informationIcon.svg";
 import JsonViewer from "./JsonViewer";
 import { CopyIcon } from "@radix-ui/react-icons";
 import toast from "react-hot-toast";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogTrigger,
+} from "@/ui-components/ui/alert-dialog";
 
 const HelpVideoAWSButton = () => {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const openDialog = () => setIsDialogOpen(true);
-    const closeDialog = () => setIsDialogOpen(false);
+  const openDialog = () => setIsDialogOpen(true);
+  const closeDialog = () => setIsDialogOpen(false);
 
-    const copyContent = async (text) => {
-        try {
-            await navigator.clipboard.writeText(text);
-            toast.success("Copied to clipboard");
-        } catch (err) {
-            alert("Failed to copy", err);
-        }
-    };
+  const copyContent = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success("Copied to clipboard");
+    } catch (err) {
+      alert("Failed to copy", err);
+    }
+  };
 
-    return (
-        <>
-            <button
-                className="p-2 rounded"
-                onClick={openDialog}
-            >
-                <img src={InformationCircleIcon} width={24} height={24} />
-            </button>
-            <Dialog isOpen={isDialogOpen} onClose={closeDialog} title={"How to create the account in AWS."} >
-                <div className="w-full flex gap-4 flex-col items-center md:flex-row">
-                    <video controls autoPlay={true} className="w-full">
-                        <source src={dummy} type="video/mp4" />
-                    </video>
-                    {/* <div className="w-full text-black relative">
+  return (
+    <>
+      <AlertDialog
+        isOpen={isDialogOpen}
+        onClose={closeDialog}
+        title={"How to create the account in AWS."}
+      >
+        <AlertDialogTrigger>
+          <button className="p-2 rounded" onClick={openDialog}>
+            <img src={InformationCircleIcon} width={24} height={24} />
+          </button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <div className="w-full flex gap-4 flex-col items-center md:flex-row">
+            <video controls autoPlay={true} className="w-full">
+              <source src={dummy} type="video/mp4" />
+            </video>
+            {/* <div className="w-full text-black relative">
 
                         <JsonViewer className={""} data={{
                             "Version": "2012-10-17",
@@ -73,10 +84,14 @@ const HelpVideoAWSButton = () => {
                         </button>
 
                     </div> */}
-                </div>
-            </Dialog>
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
-            {/* <AlertDialog.Root>
+      {/* <AlertDialog.Root>
                 <AlertDialog.Trigger className="flex justify-center">
                     <button>
                         <img src={InformationCircleIcon} width={24} height={24} />
@@ -94,8 +109,8 @@ const HelpVideoAWSButton = () => {
                     </AlertDialog.Cancel>
                 </AlertDialog.Content>
             </AlertDialog.Root> */}
-        </>
-    );
+    </>
+  );
 };
 
 export default HelpVideoAWSButton;

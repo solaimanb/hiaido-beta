@@ -29,90 +29,90 @@ const ConnectExstingMemberAccountForm = () => {
   const [loadingExternalId, setLoadingExternalId] = useState(false);
   const navigate = useNavigate();
 
-  const handleExternalIdGeneration = async () => {
-    if (loadingExternalId) return;
-    const authData = await fetchAuthSession();
-    const idToken = authData.tokens?.idToken?.toString();
+  // const handleExternalIdGeneration = async () => {
+  //   if (loadingExternalId) return;
+  //   const authData = await fetchAuthSession();
+  //   const idToken = authData.tokens?.idToken?.toString();
 
-    setLoadingExternalId(true);
+  //   setLoadingExternalId(true);
 
-    try {
-      const response = await fetch(
-        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/connect-account/external-id",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-        }
-      );
+  //   try {
+  //     const response = await fetch(
+  //       "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/connect-account/external-id",
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${idToken}`,
+  //         },
+  //       }
+  //     );
 
-      const res_body = await response.json();
-      if (response.ok) {
-        setExternalId(res_body.externalId);
-        toast.success("External Id generated successfully");
-      } else {
-        setErrorMsg(res_body.message || "An error occured");
-        toast.error(res_body.message || "An error occured");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("An error occured");
-      setErrorMsg("An error occured");
-    } finally {
-      setLoadingExternalId(false);
-    }
-  };
+  //     const res_body = await response.json();
+  //     if (response.ok) {
+  //       setExternalId(res_body.externalId);
+  //       toast.success("External Id generated successfully");
+  //     } else {
+  //       setErrorMsg(res_body.message || "An error occured");
+  //       toast.error(res_body.message || "An error occured");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error("An error occured");
+  //     setErrorMsg("An error occured");
+  //   } finally {
+  //     setLoadingExternalId(false);
+  //   }
+  // };
 
-  const submitRoleArn = async () => {
-    if (loading) return;
-    // validate input
-    if (externalId === null) {
-      setErrorMsg("External Id is required");
-      return;
-    }
-    if (roleARN.split(":").length !== 6) {
-      setErrorMsg("Invalid ARN");
-      return;
-    }
+  // const submitRoleArn = async () => {
+  //   if (loading) return;
+  //   // validate input
+  //   if (externalId === null) {
+  //     setErrorMsg("External Id is required");
+  //     return;
+  //   }
+  //   if (roleARN.split(":").length !== 6) {
+  //     setErrorMsg("Invalid ARN");
+  //     return;
+  //   }
 
-    const authData = await fetchAuthSession();
-    const idToken = authData.tokens?.idToken?.toString();
+  //   const authData = await fetchAuthSession();
+  //   const idToken = authData.tokens?.idToken?.toString();
 
-    try {
-      setLoading(true);
-      const response = await fetch(
-        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/connect-account",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            role_arn: roleARN,
-            externalId,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-        }
-      );
+  //   try {
+  //     setLoading(true);
+  //     const response = await fetch(
+  //       "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/connect-account",
+  //       {
+  //         method: "POST",
+  //         body: JSON.stringify({
+  //           role_arn: roleARN,
+  //           externalId,
+  //         }),
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${idToken}`,
+  //         },
+  //       }
+  //     );
 
-      const res_body = await response.json();
-      if (response.ok) {
-        toast.success("Account connected successfully");
-        navigate("/chat");
-      } else {
-        setErrorMsg(res_body.message || "An error occured");
-        toast.error(res_body.message || "An error occured");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("An error occured");
-      setErrorMsg("An error occured");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const res_body = await response.json();
+  //     if (response.ok) {
+  //       toast.success("Account connected successfully");
+  //       navigate("/chat");
+  //     } else {
+  //       setErrorMsg(res_body.message || "An error occured");
+  //       toast.error(res_body.message || "An error occured");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error("An error occured");
+  //     setErrorMsg("An error occured");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="w-full h-full p-2 md:border-l md:pl-4">

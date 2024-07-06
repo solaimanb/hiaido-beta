@@ -24,7 +24,14 @@ import { Button } from "@/ui-components/ui/button";
 import { fetchAuthSession } from "aws-amplify/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { Copy, Loader2 } from "lucide-react";
+import { CircleHelp, Copy, Loader2 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/ui-components/ui/tooltip";
+import HelpVideoAWSButton from "./HelpVideoAWSButton";
 
 const formSchema = z.object({
   alias: z
@@ -164,7 +171,10 @@ const ConnectAccountForm = () => {
   return (
     <>
       <AlertDialogHeader>
-        <AlertDialogTitle>Connect existing AWS account</AlertDialogTitle>
+        <AlertDialogTitle>
+          Connect existing AWS account
+          <HelpVideoAWSButton />
+        </AlertDialogTitle>
       </AlertDialogHeader>
       {/* <AlertDialogDescription> */}
       <Form {...form}>
@@ -193,8 +203,6 @@ const ConnectAccountForm = () => {
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter account alias"
-                  className="text-white"
                   value={HIAIDO_ACCOUNT_ID}
                   // disabled
                 />
@@ -211,7 +219,7 @@ const ConnectAccountForm = () => {
             {externalId === null ? (
               <FormItem>
                 <FormLabel>
-                  External ID
+                  Generating External ID
                   <Loader2 className="size-4 ml-2 inline-block cursor-pointer animate-spin" />
                 </FormLabel>
                 <FormControl>
@@ -236,7 +244,6 @@ const ConnectAccountForm = () => {
                 <FormControl>
                   <Input
                     // disabled
-                    placeholder="Enter account alias"
                     value={externalId}
                   />
                 </FormControl>
@@ -250,7 +257,19 @@ const ConnectAccountForm = () => {
             name="alias"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Account alias</FormLabel>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <FormLabel>
+                        Account alias
+                        <CircleHelp className="inline-block ml-2 size-4" />
+                      </FormLabel>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="w-64">A unique alias to identify the connected account.</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
                 <FormControl>
                   <Input placeholder="Enter account alias" {...field} />
                 </FormControl>
@@ -263,7 +282,19 @@ const ConnectAccountForm = () => {
             name="roleArn"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Role ARN</FormLabel>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <FormLabel>
+                        Role ARN
+                        <CircleHelp className="inline-block ml-2 size-4" />
+                      </FormLabel>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="w-64">The ARN or the role generated using the provided Hiaido Account ID and External Id provided</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
                 <FormControl>
                   <Input placeholder="Enter Role ARN" {...field} />
                 </FormControl>
