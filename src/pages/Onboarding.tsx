@@ -1,27 +1,30 @@
 import VerticalTabs from "@/components/VerticalTabs";
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import MemberAccountPage from "./MemberAccountPage";
 import NewTermsConditions from "@/components/NewTermsConditions";
 import { useGlobalState } from "@/context/GlobalStateContext";
 import Loader from "@/components/Loader";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import NewPriceList from "@/components/PriceList";
 
 const Onboarding = () => {
   window.scrollTo(0, 0);
   const { memberAccounts } = useGlobalState();
-  const [activeTab, setactiveTab] = useState(0);
+  const [params, _] = useSearchParams();
+  const activeTab = parseInt(params.get("step") || "0");
+
+  if (activeTab < 0 || activeTab > 2)
+    return <Navigate to="/onboarding?step=0" />;
 
   const tabs = [
     {
       title: "Terms & Conditions",
       // content: <TermsConditions setactiveTab={setactiveTab} />
-      content: <NewTermsConditions setactiveTab={setactiveTab} />,
+      content: <NewTermsConditions />,
     },
     {
       title: "Free Trial & Paid Subscription",
-      content: <NewPriceList setactiveTab={setactiveTab} />,
+      content: <NewPriceList />,
     },
     {
       title: "Choose Cloud Account",
@@ -60,7 +63,6 @@ const Onboarding = () => {
         <VerticalTabs
           tabs={tabs}
           activeTab={activeTab}
-          setactiveTab={setactiveTab}
         />
       </div>
     </>
