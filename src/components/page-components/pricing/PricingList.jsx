@@ -16,7 +16,6 @@ const PricingList = ({ convertPrice, currencySymbol }) => {
     }));
   };
 
-
   return (
     <div className="container grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-8 py-2 px-4 md:px-10">
       {pricing.map((item) => (
