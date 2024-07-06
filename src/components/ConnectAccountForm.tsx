@@ -32,6 +32,11 @@ import {
   TooltipTrigger,
 } from "@/ui-components/ui/tooltip";
 import HelpVideoAWSButton from "./HelpVideoAWSButton";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/ui-components/ui/popover";
 
 const formSchema = z.object({
   alias: z
@@ -171,9 +176,12 @@ const ConnectAccountForm = () => {
   return (
     <>
       <AlertDialogHeader>
-        <AlertDialogTitle>
+        <AlertDialogTitle className="flex justify-between items-center">
           Connect existing AWS account
-          <HelpVideoAWSButton />
+          <span className="flex items-center !text-base !font-normal">
+            Help
+            <HelpVideoAWSButton />
+          </span>
         </AlertDialogTitle>
       </AlertDialogHeader>
       {/* <AlertDialogDescription> */}
@@ -257,19 +265,17 @@ const ConnectAccountForm = () => {
             name="alias"
             render={({ field }) => (
               <FormItem>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <FormLabel>
-                        Account alias
-                        <CircleHelp className="inline-block ml-2 size-4" />
-                      </FormLabel>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="w-64">A unique alias to identify the connected account.</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Popover>
+                  <FormLabel>Account alias</FormLabel>
+                  <PopoverTrigger asChild>
+                    <CircleHelp className="inline-block ml-2 mb-2 -translate-y-1 size-4" />
+                  </PopoverTrigger>
+                  <PopoverContent className="bg-neutral-800">
+                    <p className="w-64">
+                      A unique alias to identify the connected account.
+                    </p>
+                  </PopoverContent>
+                </Popover>
                 <FormControl>
                   <Input placeholder="Enter account alias" {...field} />
                 </FormControl>
@@ -282,19 +288,18 @@ const ConnectAccountForm = () => {
             name="roleArn"
             render={({ field }) => (
               <FormItem>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <FormLabel>
-                        Role ARN
-                        <CircleHelp className="inline-block ml-2 size-4" />
-                      </FormLabel>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="w-64">The ARN or the role generated using the provided Hiaido Account ID and External Id provided</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Popover>
+                  <FormLabel>Role ARN</FormLabel>
+                  <PopoverTrigger asChild>
+                    <CircleHelp className="inline-block ml-2 mb-2 -translate-y-1 size-4" />
+                  </PopoverTrigger>
+                  <PopoverContent className="bg-neutral-800">
+                    <p className="w-64">
+                      The ARN or the role generated using the provided Hiaido
+                      Account ID and External Id provided
+                    </p>
+                  </PopoverContent>
+                </Popover>
                 <FormControl>
                   <Input placeholder="Enter Role ARN" {...field} />
                 </FormControl>
