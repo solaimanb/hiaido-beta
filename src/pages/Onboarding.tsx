@@ -1,24 +1,23 @@
 import VerticalTabs from "@/components/VerticalTabs";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import NewPriceList from "@/components/PriceList";
 import MemberAccountPage from "./MemberAccountPage";
 import NewTermsConditions from "@/components/NewTermsConditions";
 import { useGlobalState } from "@/context/GlobalStateContext";
 import Loader from "@/components/Loader";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import NewPriceList from "@/components/PriceList";
 
-const Terms = () => {
+const Onboarding = () => {
   window.scrollTo(0, 0);
   const { memberAccounts } = useGlobalState();
-  const navigate = useNavigate();
   const [activeTab, setactiveTab] = useState(0);
 
   const tabs = [
     {
       title: "Terms & Conditions",
       // content: <TermsConditions setactiveTab={setactiveTab} />
-      content: <NewTermsConditions setactiveTab={setactiveTab} />
+      content: <NewTermsConditions setactiveTab={setactiveTab} />,
     },
     {
       title: "Free Trial & Paid Subscription",
@@ -29,15 +28,16 @@ const Terms = () => {
       content: <MemberAccountPage />,
     },
   ];
+
   if (!memberAccounts) return <Loader />;
 
-  if (
-    memberAccounts.connectedAccounts.length > 0 ||
-    memberAccounts.memberAccounts.length > 0
-  ) {
-    console.log("NAVIGATING");
-    return <Navigate to={"/chat"} />;
-  }
+  // if (
+  //   memberAccounts.connectedAccounts.length > 0 ||
+  //   memberAccounts.memberAccounts.length > 0
+  // ) {
+  //   console.log("NAVIGATING");
+  //   return <Navigate to={"/chat"} />;
+  // }
 
   return (
     <>
@@ -67,4 +67,4 @@ const Terms = () => {
   );
 };
 
-export default Terms;
+export default Onboarding;

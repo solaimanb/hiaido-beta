@@ -16,6 +16,7 @@ import { GlobalStateProvider } from "./context/GlobalStateContext.js";
 import Enterprise from "./pages/Enterprise.jsx";
 import About from "./pages/About.jsx";
 import Loader from "./components/Loader.js";
+import PricePage from "./pages/Price.jsx";
 // Using React.lazy to dynamically import components for the App page.
 const Onboarding = lazy(() => import("./pages/Onboarding.js"));
 const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));

@@ -1,49 +1,117 @@
-import { check } from '@/assets'
-import { pricing } from '@/constants/pricing'
-import React from 'react'
+import { check } from "@/assets";
 import "./page-components/pricing/PricingList.css"
+import { generateCheckoutUrl } from "@/services/GenerateCheckoutUrl";
+import React, { useState } from "react";
+import { Flex, Switch, Text } from "@radix-ui/themes";
+import { pricing } from "@/constants/pricing";
 
 const NewPriceList = ({ setactiveTab }) => {
+
+    const [currency, setCurrency] = useState("INR");
+    const [usdClicked, setUsdClicked] = useState(false);
+    const [inrClicked, setInrClicked] = useState(false);
+    const [checkoutUrl, setCheckoutUrl] = useState({});
+    console.log(checkoutUrl)
+
+    const currencySymbol = currency === "USD" ? "$" : "₹";
+
+    const handleClick = (plan, currency) => {
+        const url = generateCheckoutUrl(plan, currency);
+        setCheckoutUrl((prevState) => ({
+            ...prevState,
+            [plan]: url,
+        }));
+    };
+    const handleUsdClick = () => {
+        if (!usdClicked) {
+            setCurrency("USD");
+            setUsdClicked(true);
+            setInrClicked(false);
+        }
+    };
+
+    const handleInrClick = () => {
+        if (!inrClicked) {
+            setCurrency("INR");
+            setInrClicked(true);
+            setUsdClicked(false);
+        }
+    };
+
+    const convertPrice = (price) => {
+        return currency === 'INR' ? price.INR : price.USD;
+    };
+
     return (
-        <div>
-            <div className='w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-4 '>
+        <div className="w-full">
+            <div className="mt-10 flex justify-center items-center gap-2">
+                <div className="flex items-center gap-2 p-3 rounded-2xl bg-white shadow-orange">
+                    <span
+                        className={`bold-title cursor-pointer ${currency === 'USD' ? 'text-orange-400' : 'text-black'}`}
+                        onClick={handleUsdClick}
+                    >
+                        <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-USD-Monthly"
+                            data-cb-item-quantity="1"
+                        >
+                            USD
+                        </a>
+                    </span>
+
+                    <Switch
+                        size="3"
+                        color="orange"
+                        checked={currency === "INR"}
+                        className="cursor-pointer border border-white z-10 text-white before:border-white"
+                    />
+                    <span
+                        className={`bold-title cursor-pointer ${currency === 'INR' ? 'text-orange-400' : 'text-black'}`}
+                        onClick={handleInrClick}
+                    >
+                        <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-INR-Monthly"
+                            data-cb-item-quantity="1"
+                        >
+                            INR
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div className="w-full grid grid-cols-1 xl:grid-cols-3 gap-6 md:gap-10 mt-8 py-2 px-4 md:px-10">
                 {pricing.map((item) => (
                     <div
                         key={item.id}
-                        className="pricing-card-base-bg w-full overflow-hidden flex flex-col justify-between rounded-[2.5rem] shadow-md shadow-white"
+                        className=" transition-all duration-300 ease-in-out w-full rounded-3xl border border-white shadow shadow-white p-3 hover:shadow-orange hover:scale-105"
                     >
-
-                        <div className="pricing-card-bg border-b border-orange-500/30 pb-6 flex flex-col justify-center">
-                            <div
-                                className={`space-y-2 mb-6 p-2 ${!item.price ? "space-y-4" : ""}`}
-                            >
-                                <h4 className="h4 bold-title text-center text-orange-500 mt-2">
+                        <div className=" flex flex-col justify-center">
+                            <div className={`${!item.price ? "" : ""}`}>
+                                <h4 className="text-4xl bold-title text-center text-orange-500 mt-2">
                                     {item.title}
                                 </h4>
-
-                                <div className={`flex items-center justify-center mb-6`}>
-                                    {item.price && (
-                                        <>
-                                            <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
-                                                $
-                                            </div>
-                                            <div className="text-4xl xl:text-5xl leading-none font-bold">
-                                                {item.price}
-                                            </div>
-                                            <span className="text-base font-semibold mt-2 xl:text-lg">
-                                                /month
-                                            </span>
-                                        </>
-                                    )}
-                                </div>
-
-                                <div>
+                                <div className="">
                                     <div
-                                        className={`space-y-2 ${item.images && "bg-[#302473] p-2 rounded-lg shadow-md"
+                                        className={`flex items-center justify-center my-6 ${!item.price ? "" : ""
+                                            }`}
+                                    >
+                                        {item.price && (
+                                            <>
+                                                <div className={`text-xl bold-title text-cyan-500 p-1 ${item.price.INR === null ? "hidden" : ""}`}>
+                                                    {currencySymbol}
+                                                </div>
+                                                <div className="text-3xl leading-none bold-title">
+                                                    {convertPrice(item.price)}
+                                                </div>
+                                                <span className={`font-bold mt-2 text-lg ${item.price.INR === null ? "hidden" : ""}`}>/month</span>
+                                            </>
+                                        )}
+                                    </div>
+
+
+                                    <div
+                                        className={`space-y-2 ${item.images &&
+                                            "bg-[#312373] p-2 rounded-lg shadow-lg border-r-2 border-b-2 border-[#201746]"
                                             } ${!item.price && "my-5"}`}
                                     >
                                         <p
-                                            className={`text-center xl:text-lg font-semibold ${item.images && "xl:text-sm"
+                                            className={`text-center text-lg font-semibold ${item.images && "xl:text-sm"
                                                 }`}
                                         >
                                             {item.description.split("\n").map((line, index) => (
@@ -53,6 +121,7 @@ const NewPriceList = ({ setactiveTab }) => {
                                                 </React.Fragment>
                                             ))}
                                         </p>
+
                                         <div className="flex items-center gap-3 justify-center">
                                             {item.images &&
                                                 item.images.map((image, index) => (
@@ -68,44 +137,31 @@ const NewPriceList = ({ setactiveTab }) => {
                                 </div>
                             </div>
 
-                            <button
-                                className={`bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white font-semibold p-2 rounded-lg`}
-                                href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
+                            <a
+                                className="text-white bold-title p-2 rounded-2xl text-lg border border-orange-400 text-center mt-3"
+                                href={
+                                    item.price && item.price.INR !== null
+                                        ? generateCheckoutUrl(item.title, currencySymbol === '₹' ? 'INR' : 'USD')
+                                        : 'mailto:support@hiaido.com'
+                                }
+                                onClick={(e) => {
+                                    if (item.price && item.price.INR === null) {
+                                        e.preventDefault();
+                                        window.location.href = 'mailto:support@hiaido.com';
+                                    } else {
+                                        handleClick(item.title, currencySymbol === '₹' ? 'INR' : 'USD');
+                                    }
+                                }}
                             >
-                                {item.trigger}
-                            </button>
-                        </div>
-
-                        <div className="flex h-full w-full p-2">
-                            <ul className="w-full flex flex-col h-full p-1">
-                                {item.features.map((feature, index) => (
-                                    <>
-                                        <li key={index} className="flex items-start py-2 gap-2">
-                                            <img
-                                                src={check}
-                                                width={16}
-                                                height={16}
-                                                alt="Check"
-                                                className="mt-1"
-                                            />
-
-                                            <p className="opacity-70 text-base font-semibold">
-                                                {feature}
-                                            </p>
-                                        </li>
-                                        {index < item.features.length - 1 && (
-                                            <hr className="border-t border-orange-50/10 w-full" />
-                                        )}
-                                    </>
-                                ))}
-                            </ul>
+                                {/* {item.trigger} */}
+                                Choose plan
+                            </a>
                         </div>
                     </div>
                 ))}
             </div>
             <div className="w-full flex gap-4 items-center justify-end mt-3 md:pr-4">
                 <button type="button" className="bg-white text-black py-2 px-4 rounded text-md font-bold">Decline</button>
-                {/* <AnimatedBtn type="button" onClick={() => setactiveTab(e => e + 1)}>Accept</AnimatedBtn> */}
                 <button className={`bg-orange-400 px-4 py-2 rounded font-bold`} onClick={() => setactiveTab(e => e + 1)} >Accept</button>
             </div>
         </div>
