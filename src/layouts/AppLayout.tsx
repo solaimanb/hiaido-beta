@@ -7,7 +7,7 @@ const AppLayout = () => {
   const { userAttributes, memberAccounts } = useGlobalState();
   const location = useLocation();
 
-  const dontShowRouteSidebar = ["/terms"];
+  const dontShowRouteSidebar = ["/onboarding"];
   console.log(memberAccounts);
 
   if (!userAttributes || !memberAccounts) {
@@ -16,9 +16,9 @@ const AppLayout = () => {
   if (
     memberAccounts.memberAccounts.length === 0 &&
     memberAccounts.connectedAccounts.length === 0 &&
-    location.pathname !== "/terms"
+    location.pathname !== "/onboarding"
   ) {
-    return <Navigate to="/terms" />;
+    return <Navigate to="/onboarding" />;
   }
   return (
     <div className="dark:bg-[#1a1a1a] bg-neutral-50 relative z-0 flex h-full w-full overflow-hidden">
