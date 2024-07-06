@@ -1,47 +1,46 @@
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Sliders from "./sliderInfo.json";
 import {
   Autoplay,
-  Pagination,
-  Navigation,
   EffectCoverflow,
+  Navigation,
+  Pagination,
 } from "swiper/modules";
-import { useAnimationFrame, useMotionValue } from "framer-motion";
-import { motion } from "framer-motion";
+import Sliders from "./sliderInfo.json";
 
 import "./featureSlider.css";
 
 // Dynamic import for image assets
 import {
-  digitalWorkforce,
-  smartUserInterface,
-  intelligentChatbot,
-  cloudSearchEverywhere,
-  einsteinFramework,
-  multiCloudConnectivity,
-  smarkTaskMangement,
   alerts,
-  sandhAi,
-  dataMigration,
-  securityAutomated,
-  devOpsSuite,
+  anomalyDetectionEngine,
+  autonomousOptimizationMatrix,
+  blockchainBasedGovernance,
   blockchainBasedSecurityLedger,
   chaosEngineering,
-  recommendationsEngine,
-  costOptimisation,
-  complianceManagementPack,
-  unifiedDashboard,
+  cloudSearchEverywhere,
   codeReviewerAi,
+  complianceManagementPack,
+  costOptimisation,
+  dataMigration,
+  devOpsSuite,
+  digitalWorkforce,
+  einsteinFramework,
+  intelligentChatbot,
+  multiCloudConnectivity,
   predictiveMaintenanceSuite,
-  autonomousOptimizationMatrix,
-  anomalyDetectionEngine,
-  blockchainBasedGovernance,
+  recommendationsEngine,
+  sandhAi,
+  securityAutomated,
+  smarkTaskMangement,
+  smartUserInterface,
+  unifiedDashboard,
 } from "../../../../assets/index";
 
 const imageAssets = {
@@ -207,7 +206,7 @@ const FeatureSlider = () => {
           clickable: true,
         }}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-        className="feature-slide swiper-contanier w-full"
+        className="feature-slider swiper-contanier w-full"
         breakpoints={breakpoints}
         onMouseEnter={() => {
           if (swiperRef.current && swiperRef.current.swiper) {
@@ -259,7 +258,7 @@ const FeatureSlider = () => {
                     // className={
                     //   `rounded-3xl hover:neon-bg transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg": ""}`
                     // }
-                    className={`rounded-3xl transition-all duration-200 border border-orange-500/10 mt-10 mb-20 ${
+                    className={`rounded-3xl transition-all duration-200 mx-10 md:mx-0 mt-10 mb-20 ${
                       activeIndex === index ? "neon-bg" : "hover:neon-bg"
                     }`}
 
@@ -268,7 +267,7 @@ const FeatureSlider = () => {
                     <img
                       src={imageAssets[slider?.image]}
                       alt={imageAssets[slider?.image]}
-                      className={`object-cover h-full transition-all duration-300 ${
+                      className={`object-cover transition-all duration-300 ${
                         activeIndex === index || hoveredIndex === index
                           ? "grayscale-0"
                           : "grayscale"
@@ -298,7 +297,7 @@ const FeatureSlider = () => {
         className="h-40 max-w-3xl mt-4"
       >
         {(hoveredIndex !== null || activeIndex !== null) && (
-          <div className="md:text-lg font-bold text-center w-fit mx-auto">
+          <div className="text-lg font-semibold text-center w-fit mx-auto">
             {currentDescription}
           </div>
         )}

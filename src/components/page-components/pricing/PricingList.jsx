@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { check } from "../../../assets";
 import { pricing } from "../../../constants/pricing";
 import "./PricingList.css";
+import { generateCheckoutUrl } from "@/services/GenerateCheckoutUrl";
 
-const PricingList = ({ convertPrice, currencySymbol, conversionRate }) => {
+const PricingList = ({ convertPrice, currencySymbol }) => {
+  const [checkoutUrl, setCheckoutUrl] = useState({});
+  console.log(checkoutUrl)
+
+  const handleClick = (plan, currency) => {
+    const url = generateCheckoutUrl(plan, currency);
+    setCheckoutUrl((prevState) => ({
+      ...prevState,
+      [plan]: url,
+    }));
+  };
+
   return (
-    <div className="container grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-4 mt-8 py-2 px-4 md:px-2">
+    <div className="container grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-8 py-2 px-4 md:px-10">
       {pricing.map((item) => (
         <div
           key={item.id}
@@ -18,34 +30,31 @@ const PricingList = ({ convertPrice, currencySymbol, conversionRate }) => {
               </h4>
               <div className="h-36">
                 <div
-                  className={`flex items-center justify-center mb-6 ${
-                    !item.price ? "" : ""
-                  }`}
+                  className={`flex items-center justify-center mb-6 ${!item.price ? "" : ""
+                    }`}
                 >
                   {item.price && (
                     <>
-                      <div className="text-xl bold-title mb-4 text-cyan-500 p-1">
+                      <div className={`text-xl bold-title mb-4 text-cyan-500 p-1 ${item.price.INR === null ? "hidden" : ""}`}>
                         {currencySymbol}
                       </div>
                       <div className="text-3xl leading-none bold-title">
-                        {convertPrice(item.price, conversionRate)}
+                        {convertPrice(item.price)}
                       </div>
-                      <span className="font-bold mt-3 text-lg">/month</span>
+                      <span className={`font-bold mt-2 text-lg ${item.price.INR === null ? "hidden" : ""}`}>/month</span>
                     </>
                   )}
                 </div>
 
                 <div className="">
                   <div
-                    className={`space-y-2 ${
-                      item.images &&
+                    className={`space-y-2 ${item.images &&
                       "bg-[#312373] p-2 rounded-lg shadow-lg border-r-2 border-b-2 border-[#201746]"
-                    } ${!item.price && "my-5"}`}
+                      } ${!item.price && "my-5"}`}
                   >
                     <p
-                      className={`text-center text-lg font-semibold ${
-                        item.images && "xl:text-sm"
-                      }`}
+                      className={`text-center text-lg font-semibold ${item.images && "xl:text-sm"
+                        }`}
                     >
                       {item.description.split("\n").map((line, index) => (
                         <React.Fragment key={index}>
@@ -72,12 +81,39 @@ const PricingList = ({ convertPrice, currencySymbol, conversionRate }) => {
               </div>
             </div>
 
-            <button
-              className={`bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white bold-title p-2 rounded-lg text-lg hover:scale-105`}
-              href={item.price ? "/pricing" : "mailto:support@hiaido.com"}
+            {/* <button
+              className="bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white bold-title p-2 rounded-lg text-lg hover:scale-105"
+              onClick={() => {
+                if (item.price && item.price.INR !== null) {
+                  handleClick(item.title, currencySymbol === '₹' ? 'INR' : 'USD');
+                } else {
+                  window.location.href = 'mailto:support@hiaido.com';
+                }
+              }}
             >
               {item.trigger}
-            </button>
+            </button> */}
+            <a
+              className="bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white bold-title p-2 rounded-lg text-lg hover:scale-105"
+              href={
+                item.price && item.price.INR !== null
+                  ? generateCheckoutUrl(item.title, currencySymbol === '₹' ? 'INR' : 'USD')
+                  : 'mailto:support@hiaido.com'
+              }
+              onClick={(e) => {
+                if (item.price && item.price.INR === null) {
+                  e.preventDefault();
+                  window.location.href = 'mailto:support@hiaido.com';
+                } else {
+                  handleClick(item.title, currencySymbol === '₹' ? 'INR' : 'USD');
+                }
+              }}
+            >
+              {item.trigger}
+            </a>
+
+
+
           </div>
 
           <div className="flex h-full w-full p-2">

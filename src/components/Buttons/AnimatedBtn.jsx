@@ -28,7 +28,7 @@ const AnimatedBtn = ({
           className={`z-50 px-6 py-2 text-center ${white ? "text-white" : ""
             } ${className}`}
         >
-          <span className="">{children}</span>
+        {children}
         </div>
       </button>
     </Link>

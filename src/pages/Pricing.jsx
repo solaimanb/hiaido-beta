@@ -7,17 +7,30 @@ const PricingList = lazy(() =>
 );
 
 const Pricing = () => {
+  const [usdClicked, setUsdClicked] = useState(false);
+  const [inrClicked, setInrClicked] = useState(false);
   const [currency, setCurrency] = useState("INR");
-  const conversionRate = 83.37;
 
-  const handleCurrencyChange = () => {
-    setCurrency((prevCurrency) => (prevCurrency === "USD" ? "INR" : "USD"));
+  const handleUsdClick = () => {
+    if (!usdClicked) {
+      setCurrency("USD");
+      setUsdClicked(true);
+      setInrClicked(false);
+    }
   };
 
-  const convertPrice = (price, rate) => {
-    const convertedPrice = currency === "INR" ? price * rate : price;
-    return Math.round(convertedPrice);
+  const handleInrClick = () => {
+    if (!inrClicked) {
+      setCurrency("INR");
+      setInrClicked(true);
+      setUsdClicked(false);
+    }
   };
+
+ const convertPrice = (price) => {
+  return currency === 'INR' ? price.INR : price.USD;
+};
+
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
 
@@ -56,25 +69,43 @@ const Pricing = () => {
           </div>
 
           <div className="mt-10 flex items-center gap-2">
-            <span className="bold-title">USD</span>
+            <span
+              className={`bold-title cursor-pointer ${currency === 'USD' ? 'text-green-100' : ''}`}
+              onClick={handleUsdClick}
+            >
+              <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-USD-Monthly"
+                data-cb-item-quantity="1"
+              >
+                USD
+              </a>
+            </span>
             <Text as="label" size="7">
               <Flex gap="2" align="center">
                 <Switch
                   size="3"
                   color="green"
                   checked={currency === "INR"}
-                  onCheckedChange={handleCurrencyChange}
+                  className="cursor-pointer"
                 />
+
               </Flex>
             </Text>
-            <span className="bold-title">INR</span>
+            <span
+              className={`bold-title cursor-pointer ${currency === 'INR' ? 'text-green-100' : ''}`}
+              onClick={handleInrClick}
+            >
+              <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-INR-Monthly"
+              data-cb-item-quantity="1"
+              >
+                INR
+              </a>
+            </span>
           </div>
 
           <PricingList
             currency={currency}
             convertPrice={convertPrice}
             currencySymbol={currencySymbol}
-            conversionRate={conversionRate}
           />
         </div>
       </main>
