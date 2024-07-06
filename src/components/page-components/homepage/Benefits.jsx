@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 
-import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import Heading from "../../Heading";
 
 import aws from "../../../assets/logo/amazon-aws-hiaido.png";
-import azure from "../../../assets/logo/microsoft-azure-hiaido.png";
 import gcp from "../../../assets/logo/google-cloud-hiaido.png";
+import azure from "../../../assets/logo/microsoft-azure-hiaido.png";
 import "../../../index.css";
 
 const images = [
@@ -49,28 +49,28 @@ const Benefits = () => {
     threshold: 0.1,
   });
 
-  const variants = {
-    hidden: { opacity: 0, y: -50 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-      },
-    },
-  };
+  // const variants = {
+  //   hidden: { opacity: 0, y: -50 },
+  //   show: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       type: "spring",
+  //     },
+  //   },
+  // };
 
   return (
     <motion.div
-      variants={variants}
-      initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      // variants={variants}
+      // initial="hidden"
+      // animate={inView ? "show" : "hidden"}
       className="md:pt-20 bg-dark container relative min-h-screen mt-10 text-center"
     >
       <motion.p
         className="secondaryText md:text-xl xl:text-2xl mb-10 text-base"
-        initial="hidden"
-        animate={inView ? "show" : "hidden"}
+        // initial="hidden"
+        // animate={inView ? "show" : "hidden"}
       >
         With HIAIDO, you can perform a variety of tasks across multiple cloud
         providers and <br className="md:block hidden" /> technologies, including

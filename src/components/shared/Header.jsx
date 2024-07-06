@@ -1,14 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
-import { disablePageScroll, enablePageScroll } from "scroll-lock";
-import { NavLink } from "react-router-dom";
-import { navigation } from "../../constants/navigationItem";
-import MenuSvg from "../../assets/svg/MenuSvg";
 import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { disablePageScroll, enablePageScroll } from "scroll-lock";
+import MenuSvg from "../../assets/svg/MenuSvg";
+import { navigation } from "../../constants/navigationItem";
 import AnimatedBtn from "../Buttons/AnimatedBtn";
 
-import { hiaido } from "../../assets";
-import { AvatarIcon } from "@radix-ui/react-icons";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { AvatarIcon } from "@radix-ui/react-icons";
+import { hiaido } from "../../assets";
 
 const Header = () => {
   const pathname = useLocation();
@@ -81,7 +80,7 @@ const Header = () => {
       `}
     >
       <div className="container relative flex items-center justify-between w-full px-4">
-        <div className="z-50 flex items-center w-full py-2 gap-x-8">
+        <div className="z-50 flex items-center w-4/6 py-2 gap-x-8">
           <NavLink className="block" to="/">
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
           </NavLink>
@@ -183,7 +182,7 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className="flex items-center justify-center gap-4 px-2">
+        <div className="flex items-center justify-end gap-4 px-2 w-2/6">
           <AnimatedBtn
             to={"/chat"}
             className="hidden font-semibold text-nowrap lg:block"
