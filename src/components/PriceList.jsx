@@ -1,10 +1,10 @@
 import { check } from "@/assets";
 import "./page-components/pricing/PricingList.css";
 import { generateCheckoutUrl } from "@/services/GenerateCheckoutUrl";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Switch, Text } from "@radix-ui/themes";
 import { pricing } from "@/constants/pricing";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const NewPriceList = () => {
   const [params, setSearchParams] = useSearchParams();
@@ -13,6 +13,12 @@ const NewPriceList = () => {
   const [inrClicked, setInrClicked] = useState(false);
   const [checkoutUrl, setCheckoutUrl] = useState({});
   console.log(checkoutUrl);
+
+  // useEffect(() => {
+  //   if (window.Chargebee) {
+  //     window.Chargebee.registerAgain();
+  //   }
+  // }, []);
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
 
@@ -162,29 +168,39 @@ const NewPriceList = () => {
 
               <a
                 className="text-white bold-title p-2 rounded-2xl text-lg border border-orange-400 text-center mt-3"
-                href={
-                  item.price && item.price.INR !== null
-                    ? generateCheckoutUrl(
-                        item.title,
-                        currencySymbol === "₹" ? "INR" : "USD"
-                      )
-                    : "mailto:support@hiaido.com"
-                }
+                // href={
+                //   item.price && item.price.INR !== null
+                //     ? generateCheckoutUrl(
+                //         item.title,
+                //         currencySymbol === "₹" ? "INR" : "USD"
+                //       )
+                //     : "mailto:support@hiaido.com"
+                // }
                 onClick={(e) => {
-                  if (item.price && item.price.INR === null) {
-                    e.preventDefault();
-                    window.location.href = "mailto:support@hiaido.com";
-                  } else {
-                    handleClick(
-                      item.title,
-                      currencySymbol === "₹" ? "INR" : "USD"
-                    );
+                  if (item.url_id) {
+                    document.querySelector(`#${item.url_id[currency]}`).click();
+                    return;
                   }
                 }}
               >
-                {/* {item.trigger} */}
                 Choose plan
               </a>
+              <a
+                onLoad={(e) => {
+                  console.log("CHarge", Chargebee);
+                  Chargebee.registerAgain();
+                }}
+                href="javascript:void(0)"
+                data-cb-type="checkout"
+                data-cb-item-0="Playground-INR-Monthly"
+                data-cb-item-0-quantity="1"
+              >
+                subscribe
+              </a>
+              {/* <script
+                src="https://js.chargebee.com/v2/chargebee.js"
+                data-cb-site="hiaido"
+              ></script> */}
             </div>
           </div>
         ))}

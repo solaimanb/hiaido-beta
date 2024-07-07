@@ -34,13 +34,13 @@ const Onboarding = () => {
 
   if (!memberAccounts) return <Loader />;
 
-  // if (
-  //   memberAccounts.connectedAccounts.length > 0 ||
-  //   memberAccounts.memberAccounts.length > 0
-  // ) {
-  //   console.log("NAVIGATING");
-  //   return <Navigate to={"/chat"} />;
-  // }
+  if (
+    memberAccounts.connectedAccounts.length > 0 ||
+    memberAccounts.memberAccounts.length > 0
+  ) {
+    console.log("NAVIGATING");
+    return <Navigate to={"/chat"} />;
+  }
 
   return (
     <>

@@ -1,4 +1,4 @@
-import prices from './prices.json';
+import prices from "./prices.json";
 
 export const pricing = [
   {
@@ -8,6 +8,10 @@ export const pricing = [
     price: {
       INR: prices.INR.Playground,
       USD: prices.USD.Playground,
+    },
+    url_id: {
+      INR: "Playground-INR-Monthly",
+      USD: "Playground-USD-Monthly",
     },
     features: [
       "Explore cloud tech with AI",
