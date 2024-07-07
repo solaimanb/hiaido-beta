@@ -140,6 +140,10 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      boxShadow: {
+        orange:
+          "0 0 40px 40px rgba(255, 165, 0, 0.1), 0 0 40px 40px rgba(255, 165, 0, 0.06)",
+      },
     },
   },
 
