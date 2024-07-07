@@ -1,4 +1,3 @@
-
 const termsSections = [
     {
         title: "1. Definitions",
