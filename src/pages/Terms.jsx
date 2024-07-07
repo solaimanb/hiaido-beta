@@ -1,9 +1,29 @@
 import TableOfContents from "@/components/page-components/terms/TableOfContents";
 import { Helmet } from "react-helmet-async";
 import terms from "@/constants/terms.json";
+// import TermsConditions from "@/components/termsConditions";
+// import { useState } from "react";
+// import NewPriceList from "@/components/PriceList";
+// import MemberAccountPage from "./MemberAccountPage";
 
 const Terms = () => {
   window.scrollTo(0, 0);
+  // const [activeTab, setactiveTab] = useState(0)
+
+  // const tabs = [
+  //   {
+  //     title: "Terms & Conditions",
+  //     content: <TermsConditions setactiveTab={setactiveTab} />
+  //   },
+  //   {
+  //     title: "Free Trial & Paid Subscription",
+  //     content: <NewPriceList setactiveTab={setactiveTab} />
+  //   },
+  //   {
+  //     title: "Choose Cloud Account",
+  //     content: <MemberAccountPage />
+  //   }
+  // ]
 
   return (
     <>

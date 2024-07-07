@@ -36,7 +36,7 @@ interface ChatsContextType {
 }
 const defaultChatsContextValue: ChatsContextType = {
   state: {
-    model: 0,
+    model: Model.BASE,
     chats: [],
     newChat: null,
     currentMemberAccount: null,
@@ -76,7 +76,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
 }) => {
   const { memberAccounts, currentMemberAccount } = useGlobalState();
   const [query, setQuery] = useState("");
-  const [model, setModel] = useState<Model>(0);
+  const [model, setModel] = useState<Model>(Model.BASE);
   const [chats, setChats] = useState<Chat[]>([]);
   const [newChat, setNewChat] = useState<Chat | null>(null);
   const [error, setError] = useState<null | string>(null);
@@ -121,22 +121,47 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       toast.error("Query cannot be empty");
       return;
     }
-    let url =
-      model === 0
-        ? `${config.baseURL}/get-response`
-        : `${config.multiAgentURL}/chat`;
-    let body =
-      model === 0
-        ? JSON.stringify({
-            email: currentMemberAccount["email"],
-            owner: userAttributes.email,
-            query: newChat.query,
-          })
-        : JSON.stringify({
-            email: currentMemberAccount["email"],
-            owner: userAttributes.email,
-            user_query: newChat.query,
-          });
+    let url, body, configCliUrl;
+    switch (model) {
+      case Model.BASE:
+        url = `${config.baseURL}/get-response`;
+        body = JSON.stringify({
+          email: currentMemberAccount["email"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/configure-cli`;
+        break;
+      case Model.MULTI_AGENT:
+        url = `${config.multiAgentURL}/chat`;
+        body = JSON.stringify({
+          email: currentMemberAccount["email"],
+          owner: userAttributes.email,
+          user_query: newChat.query,
+        });
+        configCliUrl = `${config.multiAgentURL}/configure-cli`;
+        break;
+      case Model.BASE_CLAUDE:
+        url = `${config.baseURL}/claude/get-response`;
+        body = JSON.stringify({
+          email: currentMemberAccount["email"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/claude/configure-cli`;
+        break;
+      default:
+        url = `${config.baseURL}/get-response`;
+        body = JSON.stringify({
+          email: currentMemberAccount["email"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/configure-cli`;
+    }
+
+    console.log(url, configCliUrl);
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -152,19 +177,12 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         response.status == 400 &&
         response_data["detail"].includes("CLI not configured")
       ) {
-        let configCliUrl =
-          model === 0
-            ? `${config.baseURL}/configure-cli`
-            : `${config.multiAgentURL}/configure-cli`;
         const res = await fetch(configCliUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            email: currentMemberAccount["email"],
-            owner: userAttributes.email,
-          }),
+          body,
         });
         const res_data = await res.json();
         console.log(res_data, res.status);
@@ -172,7 +190,12 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
           await fetchResponse();
           return;
         } else {
+          let newChatCopy = structuredClone(newChat);
+          newChatCopy.error = "An error occured. Please try again later.";
           setError(res_data);
+          newChatCopy.loading = false;
+          setChats((prevChats) => [...prevChats.slice(0, -1), newChatCopy]);
+          throw new Error(res_data);
         }
       } else {
         console.log(response_data);

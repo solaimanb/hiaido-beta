@@ -50,7 +50,7 @@ Amplify.configure({
 });
 
 const App = () => {
-  const { route, authStatus, error, user } = useAuthenticator((context) => [
+  const { route, authStatus} = useAuthenticator((context) => [
     context.route,
     context.authStatus,
   ]);
@@ -87,8 +87,9 @@ const App = () => {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/enterprise" element={<Enterprise />} />
             <Route path="/about" element={<About />} />
-            <Route path="/terms" element={<Terms />} />
             <Route path="/ethical-ai" element={<EthicalAI />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/terms" element={<Terms />} />
           </Route>
 
           <Route
@@ -102,6 +103,7 @@ const App = () => {
               )
             }
           >
+            {/* <Route path="/terms" element={<Terms />} /> */}
             <Route path="/dashboard" element={<UnderConstruction />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/account-factory" element={<AccountFactory />} />
