@@ -391,7 +391,6 @@ input:focus::placeholder {
 [data-amplify-form] input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
   border-bottom: 1px solid rgb(251 146 60 / 0.4);
   background: rgba(97, 61, 31, 0.1);
 }
