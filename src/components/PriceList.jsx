@@ -167,7 +167,7 @@ const NewPriceList = () => {
               </div>
 
               <a
-                className="text-white bold-title p-2 rounded-2xl text-lg border border-orange-400 text-center mt-3"
+                className="text-white bold-title p-2 rounded-2xl text-lg border border-orange-400 text-center mt-3 cursor-pointer"
                 // href={
                 //   item.price && item.price.INR !== null
                 //     ? generateCheckoutUrl(
@@ -185,22 +185,6 @@ const NewPriceList = () => {
               >
                 Choose plan
               </a>
-              <a
-                onLoad={(e) => {
-                  console.log("CHarge", Chargebee);
-                  Chargebee.registerAgain();
-                }}
-                href="javascript:void(0)"
-                data-cb-type="checkout"
-                data-cb-item-0="Playground-INR-Monthly"
-                data-cb-item-0-quantity="1"
-              >
-                subscribe
-              </a>
-              {/* <script
-                src="https://js.chargebee.com/v2/chargebee.js"
-                data-cb-site="hiaido"
-              ></script> */}
             </div>
           </div>
         ))}
