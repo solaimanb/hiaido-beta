@@ -71,19 +71,23 @@ const CreateMemberAccountForm = ({ Cancel, customButton }) => {
             <div
               key={i}
               className="relative aspect-square col-span-1 rounded-md hover:scale-[1.02] hover:invert-[.1] duration-300 delay-100"
-              onClick={() => setIdx(i)}
+              style={{ cursor: item.disabled ? "not-allowed" : "pointer" }}
+              onClick={() => item.disabled || setIdx(i)}
             >
               <Radio
                 className="!absolute !m-2 !z-30"
                 name="example"
                 value="1"
+                disabled={item.disabled}
                 size={"2"}
                 checked={i == idx}
               />
               <img
                 src={item.src}
                 alt=""
-                className="rounded-xl w-full shadow-md shadow-neutral-400"
+                className="rounded-xl w-full shadow-md shadow-neutral-400 dark:shadow-none"
+                // gray out if disabled
+                style={{ filter: item.disabled ? "grayscale(100%)" : "" }}
               />
             </div>
           );
@@ -211,15 +215,18 @@ const CreateMemberAccountForm = ({ Cancel, customButton }) => {
 const data = [
   {
     label: "AWS",
-    src: "https://customcodefactory.com/wp-content/uploads/2019/12/aws-app-icon-300x300.jpg",
+    src: "https://pbs.twimg.com/profile_images/1641476962362302464/K8lb6OtN_400x400.jpg",
+    disabled: false,
   },
   {
     label: "GCP",
     src: "https://pendulum-it.com/wp-content/uploads/2020/05/Google-Cloud-Platform-GCP-logo.png",
+    disabled: true,
   },
   {
     label: "Azure",
     src: "https://i.pinimg.com/564x/85/d5/7e/85d57e14f76a63b4657020779e85dfd7.jpg",
+    disabled: true,
   },
 ];
 
@@ -230,7 +237,11 @@ const CreateMemberAccountButton = ({ className }) => {
         {/* {buttonOverride ? (
           CustomButton
         ) : ( */}
-        <button className={` dark:bg-white bg-black shadow-orange-400 dark:text-black text-orange-400 shadow p-2 rounded-full px-4 text-base mt-5 ${className}`}>
+        <button
+          className="px-4 p-2"
+          id="animated-btn-outlined"
+          // className={` dark:bg-white bg-black shadow-orange-400 dark:text-black text-orange-400 shadow p-2 rounded-full px-4 text-base mt-5 ${className}`}
+        >
           Create member account
         </button>
         {/* )} */}

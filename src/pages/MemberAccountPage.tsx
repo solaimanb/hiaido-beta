@@ -116,62 +116,10 @@ const ConnectExstingMemberAccountForm = () => {
 
   return (
     <div className="w-full h-full p-2 md:border-l md:pl-4">
-      <h2 className="font-bold text-2xl text-nowrap">
-        Are you an existing AWS user ?
-      </h2>
-      <p className="my-10 mt-5">
-        Connect your existing AWS account to Hiaido to start using the chatbot
+      <h2 className="font-bold text-2xl text-nowrap">Already have AWS?</h2>
+      <p className="my-10 mt-5 text-lg">
+        Link your existing account to manage resources seamlessly.
       </p>
-      {/* <div className="w-full flex justify-center mt-4 relative">
-        <button
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={async () => {
-            await copyContent("381492248344");
-            toast.success("Account Id Copied!");
-          }}
-        >
-          <CopyIcon
-            id="addPolicy"
-            className={`cursor-pointer ${"hover:text-orange-400"}`}
-          />
-          <label htmlFor="addPolicy" className="cursor-pointer">
-            Account Id: 381492248344
-          </label>
-        </button>
-      </div> */}
-      {/* <div className="w-full flex justify-center mt-4 relative mx-auto">
-        {externalId ? (
-          <button
-            className="flex items-center gap-2 cursor-pointer"
-            onClick={async () => {
-              await copyContent(externalId);
-              toast.success("External Id Copied!");
-            }}
-          >
-            <label
-              htmlFor="addPolicy"
-              className="cursor-pointer flex gap-2 justify-center"
-            >
-              <CopyIcon
-                id="addPolicy"
-                className={`cursor-pointer size-5 ${"hover:text-orange-400"}`}
-              />
-              <div className="text-left">External Id: {externalId}</div>
-            </label>
-          </button>
-        ) : (
-          <Button
-            variant="link"
-            className="text-orange-400"
-            onClick={handleExternalIdGeneration}
-          >
-            {loadingExternalId && (
-              <Loader2 className="animate-spin mr-2 size-4" />
-            )}
-            Generate External Id
-          </Button>
-        )}
-      </div> */}
 
       {/* <div className="mt-5 w-full flex justify-center">
         <input
@@ -235,10 +183,9 @@ const MemberAccountPage = () => {
           </div>
           <div className="w-full flex flex-col md:flex-row gap-6 md:gap-0 items-center">
             <div className="w-full p-2">
-              <h2 className="font-bold text-2xl">No Member Account Found</h2>
-              <p className="mt-3 w-full max-w-md">
-                You need to create a member account first before using the
-                chatbot
+              <h2 className="font-bold text-2xl">New to AWS?</h2>
+              <p className="w-full max-w-md my-10 mt-5 text-lg">
+                Easy sign up for a new AWS account to explore cloud solutions
               </p>
               <CreateMemberAccountButton className={"bg-black"} />
             </div>

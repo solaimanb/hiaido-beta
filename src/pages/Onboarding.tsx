@@ -27,7 +27,7 @@ const Onboarding = () => {
       content: <NewPriceList />,
     },
     {
-      title: "Choose Cloud Account",
+      title: "Get Started",
       content: <MemberAccountPage />,
     },
   ];
