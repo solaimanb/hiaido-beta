@@ -85,7 +85,7 @@ const Header = () => {
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
           </NavLink>
 
-          <nav className="hidden w-full lg:block custom-scrollbar">
+          {/* <nav className="hidden w-full lg:block custom-scrollbar">
             <div className="flex gap-6 ">
               {navigation.map((item, index) => (
                 <div
@@ -158,28 +158,13 @@ const Header = () => {
                             </div>
                           );
                         })}
-
-                        {/* <div className="absolute z-0 w-10 h-10 rounded-lg -top-3 left-24">
-                          <svg
-                            width="40"
-                            height="30"
-                            viewBox="0 0 158 141"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M63.4115 9.00003C70.3397 -2.99997 87.6603 -3 94.5885 9L155.21 114C162.138 126 153.478 141 139.622 141H18.3783C4.52185 141 -4.13844 126 2.78976 114L63.4115 9.00003Z"
-                              fill="#111827"
-                            />
-                          </svg>
-                        </div> */}
                       </div>
                     </div>
                   )}
                 </div>
               ))}
             </div>
-          </nav>
+          </nav> */}
         </div>
 
         <div className="flex items-center justify-end gap-4 px-2 w-2/6">
