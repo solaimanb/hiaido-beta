@@ -230,7 +230,7 @@ const data = [
   },
 ];
 
-const CreateMemberAccountButton = ({ className }) => {
+const CreateMemberAccountButton = () => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
