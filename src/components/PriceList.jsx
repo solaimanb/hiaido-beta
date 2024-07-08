@@ -189,7 +189,7 @@ const NewPriceList = () => {
           </div>
         ))}
       </div>
-      <div className="w-full flex gap-4 items-center justify-end mt-3 md:pr-4">
+      {/* <div className="w-full flex gap-4 items-center justify-end mt-3 md:pr-4">
         <button
           type="button"
           className="bg-white text-black py-2 px-4 rounded text-md font-bold"
@@ -199,7 +199,7 @@ const NewPriceList = () => {
         <button className={`bg-orange-400 px-4 py-2 rounded font-bold`}>
           Accept
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
