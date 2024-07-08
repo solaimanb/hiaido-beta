@@ -33,7 +33,7 @@ export const pricing = [
       "Access to core functionalities",
       "Full access to Cloud Engineer AI agent",
       "Cloud resource management",
-      "Full acess to cloud console",
+      "Full access to cloud console",
       "Single agent system",
       "Moderate rate limit",
       "Limited resource provisioning",

@@ -190,9 +190,9 @@ const About = () => {
         </section>
       </div>
 
-      <section className="mt-20">
+      {/* <section className="mt-20">
         <Contact />
-      </section>
+      </section> */}
     </main>
   );
 };
