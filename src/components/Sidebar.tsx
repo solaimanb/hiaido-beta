@@ -42,7 +42,7 @@ import toast from "react-hot-toast";
 import Loader from "./Loader";
 
 export const navbarData = [
-  { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
+  // { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
   {
     label: "Chat",
     icon: <ChatBubbleLeftRightIcon className="w-6" />,
@@ -51,30 +51,30 @@ export const navbarData = [
     label: "Account Factory",
     icon: <AtSymbolIcon className="w-6" />,
   },
-  {
-    label: "Usage Analytics",
-    icon: <PresentationChartLineIcon className="w-6" />,
-  },
-  {
-    label: "Deployments",
-    icon: <CloudArrowUpIcon className="w-6" />,
-  },
-  { label: "Scheduler", icon: <QueueListIcon className="w-6" /> },
-  {
-    label: "Feature requests",
-    icon: <SquaresPlusIcon className="w-6" />,
-  },
-  { label: "User management", icon: <UsersIcon className="w-6" /> },
-  { label: "Billing", icon: <CurrencyDollarIcon className="w-6" /> },
-  {
-    label: "Tickets",
-    icon: <TicketIcon className="w-6" />,
-  },
-  { label: "Settings", icon: <Cog6ToothIcon className="w-6" /> },
-  {
-    label: "Help",
-    icon: <QuestionMarkCircleIcon className="w-6" />,
-  },
+  // {
+  //   label: "Usage Analytics",
+  //   icon: <PresentationChartLineIcon className="w-6" />,
+  // },
+  // {
+  //   label: "Deployments",
+  //   icon: <CloudArrowUpIcon className="w-6" />,
+  // },
+  // { label: "Scheduler", icon: <QueueListIcon className="w-6" /> },
+  // {
+  //   label: "Feature requests",
+  //   icon: <SquaresPlusIcon className="w-6" />,
+  // },
+  // { label: "User management", icon: <UsersIcon className="w-6" /> },
+  // { label: "Billing", icon: <CurrencyDollarIcon className="w-6" /> },
+  // {
+  //   label: "Tickets",
+  //   icon: <TicketIcon className="w-6" />,
+  // },
+  // { label: "Settings", icon: <Cog6ToothIcon className="w-6" /> },
+  // {
+  //   label: "Help",
+  //   icon: <QuestionMarkCircleIcon className="w-6" />,
+  // },
 ];
 
 const labelTransitions = {
@@ -171,69 +171,7 @@ const ToggleTheme: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
 };
 
 const Sidebar = () => {
-  const {
-    memberAccounts,
-    setMemberAccounts,
-    setCurrentMemberAccount,
-    currentMemberAccount,
-  } = useContext(GlobalStateContext);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  // console.log("sidebar");
-  // console.log(memberAccounts);
-
-  // useEffect(() => {
-  //   if (!memberAccounts) {
-  //     fetchMemberAccounts()
-  //       .then((res) => {
-  //         setMemberAccounts(res);
-  //         let cma = localStorage.getItem("current_member_account");
-  //         if (cma) {
-  //           let cmaObj: MemberAccount = JSON.parse(cma);
-  //           if (
-  //             res?.length > 0 &&
-  //             res.some((val) => val.email === cmaObj.email)
-  //           ) {
-  //             setCurrentMemberAccount(cmaObj);
-  //           } else {
-  //             setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
-  //           }
-  //         } else {
-  //           setCurrentMemberAccount(res?.length > 0 ? res[0] : null);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         // setError(err);
-  //       });
-  //   }
-  // }, []);
-
-  // const fetchMemberAccounts: () => Promise<MemberAccount[]> = async () => {
-  //   // console.log("FETCHING MEMBER ACCOUNTS");
-
-  //   try {
-  //     let url =
-  //       "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/member-accounts";
-  //     const result = await fetchAuthSession();
-  //     // TODO: does not work for google and facebook
-  //     // TODO: fix
-  //     const idToken = result.tokens?.idToken?.toString();
-  //     // console.log(result);
-  //     const response = await fetch(url, {
-  //       method: "GET",
-  //       headers: { Authorization: `Bearer ${idToken}` },
-  //     });
-  //     const response_json = await response.json();
-  //     // console.log(response_json);
-  //     if (response.ok) {
-  //       return response_json;
-  //     } else {
-  //       throw response_json;
-  //     }
-  //   } catch (err) {
-  //     return err;
-  //   }
-  // };
   const sliceIndex = 9;
 
   return (
@@ -256,24 +194,6 @@ const Sidebar = () => {
         <div
           className={`flex items-center justify-start my-4 text-2xl pl-1 ${""}`}
         >
-          {/* <Link to={"/"}>
-            <img
-              className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
-              src={logo}
-              alt="Brand Logo"
-            />
-          </Link>
-
-          <AnimatePresence>
-            {isCollapsed || (
-              <motion.h1
-                className="dark:text-neutral-100 text-neutral-50"
-                {...labelTransitions}
-              >
-                HiAiDo
-              </motion.h1>
-            )}
-          </AnimatePresence> */}
           {isCollapsed ? (
             <Link to={"/"}>
               <img
@@ -302,8 +222,8 @@ const Sidebar = () => {
               isCollapsed={isCollapsed}
             />
           </div>
-          <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800 my-2"></div>
-          <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
+          {/* <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800 my-2"></div> */}
+          {/* <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
             <div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
               <AnimatePresence>
                 {isCollapsed || (
@@ -316,14 +236,9 @@ const Sidebar = () => {
               groupData={navbarData.slice(sliceIndex)}
               isCollapsed={isCollapsed}
             />
-          </div>
+          </div> */}
         </div>
         <div className="h-fit flex flex-col items-center justify-end mx-3 space-y-2">
-          {
-            // isCollapsed ? (
-            //   <div className="">{data[parseInt(activeTabIndex)].icon}</div>
-            // ) :
-          }
           <ToggleTheme isCollapsed={isCollapsed} />
           <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800"></div>
           <CurrentMemberAccountComponent isCollapsed={isCollapsed} />

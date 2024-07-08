@@ -3,6 +3,7 @@ import { Table } from "@radix-ui/themes";
 import CreateMemberAccountButton from "../components/CreateMemberAccountButton";
 import { GlobalStateContext } from "@/context/GlobalStateContext";
 import { Helmet } from "react-helmet-async";
+import ConnectAccountFormButton from "@/components/ConnectAccountFormButton";
 
 const MemberAccountsTable = () => {
   const { memberAccounts, currentMemberAccount, setCurrentMemberAccount } =
@@ -38,7 +39,10 @@ const MemberAccountsTable = () => {
         <div className="mt-20 text-2xl font-semibold text-neutral-500">
           No member accounts found.
         </div>
-        <CreateMemberAccountButton />
+        <div className="flex gap-3">
+          <CreateMemberAccountButton />
+          <ConnectAccountFormButton />
+        </div>
       </div>
     );
 
@@ -49,8 +53,9 @@ const MemberAccountsTable = () => {
         <div className="font-semibold text-2xl">
           {memberAccounts.memberAccounts.length} accounts
         </div>
-        <div>
+        <div className="flex gap-3">
           <CreateMemberAccountButton />
+          <ConnectAccountFormButton />
         </div>
       </div>
 
