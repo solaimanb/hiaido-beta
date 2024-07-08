@@ -131,7 +131,11 @@ const Hero = () => {
               &quot;Welcome to the future of automation with HIAIDO&quot;
             </p>
 
-            <AnimatedBtn to={"/chat"} className="font-semibold" outlined={true}>
+            <AnimatedBtn
+              to={"/login"}
+              className="font-semibold"
+              outlined={true}
+            >
               Get Started
             </AnimatedBtn>
           </div>

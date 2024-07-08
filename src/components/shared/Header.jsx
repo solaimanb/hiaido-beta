@@ -184,7 +184,7 @@ const Header = () => {
 
         <div className="flex items-center justify-end gap-4 px-2 w-2/6">
           <AnimatedBtn
-            to={"/chat"}
+            to={"/login"}
             className="hidden font-semibold text-nowrap lg:block"
             outlined={true}
           >
