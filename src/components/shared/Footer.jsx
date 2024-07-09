@@ -31,9 +31,9 @@ const Footer = () => {
             <p className="lg:block gap-x-1 flex items-center text-sm font-semibold">
               &copy; {new Date().getFullYear()}
               {" "}
-              Copyright
-              {" "}
               <Link to="/">HIAIDO</Link> •
+              {" "}
+              All rights reserved.
               {" "}
             </p>
           </div>
