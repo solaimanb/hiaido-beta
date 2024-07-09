@@ -187,7 +187,7 @@ const MemberAccountPage = () => {
               <p className="w-full max-w-md my-10 mt-5 text-lg">
                 Easy sign up for a new AWS account to explore cloud solutions
               </p>
-              <CreateMemberAccountButton className={"bg-black"} />
+              <CreateMemberAccountButton />
             </div>
             {/* <hr className='my-5' /> */}
             <OrDevider className={"py-5 w-full block md:hidden"} />

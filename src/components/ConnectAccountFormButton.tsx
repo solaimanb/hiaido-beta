@@ -4,6 +4,7 @@ import {
   AlertDialogTrigger,
 } from "@/ui-components/ui/alert-dialog";
 import ConnectAccountForm from "./ConnectAccountForm";
+import "./Buttons/AnimatedBtn.css";
 import { Button } from "@/ui-components/ui/button";
 import AnimatedBtn from "./Buttons/AnimatedBtn";
 

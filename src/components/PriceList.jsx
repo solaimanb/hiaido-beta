@@ -166,7 +166,8 @@ const NewPriceList = () => {
                 </div>
               </div>
 
-              <a
+              <button
+                id="animated-btn"
                 className="text-white bold-title p-2 rounded-2xl text-lg border border-orange-400 text-center mt-3 cursor-pointer"
                 // href={
                 //   item.price && item.price.INR !== null
@@ -184,7 +185,7 @@ const NewPriceList = () => {
                 }}
               >
                 {item.url_id ? "Choose Plan" : "Coming Soon"}
-              </a>
+              </button>
               {/* <div
                 class="razorpay-embed-btn"
                 data-url="https://pages.razorpay.com/pl_OW4SRe3vFwU2Mm/view"
