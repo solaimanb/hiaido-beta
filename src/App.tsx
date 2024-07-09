@@ -16,7 +16,6 @@ import { GlobalStateProvider } from "./context/GlobalStateContext.js";
 import Enterprise from "./pages/Enterprise.jsx";
 import About from "./pages/About.jsx";
 
-// Using React.lazy to dynamically import components for the App page.
 const RootLayout = lazy(() => import("./layouts/RootLayout.jsx"));
 const Landing = lazy(() => import("./pages/Landing.jsx"));
 const Hiring = lazy(() => import("./pages/Hiring.jsx"));
@@ -60,7 +59,6 @@ const App = () => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        // Assume some function to check authentication status
         // await someAuthCheckFunction();
       } catch (e) {
         console.error("Failed to check auth status", e);

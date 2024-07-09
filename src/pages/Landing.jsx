@@ -3,9 +3,6 @@ import { lazy, Suspense } from "react";
 import Loading from "../components/shared/Loading";
 import FeatureSlider from "../components/page-components/homepage/feature-slider/FeatureSlider";
 import About from "./About";
-import Products from "./Products";
-import Features from "./Features";
-import Integrations from "./Integrations";
 import Pricing from "./Pricing";
 import Contact from "@/components/shared/Contact";
 
@@ -45,11 +42,7 @@ const Landing = () => {
         <FeatureSlider />
         <Benefits />
         <About />
-        {/* <Products />
-        <Features />
-        <Integrations /> */}
         <Pricing />
-
         <section className="mt-40">
           <Contact />
         </section>

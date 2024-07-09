@@ -1,10 +1,7 @@
-import { lazy } from "react";
 import logo from "../assets/images/hiaido-logo.png";
 import robot from "../assets/images/robot.png";
-// import glow from "../assets/images/glow.png";
 import { Link } from "react-router-dom";
 
-const Contact = lazy(() => import("../components/shared/Contact"));
 
 const coreFunctionalities = [
   {
@@ -145,7 +142,6 @@ const About = () => {
         </section>
 
         <section className="flex flex-col items-center">
-          {/* <img src={glow} alt="hiaido" className="scale-150" /> */}
           <img src={robot} alt="hiaido" className="lg:scale-150" />
 
           <div className="border rounded-lg border-orange-500/30 px-2 mt-4 w-fit flex gap-2 text-center space-x-2 font-semibold">
@@ -189,10 +185,6 @@ const About = () => {
           </div>
         </section>
       </div>
-
-      {/* <section className="mt-20">
-        <Contact />
-      </section> */}
     </main>
   );
 };

@@ -5,7 +5,7 @@ import { lazy } from "react";
 const Contact = lazy(() => import("../components/shared/Contact"));
 
 const ContactUs = () => {
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
 
   return (
     <>
