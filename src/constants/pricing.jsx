@@ -33,6 +33,10 @@ export const pricing = [
       INR: prices.INR.Starter,
       USD: prices.USD.Starter,
     },
+    url_id: {
+      INR: "Starter-INR-Monthly",
+      USD: "Starter-USD-Monthly",
+    },
     features: [
       "Access to core functionalities",
       "Full access to Cloud Engineer AI agent",
@@ -53,6 +57,10 @@ export const pricing = [
     price: {
       INR: prices.INR.Elite,
       USD: prices.USD.Elite,
+    },
+    url_id: {
+      INR: "Elite-INR-Monthly",
+      USD: "Elite-USD-Monthly",
     },
     features: [
       "Premium features and integrations",

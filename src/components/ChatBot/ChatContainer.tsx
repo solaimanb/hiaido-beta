@@ -299,8 +299,8 @@ const QueryBox = () => {
 
   return (
     <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[780px] p-1.5 outline-none appearance-none">
-      <Paperclip className="size-6 mb-2 ml-2" />
-      <div className="flex flex-col flex-1 min-w-0">
+      {/* <Paperclip className="size-6 mb-2 ml-2" /> */}
+      <div className="flex flex-col flex-1 min-w-0 pl-5">
         <textarea
           disabled={
             (memberAccounts &&
