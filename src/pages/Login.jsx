@@ -72,6 +72,8 @@ const Login = () => {
     }
   }, [route, navigate]);
 
+  console.log(route);
+
   return (
     <ThemeProvider
       colorMode="dark"
@@ -119,8 +121,7 @@ const Login = () => {
 
               <Authenticator
                 loginMechanisms={["email"]}
-                hideSignUp
-                socialProviders={[]}
+                socialProviders={["google"]}
               />
             </div>
           </div>

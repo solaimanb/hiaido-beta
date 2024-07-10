@@ -43,8 +43,8 @@ Amplify.configure({
           redirectSignIn: ["http://localhost:5173/chat"],
           redirectSignOut: ["http://localhost:5173"],
           responseType: "code",
-          scopes: ["email", "phone", "aws.cognito.signin.user.admin"],
-          // providers: ["Google", "Facebook"],
+          scopes: ["email", "phone", "aws.cognito.signin.user.admin", "openid"],
+          providers: ["Google"],
         },
       },
     },
@@ -96,7 +96,6 @@ const App = () => {
             <Route path="/enterprise" element={<Enterprise />} />
             <Route path="/about" element={<About />} />
             <Route path="/ethical-ai" element={<EthicalAI />} />
-            {/* <Route path="/login" element={<Login />} /> */}
             <Route path="/terms" element={<Terms />} />
           </Route>
 
@@ -131,15 +130,12 @@ const App = () => {
               }
             />
           )}
-
-          {/* <Route
-            path="/login"
-            element={
-              route === "authenticated" ? <Navigate to="/chat" /> : <Login />
-            }
-          /> */}
-
-          <Route path="*" element={<NotFound />} />
+          {authStatus === "authenticated" && (
+            <Route path="*" element={<NotFound />} />
+          )}
+          {authStatus === "unauthenticated" && (
+            <Route path="*" element={<Navigate to="/login" />} />
+          )}
         </Routes>
         <Toaster />
         <ButtonGradient />
