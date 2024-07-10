@@ -39,7 +39,7 @@ const Pricing = () => {
   return (
     <>
       {/* SEO CONTENT */}
-      <Helmet>
+      {/* <Helmet>
         <title>Hiaido | Pricing</title>
         <meta
           name="description"
@@ -50,7 +50,7 @@ const Pricing = () => {
           content="Hiaido, Subscription, Pricing, Cloud Operations, Automation, Plans"
         />
         <meta name="author" content="Hiaido" />
-      </Helmet>
+      </Helmet> */}
 
       {/* MAIN CONTENT */}
       <main
