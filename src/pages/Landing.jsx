@@ -6,7 +6,6 @@ import About from "./About";
 import Pricing from "./Pricing";
 import Contact from "@/components/shared/Contact";
 
-// Using React.lazy to dynamically import components for the Landing page.
 const Hero = lazy(() =>
   import("../components/page-components/homepage/hero/Hero")
 );
@@ -43,9 +42,6 @@ const Landing = () => {
         <Benefits />
         <About />
         <Pricing />
-        <section className="mt-40">
-          <Contact />
-        </section>
       </main>
     </Suspense>
   );

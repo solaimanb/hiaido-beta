@@ -92,7 +92,7 @@ const Hero = () => {
           <div className="space-y-3">
             <div className="flex flex-col space-y-8 2xl:space-y-14  lg:pt-10">
               <div>
-                <h1 className="hero-title text-3xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl inline-block tracking-tight">
+                <h1 className="hero-title text-3xl md:text-6xl lg:text-6xl xl:text-7xl inline-block tracking-tight">
                   The Next Generation
                   <br />
                   <span className="relative inline-block">
