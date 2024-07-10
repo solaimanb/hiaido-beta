@@ -4,7 +4,7 @@ import HelpVideoAWSButton from "@/components/HelpVideoAWSButton";
 import OrDevider from "@/components/OrDevider";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { Helmet } from "react-helmet-async";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { Loader2, VerifiedIcon } from "lucide-react";
@@ -144,6 +144,11 @@ const ConnectExstingMemberAccountForm = () => {
 
 const MemberAccountPage = () => {
   const [showCopied, setShowCopied] = useState(false);
+  const [searchParams, _] = useSearchParams();
+
+  const hostedPageId = searchParams.get("id");
+  const state = searchParams.get("state");
+  console.log(hostedPageId, state);
   window.scrollTo(0, 0);
 
   useEffect(() => {
@@ -177,25 +182,32 @@ const MemberAccountPage = () => {
             </div> */}
       <div className="min-h-screen overflow-auto flex justify-center items-center p-3">
         <div className="p-9 rounded-lg text-center border border-orange-300 ">
-          <div className="w-full flex gap-2 mb-3 pb-3 justify-end items-center">
-            <div>Help</div>
-            <HelpVideoAWSButton />
-          </div>
-          <div className="w-full flex flex-col md:flex-row gap-6 md:gap-0 items-center">
-            <div className="w-full p-2">
-              <h2 className="font-bold text-2xl">New to AWS?</h2>
-              <p className="w-full max-w-md my-10 mt-5 text-lg">
-                Easy sign up for a new AWS account to explore cloud solutions
-              </p>
-              <CreateMemberAccountButton />
-            </div>
-            {/* <hr className='my-5' /> */}
-            <OrDevider className={"py-5 w-full block md:hidden"} />
-            <div className="translate-x-3 hidden md:block font-bold bg-black">
-              OR
-            </div>
-            <ConnectExstingMemberAccountForm />
-          </div>
+          {hostedPageId && state === "succeeded" ? (
+            <>
+              <div className="w-full flex gap-2 mb-3 pb-3 justify-end items-center">
+                <div>Help</div>
+                <HelpVideoAWSButton />
+              </div>
+              <div className="w-full flex flex-col md:flex-row gap-6 md:gap-0 items-center">
+                <div className="w-full p-2">
+                  <h2 className="font-bold text-2xl">New to AWS?</h2>
+                  <p className="w-full max-w-md my-10 mt-5 text-lg">
+                    Easy sign up for a new AWS account to explore cloud
+                    solutions
+                  </p>
+                  <CreateMemberAccountButton />
+                </div>
+                {/* <hr className='my-5' /> */}
+                <OrDevider className={"py-5 w-full block md:hidden"} />
+                <div className="translate-x-3 hidden md:block font-bold bg-black">
+                  OR
+                </div>
+                <ConnectExstingMemberAccountForm />
+              </div>
+            </>
+          ) : (
+            <div className="w-full"> Please complete the payment first</div>
+          )}
         </div>
       </div>
     </>

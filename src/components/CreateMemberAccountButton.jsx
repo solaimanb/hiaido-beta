@@ -44,6 +44,9 @@ const CreateMemberAccountForm = ({ Cancel, customButton }) => {
           },
           { style: { backgroundColor: "rgb(34, 160, 94)" } }
         );
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
         // obj.formApi.reset();
       } else {
         const res_json = await response.json();

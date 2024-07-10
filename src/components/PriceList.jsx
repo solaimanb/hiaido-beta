@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Flex, Switch, Text } from "@radix-ui/themes";
 import { pricing } from "@/constants/pricing";
 import { Link, useSearchParams } from "react-router-dom";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 const NewPriceList = () => {
   const [params, setSearchParams] = useSearchParams();
@@ -13,6 +14,54 @@ const NewPriceList = () => {
   const [inrClicked, setInrClicked] = useState(false);
   const [checkoutUrl, setCheckoutUrl] = useState({});
   console.log(checkoutUrl);
+
+  // useEffect(() => {
+  //   if (window.Chargebee) {
+  //     let instance = window.Chargebee.getInstance();
+  //     console.log(instance);
+
+  //     let hostedPage = {
+  //       id: "MEszjLsdCVSUoIcuxWrZzdiX6cuCt9oAv0",
+  //       type: "checkout_new",
+  //       url: "https://hiaido.chargebee.com/pages/v3/MEszjLsdCVSUoIcuxWrZzdiX6cuCt9oAv0/",
+  //       state: "created",
+  //       embed: false,
+  //       created_at: 1720556097,
+  //       expires_at: 1720566897,
+  //       object: "hosted_page",
+  //       updated_at: 1720556097,
+  //       resource_version: 1720556097822,
+  //     };
+
+  //     instance.openCheckout({
+  //       hostedPage: function () {
+  //         return Promise.resolve(hostedPage);
+  //       },
+  //     });
+  //     // window.Chargebee.registerAgain();
+  //   }
+  // }, []);
+
+  const handleCheckoutGeneration = async (itemPriceId, idToken) => {
+    if (window.Chargebee) {
+      let instance = window.Chargebee.getInstance();
+
+      await instance.openCheckout({
+        hostedPage: async () => {
+          return fetch(
+            "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
+            {
+              method: "POST",
+              body: JSON.stringify({ itemPriceId }),
+              headers: { Authorization: `Bearer ${idToken}` },
+            }
+          )
+            .then((res) => res.json())
+            .then((data) => data.hostedPage);
+        },
+      });
+    }
+  };
 
   // useEffect(() => {
   //   if (window.Chargebee) {
@@ -167,7 +216,11 @@ const NewPriceList = () => {
               </div>
 
               <button
-                id="animated-btn"
+                id={
+                  item.url_id && item.url_id[currency]
+                    ? "animated-btn"
+                    : "animated-btn-outlined"
+                }
                 className="text-white bold-title p-2 rounded-2xl text-lg border border-orange-400 text-center mt-3 cursor-pointer"
                 // href={
                 //   item.price && item.price.INR !== null
@@ -177,10 +230,17 @@ const NewPriceList = () => {
                 //       )
                 //     : "mailto:support@hiaido.com"
                 // }
-                onClick={(e) => {
-                  if (item.url_id) {
-                    document.querySelector(`#${item.url_id[currency]}`).click();
-                    return;
+                onClick={async (e) => {
+                  let { tokens } = await fetchAuthSession();
+                  console.log(item.url_id[currency]);
+
+                  if (item.url_id && tokens.idToken) {
+                    handleCheckoutGeneration(
+                      item.url_id[currency],
+                      tokens.idToken.toString()
+                    );
+                    // document.querySelector(`#${item.url_id[currency]}`).click();
+                    // return;
                   }
                 }}
               >
