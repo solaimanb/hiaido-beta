@@ -85,7 +85,7 @@ const Hero = () => {
         <motion.div
           initial="hidden"
           animate="visible"
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.1 }}
           variants={variants}
           className="flex flex-col items-center justify-center h-[80vh] text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
