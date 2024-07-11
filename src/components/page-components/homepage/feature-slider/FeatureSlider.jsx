@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import {
   Autoplay,
   EffectCoverflow,
@@ -15,8 +15,6 @@ import {
 import Sliders from "./sliderInfo.json";
 
 import "./featureSlider.css";
-
-// Dynamic import for image assets
 import {
   alerts,
   anomalyDetectionEngine,
@@ -43,7 +41,7 @@ import {
   unifiedDashboard,
 } from "../../../../assets/index";
 
-const imageAssets = {
+ const imageAssets = {
   digitalWorkforce,
   smartUserInterface,
   intelligentChatbot,
@@ -84,33 +82,19 @@ const breakpoints = {
 const FeatureSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  // const [isMdScreen, setIsMdScreen] = useState(window.innerWidth >= 768);
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentDescription, setCurrentDescription] = useState("");
   const swiperRef = useRef(null);
 
-  // const handleResize = () => {
-  //   setIsMdScreen(window.innerWidth >= 768);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
   useEffect(() => {
-    if (hoveredIndex !== null) {
-      setCurrentTitle(Sliders[hoveredIndex]?.title);
-      setCurrentDescription(Sliders[hoveredIndex]?.description);
-    } else if (activeIndex !== null) {
-      setCurrentTitle(Sliders[activeIndex]?.title);
-      setCurrentDescription(Sliders[activeIndex]?.description);
-    } else {
-      setCurrentTitle("");
-      setCurrentDescription("");
-    }
+    const updateCurrentInfo = () => {
+      const index = hoveredIndex !== null ? hoveredIndex : activeIndex;
+      if (index !== null) {
+        setCurrentTitle(Sliders[index]?.title || "");
+        setCurrentDescription(Sliders[index]?.description || "");
+      }
+    };
+    updateCurrentInfo();
   }, [hoveredIndex, activeIndex]);
 
   const baseX = useMotionValue(0);
@@ -122,44 +106,21 @@ const FeatureSlider = () => {
     baseX.set(baseX.get() - moveBy);
   });
 
-  // Function to handle slide click
-  // const handleSlideClick = (index) => {
-  //   if (isMdScreen) {
-  //     setActiveIndex(index === activeIndex ? null : index);
-  //     setHoveredIndex(null);
-
-  //     if (swiperRef.current && swiperRef.current.swiper) {
-  //       swiperRef.current.swiper.slideTo(index, 1000);
-  //     }
-  //   }
-  // };
-
-  const handleSlideClick = (index) => {
+  const handleSlideClick = useCallback((index) => {
     setActiveIndex(index);
     setHoveredIndex(null);
+    swiperRef.current?.swiper?.slideToLoop(index, 1000);
+  }, []);
 
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slideToLoop(index, 1000);
-    }
-  };
-
-  const handleMouseEnter = (index) => {
-    // if (activeIndex !== null) {
-    //   setActiveIndex(null);
-    // }
-
+  const handleMouseEnter = useCallback((index) => {
     setHoveredIndex(index);
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.autoplay.stop();
-    }
-  };
+    swiperRef.current?.swiper?.autoplay.stop();
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setHoveredIndex(null);
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.autoplay.start();
-    }
-  };
+    swiperRef.current?.swiper?.autoplay.start();
+  }, []);
 
   const variants = {
     hidden: { filter: "blur(10px)", opacity: 0 },
@@ -206,7 +167,7 @@ const FeatureSlider = () => {
           clickable: true,
         }}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-        className="feature-slider swiper-contanier w-full"
+        className="feature-slider swiper-container w-full"
         breakpoints={breakpoints}
         onMouseEnter={() => {
           if (swiperRef.current && swiperRef.current.swiper) {
@@ -223,20 +184,12 @@ const FeatureSlider = () => {
       >
         {Sliders.map(
           (slider, index) => (
-            // (index !== 0 || (index === 0 && isMdScreen)) &&
-            //   (index !== 1 || (index === 1 && isMdScreen)) ? (
+         
             <SwiperSlide
               key={index}
               onClick={() => handleSlideClick(index)}
-              // className={index !== 0 && index !== 1 ? "w-full" : ""}
             >
               <div
-                // className={
-                //   index !== 0 && index !== 1
-                //     ? "relative flex flex-col text-[#F9F7ED] py-10 w-full"
-                //     : ""
-                // }
-
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
@@ -249,20 +202,9 @@ const FeatureSlider = () => {
                   onClick={() => setActiveIndex(index)}
                 >
                   <div
-                    // className={
-                    //   index !== 0 && index !== 1
-                    //     ? "rounded-3xl neon-bg transition-all duration-200 w-full border-2 border-orange-500/5"
-                    //     : ""
-                    // }
-
-                    // className={
-                    //   `rounded-3xl hover:neon-bg transition-all duration-200 w-full border border-orange-500/10 my-10 ${activeIndex === index ? "neon-bg": ""}`
-                    // }
                     className={`rounded-3xl transition-all duration-200 mx-10 md:mx-0 mt-10 mb-20 ${
                       activeIndex === index ? "neon-bg" : "hover:neon-bg"
                     }`}
-
-                    // className={activeIndex === index ? "highlight-slide" : ""}
                   >
                     <img
                       src={imageAssets[slider?.image]}
@@ -272,15 +214,14 @@ const FeatureSlider = () => {
                           ? "grayscale-0"
                           : "grayscale"
                       }`}
+                      loading="lazy"
                     />
                   </div>
                 </div>
               </div>
             </SwiperSlide>
           )
-          // ) : null
         )}
-
         {/* Swiper Pagination */}
         <div className="slider-controller">
           <div className="swiper-button-prev slider-arrow"></div>
@@ -307,182 +248,3 @@ const FeatureSlider = () => {
 };
 
 export default FeatureSlider;
-
-{
-  /* <Marquee className="min-h-screen">
-        {Sliders?.map((slider, index) =>
-          (index !== 0 || (index === 0 && isMdScreen)) &&
-          (index !== 1 || (index === 1 && isMdScreen)) ? (
-            <div
-              key={index}
-              className={index !== 0 && index !== 1 ? "py-10" : ""}
-            >
-              {(hoveredIndex === index || activeIndex === index) && (
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  transition={{ duration: 0.5 }}
-                  variants={variants}
-                  className={
-                    index !== 0 && index !== 1
-                      ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-6xl"
-                      : ""
-                  }
-                >
-                  {slider?.title}
-                </motion.div>
-              )}
-
-              <div
-                className={
-                  index !== 0 && index !== 1
-                    ? "relative flex flex-col text-[#F9F7ED]"
-                    : ""
-                }
-              >
-                {(hoveredIndex === index || activeIndex === index) && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 0.5 }}
-                    variants={variants}
-                    className={
-                      index !== 0 && index !== 1
-                        ? "bold-title absolute -top-10 text-xl font-bold text-center w-full md:text-5xl"
-                        : ""
-                    }
-                  >
-                    {slider?.title}
-                  </motion.div>
-                )}
-
-                <div
-                  className={`${index !== 0 && index !== 1 ? "p-6" : ""} ${
-                    hoveredIndex === index || activeIndex === index
-                      ? "relative"
-                      : ""
-                  } `}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={() =>
-                    setActiveIndex((prevIndex) =>
-                      prevIndex === index ? null : index
-                    )
-                  }
-                >
-                  <div className={index !== 0 && index !== 1 ? "w-80" : ""}>
-                    <img
-                      src={imageAssets[slider?.image]}
-                      alt={imageAssets[slider?.image]}
-                      className={
-                        index !== 0 && index !== 1
-                          ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                          : "object-cover w-full h-full transition-all duration-300"
-                      }
-                    />
-                  </div>
-                </div>
-
-                {(hoveredIndex === index || activeIndex === index) && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 0.5 }}
-                    variants={variants}
-                    className={
-                      index !== 0 && index !== 1
-                        ? "absolute -bottom-10 text-sm font-bold text-center w-full"
-                        : ""
-                    }
-                  >
-                    {slider?.description}
-                  </motion.div>
-                )}
-              </div>
-            </div>
-          ) : null
-        )}
-      </Marquee> */
-}
-
-{
-  /* <div className="w-full">
-<Swiper
-  ref={swiperRef}
-  direction="horizontal"
-  autoplay={{
-    delay: 1000,
-    disableOnInteraction: false,
-  }}
-  speed={1000}
-  modules={[Autoplay, Navigation]}
-  className="feature-slider"
-  spaceBetween={10}
-  breakpoints={breakpoints}
-  onMouseEnter={() => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.autoplay.stop();
-    }
-  }}
-  onMouseLeave={() => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.autoplay.start();
-    }
-  }}
->
-  {Sliders.map((slider, index) =>
-    (index !== 0 || (index === 0 && isMdScreen)) &&
-    (index !== 1 || (index === 1 && isMdScreen)) ? (
-      <SwiperSlide
-        key={index}
-        className={index !== 0 && index !== 1 ? "w-full h-full" : ""}
-        onClick={() => handleSlideClick(index)}
-      >
-        <div
-          className={
-            index !== 0 && index !== 1
-              ? "relative py-4 flex flex-col  text-[#F9F7ED] w-full h-full"
-              : ""
-          }
-        >
-          <div
-            className={`${index !== 0 && index !== 1 ? "p-6 w-full h-full" : ""} ${
-              hoveredIndex === index || activeIndex === index ? "" : ""
-            } `}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-            onClick={() => setActiveIndex(index)}
-          >
-            <div
-              className={
-                index !== 0 && index !== 1
-                  ? "p-4 md:p-14 rounded-xl w-full h-full"
-                  : ""
-              }
-            >
-              <div
-                className={
-                  index !== 0 && index !== 1
-                    ? "min-w neon-bg transition-all duration-200 w-full h-full min-w-60"
-                    : ""
-                }
-              >
-                <img
-                  src={imageAssets[slider?.image]}
-                  alt={imageAssets[slider?.image]}
-                  className={
-                    index !== 0 && index !== 1
-                      ? "object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                      : "object-cover w-full h-full transition-all duration-300"
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </SwiperSlide>
-    ) : null
-  )}
-</Swiper>
-</div> */
-}

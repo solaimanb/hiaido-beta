@@ -1,22 +1,18 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// import required modules
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 import { PlayIcon } from "@radix-ui/react-icons";
 import { aws, azure, gcp, interactiveAnimationV5 } from "../../../../assets";
 import "./spinner.css";
 
-// Animation Text Array & Asset Imports:
 import { TextArrays } from "./index";
 import {
   filterByCategory,
@@ -25,9 +21,7 @@ import {
   getTextArrayData,
 } from "./textArrayMapping";
 
-//==============================================
 // Functional Buttons for filtering text arrays:
-//==============================================
 const actionButtons = ["Create", "Describe", "Update", "List", "Delete"];
 const categoryButtons = ["Aws", "Azure", "GCP"];
 
@@ -41,23 +35,18 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
   const [showExample, setShowExample] = useState(false);
   const [filteredTextLines, setFilteredTextLines] = useState(allTextLines);
 
-  //==================================
   // Text Animation Mapping Functions:
-  //==================================
   const updateFilteredTextLines = (actionButton, categoryButton) => {
     let filteredTexts = allTextLines;
 
-    // Set activeActionButton to null if actionButton is not active
     setActiveActionButton(actionButton || null);
 
-    // Apply category filtering
     if (categoryButton) {
       filteredTexts = filterByCategory(categoryButton, textArrayData).flatMap(
         (item) => item.values
       );
     }
 
-    // Apply actionButton filtering
     if (actionButton) {
       const filteredSubCategories = filterSubCategoryTexts(
         textArrayData,
@@ -74,16 +63,13 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
     );
   };
 
-  //======================================
   // Shuffle the text array for animation:
-  //======================================
-  const shuffledTexts = [...filteredTextLines].sort(() => Math.random() - 0.5);
+  const shuffledTexts = useMemo(() => [...filteredTextLines].sort(() => Math.random() - 0.5), [filteredTextLines]);
 
   return (
     <div className="flex items-center justify-center w-full h-full">
       {showSecondAnimation && (
         <div className="flex flex-col items-start justify-center w-full md:max-w-[80%]">
-          {/* HiAiDo Process Animation */}
           {!showExample && (
             <img
               src={interactiveAnimationV5}
@@ -93,11 +79,9 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
             />
           )}
 
-          {/* Functional Animation */}
           {showExample && (
             <div className="w-full mx-auto border-[#2A0BF6] p-3 border-[3px] gap-4 flex flex-col rounded-2xl">
               <div className="flex gap-2">
-                {/* Create, Describe, Update, List, Delete */}
                 {actionButtons.map((button, index) => (
                   <motion.button
                     key={button}
@@ -128,7 +112,6 @@ const InteractiveAnimation = ({ showSecondAnimation }) => {
 
               {/* Animation Outlet */}
               <div className="flex w-full gap-2 justify-between flex-row">
-                {/* Self-Scroll Animation Swiper */}
                 <Swiper
                   slidesPerView={1}
                   loop={true}
