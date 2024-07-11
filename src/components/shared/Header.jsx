@@ -85,7 +85,7 @@ const Header = () => {
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
           </NavLink>
 
-          <nav className="hidden w-full lg:block custom-scrollbar">
+         <nav className="hidden w-full lg:block custom-scrollbar">
             <div className="flex gap-6 ">
               {navigation.map((item, index) => (
                 <div
@@ -164,7 +164,7 @@ const Header = () => {
                 </div>
               ))}
             </div>
-          </nav>
+          </nav> 
         </div>
 
         <div className="flex items-center justify-end gap-4 px-2 w-2/6">
