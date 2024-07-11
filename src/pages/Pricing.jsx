@@ -34,7 +34,7 @@ const Pricing = () => {
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
 
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
 
   return (
     <>
