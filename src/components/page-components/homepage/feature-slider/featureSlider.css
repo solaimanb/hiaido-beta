@@ -152,10 +152,6 @@ border: solid 1px #e75a27;
 }
 
 @media (min-width: 1024px) {
-  /* .slider-controller .swiper-wrapper {
-    margin-left: calc(50% - (5 * 10px) - 50%);
-  } */
-
   .slider-controller .swiper-button-next {
     right: 25%;
     top: 96%;

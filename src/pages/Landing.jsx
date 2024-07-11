@@ -1,10 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import Loading from "../components/shared/Loading";
-import FeatureSlider from "../components/page-components/homepage/feature-slider/FeatureSlider";
 import About from "./About";
 import Pricing from "./Pricing";
-import Contact from "@/components/shared/Contact";
 
 const Hero = lazy(() =>
   import("../components/page-components/homepage/hero/Hero")
@@ -12,6 +10,8 @@ const Hero = lazy(() =>
 const Benefits = lazy(() =>
   import("../components/page-components/homepage/Benefits")
 );
+const FeatureSlider = lazy(() =>
+  import("@/components/page-components/homepage/feature-slider/FeatureSlider"));
 
 const Landing = () => {
   window.scrollTo(0, 0);
