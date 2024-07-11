@@ -10,7 +10,7 @@ const Footer = () => {
         </p> */}
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-white/80">
+        <div className="flex flex-col md:flex-row items-center gap-2 text-sm text-white/80">
           {/* <NavLink
           to="/privacy"
           className="lg:block text-white/60 underline-offset-2 text-xs font-semibold text-center underline"
@@ -30,11 +30,8 @@ const Footer = () => {
           <div>
             <p className="lg:block gap-x-1 flex items-center text-sm font-semibold">
               &copy; {new Date().getFullYear()}
-              {" "}
               <Link to="/">HIAIDO</Link> •
-              {" "}
               All rights reserved.
-              {" "}
             </p>
           </div>
 
