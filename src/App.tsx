@@ -16,6 +16,7 @@ import { GlobalStateProvider } from "./context/GlobalStateContext.js";
 import Enterprise from "./pages/Enterprise.jsx";
 import About from "./pages/About.jsx";
 import Loader from "./components/Loader.js";
+import Subscriptions from "./pages/Subscriptions.js";
 
 // Using React.lazy to dynamically import components for the App page.
 const Onboarding = lazy(() => import("./pages/Onboarding.js"));
@@ -40,8 +41,11 @@ Amplify.configure({
       loginWith: {
         oauth: {
           domain: "hiaido.auth.us-east-1.amazoncognito.com",
-          redirectSignIn: ["http://localhost:5173/chat"],
-          redirectSignOut: ["http://localhost:5173"],
+          redirectSignIn: [
+            "http://localhost:5173/chat",
+            "https://hiaido.com/chat",
+          ],
+          redirectSignOut: ["http://localhost:5173", "https://hiaido.com"],
           responseType: "code",
           scopes: ["email", "phone", "aws.cognito.signin.user.admin", "openid"],
           providers: ["Google"],
@@ -111,6 +115,7 @@ const App = () => {
               <Route path="/dashboard" element={<UnderConstruction />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/account-factory" element={<AccountFactory />} />
+              <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/usage-analytics" element={<UnderConstruction />} />
               <Route path="/deployments" element={<UnderConstruction />} />
               <Route path="/scheduler" element={<UnderConstruction />} />

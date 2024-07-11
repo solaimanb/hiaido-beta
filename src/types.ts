@@ -11,6 +11,7 @@ export interface ManagedMemberAccount {
 export interface ConnectedAccount {
   role_arn: string;
   owner: string;
+  alias: string;
   externalId: string;
   account_id: string;
   owner_id: string;

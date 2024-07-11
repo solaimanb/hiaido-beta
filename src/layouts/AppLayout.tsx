@@ -2,13 +2,41 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { useGlobalState } from "@/context/GlobalStateContext";
 import Loader from "@/components/Loader";
+import { useEffect, useState } from "react";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 const AppLayout = () => {
-  const { userAttributes, memberAccounts } = useGlobalState();
+  const { userAttributes, memberAccounts, } = useGlobalState();
   const location = useLocation();
 
   const dontShowRouteSidebar = ["/onboarding"];
   console.log(memberAccounts);
+
+  const getHostedPage = async () => {
+    const authSession = await fetchAuthSession();
+    let idToken = authSession.tokens?.idToken?.toString();
+    if (idToken) {
+      let response = await fetch(
+        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+      } else {
+        throw new Error(data.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getHostedPage();
+  }, []);
 
   if (!userAttributes || !memberAccounts) {
     return <Loader />;

@@ -35,7 +35,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ui-components/ui/dropdown-menu";
-import { LogOut } from "lucide-react";
+import { CalendarCheck2, LogOut, MessageSquare, Subscript } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/ui-components/ui/avatar";
 import { ScrollArea } from "@/ui-components/ui/scroll-area";
 import toast from "react-hot-toast";
@@ -51,6 +51,7 @@ export const navbarData = [
     label: "Account Factory",
     icon: <AtSymbolIcon className="w-6" />,
   },
+  { label: "Subscriptions", icon: <CalendarCheck2 className="w-5" /> },
   // {
   //   label: "Usage Analytics",
   //   icon: <PresentationChartLineIcon className="w-6" />,
@@ -404,7 +405,7 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
             ))}
           </DropdownMenuRadioGroup>
         </ScrollArea>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={async () => {
             localStorage.removeItem("current_member_account");
@@ -415,7 +416,7 @@ const CurrentMemberAccountComponent: React.FC<{ isCollapsed: boolean }> = ({
         >
           <LogOut className="mr-2 size-4" />
           <span>Log out</span>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
