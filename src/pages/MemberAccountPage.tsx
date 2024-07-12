@@ -226,7 +226,7 @@ const MemberAccountPage = () => {
               </div>
               <div className="w-full flex flex-col md:flex-row gap-6 md:gap-0 items-center">
                 <div className="w-full p-2">
-                  <h2 className="font-bold text-2xl">New to AWS?</h2>
+                  <h2 className="font-bold text-2xl">New to </h2>
                   <p className="w-full max-w-md my-10 mt-5 text-lg">
                     Easy sign up for a new AWS account to explore cloud
                     solutions
