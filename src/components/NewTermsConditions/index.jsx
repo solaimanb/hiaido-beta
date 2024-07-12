@@ -300,7 +300,7 @@ const NewTermsConditions = ({}) => {
       </div>
 
       <div className="w-full flex gap-4 items-center justify-between border-t pt-3 md:pr-4 border-orange-400">
-        <div className="flex gap-2 justify-center md:justify-start w-full items-center">
+        {/* <div className="flex gap-2 justify-center md:justify-start w-full items-center">
           <input
             type="radio"
             name="terms"
@@ -310,7 +310,7 @@ const NewTermsConditions = ({}) => {
             checked={termsAccepted}
           />
           <label htmlFor="terms">I agree with the terms & Conditions</label>
-        </div>
+        </div> */}
         <div className="flex gap-4 items-center">
           {/* <button
             type="button"
@@ -322,16 +322,16 @@ const NewTermsConditions = ({}) => {
           <button
             className={`bg-orange-400 px-4 py-2 rounded font-bold`}
             onClick={() => {
-              if (termsAccepted) {
-                setSearchParams({ step: "1" });
-              } else {
-                toast.error(
-                  "Please accept the terms and conditions to proceed"
-                );
-              }
+              setSearchParams({ step: "1" });
+              // if (termsAccepted) {
+              // } else {
+              //   toast.error(
+              //     "Please accept the terms and conditions to proceed"
+              //   );
+              // }
             }}
           >
-            Next
+            Accept
           </button>
         </div>
       </div>

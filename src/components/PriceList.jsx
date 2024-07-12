@@ -31,6 +31,8 @@ const NewPriceList = () => {
       console.log(data);
       if (data?.state === "succeeded") {
         navigate(`/onboarding?step=2&id=${data.id}&state=${data.state}`);
+      } else {
+        setHostedPage({});
       }
     } else {
       setHostedPage({});
@@ -58,7 +60,7 @@ const NewPriceList = () => {
             .then((res) => res.json())
             .then((data) => data.hostedPage);
           if (data.redirect_url) {
-            window.location.replace(data.redirect_url);
+            navigate(data.redirect_url);
           } else {
             return new Promise((resolve, reject) => {
               resolve(data);
