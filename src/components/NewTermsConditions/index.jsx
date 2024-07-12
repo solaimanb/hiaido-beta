@@ -30,7 +30,7 @@ import UserGeneratedContributions from "./contents/UserGeneratedContributions";
 import UserRegistrastion from "./contents/UserRegistrastion";
 import UserRepresentation from "./contents/UserRepresentation";
 import TableOfContents from "../page-components/terms/TableOfContents";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 
@@ -39,8 +39,15 @@ const NewTermsConditions = ({}) => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   console.log(termsAccepted);
 
+  const divRef = useRef(null);
+
+  const scrollToElement = () => {
+    divRef.current.scrollIntoView()
+  }
+  useEffect(scrollToElement, [  ])
+
   return (
-    <div className="max-w-4xl px-4 mx-auto space-y-4">
+    <div className="max-w-4xl px-4 mx-auto space-y-4 term-conditions-page">
       <div className="sticky top-0 bg-black pb-5 pt-3">
         <h2 className="text-4xl font-bold bg-gradient-to-r via-orange-500 to-pink-500  from-yellow-300 text-transparent bg-clip-text inline-block">
           TERMS AND CONDITIONS
@@ -97,7 +104,7 @@ const NewTermsConditions = ({}) => {
             continuing to use the Services after the effective date of any
             changes, you agree to be bound by the modified terms. If you
             disagree with such changes, you may terminate Services as per the
-            section &apos;[TERM AND TERMINATION](#terms)&apos;.
+            section &apos; <a href="#terms" className="text-blue-300">TERM AND TERMINATION</a>&apos;.
             <br />
             <br />
             The Services are intended for users who are at least 13 years of
@@ -270,7 +277,7 @@ const NewTermsConditions = ({}) => {
           ))}
         </div>
 
-        <div>
+        <div ref={divRef} >
           <h4 className="font-bold text-lg">CONTACT US</h4>
 
           <p>
@@ -279,17 +286,17 @@ const NewTermsConditions = ({}) => {
             at:
           </p>
 
-          <div className="font-bold mt-2">
+          <div className="mt-2">
             <p>Hiaido Cloud Automation Pvt. Ltd</p>
             <p>24, Ranganathan Street, OMR, Karapakkam</p>
             <p>Chennai, Tamil Nadu 600097</p>
             <p>India</p>
-            <div className="flex items-start flex-row gap-1">
-              <div>Phone:</div>{" "}
+            <div className="">
+              <p>Phone:</p>
               <div>
-                <a href="tel:+918939979393">+91 8939 979 393</a>
+                <a href="tel:+918939979393" className="text-[12px]">+91 8939 979 393</a>
                 <br />
-                <a href="tel:+919911195555">+91 9911 195 555</a>
+                <a href="tel:+919911195555" className="text-[12px]">+91 9911 195 555</a>
               </div>
             </div>
             <p>

@@ -5,7 +5,7 @@ const VerticalTabs = ({ tabs, activeTab }) => {
 
     return (
         <div className='max-w-6xl mx-auto flex flex-col md:flex-row gap-2 items-center bg-black p-3 rounded-lg text-white'>
-            <div className='flex flex-col justify-between items-center md:h-[calc(100dvh_-_10dvh)]'>
+            <div className='flex flex-col justify-between items-center w-full md:w-auto md:h-[calc(100dvh_-_10dvh)]'>
                 <NavLink className="block mt-3" to="/">
                     <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
                 </NavLink>
@@ -22,7 +22,7 @@ const VerticalTabs = ({ tabs, activeTab }) => {
                 </div>
                 <div></div>
             </div>
-            <div className="content w-full mt-6 md:mt-0 h-[calc(100dvh_-_40dvh)] md:h-[calc(100dvh_-_10dvh)] overflow-auto scrollbar-thin scrollbar-track-orange-100 scrollbar-thumb-orange-400 ">
+            <div className="content w-full md:mt-6 md:mt-0 h-[calc(100dvh_-_40dvh)] md:h-[calc(100dvh_-_10dvh)] overflow-auto scrollbar-thin scrollbar-track-orange-100 scrollbar-thumb-orange-400 ">
                 {tabs[activeTab].content}
             </div>
         </div>
