@@ -240,7 +240,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div>
+        <div className="mb-10">
           <Link
             to={"/login"}
             onClick={() => user && signOut()}
