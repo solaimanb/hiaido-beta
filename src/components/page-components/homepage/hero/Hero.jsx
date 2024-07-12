@@ -1,41 +1,36 @@
-// External libraries
 import { PointMaterial, Points } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { motion } from "framer-motion";
 import * as random from "maath/random/dist/maath-random.esm";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
-// Local components
 import AnimatedBtn from "../../../Buttons/AnimatedBtn";
 import Section from "../../../Section";
 import AnimatedText from "../../../shared/AnimatedText";
 import InteractiveAnimation from "./InteractiveAnimation";
 
-// Assets
 import { curve } from "../../../../assets";
 
 function Stars(props) {
   const ref = useRef();
 
-  const [sphere] = useState(() => {
+  const sphere = useMemo(() => {
     const positions = random.inSphere(new Float32Array(15000), { radius: 2 });
     const validPositions = [];
 
-    // Filter out NaN values and populate validPositions array
     for (let i = 0; i < positions.length; i += 3) {
       const x = positions[i];
       const y = positions[i + 1];
       const z = positions[i + 2];
 
-      // Check if any of the coordinates are NaN
       if (!isNaN(x) && !isNaN(y) && !isNaN(z)) {
         validPositions.push(x, y, z);
       }
     }
 
     return new Float32Array(validPositions);
-  });
+  }, []);
 
   useFrame((state, delta) => {
     ref.current.rotation.x -= delta / 15;
@@ -43,20 +38,8 @@ function Stars(props) {
   });
 
   return (
-    <Points
-      ref={ref}
-      positions={sphere}
-      stride={3}
-      frustumCulled={false}
-      {...props}
-    >
-      <PointMaterial
-        transparent
-        color="#E17225"
-        size={0.002}
-        sizeAttenuation={true}
-        depthWrite={false}
-      />
+    <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
+      <PointMaterial transparent color="#E17225" size={0.002} sizeAttenuation={true} depthWrite={false} />
     </Points>
   );
 }
@@ -76,7 +59,6 @@ const Hero = () => {
   return (
     <Section
       crosses
-      // crossesOffset="lg:translate-y-[5.25rem]"
       customPaddings
       id="hero"
       className="flex justify-center"
@@ -85,14 +67,14 @@ const Hero = () => {
         <motion.div
           initial="hidden"
           animate="visible"
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.1 }}
           variants={variants}
           className="flex flex-col items-center justify-center h-[80vh] text-center max-w-5xl lg:max-w-7xl mx-auto w-full md:mt-12 gap-4"
         >
           <div className="space-y-3">
             <div className="flex flex-col space-y-8 2xl:space-y-14  lg:pt-10">
               <div>
-                <h1 className="hero-title text-3xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl inline-block tracking-tight">
+                <h1 className="hero-title text-3xl md:text-6xl lg:text-6xl xl:text-7xl inline-block tracking-tight">
                   The Next Generation
                   <br />
                   <span className="relative inline-block">

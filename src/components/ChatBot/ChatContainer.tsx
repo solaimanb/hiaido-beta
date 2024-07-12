@@ -207,8 +207,8 @@ const ChatsList = memo(() => {
 // contains the chats and query box
 const ChatContainer = () => {
   const chatBoxRef = useRef<HTMLDivElement>(null);
-  const { state, submitPrompt } = useChats();
-  const { chats, memberAccounts } = state;
+  const { setters, state, submitPrompt } = useChats();
+  const { query, chats, memberAccounts, model } = state;
   const { userAttributes } = useGlobalState();
 
   useEffect(() => {

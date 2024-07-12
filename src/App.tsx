@@ -66,7 +66,6 @@ const App = () => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        // Assume some function to check authentication status
         // await someAuthCheckFunction();
       } catch (e) {
         console.error("Failed to check auth status", e);

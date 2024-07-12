@@ -26,7 +26,7 @@ import AnimatedBtn from "../components/Buttons/AnimatedBtn";
 // });
 
 const Hiring = () => {
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
   const navigate = useNavigate();
 
   const [isLoader, setIsLoader] = useState(false);

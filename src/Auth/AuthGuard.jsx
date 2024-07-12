@@ -6,11 +6,9 @@ const AuthGuard = ({ children }) => {
   const location = useLocation();
 
   if (!user?.isAuthenticated) {
-    // Redirect to login if not authenticated
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  // Render children if authenticated
   return <>{children}</>;
 };
 
