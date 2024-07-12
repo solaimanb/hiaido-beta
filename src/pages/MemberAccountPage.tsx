@@ -145,10 +145,10 @@ const ConnectExstingMemberAccountForm = () => {
 
 const MemberAccountPage = () => {
   const [showCopied, setShowCopied] = useState(false);
-  const [searchParams, _] = useSearchParams();
+  const [searchParams, setSearchParam] = useSearchParams();
   const [hostedPage, setHostedPage] = useState<any>(null);
 
-  const hostedPageId = searchParams.get("id");
+  const hostedPageId = searchParams.get("id") || hostedPage?.id;
   const state = searchParams.get("state");
   console.log(hostedPageId, state);
   window.scrollTo(0, 0);
@@ -169,7 +169,11 @@ const MemberAccountPage = () => {
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        setHostedPage(data.hostedPage);
+        if (data.hostedPage) {
+          // setSearchParam("id", data.hostedPage.id);
+          // setSearchParam("state", data.hostedPage.state);
+          setHostedPage(data.hostedPage);
+        }
       } else {
         throw new Error(data.message);
       }

@@ -4,8 +4,9 @@ import { generateCheckoutUrl } from "@/services/GenerateCheckoutUrl";
 import React, { useEffect, useState } from "react";
 import { Flex, Switch, Text } from "@radix-ui/themes";
 import { pricing } from "@/constants/pricing";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { fetchAuthSession } from "aws-amplify/auth";
+import Loader from "./Loader";
 
 const NewPriceList = () => {
   const [params, setSearchParams] = useSearchParams();
@@ -13,7 +14,32 @@ const NewPriceList = () => {
   const [usdClicked, setUsdClicked] = useState(false);
   const [inrClicked, setInrClicked] = useState(false);
   const [checkoutUrl, setCheckoutUrl] = useState({});
+  const [hostedPage, setHostedPage] = useState(null);
+  const navigate = useNavigate();
   console.log(checkoutUrl);
+
+  const checkIfPaymentDone = async () => {
+    const { tokens } = await fetchAuthSession();
+    const response = await fetch(
+      "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
+      {
+        headers: { Authorization: `Bearer ${tokens.idToken}` },
+      }
+    );
+    if (response.ok) {
+      const data = (await response.json())?.hostedPage;
+      console.log(data);
+      if (data?.state === "succeeded") {
+        navigate(`/onboarding?step=2&id=${data.id}&state=${data.state}`);
+      }
+    } else {
+      setHostedPage({});
+    }
+  };
+
+  useEffect(() => {
+    checkIfPaymentDone();
+  }, []);
 
   const handleCheckoutGeneration = async (itemPriceId, idToken) => {
     if (window.Chargebee) {
@@ -21,7 +47,7 @@ const NewPriceList = () => {
 
       await instance.openCheckout({
         hostedPage: async () => {
-          return fetch(
+          const data = await fetch(
             "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
             {
               method: "POST",
@@ -31,6 +57,13 @@ const NewPriceList = () => {
           )
             .then((res) => res.json())
             .then((data) => data.hostedPage);
+          if (data.redirect_url) {
+            window.location.replace(data.redirect_url);
+          } else {
+            return new Promise((resolve, reject) => {
+              resolve(data);
+            });
+          }
         },
       });
     }
@@ -64,6 +97,10 @@ const NewPriceList = () => {
   const convertPrice = (price) => {
     return currency === "INR" ? price.INR : price.USD;
   };
+
+  if (!hostedPage) {
+    return <Loader />;
+  }
 
   return (
     <div className="w-full">
