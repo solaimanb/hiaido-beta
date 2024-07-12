@@ -12,6 +12,7 @@ import AnimatedBtn from "../components/Buttons/AnimatedBtn";
 import { Button } from "@/ui-components/ui/button";
 import ConnectAccountFormButton from "@/components/ConnectAccountFormButton";
 import { fetchAuthSession } from "aws-amplify/auth";
+import Loader from "@/components/Loader";
 
 const copyContent = async (text: string) => {
   try {
@@ -145,11 +146,39 @@ const ConnectExstingMemberAccountForm = () => {
 const MemberAccountPage = () => {
   const [showCopied, setShowCopied] = useState(false);
   const [searchParams, _] = useSearchParams();
+  const [hostedPage, setHostedPage] = useState<any>(null);
 
   const hostedPageId = searchParams.get("id");
   const state = searchParams.get("state");
   console.log(hostedPageId, state);
   window.scrollTo(0, 0);
+
+  const getHostedPage = async () => {
+    const authSession = await fetchAuthSession();
+    let idToken = authSession.tokens?.idToken?.toString();
+    if (idToken) {
+      let response = await fetch(
+        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+        setHostedPage(data.hostedPage);
+      } else {
+        throw new Error(data.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getHostedPage();
+  }, []);
 
   useEffect(() => {
     if (showCopied) {
@@ -158,6 +187,13 @@ const MemberAccountPage = () => {
       }, 2000);
     }
   }, [showCopied]);
+
+  if (!hostedPage) {
+    return <Loader />;
+  }
+
+  const item_price_id =
+    hostedPage.content?.subscription.subscription_items[0].item_price_id;
 
   return (
     <>
@@ -198,11 +234,15 @@ const MemberAccountPage = () => {
                   <CreateMemberAccountButton />
                 </div>
                 {/* <hr className='my-5' /> */}
-                <OrDevider className={"py-5 w-full block md:hidden"} />
-                <div className="translate-x-3 hidden md:block font-bold bg-black">
-                  OR
-                </div>
-                <ConnectExstingMemberAccountForm />
+                {(item_price_id as string).includes("Playground") || (
+                  <>
+                    <OrDevider className={"py-5 w-full block md:hidden"} />{" "}
+                    <div className="translate-x-3 hidden md:block font-bold bg-black">
+                      OR
+                    </div>
+                    <ConnectExstingMemberAccountForm />
+                  </>
+                )}
               </div>
             </>
           ) : (
