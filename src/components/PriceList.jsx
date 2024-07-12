@@ -15,33 +15,6 @@ const NewPriceList = () => {
   const [checkoutUrl, setCheckoutUrl] = useState({});
   console.log(checkoutUrl);
 
-  // useEffect(() => {
-  //   if (window.Chargebee) {
-  //     let instance = window.Chargebee.getInstance();
-  //     console.log(instance);
-
-  //     let hostedPage = {
-  //       id: "MEszjLsdCVSUoIcuxWrZzdiX6cuCt9oAv0",
-  //       type: "checkout_new",
-  //       url: "https://hiaido.chargebee.com/pages/v3/MEszjLsdCVSUoIcuxWrZzdiX6cuCt9oAv0/",
-  //       state: "created",
-  //       embed: false,
-  //       created_at: 1720556097,
-  //       expires_at: 1720566897,
-  //       object: "hosted_page",
-  //       updated_at: 1720556097,
-  //       resource_version: 1720556097822,
-  //     };
-
-  //     instance.openCheckout({
-  //       hostedPage: function () {
-  //         return Promise.resolve(hostedPage);
-  //       },
-  //     });
-  //     // window.Chargebee.registerAgain();
-  //   }
-  // }, []);
-
   const handleCheckoutGeneration = async (itemPriceId, idToken) => {
     if (window.Chargebee) {
       let instance = window.Chargebee.getInstance();
@@ -62,12 +35,6 @@ const NewPriceList = () => {
       });
     }
   };
-
-  // useEffect(() => {
-  //   if (window.Chargebee) {
-  //     window.Chargebee.registerAgain();
-  //   }
-  // }, []);
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
 
