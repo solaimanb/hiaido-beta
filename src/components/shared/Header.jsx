@@ -85,7 +85,7 @@ const Header = () => {
             <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
           </NavLink>
 
-         <nav className="hidden w-full lg:block custom-scrollbar">
+          <nav className="hidden w-full lg:block custom-scrollbar">
             <div className="flex gap-6 ">
               {navigation.map((item, index) => (
                 <div
@@ -95,10 +95,9 @@ const Header = () => {
                 >
                   <NavLink
                     className={({ isActive }) =>
-                      `w-28 py-4 font-[400] text-center transition-all duration-300 ease-in-out relative ${
-                        isActive && !item.subNav
-                          ? "text-orange-400"
-                          : "text-white/70 hover:text-orange-400/100"
+                      `w-28 py-4 font-[400] text-center transition-all duration-300 ease-in-out relative ${isActive && !item.subNav
+                        ? "text-orange-400"
+                        : "text-white/70 hover:text-orange-400/100"
                       }`
                     }
                     to={item?.path}
@@ -126,11 +125,10 @@ const Header = () => {
                   {item.subNav && hoveredNavItem === item.name && (
                     <div className="absolute left-0 z-50 w-full pt-4 top-12 xl:top-14">
                       <div
-                        className={`p-4 bg-gray-900 grid w-full grid-cols-1 gap-4 lg:grid-cols-3 ${
-                          item.subNav.length > 3
+                        className={`p-4 bg-gray-900 grid w-full grid-cols-1 gap-4 lg:grid-cols-3 ${item.subNav.length > 3
                             ? "overflow-y-scroll max-h-[60vh]"
                             : ""
-                        } rounded-xl backdrop-blur-lg`}
+                          } rounded-xl backdrop-blur-lg`}
                       >
                         {item.subNav.map((subItem, subIndex) => {
                           return (
@@ -164,7 +162,7 @@ const Header = () => {
                 </div>
               ))}
             </div>
-          </nav> 
+          </nav>
         </div>
 
         <div className="flex items-center justify-end gap-4 px-2 w-2/6">
@@ -207,11 +205,10 @@ const Header = () => {
 
       {/* Small Screen Toggle Nav */}
       <nav
-        className={`${
-          openNavigation
+        className={`${openNavigation
             ? "fixed top-0 bottom-0 left-0 flex translate-x-0 transition duration-500 ease-in-out bg-black h-[100vh]"
             : "flex -translate-x-full transition-all duration-500 ease-in-out opacity-0 bg-black h-[100vh]"
-        } flex lg:hidden flex-col justify-between fixed top-0 left-0 w-[90%] md:w-[80%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
+          } flex lg:hidden flex-col justify-between fixed top-0 left-0 w-[90%] md:w-[70%] z-50 duration-300 ease-in-out transform backdrop-blur-3xl border border-orange-400/20 p-4`}
       >
         <div className="p-2">
           {/* Brand Logo */}
@@ -231,13 +228,11 @@ const Header = () => {
                 key={item?.id}
                 to={item?.path}
                 onClick={handleClick}
-                className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border py-1 rounded-md font-semibold ${
-                  item?.onlyMobile ? "lg:hidden" : ""
-                } ${
-                  item?.url === pathname.hash
+                className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-900/5 border py-1 rounded-md font-semibold ${item?.onlyMobile ? "lg:hidden" : ""
+                  } ${item?.url === pathname.hash
                     ? "font-bold text-orange-400/80"
                     : "lg:text-n-1/50"
-                }`}
+                  }`}
               >
                 {item?.name}
               </Link>
@@ -245,21 +240,23 @@ const Header = () => {
           </div>
         </div>
 
-        <Link
-          to={"/login"}
-          onClick={() => user && signOut()}
-          className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-500 py-1 my-4 rounded-full border w-full font-semibold text-center mt-auto
+        <div>
+          <Link
+            to={"/login"}
+            onClick={() => user && signOut()}
+            className={`block relative uppercase text-white/80 border-orange-800/10 bg-orange-500 py-1 my-4 rounded-full border w-full font-semibold text-center mt-auto
                 `}
-        >
-          {user ? "Sign Out" : "Sign In"}
-        </Link>
+          >
+            {user ? "Sign Out" : "Log In"}
+          </Link>
 
-        <div className="space-y-2">
-          <div className="horizon-bar opacity-30 h-[1px] bg-orange-400" />
+          <div className="space-y-2">
+            <div className="horizon-bar opacity-30 h-[1px] bg-orange-400" />
 
-          <p className="text-xs font-semibold lg:block text-white/80">
-            © {new Date().getFullYear()} HIAIDO All rights reserved.
-          </p>
+            <p className="text-xs font-semibold lg:block text-white/80">
+              © {new Date().getFullYear()} HIAIDO All rights reserved.
+            </p>
+          </div>
         </div>
       </nav>
     </header>
