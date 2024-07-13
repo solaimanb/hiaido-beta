@@ -16,91 +16,12 @@ import CreateMemberAccountButton from "../CreateMemberAccountButton";
 import MDX from "../MDX";
 import QueryTemplates from "./QueryTemplates";
 import ChatResponseButtonsGroup from "./ChatResponseButtonsGroup";
-import { Button } from "@/ui-components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/ui-components/ui/dropdown-menu";
-import { ArrowRight, Paperclip, RefreshCcwIcon, Send } from "lucide-react";
+import { ArrowRight, RefreshCcwIcon } from "lucide-react";
 import { useChats } from "@/context/ChatsContext";
 import Loader from "../Loader";
 
 const width = "840";
 const widthClass = `w-[${width}px]`;
-
-// function useChats() {
-//   const [query, setQuery] = useState("");
-//   const [chats, setChats] = useState([]);
-//   // const [chats, setChats] = useState([
-//   //   {
-//   //     query: "markdown test",
-//   //     result: markdownData,
-//   //   },
-//   // ]);
-
-//   useEffect(() => {
-//     const fetchResponse = async () => {
-//       console.log(newChat);
-//       const response = await fetch(`${config.baseURL}/get-response`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           email: currentMemberAccount["email"],
-//           // TODO: may break during google sign in, fix it
-//           owner: user.signInDetails.loginId,
-//           query: newChat.query,
-//         }),
-//       });
-//       console.log("Completed request");
-//       const response_data = await response.json();
-//       console.log(response_data);
-//       if (!response.ok) {
-//         if (
-//           response.status == 400 &&
-//           response_data["detail"].includes("CLI not configured")
-//         ) {
-//           const res = await fetch(`${config.baseURL}/configure-cli`, {
-//             method: "POST",
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({
-//               email: currentMemberAccount["email"],
-//               owner: user.signInDetails.loginId,
-//             }),
-//           });
-//           const res_data = await res.json();
-//           console.log(res_data);
-//           if (res.ok) {
-//             await fetchResponse();
-//             return;
-//           } else {
-//             setError(res_data);
-//           }
-//         } else {
-//           throw new Error(res_data);
-//         }
-//       }
-
-//       newChat.result = response_data.response;
-//       newChat.loading = false;
-
-//       setChats((prevChats) => [...prevChats.slice(0, -1), newChat]);
-//     };
-
-//     if (newChat) {
-//       fetchResponse();
-//     }
-//   }, [newChat]);
-
-//   const submitPrompt = () => {};
-//   const [error, setError] = useState(null);
-
-//   return { query, setQuery, chats };
-// }
 
 const CreateMemberAccountWarningBox = () => {
   return (
@@ -112,7 +33,7 @@ const CreateMemberAccountWarningBox = () => {
         <p className="mb-12 mt-5 mx-3 dark:text-neutral-400">
           You need to create a member account first before using the chatbot
         </p>
-        <CreateMemberAccountButton className={""} />
+        <CreateMemberAccountButton />
       </div>
       <div></div>
     </div>
@@ -237,15 +158,9 @@ const ChatContainer = () => {
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     className="h-full"
                   >
-                    {memberAccounts && memberAccounts.length == 0 ? (
-                      <CreateMemberAccountWarningBox />
-                    ) : (
-                      <QueryTemplates
-                        askQuery={(templateQuery) =>
-                          submitPrompt(templateQuery)
-                        }
-                      />
-                    )}
+                    <QueryTemplates
+                      askQuery={(templateQuery) => submitPrompt(templateQuery)}
+                    />
                   </motion.div>
                 ) : (
                   <div className="h-full pb-48">

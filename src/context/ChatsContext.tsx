@@ -42,7 +42,7 @@ interface ChatsContextType {
 }
 const defaultChatsContextValue: ChatsContextType = {
   state: {
-    model: Model.CLAUDE_SONNET,
+    model: Model.CLAUDE_HAIKU,
     chats: [],
     newChat: null,
     currentMemberAccount: null,
@@ -82,7 +82,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
 }) => {
   const { memberAccounts, currentMemberAccount } = useGlobalState();
   const [query, setQuery] = useState("");
-  const [model, setModel] = useState<Model>(Model.CLAUDE_SONNET);
+  const [model, setModel] = useState<Model>(Model.CLAUDE_HAIKU);
   const [chats, setChats] = useState<Chat[]>([]);
   const [newChat, setNewChat] = useState<Chat | null>(null);
   const [error, setError] = useState<null | string>(null);
@@ -129,24 +129,6 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     }
     let url, body, configCliUrl;
     switch (model) {
-      // case Model.BASE:
-      //   url = `${config.baseURL}/get-response`;
-      //   body = JSON.stringify({
-      //     email: currentMemberAccount["email"],
-      //     owner: userAttributes.email,
-      //     query: newChat.query,
-      //   });
-      //   configCliUrl = `${config.baseURL}/configure-cli`;
-      //   break;
-      // case Model.MULTI_AGENT:
-      //   url = `${config.multiAgentURL}/chat`;
-      //   body = JSON.stringify({
-      //     email: currentMemberAccount["email"],
-      //     owner: userAttributes.email,
-      //     user_query: newChat.query,
-      //   });
-      //   configCliUrl = `${config.multiAgentURL}/configure-cli`;
-      //   break;
       case Model.CLAUDE_HAIKU:
         url = `${config.baseURL}/get-response/claude-haiku`;
         body = JSON.stringify({

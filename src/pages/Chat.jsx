@@ -14,6 +14,8 @@ import { Button } from "@/ui-components/ui/button";
 import { Bot, ChevronDown } from "lucide-react";
 import { Model } from "@/types";
 import { memo } from "react";
+import { useGlobalState } from "@/context/GlobalStateContext";
+import Loader from "@/components/Loader";
 
 const Chat = () => {
   return (
@@ -76,8 +78,14 @@ const ChatPage = () => {
     state: { model, chats },
     setters: { setModel },
   } = useChats();
+  const { subscription } = useGlobalState();
   console.log(model);
   // console.log("Chat");
+
+  if (!subscription) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Helmet>
@@ -99,51 +107,40 @@ const ChatPage = () => {
               <DropdownMenuContent className="w-fit">
                 <DropdownMenuLabel>Models</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
-                  {/* <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    value={Model.BASE}
+                {subscription.plan !== "PLAYGROUND" ? (
+                  <DropdownMenuRadioGroup
+                    value={model}
+                    onValueChange={setModel}
                   >
-                    <Bot className="size-4" />
-                    Normal
-                  </DropdownMenuRadioItem> */}
-                  <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    value={Model.CLAUDE_HAIKU}
+                    <DropdownMenuRadioItem
+                      className="flex items-center gap-1"
+                      value={Model.CLAUDE_HAIKU}
+                    >
+                      <Bot className="size-4" />
+                      {modelNames[Model.CLAUDE_HAIKU]}
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                ) : (
+                  <DropdownMenuRadioGroup
+                    value={model}
+                    onValueChange={setModel}
                   >
-                    <Bot className="size-4" />
-                    {modelNames[Model.CLAUDE_HAIKU]}
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    value={Model.CLAUDE_SONNET}
-                  >
-                    <Bot className="size-4" />
-                    {modelNames[Model.CLAUDE_SONNET]}
-                  </DropdownMenuRadioItem>
-
-                  {/* <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    value={Model.MULTI_AGENT}
-                  >
-                    <Bot className="size-4" />
-                    Multiagent
-                  </DropdownMenuRadioItem> */}
-                  {/* <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    // bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 animated-background text-black"
-                    value={Model.ADVANCED}
-                  >
-                    <Bot className="size-4" />
-                    Advanced
-                  </DropdownMenuRadioItem> */}
-                </DropdownMenuRadioGroup>
-                {/* <DropdownMenuItem className="p-3" onClick={() => setModel(0)}>
-                  Normal chatbot
-                </DropdownMenuItem>
-                <DropdownMenuItem className="p-3" onClick={() => setModel(1)}>
-                  Multiagent chatbot
-                </DropdownMenuItem> */}
+                    <DropdownMenuRadioItem
+                      className="flex items-center gap-1"
+                      value={Model.CLAUDE_HAIKU}
+                    >
+                      <Bot className="size-4" />
+                      {modelNames[Model.CLAUDE_HAIKU]}
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem
+                      className="flex items-center gap-1"
+                      value={Model.CLAUDE_SONNET}
+                    >
+                      <Bot className="size-4" />
+                      {modelNames[Model.CLAUDE_SONNET]}
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

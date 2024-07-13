@@ -7,41 +7,47 @@ import { pricing } from "@/constants/pricing";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { fetchAuthSession } from "aws-amplify/auth";
 import Loader from "./Loader";
+import { useGlobalState } from "@/context/GlobalStateContext";
 
 const NewPriceList = () => {
-  const [params, setSearchParams] = useSearchParams();
   const [currency, setCurrency] = useState("INR");
   const [usdClicked, setUsdClicked] = useState(false);
   const [inrClicked, setInrClicked] = useState(false);
   const [checkoutUrl, setCheckoutUrl] = useState({});
-  const [hostedPage, setHostedPage] = useState(null);
+  const { subscription } = useGlobalState();
   const navigate = useNavigate();
   console.log(checkoutUrl);
 
+  // const checkIfPaymentDone = async () => {
+  //   const { tokens } = await fetchAuthSession();
+  //   const response = await fetch(
+  //     "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
+  //     {
+  //       headers: { Authorization: `Bearer ${tokens.idToken}` },
+  //     }
+  //   );
+  //   if (response.ok) {
+  //     const data = (await response.json())?.hostedPage;
+  //     console.log(data);
+  //     if (data?.state === "succeeded") {
+  //       navigate(`/onboarding?step=2&id=${data.id}&state=${data.state}`);
+  //     } else {
+  //       setHostedPage({});
+  //     }
+  //   } else {
+  //     setHostedPage({});
+  //   }
+  // };
+
   const checkIfPaymentDone = async () => {
-    const { tokens } = await fetchAuthSession();
-    const response = await fetch(
-      "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
-      {
-        headers: { Authorization: `Bearer ${tokens.idToken}` },
-      }
-    );
-    if (response.ok) {
-      const data = (await response.json())?.hostedPage;
-      console.log(data);
-      if (data?.state === "succeeded") {
-        navigate(`/onboarding?step=2&id=${data.id}&state=${data.state}`);
-      } else {
-        setHostedPage({});
-      }
-    } else {
-      setHostedPage({});
+    if (subscription) {
+      navigate(`/onboarding?step=2&id=${subscription.hosted_page_id}`);
     }
   };
 
   useEffect(() => {
     checkIfPaymentDone();
-  }, []);
+  }, [subscription]);
 
   const handleCheckoutGeneration = async (itemPriceId, idToken) => {
     if (window.Chargebee) {
@@ -100,7 +106,7 @@ const NewPriceList = () => {
     return currency === "INR" ? price.INR : price.USD;
   };
 
-  if (!hostedPage) {
+  if (subscription === null) {
     return <Loader />;
   }
 

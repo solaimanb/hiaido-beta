@@ -147,43 +147,20 @@ const ConnectExstingMemberAccountForm = () => {
 const MemberAccountPage = () => {
   const [showCopied, setShowCopied] = useState(false);
   const [searchParams, setSearchParam] = useSearchParams();
-  const { hostedPage } = useGlobalState();
+  const { subscription } = useGlobalState();
 
-  const hostedPageId = searchParams.get("id") || hostedPage?.id;
+  console.log(subscription);
+
+  const hostedPageId = searchParams.get("id");
   const state = searchParams.get("state");
-  console.log(hostedPageId, state);
   window.scrollTo(0, 0);
 
-  // const getHostedPage = async () => {
-  //   const authSession = await fetchAuthSession();
-  //   let idToken = authSession.tokens?.idToken?.toString();
-  //   if (idToken) {
-  //     let response = await fetch(
-  //       "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${idToken}`,
-  //         },
-  //       }
-  //     );
-
-  //     const data = await response.json();
-  //     if (response.ok) {
-  //       console.log(data);
-  //       if (data.hostedPage) {
-  //         // setSearchParam("id", data.hostedPage.id);
-  //         // setSearchParam("state", data.hostedPage.state);
-  //         setHostedPage(data.hostedPage);
-  //       }
-  //     } else {
-  //       throw new Error(data.message);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getHostedPage();
-  // }, []);
+  useEffect(() => {
+    if (!hostedPageId) {
+      // TODO: fetch redirect url from backend
+      return;
+    }
+  }, []);
 
   useEffect(() => {
     if (showCopied) {
@@ -193,12 +170,9 @@ const MemberAccountPage = () => {
     }
   }, [showCopied]);
 
-  if (!hostedPage) {
+  if (subscription === null) {
     return <Loader />;
   }
-
-  const item_price_id =
-    hostedPage.content?.subscription.subscription_items[0].item_price_id;
 
   return (
     <>
@@ -223,7 +197,7 @@ const MemberAccountPage = () => {
             </div> */}
       <div className="min-h-screen overflow-auto flex justify-center items-center p-3">
         <div className="p-9 rounded-lg text-center border border-orange-300 ">
-          {hostedPageId && state === "succeeded" ? (
+          {subscription ? (
             <>
               <div className="w-full flex gap-2 mb-3 pb-3 justify-end items-center">
                 <div>Help</div>
@@ -239,7 +213,7 @@ const MemberAccountPage = () => {
                   <CreateMemberAccountButton />
                 </div>
                 {/* <hr className='my-5' /> */}
-                {(item_price_id as string).includes("Playground") || (
+                {subscription.plan === "PLAYGROUND" || (
                   <>
                     <OrDevider className={"py-5 w-full block md:hidden"} />{" "}
                     <div className="translate-x-3 hidden md:block font-bold bg-black">
@@ -251,7 +225,7 @@ const MemberAccountPage = () => {
               </div>
             </>
           ) : (
-            <div className="w-full"> Please complete the payment first</div>
+            <div className="w-full">Please complete the payment first</div>
           )}
         </div>
       </div>

@@ -45,6 +45,12 @@ export enum Model {
   CLAUDE_SONNET = 4,
 }
 
+export enum Plan {
+  PLAYGROUND = "PLAYGROUND",
+  STARTER = "STARTER",
+  ELITE = "ELITE",
+}
+
 export interface Subscription {
   email: string;
   activated_at: string;
@@ -52,6 +58,6 @@ export interface Subscription {
   hosted_page_id: string;
   item_price_id: string;
   payment_source_id: string;
-  plan: string;
+  plan: "PLAYGROUND" | "STARTER" | "ELITE";
   subscription_id: string;
 }
