@@ -2,6 +2,7 @@ import {
   ConnectedAccount,
   ManagedMemberAccount,
   MemberAccounts,
+  Subscription,
 } from "@/types";
 import {
   FetchUserAttributesOutput,
@@ -26,6 +27,8 @@ interface GlobalStateContextType {
     React.SetStateAction<ManagedMemberAccount | ConnectedAccount | null>
   >;
   userAttributes: FetchUserAttributesOutput | null;
+  hostedPage: any;
+  subscription: Subscription | null | false;
 }
 export const GlobalStateContext = createContext<GlobalStateContextType>({
   memberAccounts: null,
@@ -33,6 +36,8 @@ export const GlobalStateContext = createContext<GlobalStateContextType>({
   currentMemberAccount: null,
   setCurrentMemberAccount: () => {},
   userAttributes: null,
+  hostedPage: null,
+  subscription: null,
 });
 
 export const useGlobalState = () => {
@@ -52,12 +57,18 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
     null
   );
   const [error, setError] = useState<string | null>(null);
-
   const [currentMemberAccount, setCurrentMemberAccount] = useState<
     ManagedMemberAccount | ConnectedAccount | null
   >(null);
   const [userAttributes, setUserAttributes] =
     useState<FetchUserAttributesOutput | null>(null);
+
+  // if {} means some hosted page is not available
+  const [hostedPage, setHostedPage] = useState<any>(null);
+  // if false means no subscription
+  const [subscription, setSubscription] = useState<Subscription | null | false>(
+    null
+  );
 
   useEffect(() => {
     console.log("FETCH USER ATTRIBUTES");
@@ -76,6 +87,70 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
     //   .then((res) => console.log(res))
     //   .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    getHostedPage();
+  }, []);
+
+  useEffect(() => {
+    getSubscription();
+  }, []);
+  console.log(subscription);
+
+  const getSubscription = async () => {
+    const authSession = await fetchAuthSession();
+    let idToken = authSession.tokens?.idToken?.toString();
+    if (idToken) {
+      let response = await fetch(
+        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/subscription",
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+        if (data.subscription) {
+          setSubscription(data.subscription);
+        } else {
+          setSubscription(false);
+        }
+      } else {
+        if (response.status === 404) {
+          setSubscription(false);
+        }
+        throw new Error(data.message);
+      }
+    }
+  };
+
+  const getHostedPage = async () => {
+    const authSession = await fetchAuthSession();
+    let idToken = authSession.tokens?.idToken?.toString();
+    if (idToken) {
+      let response = await fetch(
+        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+        if (data.hostedPage) {
+          setHostedPage(data.hostedPage);
+        }
+      } else {
+        throw new Error(data.message);
+      }
+    }
+  };
 
   const fetchMemberAccounts: () => Promise<MemberAccounts> = async () => {
     // console.log("FETCHING MEMBER ACCOUNTS");
@@ -153,6 +228,8 @@ export const GlobalStateProvider: React.FC<PropsWithChildren> = ({
         currentMemberAccount,
         setCurrentMemberAccount,
         userAttributes,
+        hostedPage,
+        subscription,
       }}
     >
       {children}

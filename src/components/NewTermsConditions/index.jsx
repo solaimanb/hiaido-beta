@@ -33,7 +33,6 @@ import TableOfContents from "../page-components/terms/TableOfContents";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-
 const NewTermsConditions = ({}) => {
   const [params, setSearchParams] = useSearchParams();
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -300,17 +299,19 @@ const NewTermsConditions = ({}) => {
       </div>
 
       <div className="w-full flex gap-4 items-center justify-between border-t pt-3 md:pr-4 border-orange-400">
-        {/* <div className="flex gap-2 justify-center md:justify-start w-full items-center">
-          <input
-            type="radio"
-            name="terms"
-            id="terms"
-            className=""
-            onChange={(e) => setTermsAccepted(termsAccepted ? false : true)}
-            checked={termsAccepted}
-          />
-          <label htmlFor="terms">I agree with the terms & Conditions</label>
-        </div> */}
+        <div className="flex flex-1 gap-2 justify-center md:justify-start w-full items-center">
+          <div className="flex space-x-2 justify-center w-full">
+            <input
+              type="radio"
+              name="terms"
+              id="terms"
+              className="block"
+              onChange={(e) => setTermsAccepted(termsAccepted ? false : true)}
+              checked={termsAccepted}
+            />
+            <label htmlFor="terms">I agree with the terms & Conditions</label>
+          </div>
+        </div>
         <div className="flex gap-4 items-center">
           {/* <button
             type="button"
@@ -322,16 +323,16 @@ const NewTermsConditions = ({}) => {
           <button
             className={`bg-orange-400 px-4 py-2 rounded font-bold`}
             onClick={() => {
-              setSearchParams({ step: "1" });
-              // if (termsAccepted) {
-              // } else {
-              //   toast.error(
-              //     "Please accept the terms and conditions to proceed"
-              //   );
-              // }
+              if (termsAccepted) {
+                setSearchParams({ step: "1" });
+              } else {
+                toast.error(
+                  "Please accept the terms and conditions to proceed"
+                );
+              }
             }}
           >
-            Accept
+            Next
           </button>
         </div>
       </div>

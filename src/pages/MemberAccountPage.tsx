@@ -13,6 +13,7 @@ import { Button } from "@/ui-components/ui/button";
 import ConnectAccountFormButton from "@/components/ConnectAccountFormButton";
 import { fetchAuthSession } from "aws-amplify/auth";
 import Loader from "@/components/Loader";
+import { useGlobalState } from "@/context/GlobalStateContext";
 
 const copyContent = async (text: string) => {
   try {
@@ -146,43 +147,43 @@ const ConnectExstingMemberAccountForm = () => {
 const MemberAccountPage = () => {
   const [showCopied, setShowCopied] = useState(false);
   const [searchParams, setSearchParam] = useSearchParams();
-  const [hostedPage, setHostedPage] = useState<any>(null);
+  const { hostedPage } = useGlobalState();
 
   const hostedPageId = searchParams.get("id") || hostedPage?.id;
   const state = searchParams.get("state");
   console.log(hostedPageId, state);
   window.scrollTo(0, 0);
 
-  const getHostedPage = async () => {
-    const authSession = await fetchAuthSession();
-    let idToken = authSession.tokens?.idToken?.toString();
-    if (idToken) {
-      let response = await fetch(
-        "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
-        {
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
-        }
-      );
+  // const getHostedPage = async () => {
+  //   const authSession = await fetchAuthSession();
+  //   let idToken = authSession.tokens?.idToken?.toString();
+  //   if (idToken) {
+  //     let response = await fetch(
+  //       "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/hosted-page",
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${idToken}`,
+  //         },
+  //       }
+  //     );
 
-      const data = await response.json();
-      if (response.ok) {
-        console.log(data);
-        if (data.hostedPage) {
-          // setSearchParam("id", data.hostedPage.id);
-          // setSearchParam("state", data.hostedPage.state);
-          setHostedPage(data.hostedPage);
-        }
-      } else {
-        throw new Error(data.message);
-      }
-    }
-  };
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       console.log(data);
+  //       if (data.hostedPage) {
+  //         // setSearchParam("id", data.hostedPage.id);
+  //         // setSearchParam("state", data.hostedPage.state);
+  //         setHostedPage(data.hostedPage);
+  //       }
+  //     } else {
+  //       throw new Error(data.message);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    getHostedPage();
-  }, []);
+  // useEffect(() => {
+  //   getHostedPage();
+  // }, []);
 
   useEffect(() => {
     if (showCopied) {
@@ -230,7 +231,7 @@ const MemberAccountPage = () => {
               </div>
               <div className="w-full flex flex-col md:flex-row gap-6 md:gap-0 items-center">
                 <div className="w-full p-2">
-                  <h2 className="font-bold text-2xl">New to </h2>
+                  <h2 className="font-bold text-2xl">New to AWS?</h2>
                   <p className="w-full max-w-md my-10 mt-5 text-lg">
                     Easy sign up for a new AWS account to explore cloud
                     solutions

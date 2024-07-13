@@ -44,3 +44,14 @@ export enum Model {
   CLAUDE_HAIKU = 3,
   CLAUDE_SONNET = 4,
 }
+
+export interface Subscription {
+  email: string;
+  activated_at: string;
+  created_at: string;
+  hosted_page_id: string;
+  item_price_id: string;
+  payment_source_id: string;
+  plan: string;
+  subscription_id: string;
+}
