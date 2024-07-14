@@ -3,12 +3,13 @@ import { hiaido } from "../assets";
 
 const VerticalTabs = ({ tabs, activeTab }) => {
   return (
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-2 items-center bg-black p-3 rounded-lg text-white">
-      <div className="flex flex-col justify-between items-center md:h-[calc(100dvh_-_10dvh)]">
+    <div className="max-w-6xl mx-auto flex flex-col h-full md:flex-row gap-2 items-center bg-black p-3 rounded-lg text-white">
+      <div className="hidden md:flex flex-col justify-start items-center w-32 md:w-auto md:h-[calc(100dvh_-_10dvh)]">
         <div className="block mt-3" to="/">
           <img src={hiaido} alt="hiaido" className="w-24 md:w-40 lg:w-48" />
         </div>
-        <div className="w-full flex flex-col gap-3 justify-start ">
+        <div className="w-full flex flex-col gap-3 justify-center h-full
+         ">
           {tabs.map((child, index) => (
             <button
               key={index}
@@ -23,9 +24,8 @@ const VerticalTabs = ({ tabs, activeTab }) => {
             </button>
           ))}
         </div>
-        <div></div>
       </div>
-      <div className="content w-full mt-6 md:mt-0 h-[calc(100dvh_-_40dvh)] md:h-[calc(100dvh_-_10dvh)] overflow-auto scrollbar-thin scrollbar-track-orange-100 scrollbar-thumb-orange-400 ">
+      <div className="content w-full md:min-w-[480px] h-full overflow-auto scrollbar-thin scrollbar-track-orange-100 scrollbar-thumb-orange-400 ">
         {tabs[activeTab].content}
       </div>
     </div>
