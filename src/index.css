@@ -616,6 +616,10 @@ p {
   mask-composite: subtract;
 }
 
+.term-conditions-page p{
+  font-size: 11px;
+}
+
 /* Keyframes */
 @keyframes dot-typing {
   0% {

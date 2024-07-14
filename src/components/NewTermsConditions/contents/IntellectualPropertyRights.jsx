@@ -12,7 +12,7 @@ const IntellectualPropertyRights = () => {
 
             <h2 className="text-xl font-semibold mb-2">Your use of our Services</h2>
             <p className="mb-4">
-                Subject to your compliance with these Legal Terms, including the 'PROHIBITED ACTIVITIES' section below, we grant you a non-exclusive, non-transferable, revocable licence to:
+                Subject to your compliance with these Legal Terms, including the <a href="#prohibited">'PROHIBITED ACTIVITIES'</a> section below, we grant you a non-exclusive, non-transferable, revocable licence to:
             </p>
             <ul className="list-disc list-inside mb-4">
                 <li>access the Services; and</li>

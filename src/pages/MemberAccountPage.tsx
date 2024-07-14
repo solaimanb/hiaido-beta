@@ -23,7 +23,9 @@ const copyContent = async (text: string) => {
   }
 };
 
-const ConnectExstingMemberAccountForm = () => {
+const ConnectExstingMemberAccountForm: React.FC<{ disabled?: boolean }> = ({
+  disabled = false,
+}) => {
   const [roleARN, setRoleARN] = useState("");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [externalId, setExternalId] = useState<string | null>(null);
@@ -139,7 +141,7 @@ const ConnectExstingMemberAccountForm = () => {
       {/* <div className="text-left text-red-400 mt-3 text-sm">{errorMsg}</div> */}
       {/* <ExstingMemberAccountButton disabled={!roleARN.length} /> */}
       {/* <Button onClick={submitRoleArn}>Connect</Button> */}
-      <ConnectAccountFormButton />
+      <ConnectAccountFormButton disabled={disabled} />
     </div>
   );
 };
@@ -195,8 +197,8 @@ const MemberAccountPage = () => {
                 <div> help</div>
                 <HelpVideoAWSButton />
             </div> */}
-      <div className="min-h-screen overflow-auto flex justify-center items-center p-3">
-        <div className="p-9 rounded-lg text-center border border-orange-300 ">
+      <div className="h-full md:w-[720px] overflow-auto flex justify-center items-center p-3">
+        <div className="p-9 w-fit rounded-lg text-center border border-orange-300 ">
           {subscription ? (
             <>
               <div className="w-full flex gap-2 mb-3 pb-3 justify-end items-center">
@@ -213,15 +215,17 @@ const MemberAccountPage = () => {
                   <CreateMemberAccountButton />
                 </div>
                 {/* <hr className='my-5' /> */}
-                {subscription.plan === "PLAYGROUND" || (
-                  <>
-                    <OrDevider className={"py-5 w-full block md:hidden"} />{" "}
-                    <div className="translate-x-3 hidden md:block font-bold bg-black">
-                      OR
-                    </div>
-                    <ConnectExstingMemberAccountForm />
-                  </>
-                )}
+                {/* {subscription.plan === "PLAYGROUND" || (
+                  <> */}
+                <OrDevider className={"py-5 w-full block md:hidden"} />{" "}
+                <div className="translate-x-3 hidden md:block font-bold bg-black">
+                  OR
+                </div>
+                <ConnectExstingMemberAccountForm
+                  disabled={subscription.plan === "PLAYGROUND"}
+                />
+                {/* </>
+                )} */}
               </div>
             </>
           ) : (
