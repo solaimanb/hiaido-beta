@@ -132,7 +132,8 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       case Model.CLAUDE_HAIKU:
         url = `${config.baseURL}/get-response/claude-haiku`;
         body = JSON.stringify({
-          email: currentMemberAccount["email"] || currentMemberAccount["externalId"],
+          email:
+            currentMemberAccount["email"] || currentMemberAccount["externalId"],
           owner: userAttributes.email,
           query: newChat.query,
         });
@@ -141,7 +142,8 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       case Model.CLAUDE_SONNET:
         url = `${config.baseURL}/get-response/claude-sonnet`;
         body = JSON.stringify({
-          email: currentMemberAccount["email"] || currentMemberAccount["externalId"],
+          email:
+            currentMemberAccount["email"] || currentMemberAccount["externalId"],
           owner: userAttributes.email,
           query: newChat.query,
         });
@@ -150,7 +152,8 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
       default:
         url = `${config.baseURL}/get-response`;
         body = JSON.stringify({
-          email: currentMemberAccount["email"] || currentMemberAccount["externalId"],
+          email:
+            currentMemberAccount["email"] || currentMemberAccount["externalId"],
           owner: userAttributes.email,
           query: newChat.query,
         });
@@ -198,11 +201,9 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         console.log(response_data);
         let newChatCopy = structuredClone(newChat);
         if (response.status >= 500) {
-          newChatCopy.error =
-            response_data?.detail || "Internal server error occured.";
+          newChatCopy.error = "Internal server error";
         } else {
           newChatCopy.error =
-            response_data?.detail ||
             "An unknown error occured. Please try again later.";
         }
         newChatCopy.loading = false;

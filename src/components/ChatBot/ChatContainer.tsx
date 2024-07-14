@@ -93,6 +93,7 @@ const ChatsList = memo(() => {
                         <span>{chat.error}</span>
                         <button
                           onClick={() => {
+                            console.log("retrying");
                             if (newChat) {
                               let newChatCopy = structuredClone(newChat);
                               newChatCopy.error = undefined;
