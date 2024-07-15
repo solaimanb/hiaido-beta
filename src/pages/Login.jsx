@@ -11,7 +11,8 @@ import {
 } from "@aws-amplify/ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import "@aws-amplify/ui-react/styles.css";
+// import "@aws-amplify/ui-react/styles.css";
+import "./login.css";
 
 const components = {
   Footer() {
@@ -114,6 +115,9 @@ const Login = () => {
             </div>
 
             <div className="h-100 relative w-full space-y-10">
+              <h1 className="mt-12 text-xl font-bold leading-tight text-center">
+                Welcome to Hiaido.cloud
+              </h1>
               {/* <h1 className="mt-12 text-xl font-bold leading-tight text-center">
                 Log in to your account
               </h1> */}
