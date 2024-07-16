@@ -9,19 +9,34 @@ import { Button } from "@/ui-components/ui/button";
 import AnimatedBtn from "./Buttons/AnimatedBtn";
 import React from "react";
 import toast from "react-hot-toast";
+import { useGlobalState } from "@/context/GlobalStateContext";
+import Loading from "./shared/Loading";
 
-const ConnectAccountFormButton: React.FC<{ disabled?: boolean }> = ({
-  disabled = false,
-}) => {
+const ConnectAccountFormButton: React.FC<{}> = ({}) => {
+  const { memberAccounts, subscription } = useGlobalState();
+  if (!subscription || !memberAccounts) {
+    return <Loading />;
+  }
+  let disabled = false;
+  let disableMessage = "";
+
+  if (subscription.plan === "PLAYGROUND") {
+    if (
+      memberAccounts.memberAccounts.length > 0 ||
+      memberAccounts.connectedAccounts.length > 0
+    ) {
+      disabled = true;
+      disableMessage =
+        "Exclusive for Elite Members. Upgrade to our Elite plan to connect your existing AWS accounts.";
+    }
+  }
   return (
     <AlertDialog>
       {disabled ? (
         <button
           id="animated-btn"
           onClick={() => {
-            toast.error(
-              "Exclusive for Elite Members. Upgrade to our Elite plan to connect your existing AWS accounts."
-            );
+            toast.error(disableMessage);
           }}
           className="p-2 px-4"
         >

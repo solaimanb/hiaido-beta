@@ -1,13 +1,15 @@
+import React, { useState } from "react";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { AlertDialog, Radio } from "@radix-ui/themes";
 import { useForm } from "@tanstack/react-form";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import toast from "react-hot-toast";
+import { useGlobalState } from "@/context/GlobalStateContext";
+import Loading from "./shared/Loading";
 
-const CreateMemberAccountForm = ({ Cancel, customButton }) => {
+const CreateMemberAccountForm: React.FC<any> = ({ Cancel, customButton }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
@@ -20,7 +22,7 @@ const CreateMemberAccountForm = ({ Cancel, customButton }) => {
       setIsLoading(true);
       const authData = await fetchAuthSession();
       // TODO: does not work for google and facebook
-      const idToken = authData.tokens.idToken.toString();
+      const idToken = authData.tokens?.idToken?.toString();
       // console.log(obj.value);
       const response = await fetch(
         "https://t19tszry50.execute-api.us-east-1.amazonaws.com/prod/create",
@@ -199,7 +201,7 @@ const CreateMemberAccountForm = ({ Cancel, customButton }) => {
             <button
               className={`dark:bg-cyan-100 bg-cyan-200 z-[100] text-black p-3 px-5 rounded-lg space-x-3 w-fit flex items-center disabled:cursor-not-allowed disabled:bg-cyan-100/50 hover:bg-cyan-300 `}
               disabled={isLoading}
-              stype="submit"
+              type="submit"
             >
               <span>Start</span>
               {isLoading ? (
@@ -233,22 +235,50 @@ const data = [
   },
 ];
 
-const CreateMemberAccountButton = () => {
+const CreateMemberAccountButton: React.FC<{}> = ({}) => {
+  const { memberAccounts, subscription } = useGlobalState();
+  if (!subscription || !memberAccounts) {
+    return <Loading />;
+  }
+  let disabled = false;
+  let disableMessage = "";
+
+  if (subscription.plan === "PLAYGROUND") {
+    if (
+      memberAccounts.memberAccounts.length > 0 ||
+      memberAccounts.connectedAccounts.length > 0
+    ) {
+      disabled = true;
+      disableMessage = "Upgrade your plan to create more member accounts.";
+    }
+  }
   return (
     <AlertDialog.Root>
-      <AlertDialog.Trigger>
-        {/* {buttonOverride ? (
-          CustomButton
-        ) : ( */}
+      {disabled ? (
         <button
-          className="px-4 p-2"
           id="animated-btn-outlined"
-          // className={` dark:bg-white bg-black shadow-orange-400 dark:text-black text-orange-400 shadow p-2 rounded-full px-4 text-base mt-5 ${className}`}
+          className="!shadow-none px-4 p-2"
+          onClick={() => {
+            toast.error("Upgrade your plan to create more member accounts.");
+          }}
         >
           Create member account
         </button>
-        {/* )} */}
-      </AlertDialog.Trigger>
+      ) : (
+        <AlertDialog.Trigger>
+          {/* {buttonOverride ? (
+          CustomButton
+          ) : ( */}
+          <button
+            className="px-4 p-2"
+            id="animated-btn-outlined"
+            // className={` dark:bg-white bg-black shadow-orange-400 dark:text-black text-orange-400 shadow p-2 rounded-full px-4 text-base mt-5 ${className}`}
+          >
+            Create member account
+          </button>
+          {/* )} */}
+        </AlertDialog.Trigger>
+      )}
       <AlertDialog.Content className="!h-fit">
         <AlertDialog.Title>
           <div className="w-full text-2xl p-2">Create Member Account</div>

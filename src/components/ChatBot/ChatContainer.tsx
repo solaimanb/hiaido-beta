@@ -12,13 +12,13 @@ import {
   GlobalStateContext,
   useGlobalState,
 } from "../../context/GlobalStateContext";
-import CreateMemberAccountButton from "../CreateMemberAccountButton";
 import MDX from "../MDX";
 import QueryTemplates from "./QueryTemplates";
 import ChatResponseButtonsGroup from "./ChatResponseButtonsGroup";
 import { ArrowRight, RefreshCcwIcon } from "lucide-react";
 import { useChats } from "@/context/ChatsContext";
 import Loader from "../Loader";
+import CreateMemberAccountButton from "../CreateMemberAccountButton";
 
 const width = "840";
 const widthClass = `w-[${width}px]`;

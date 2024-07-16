@@ -141,7 +141,7 @@ const ConnectExstingMemberAccountForm: React.FC<{ disabled?: boolean }> = ({
       {/* <div className="text-left text-red-400 mt-3 text-sm">{errorMsg}</div> */}
       {/* <ExstingMemberAccountButton disabled={!roleARN.length} /> */}
       {/* <Button onClick={submitRoleArn}>Connect</Button> */}
-      <ConnectAccountFormButton disabled={disabled} />
+      <ConnectAccountFormButton />
     </div>
   );
 };
