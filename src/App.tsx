@@ -44,8 +44,13 @@ Amplify.configure({
           redirectSignIn: [
             "http://localhost:5173/chat",
             "https://hiaido.com/chat",
+            "https://hiaido.cloud/chat",
           ],
-          redirectSignOut: ["http://localhost:5173", "https://hiaido.com"],
+          redirectSignOut: [
+            "http://localhost:5173",
+            "https://hiaido.com",
+            "https://hiaido.cloud",
+          ],
           responseType: "code",
           scopes: ["email", "phone", "aws.cognito.signin.user.admin", "openid"],
           providers: ["Google"],
