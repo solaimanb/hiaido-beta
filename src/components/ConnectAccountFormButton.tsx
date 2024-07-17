@@ -20,20 +20,20 @@ const ConnectAccountFormButton: React.FC<{}> = ({}) => {
   let disabled = false;
   let disableMessage = "";
 
-  // if (subscription.plan === "PLAYGROUND") {
-  //   if (
-  //     memberAccounts.memberAccounts.length > 0 ||
-  //     memberAccounts.connectedAccounts.length > 0
-  //   ) {
-  //     disabled = true;
-  //     disableMessage =
-  //       "Exclusive for Elite Members. Upgrade to our Elite plan to connect your existing AWS accounts.";
-  //   }
-  // } else if (subscription.plan === "STARTER") {
-  //   disabled = true;
-  //   disableMessage =
-  //     "Exclusive for Elite Members. Upgrade to our Elite plan to connect your existing AWS accounts.";
-  // }
+  if (subscription.plan === "PLAYGROUND") {
+    if (
+      memberAccounts.memberAccounts.length > 0 ||
+      memberAccounts.connectedAccounts.length > 0
+    ) {
+      disabled = true;
+      disableMessage =
+        "Exclusive for Elite Members. Upgrade to our Elite plan to connect your existing AWS accounts.";
+    }
+  } else if (subscription.plan === "STARTER") {
+    disabled = true;
+    disableMessage =
+      "Exclusive for Elite Members. Upgrade to our Elite plan to connect your existing AWS accounts.";
+  }
   return (
     <AlertDialog>
       {disabled ? (
