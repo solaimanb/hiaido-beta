@@ -27,10 +27,10 @@ const Footer = () => {
           Ethical AI
         </NavLink> */}
 
-          <div>
+          <div className="">
             <p className="lg:block gap-x-1 flex items-center text-sm font-semibold">
               &copy; {new Date().getFullYear()}
-              <Link to="/">HIAIDO</Link> •
+              <Link to="/"> HIAIDO</Link> •
               All rights reserved.
             </p>
           </div>
