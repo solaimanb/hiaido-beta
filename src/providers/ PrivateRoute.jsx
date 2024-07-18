@@ -3,7 +3,6 @@ import { Navigate, Route } from "react-router-dom";
 
 const PrivateRoute = ({ children, ...rest }) => {
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
-  console.log(authStatus);
 
   return (
     <Route

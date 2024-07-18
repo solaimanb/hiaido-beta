@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { lazy, useState } from "react";
 import { Flex, Switch, Text } from "@radix-ui/themes";
 
@@ -10,6 +9,8 @@ const Pricing = () => {
   const [usdClicked, setUsdClicked] = useState(false);
   const [inrClicked, setInrClicked] = useState(false);
   const [currency, setCurrency] = useState("INR");
+
+
 
   const handleUsdClick = () => {
     if (!usdClicked) {
