@@ -1,8 +1,7 @@
-import { Helmet } from "react-helmet-async";
 import TableOfContents from "@/components/page-components/terms/TableOfContents";
+import { Helmet } from "react-helmet-async";
 import terms from "@/constants/terms";
 
-// import TermsConditions from "@/components/termsConditions";
 // import { Tabs } from "@radix-ui/themes";
 // import { useState } from "react";
 // import Pricing from "./Pricing";

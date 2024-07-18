@@ -9,16 +9,16 @@ const tableOfContentsItems = [
   { id: 'ugc', title: 'USER GENERATED CONTRIBUTIONS' },
   { id: 'license', title: 'CONTRIBUTION LICENCE' },
   { id: 'reviews', title: 'GUIDELINES FOR REVIEWS' },
-  // { id: 'mobile', title: 'MOBILE APPLICATION LICENSING' },
-  { id: 'betaservices', title: 'BETA SERVICES' },
+  { id: 'mobile', title: 'MOBILE APPLICATION LICENSING' },
+  { id: 'BetaServices', title: 'BETA SERVICES' },
   { id: 'thirdparty', title: 'THIRD-PARTY WEBSITES AND CONTENT' },
   { id: 'sitemanage', title: 'SERVICES MANAGEMENT' },
   { id: 'ppyes', title: 'PRIVACY POLICY' },
-  // { id: 'dmca', title: 'DMCA NOTICE AND PROCEDURE FOR MAKING CLAIMS OF COPYRIGHT INFRINGEMENT' },
+  { id: 'dmca', title: 'DMCA NOTICE AND PROCEDURE FOR MAKING CLAIMS OF COPYRIGHT INFRINGEMENT' },
   { id: 'terms', title: 'TERM AND TERMINATION' },
   { id: 'modifications', title: 'MODIFICATIONS AND INTERRUPTIONS' },
   { id: 'law', title: 'GOVERNING LAW' },
-  { id: 'dispute', title: 'DISPUTE RESOLUTION' },
+  { id: 'disputes', title: 'DISPUTE RESOLUTION' },
   { id: 'corrections', title: 'CORRECTIONS' },
   { id: 'disclaimer', title: 'DISCLAIMER' },
   { id: 'liability', title: 'LIMITATIONS OF LIABILITY' },
@@ -38,7 +38,7 @@ const TableOfContents = () => {
       <ul className="px-0">
         {tableOfContentsItems.map((item, index) => (
           <li key={item.id}>
-            <a href={`#${item.id}`} className="text-xs font-semibold text-blue-300">{index + 1}. {item.title}</a>
+        <a href={`#${item.id}`} className="text-xs font-semibold text-blue-300">{index + 1}. {item.title}</a>
           </li>
         ))}
       </ul>
