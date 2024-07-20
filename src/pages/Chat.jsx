@@ -16,6 +16,7 @@ import { Model } from "@/types";
 import { memo } from "react";
 import { useGlobalState } from "@/context/GlobalStateContext";
 import Loader from "@/components/Loader";
+import toast from "react-hot-toast";
 
 const Chat = () => {
   return (
@@ -107,40 +108,31 @@ const ChatPage = () => {
               <DropdownMenuContent className="w-fit">
                 <DropdownMenuLabel>Models</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                {subscription.plan !== "PLAYGROUND" ? (
-                  <DropdownMenuRadioGroup
-                    value={model}
-                    onValueChange={setModel}
+                <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
+                  <DropdownMenuRadioItem
+                    className="flex items-center gap-1"
+                    value={Model.CLAUDE_HAIKU}
                   >
-                    <DropdownMenuRadioItem
-                      className="flex items-center gap-1"
-                      value={Model.CLAUDE_HAIKU}
-                    >
-                      <Bot className="size-4" />
-                      {modelNames[Model.CLAUDE_HAIKU]}
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                ) : (
-                  <DropdownMenuRadioGroup
-                    value={model}
-                    onValueChange={setModel}
+                    <Bot className="size-4" />
+                    {modelNames[Model.CLAUDE_HAIKU]}
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem
+                    className="flex items-center gap-1"
+                    value={Model.CLAUDE_SONNET}
+                    style={{
+                      color: subscription.plan === "PLAYGROUND" && "#999999",
+                    }}
+                    onClick={(e) => {
+                      if (subscription.plan === "PLAYGROUND") {
+                        e.preventDefault();
+                        toast.error("You need to upgrade your plan");
+                      }
+                    }}
                   >
-                    <DropdownMenuRadioItem
-                      className="flex items-center gap-1"
-                      value={Model.CLAUDE_HAIKU}
-                    >
-                      <Bot className="size-4" />
-                      {modelNames[Model.CLAUDE_HAIKU]}
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem
-                      className="flex items-center gap-1"
-                      value={Model.CLAUDE_SONNET}
-                    >
-                      <Bot className="size-4" />
-                      {modelNames[Model.CLAUDE_SONNET]}
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                )}
+                    <Bot className="size-4" />
+                    {modelNames[Model.CLAUDE_SONNET]}
+                  </DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
