@@ -29,22 +29,33 @@ button.amplify-button.amplify-field-group__control {
     justify-content: center;
   } */
 .amplify-divider::after {
-    content: attr(data-label);
-    position: absolute;
-    width: 100%;
-    transform: translate(20%,-50%);
-    font-size: var(--amplify-components-divider-label-font-size);
-    padding-inline: var(--amplify-components-divider-label-padding-inline);
-    background-color: var(--amplify-components-divider-label-background-color);
-    background-color: #00000000;
-    color: var(--amplify-components-divider-label-color);
-  }
-  
+  content: attr(data-label);
+  position: absolute;
+  width: 100%;
+  transform: translate(20%, -50%);
+  font-size: var(--amplify-components-divider-label-font-size);
+  padding-inline: var(--amplify-components-divider-label-padding-inline);
+  background-color: var(--amplify-components-divider-label-background-color);
+  background-color: #00000000;
+  color: var(--amplify-components-divider-label-color);
+}
+
 .amplify-flex.federated-sign-in-container {
   gap: 6px;
   display: flex;
   width: 50%;
-  margin: 40px auto;
+  padding-bottom: 10px !important;
+  margin: 10px auto;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .amplify-flex.federated-sign-in-container {
+    width: 100%;
+  }
+  .amplify-divider::after {
+    transform: translate(42%, -50%);
+  }
 }
 .amplify-icon {
   width: 24px !important;
@@ -108,9 +119,10 @@ button.amplify-button.amplify-field-group__control {
   display: flex;
 }
 .amplify-flex.federated-sign-in-container
-  .amplify-button.amplify-field-group__control.federated-sign-in-button span {
-    display: block;
-    width: 100%;
+  .amplify-button.amplify-field-group__control.federated-sign-in-button
+  span {
+  display: block;
+  width: 100%;
 }
 
 [data-amplify-router]
@@ -122,6 +134,10 @@ button.amplify-button.amplify-field-group__control {
   .amplify-tabs
   .amplify-tabs__list.amplify-tabs__list--top.amplify-tabs__list--equal
   .amplify-tabs__item {
+  margin: 0 10px;
+  border-color: gray;
+  border-radius: 12px;
+  border-width: 1px;
   padding: 10px;
   width: 100%;
 }
@@ -135,11 +151,12 @@ button.amplify-button.amplify-field-group__control {
   margin: 20px 0;
 }
 
-.amplify-tabs__list.amplify-tabs__list--top.amplify-tabs__list--equal
+[data-amplify-router]
+  .amplify-tabs__list.amplify-tabs__list--top.amplify-tabs__list--equal
   .amplify-tabs__item.amplify-tabs__item--active {
   /* background-color: orange; */
   border-width: 3px;
-border-color: orange;
+  border-color: orange;
   /* color: black; */
   border-radius: 12px;
 }

@@ -16,6 +16,7 @@ import { Model } from "@/types";
 import { memo } from "react";
 import { useGlobalState } from "@/context/GlobalStateContext";
 import Loader from "@/components/Loader";
+import toast from "react-hot-toast";
 
 const Chat = () => {
   return (
@@ -97,54 +98,43 @@ const ChatPage = () => {
             <div className="hidden md:block md:text-2xl text-3xl mt-6 text-left sticky top-0 mb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
               {chats.length === 0 ? "" : <ChatPageHeader />}
             </div>
-            <div className="my-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost">
-                    Model: <div className="ml-2">{modelNames[model]}</div>
-                    <ChevronDown className="size-4 ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-fit">
-                  <DropdownMenuLabel>Models</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  {subscription.plan !== "PLAYGROUND" ? (
-                    <DropdownMenuRadioGroup
-                      value={model}
-                      onValueChange={setModel}
-                    >
-                      <DropdownMenuRadioItem
-                        className="flex items-center gap-1"
-                        value={Model.CLAUDE_HAIKU}
-                      >
-                        <Bot className="size-4" />
-                        {modelNames[Model.CLAUDE_HAIKU]}
-                      </DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  ) : (
-                    <DropdownMenuRadioGroup
-                      value={model}
-                      onValueChange={setModel}
-                    >
-                      <DropdownMenuRadioItem
-                        className="flex items-center gap-1"
-                        value={Model.CLAUDE_HAIKU}
-                      >
-                        <Bot className="size-4" />
-                        {modelNames[Model.CLAUDE_HAIKU]}
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem
-                        className="flex items-center gap-1"
-                        value={Model.CLAUDE_SONNET}
-                      >
-                        <Bot className="size-4" />
-                        {modelNames[Model.CLAUDE_SONNET]}
-                      </DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost">
+                  Model: <div className="ml-2">{modelNames[model]}</div>
+                  <ChevronDown className="size-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-fit">
+                <DropdownMenuLabel>Models</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
+                  <DropdownMenuRadioItem
+                    className="flex items-center gap-1"
+                    value={Model.CLAUDE_HAIKU}
+                  >
+                    <Bot className="size-4" />
+                    {modelNames[Model.CLAUDE_HAIKU]}
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem
+                    className="flex items-center gap-1"
+                    value={Model.CLAUDE_SONNET}
+                    style={{
+                      color: subscription.plan === "PLAYGROUND" && "#999999",
+                    }}
+                    onClick={(e) => {
+                      if (subscription.plan === "PLAYGROUND") {
+                        e.preventDefault();
+                        toast.error("You need to upgrade your plan");
+                      }
+                    }}
+                  >
+                    <Bot className="size-4" />
+                    {modelNames[Model.CLAUDE_SONNET]}
+                  </DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           <ChatContainer />
         </div>
