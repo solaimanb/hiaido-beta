@@ -56,11 +56,12 @@ const options = [
 ];
 
 const modelNames = [];
-modelNames[Model.BASE] = "Normal";
+modelNames[Model.GPT_4O_MINI] = "Basic";
+// modelNames[Model.BASE] = "Normal";
 modelNames[Model.CLAUDE_HAIKU] = "General Purpose";
 modelNames[Model.CLAUDE_SONNET] = "Advanced";
-modelNames[Model.MULTI_AGENT] = "Multiagent";
-modelNames[Model.ADVANCED] = "Advanced";
+// modelNames[Model.MULTI_AGENT] = "Multiagent";
+// modelNames[Model.ADVANCED] = "Advanced";
 
 const ChatPageHeader = memo(() => {
   const option = Math.floor(Math.random() * 4);
@@ -109,6 +110,13 @@ const ChatPage = () => {
                 <DropdownMenuLabel>Models</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
+                  <DropdownMenuRadioItem
+                    className="flex items-center gap-1"
+                    value={Model.GPT_4O_MINI}
+                  >
+                    <Bot className="size-4" />
+                    {modelNames[Model.GPT_4O_MINI]}
+                  </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem
                     className="flex items-center gap-1"
                     value={Model.CLAUDE_HAIKU}

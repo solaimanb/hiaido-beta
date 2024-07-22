@@ -43,6 +43,7 @@ export enum Model {
   // ADVANCED = 2,
   CLAUDE_HAIKU = 3,
   CLAUDE_SONNET = 4,
+  GPT_4O_MINI = 5,
 }
 
 export enum Plan {

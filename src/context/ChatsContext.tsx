@@ -129,6 +129,16 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     }
     let url, body, configCliUrl;
     switch (model) {
+      case Model.GPT_4O_MINI:
+        url = `${config.baseURL}/get-response/gpt4o-mini`;
+        body = JSON.stringify({
+          email:
+            currentMemberAccount["email"] || currentMemberAccount["externalId"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/configure-cli`;
+        break;
       case Model.CLAUDE_HAIKU:
         url = `${config.baseURL}/get-response/claude-haiku`;
         body = JSON.stringify({
