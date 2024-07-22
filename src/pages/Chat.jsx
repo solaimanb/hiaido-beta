@@ -93,56 +93,58 @@ const ChatPage = () => {
       </Helmet>
       <div className="h-full focus-visible:outline-0 w-full" tabIndex={0}>
         <div className="h-full w-full flex flex-col">
-          <div className="flex justify-between items-center px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
-            <div className="md:text-2xl text-3xl mt-6 text-left sticky top-0 mb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
+          <div className="flex justify-end md:justify-between items-center px-2 md:px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
+            <div className="hidden md:block md:text-2xl text-3xl mt-6 text-left sticky top-0 mb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
               {chats.length === 0 ? "" : <ChatPageHeader />}
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost">
-                  Model: <div className="ml-2">{modelNames[model]}</div>
-                  <ChevronDown className="size-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-fit">
-                <DropdownMenuLabel>Models</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {subscription.plan !== "PLAYGROUND" ? (
-                  <DropdownMenuRadioGroup
-                    value={model}
-                    onValueChange={setModel}
-                  >
-                    <DropdownMenuRadioItem
-                      className="flex items-center gap-1"
-                      value={Model.CLAUDE_HAIKU}
+            <div className="my-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost">
+                    Model: <div className="ml-2">{modelNames[model]}</div>
+                    <ChevronDown className="size-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-fit">
+                  <DropdownMenuLabel>Models</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {subscription.plan !== "PLAYGROUND" ? (
+                    <DropdownMenuRadioGroup
+                      value={model}
+                      onValueChange={setModel}
                     >
-                      <Bot className="size-4" />
-                      {modelNames[Model.CLAUDE_HAIKU]}
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                ) : (
-                  <DropdownMenuRadioGroup
-                    value={model}
-                    onValueChange={setModel}
-                  >
-                    <DropdownMenuRadioItem
-                      className="flex items-center gap-1"
-                      value={Model.CLAUDE_HAIKU}
+                      <DropdownMenuRadioItem
+                        className="flex items-center gap-1"
+                        value={Model.CLAUDE_HAIKU}
+                      >
+                        <Bot className="size-4" />
+                        {modelNames[Model.CLAUDE_HAIKU]}
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  ) : (
+                    <DropdownMenuRadioGroup
+                      value={model}
+                      onValueChange={setModel}
                     >
-                      <Bot className="size-4" />
-                      {modelNames[Model.CLAUDE_HAIKU]}
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem
-                      className="flex items-center gap-1"
-                      value={Model.CLAUDE_SONNET}
-                    >
-                      <Bot className="size-4" />
-                      {modelNames[Model.CLAUDE_SONNET]}
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                      <DropdownMenuRadioItem
+                        className="flex items-center gap-1"
+                        value={Model.CLAUDE_HAIKU}
+                      >
+                        <Bot className="size-4" />
+                        {modelNames[Model.CLAUDE_HAIKU]}
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem
+                        className="flex items-center gap-1"
+                        value={Model.CLAUDE_SONNET}
+                      >
+                        <Bot className="size-4" />
+                        {modelNames[Model.CLAUDE_SONNET]}
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
           <ChatContainer />
         </div>

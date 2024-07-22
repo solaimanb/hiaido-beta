@@ -35,11 +35,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ui-components/ui/dropdown-menu";
-import { CalendarCheck2, LogOut, MessageSquare, Subscript } from "lucide-react";
+import {
+  CalendarCheck2,
+  LogOut,
+  Menu,
+  MessageSquare,
+  Subscript,
+} from "lucide-react";
 import { Avatar, AvatarFallback } from "@/ui-components/ui/avatar";
 import { ScrollArea } from "@/ui-components/ui/scroll-area";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
+import { Sheet, SheetContent, SheetTrigger } from "@/ui-components/ui/sheet";
 
 export const navbarData = [
   // { label: "Dashboard", icon: <Squares2X2Icon className="w-6" /> },
@@ -106,9 +113,9 @@ const ToggleTheme: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
 
   return (
     <Menubar.Root
-      className={`flex dark:bg-neutral-900 bg-white w-fit ${
-        isCollapsed ? "m-[6px]" : "p-[3px]"
-      } rounded-full shadow-blackA4 space-x-1 justify-start`}
+      className={`flex dark:bg-neutral-900 bg-white text-white w-fit ${
+        isCollapsed ? "md:m-[6px]" : "md:p-[3px]"
+      } rounded-full shadow-blackA4 p-2 space-x-1 justify-start md:relative`}
     >
       {data.map((item, i) => {
         return (
@@ -176,55 +183,41 @@ const Sidebar = () => {
   const sliceIndex = 9;
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        className={`dark:bg-neutral-800 bg-neutral-950 relative h-full text-[13px] flex flex-col ${
-          isCollapsed ? "p-1 py-3 " : "p-3"
-        }`}
-        variants={{
-          expand: {
-            width: "210px",
-          },
-          collapse: {
-            width: "48px",
-            transition: { delay: 0.3 },
-          },
-        }}
-        animate={isCollapsed ? "collapse" : "expand"}
-      >
-        <div
-          className={`flex items-center justify-start my-4 text-2xl pl-1 ${""}`}
-        >
-          {isCollapsed ? (
-            <Link to={"/"}>
-              <img
-                className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
-                src={logo}
-                alt="Brand Logo"
-              />
-            </Link>
-          ) : (
-            <div className="w-[80%] p-2">
-              <img className="w-full" src={logoSidebar} alt="Hiaido logo" />
+    <>
+      <div className="md:hidden">
+        <Sheet>
+          <SheetTrigger>
+            <button className="relative">
+              <Menu className="absolute z-50 ml-3 -mt-1" />
+            </button>
+          </SheetTrigger>
+          <SheetContent
+            side="left"
+            className="dark:bg-neutral-800 h-full flex flex-col"
+          >
+            <div
+              className={`flex items-center justify-start my-4 text-2xl pl-1`}
+            >
+              <div className="w-[80%] p-2">
+                <img className="w-full" src={logoSidebar} alt="Hiaido logo" />
+              </div>
             </div>
-          )}
-        </div>
-        <div className="dark:divide-neutral-600 divide-neutral-600 h-full">
-          <div className=" text-neutral-400 my-2 space-y-[5px]">
-            <motion.div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
-              <AnimatePresence>
-                {isCollapsed || (
-                  <motion.span {...labelTransitions}>MAIN</motion.span>
-                )}
-              </AnimatePresence>
-            </motion.div>
-            <NavLinksGroup
-              groupData={navbarData.slice(0, sliceIndex)}
-              isCollapsed={isCollapsed}
-            />
-          </div>
-          {/* <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800 my-2"></div> */}
-          {/* <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
+            <div className="dark:divide-neutral-600 divide-neutral-600 flex-1">
+              <div className=" text-neutral-400 my-2 space-y-[5px]">
+                <motion.div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
+                  <AnimatePresence>
+                    {isCollapsed || (
+                      <motion.span {...labelTransitions}>MAIN</motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+                <NavLinksGroup
+                  groupData={navbarData.slice(0, sliceIndex)}
+                  isCollapsed={isCollapsed}
+                />
+              </div>
+              {/* <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800 my-2"></div> */}
+              {/* <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
             <div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
               <AnimatePresence>
                 {isCollapsed || (
@@ -238,24 +231,94 @@ const Sidebar = () => {
               isCollapsed={isCollapsed}
             />
           </div> */}
-        </div>
-        <div className="h-fit flex flex-col items-center justify-end mx-3 space-y-2">
-          <ToggleTheme isCollapsed={isCollapsed} />
-          <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800"></div>
-          <CurrentMemberAccountComponent isCollapsed={isCollapsed} />
-        </div>
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute top-16 -right-4 dark:bg-neutral-700 bg-white p-2 rounded-full stroke-neutral-800 dark:stroke-white z-20 outline-none shadow-neutral-700 shadow-md dark:shadow-none"
+            </div>
+            <div className="h-fit flex flex-col items-center justify-end mx-3 space-y-2">
+              <ToggleTheme isCollapsed={isCollapsed} />
+              <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800"></div>
+              <CurrentMemberAccountComponent isCollapsed={isCollapsed} />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          className={`dark:bg-neutral-800 bg-neutral-950 relative h-full text-[13px] hidden md:flex flex-col ${
+            isCollapsed ? "p-1 py-3 " : "p-3"
+          }`}
+          variants={{
+            expand: {
+              width: "210px",
+            },
+            collapse: {
+              width: "48px",
+              transition: { delay: 0.3 },
+            },
+          }}
+          animate={isCollapsed ? "collapse" : "expand"}
         >
-          {isCollapsed ? (
-            <ChevronRightIcon className="size-5" />
-          ) : (
-            <ChevronLeftIcon className="size-5" />
-          )}
-        </button>
-      </motion.div>
-    </AnimatePresence>
+          <div
+            className={`flex items-center justify-start my-4 text-2xl pl-1 ${""}`}
+          >
+            {isCollapsed ? (
+              <img
+                className={`w-8 h-8 ${isCollapsed || "mr-2"}`}
+                src={logo}
+                alt="Brand Logo"
+              />
+            ) : (
+              <div className="w-[80%] p-2">
+                <img className="w-full" src={logoSidebar} alt="Hiaido logo" />
+              </div>
+            )}
+          </div>
+          <div className="dark:divide-neutral-600 divide-neutral-600 h-full">
+            <div className=" text-neutral-400 my-2 space-y-[5px]">
+              <motion.div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
+                <AnimatePresence>
+                  {isCollapsed || (
+                    <motion.span {...labelTransitions}>MAIN</motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+              <NavLinksGroup
+                groupData={navbarData.slice(0, sliceIndex)}
+                isCollapsed={isCollapsed}
+              />
+            </div>
+            {/* <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800 my-2"></div> */}
+            {/* <div className="text-neutral-400 mt-5 h-full space-y-[5px]">
+            <div className="dark:text-neutral-500 text-neutral-400 my-2 h-3 text-xs font-semibold">
+              <AnimatePresence>
+                {isCollapsed || (
+                  <motion.span {...labelTransitions}>SUPPORT</motion.span>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <NavLinksGroup
+              groupData={navbarData.slice(sliceIndex)}
+              isCollapsed={isCollapsed}
+            />
+          </div> */}
+          </div>
+          <div className="h-fit flex flex-col items-center justify-end mx-3 space-y-2">
+            <ToggleTheme isCollapsed={isCollapsed} />
+            <div className="h-[1px] dark:bg-neutral-700/75 bg-neutral-800"></div>
+            <CurrentMemberAccountComponent isCollapsed={isCollapsed} />
+          </div>
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="absolute top-16 -right-4 dark:bg-neutral-700 bg-white p-2 rounded-full stroke-neutral-800 dark:stroke-white z-20 outline-none shadow-neutral-700 shadow-md dark:shadow-none"
+          >
+            {isCollapsed ? (
+              <ChevronRightIcon className="size-5" />
+            ) : (
+              <ChevronLeftIcon className="size-5" />
+            )}
+          </button>
+        </motion.div>
+      </AnimatePresence>
+    </>
   );
 };
 
