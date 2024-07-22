@@ -46,19 +46,19 @@ const ChatsList = memo(() => {
     setters: { setNewChat },
   } = useChats();
   return (
-    <div className="pb-60 w-full">
+    <div className="pb-60 w-full px-3">
       {chats.map((chat, index) => (
-        <div key={index} className="w-[840px] mx-auto">
+        <div key={index} className="w-full md:w-[840px] mx-auto pb-8">
           <div className="py-2 px-3 text-base flex justify-center">
             <div className="flex flex-1 mx-auto gap-3 justify-center ">
-              <div className="dark:text-neutral-300 mx-auto text-white text-[15px] font-[500] -ml-3 dark:bg-neutral-700/50 bg-neutral-800 p-2 rounded-[20px] px-5 dark:shadow-neutral-900 shadow-md max-w-[75%] mt-8">
+              <div className="dark:text-neutral-300 mx-auto text-white text-[15px] font-[500] -ml-3 dark:bg-neutral-700/50 bg-neutral-800 p-2 rounded-[20px] px-5 dark:shadow-neutral-900 shadow-md max-w-[75%]">
                 {chat.query}
               </div>
             </div>
           </div>
           <div className="relative py-2">
             {chat.loading ? (
-              <div className={`mx-auto w-[720px] mt-3`}>
+              <div className={`mx-auto w-full md:w-[720px] mt-3`}>
                 <div className="animate-pulse flex space-x-4">
                   <div className="flex-1 space-y-4">
                     <div className="h-4 dark:bg-neutral-700/60 bg-neutral-300 rounded"></div>
@@ -75,7 +75,7 @@ const ChatsList = memo(() => {
                 </div>
               </div>
             ) : (
-              <div className={`flex flex-1 mx-auto gap-4 w-[840px]`}>
+              <div className={`flex flex-1 mx-auto gap-2 md:gap-4 w-full md:w-[840px]`}>
                 <img
                   className="my-4 size-8 flex-shrink-0"
                   src={logo}
@@ -214,7 +214,7 @@ const QueryBox = () => {
   }, [query]);
 
   return (
-    <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[780px] p-1.5 outline-none appearance-none">
+    <div className="dark:bg-neutral-800 bg-neutral-300/45 shadow-md rounded-[26px] flex items-end gap-3.5 w-[780px] p-1.5 outline-none appearance-none mx-3">
       {/* <Paperclip className="size-6 mb-2 ml-2" /> */}
       <div className="flex flex-col flex-1 min-w-0 pl-5">
         <textarea

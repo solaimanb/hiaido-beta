@@ -94,8 +94,8 @@ const ChatPage = () => {
       </Helmet>
       <div className="h-full focus-visible:outline-0 w-full" tabIndex={0}>
         <div className="h-full w-full flex flex-col">
-          <div className="flex justify-between items-center px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
-            <div className="md:text-2xl text-3xl mt-6 text-left sticky top-0 mb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
+          <div className="flex justify-end md:justify-between items-center px-2 md:px-10 sticky top-0 bg-neutral-50  dark:bg-[#1a1a1a] z-2">
+            <div className="hidden md:block md:text-2xl text-3xl mt-6 text-left sticky top-0 mb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
               {chats.length === 0 ? "" : <ChatPageHeader />}
             </div>
             <DropdownMenu>

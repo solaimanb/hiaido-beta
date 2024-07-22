@@ -17,7 +17,7 @@ const MDX: React.FC<MDXProps> = ({ content }) => {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
-      className="markdown leading-relaxed text-[15px] w-full"
+      className="markdown leading-relaxed text-sm md:text-[15px] w-full"
       components={{
         code(props) {
           const { children, className, node, ...rest } = props;

@@ -3,17 +3,26 @@ import { check } from "../../../assets";
 import { pricing } from "../../../constants/pricing";
 import "./PricingList.css";
 import { generateCheckoutUrl } from "@/services/GenerateCheckoutUrl";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 
 const PricingList = ({ convertPrice, currencySymbol }) => {
   const [checkoutUrl, setCheckoutUrl] = useState({});
-  console.log(checkoutUrl)
+  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  const navigate = useNavigate();
 
-  const handleClick = (plan, currency) => {
-    const url = generateCheckoutUrl(plan, currency);
-    setCheckoutUrl((prevState) => ({
-      ...prevState,
-      [plan]: url,
-    }));
+  const handleClick = (plan, currency, event) => {
+    if (authStatus === "authenticated") {
+      const url = generateCheckoutUrl(plan, currency);
+      setCheckoutUrl((prevState) => ({
+        ...prevState,
+        [plan]: url,
+      }));
+      window.location.href = url;
+    } else {
+      event.preventDefault(); 
+      navigate("/login");
+    }
   };
 
   return (
