@@ -10,8 +10,6 @@ const Pricing = () => {
   const [inrClicked, setInrClicked] = useState(false);
   const [currency, setCurrency] = useState("INR");
 
-
-
   const handleUsdClick = () => {
     if (!usdClicked) {
       setCurrency("USD");
@@ -28,10 +26,9 @@ const Pricing = () => {
     }
   };
 
- const convertPrice = (price) => {
-  return currency === 'INR' ? price.INR : price.USD;
-};
-
+  const convertPrice = (price) => {
+    return currency === "INR" ? price.INR : price.USD;
+  };
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
 
@@ -71,10 +68,15 @@ const Pricing = () => {
 
           <div className="mt-10 flex items-center gap-2">
             <span
-              className={`bold-title cursor-pointer ${currency === 'USD' ? 'text-green-100' : ''}`}
+              className={`bold-title cursor-pointer ${
+                currency === "USD" ? "text-green-100" : ""
+              }`}
               onClick={handleUsdClick}
             >
-              <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-USD-Monthly"
+              <a
+                href="javascript:void(0)"
+                data-cb-type="checkout"
+                data-cb-item-0="Playground-USD-Monthly"
                 data-cb-item-quantity="1"
               >
                 USD
@@ -88,15 +90,19 @@ const Pricing = () => {
                   checked={currency === "INR"}
                   className="cursor-pointer"
                 />
-
               </Flex>
             </Text>
             <span
-              className={`bold-title cursor-pointer ${currency === 'INR' ? 'text-green-100' : ''}`}
+              className={`bold-title cursor-pointer ${
+                currency === "INR" ? "text-green-100" : ""
+              }`}
               onClick={handleInrClick}
             >
-              <a href="javascript:void(0)" data-cb-type="checkout" data-cb-item-0="Playground-INR-Monthly"
-              data-cb-item-quantity="1"
+              <a
+                href="javascript:void(0)"
+                data-cb-type="checkout"
+                data-cb-item-0="Playground-INR-Monthly"
+                data-cb-item-quantity="1"
               >
                 INR
               </a>
