@@ -118,15 +118,6 @@ const Terms = () => {
               TERMINATION](#terms)&apos;.
               <br />
               <br />
-              The Services are intended for users who are at least 13 years of
-              age. All users who are minors in the jurisdiction in which they
-              reside (generally under the age of 18) must have the permission
-              of, and be directly supervised by, their parent or guardian to use
-              the Services. If you are a minor, you must have your parent or
-              guardian read and agree to these Legal Terms prior to you
-              using the Services.
-              <br />
-              <br />
               We recommend that you print a copy of these Legal Terms for
               your records.
             </p>

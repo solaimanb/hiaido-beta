@@ -38,12 +38,12 @@ const NewTermsConditions = ({}) => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   console.log(termsAccepted);
 
-  const divRef = useRef(null);
+  // const divRef = useRef(null);
 
-  const scrollToElement = () => {
-    divRef.current.scrollIntoView()
-  }
-  useEffect(scrollToElement, [  ])
+  // const scrollToElement = () => {
+  //   divRef.current.scrollIntoView();
+  // };
+  // useEffect(scrollToElement, []);
 
   return (
     <div className="max-w-4xl px-4 mx-auto space-y-4 term-conditions-page">
@@ -103,15 +103,11 @@ const NewTermsConditions = ({}) => {
             continuing to use the Services after the effective date of any
             changes, you agree to be bound by the modified terms. If you
             disagree with such changes, you may terminate Services as per the
-            section &apos; <a href="#terms" className="text-blue-300">TERM AND TERMINATION</a>&apos;.
-            <br />
-            <br />
-            The Services are intended for users who are at least 13 years of
-            age. All users who are minors in the jurisdiction in which they
-            reside (generally under the age of 18) must have the permission of,
-            and be directly supervised by, their parent or guardian to use the
-            Services. If you are a minor, you must have your parent or guardian
-            read and agree to these Legal Terms prior to you using the Services.
+            section &apos;{" "}
+            <a href="#terms" className="text-blue-300">
+              TERM AND TERMINATION
+            </a>
+            &apos;.
             <br />
             <br />
             We recommend that you print a copy of these Legal Terms for your
@@ -276,7 +272,7 @@ const NewTermsConditions = ({}) => {
           ))}
         </div>
 
-        <div ref={divRef} >
+        <div>
           <h4 className="font-bold text-lg">CONTACT US</h4>
 
           <p>
@@ -293,9 +289,13 @@ const NewTermsConditions = ({}) => {
             <div className="">
               <p>Phone:</p>
               <div>
-                <a href="tel:+918939979393" className="text-[12px]">+91 8939 979 393</a>
+                <a href="tel:+918939979393" className="text-[12px]">
+                  +91 8939 979 393
+                </a>
                 <br />
-                <a href="tel:+919911195555" className="text-[12px]">+91 9911 195 555</a>
+                <a href="tel:+919911195555" className="text-[12px]">
+                  +91 9911 195 555
+                </a>
               </div>
             </div>
             <p>
@@ -316,7 +316,9 @@ const NewTermsConditions = ({}) => {
               onChange={(e) => setTermsAccepted(termsAccepted ? false : true)}
               checked={termsAccepted}
             />
-            <label htmlFor="terms" className="text-sm">I agree with the terms & conditions</label>
+            <label htmlFor="terms" className="text-sm">
+              I agree with the terms & conditions
+            </label>
           </div>
         </div>
         <div className="flex gap-4 items-center">
@@ -414,16 +416,6 @@ const NewTermsConditions = ({}) => {
               changes, you agree to be bound by the modified terms. If you
               disagree with such changes, you may terminate Services as per the
               section 'TERM AND TERMINATION'.
-            </p>
-
-            <p>
-              The Services are intended for users who are at least 13 years of
-              age. All users who are minors in the jurisdiction in which they
-              reside (generally under the age of 18) must have the permission
-              of, and be directly supervised by, their parent or guardian to use
-              the Services. If you are a minor, you must have your parent or
-              guardian read and agree to these Legal Terms prior to you using
-              the Services.
             </p>
             <p>
               We recommend that you print a copy of these Legal Terms for your
