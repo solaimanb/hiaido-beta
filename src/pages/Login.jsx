@@ -98,13 +98,13 @@ const Login = () => {
       <div className="bg-black/90 flex items-center justify-center w-full h-full min-h-screen p-4 text-white">
         <div className="md:flex-row border-orange-400/10 backdrop-blur-sm flex flex-col items-center w-full h-[96vh] border rounded-lg space-y-6 md:space-y-0">
           {/* HiAiDo Image Banner */}
-          <div className="lg:flex md:w-1/2 xl:w-2/3 relative flex items-center justify-center w-full p-10">
+          <div className="hidden lg:flex md:w-1/2 xl:w-2/3 relative items-center justify-center w-full p-10">
             <div>
               <img src={hiaido} alt="logo" width={400} />
             </div>
           </div>
 
-          <div className="md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12 bor border-orange-400/10 bg-orange-400/5 relative flex items-center justify-center w-full h-full px-6 border-l">
+          <div className="w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12 bor border-orange-400/10 bg-orange-400/5 relative flex items-center justify-center h-full px-6 border-l">
             <div className="top-2 left-2 absolute px-2">
               <Link
                 to="/"
@@ -114,7 +114,7 @@ const Login = () => {
               </Link>
             </div>
 
-            <div className="h-100 relative w-full space-y-10">
+            <div className="relative w-full space-y-10">
               <h1 className="mt-12 text-xl font-bold leading-tight text-center">
                 Welcome to Hiaido.cloud
               </h1>
@@ -122,11 +122,12 @@ const Login = () => {
                 Log in to your account
               </h1> */}
               {/* <div className="horizon-bar opacity-30 container h-[1px] mt-10 bg-orange-400" /> */}
-
-              <Authenticator
-                loginMechanisms={["email"]}
-                socialProviders={["google"]}
-              />
+              <div className="w-full">
+                <Authenticator
+                  loginMechanisms={["email"]}
+                  socialProviders={["google"]}
+                />
+              </div>
             </div>
           </div>
         </div>

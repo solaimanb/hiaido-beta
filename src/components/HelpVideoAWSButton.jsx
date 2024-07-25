@@ -41,10 +41,17 @@ const HelpVideoAWSButton = () => {
           </button>
         </AlertDialogTrigger>
         <AlertDialogContent>
-          <div className="w-full flex gap-4 flex-col items-center md:flex-row">
-            <video controls autoPlay={true} className="w-full">
-              <source src={dummy} type="video/mp4" />
-            </video>
+          <div className="w-full flex gap-4 flex-col items-center md:flex-row py-20">
+            <iframe
+              style={{ width: "100%", height: "180%" }}
+              src="https://www.youtube.com/embed/fab5guQMkQc?si=0Rsl_JYa99dWqr8i"
+              title="YouTube video player"
+              frameborder="0"
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen;"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
             {/* <div className="w-full text-black relative">
 
                         <JsonViewer className={""} data={{
