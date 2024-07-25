@@ -33,7 +33,7 @@ interface ChatsContextType {
   setters: {
     setChats: Dispatch<SetStateAction<Chat[]>>;
     setError: Dispatch<SetStateAction<string | null>>;
-    setModel: Dispatch<SetStateAction<Model>>;
+    setModel: (model: Model) => void;
     setNewChat: Dispatch<SetStateAction<Chat | null>>;
     setQuery: Dispatch<SetStateAction<string>>;
   };
@@ -42,7 +42,7 @@ interface ChatsContextType {
 }
 const defaultChatsContextValue: ChatsContextType = {
   state: {
-    model: Model.CLAUDE_HAIKU,
+    model: Model.GPT_4O_MINI,
     chats: [],
     newChat: null,
     currentMemberAccount: null,
@@ -82,12 +82,19 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
 }) => {
   const { memberAccounts, currentMemberAccount } = useGlobalState();
   const [query, setQuery] = useState("");
-  const [model, setModel] = useState<Model>(Model.CLAUDE_HAIKU);
+  const [model, _setModel] = useState<Model>(
+    parseInt(localStorage.getItem("model") || Model.GPT_4O_MINI.toString())
+  );
   const [chats, setChats] = useState<Chat[]>([]);
   const [newChat, setNewChat] = useState<Chat | null>(null);
   const [error, setError] = useState<null | string>(null);
   const [loadingChats, setLoadingChats] = useState(true);
   const [idb, setIdb] = useState<IDBDatabase | null>(null);
+
+  const setModel = (model: Model) => {
+    localStorage.setItem("model", model.toString());
+    _setModel(model);
+  };
 
   const { userAttributes } = useGlobalState();
 

@@ -170,26 +170,34 @@ const NewPriceList = () => {
                       !item.price ? "" : ""
                     }`}
                   >
-                    {item.price && (
+                    {item.title === "Playground" ? (
                       <>
-                        <div
-                          className={`text-xl bold-title text-cyan-500 p-1 ${
-                            item.price.INR === null ? "hidden" : ""
-                          }`}
-                        >
-                          {currencySymbol}
-                        </div>
                         <div className="text-3xl leading-none bold-title">
-                          {convertPrice(item.price)}
+                          FREE
                         </div>
-                        <span
-                          className={`font-bold mt-2 text-lg ${
-                            item.price.INR === null ? "hidden" : ""
-                          }`}
-                        >
-                          /month
-                        </span>
                       </>
+                    ) : (
+                      item.price && (
+                        <>
+                          <div
+                            className={`text-xl bold-title text-cyan-500 p-1 ${
+                              item.price.INR === null ? "hidden" : ""
+                            }`}
+                          >
+                            {currencySymbol}
+                          </div>
+                          <div className="text-3xl leading-none bold-title">
+                            {convertPrice(item.price)}
+                          </div>
+                          <span
+                            className={`font-bold mt-2 text-lg ${
+                              item.price.INR === null ? "hidden" : ""
+                            }`}
+                          >
+                            /month
+                          </span>
+                        </>
+                      )
                     )}
                   </div>
 
@@ -256,7 +264,11 @@ const NewPriceList = () => {
                   }
                 }}
               >
-                {item.url_id ? "Choose Plan" : "Coming Soon"}
+                {item.title === "Playground"
+                  ? "Go"
+                  : item.url_id
+                  ? "Choose Plan"
+                  : "Coming Soon"}
               </button>
               {/* <div
                 class="razorpay-embed-btn"

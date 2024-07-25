@@ -32,7 +32,7 @@ const MDX: React.FC<MDXProps> = ({ content }) => {
           ) : (
             <code
               {...rest}
-              className={`${className} dark:text-yellow-200/50 text-yellow-800 dark:bg-neutral-900 bg-neutral-200 text-[13px] rounded-md p-[2px] px-1 font-mono`}
+              className={`${className} dark:text-yellow-200/50 text-yellow-800 dark:bg-neutral-900 bg-neutral-200 text-[13px] rounded-md p-[2px] font-mono text-wrap`}
             >
               {children}
             </code>

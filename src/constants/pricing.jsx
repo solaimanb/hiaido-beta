@@ -4,7 +4,7 @@ export const pricing = [
   {
     id: "0",
     title: "Playground",
-    description: "Per workspace\n Billed monthly",
+    description: "No credit card required\n",
     price: {
       INR: prices.INR.Playground,
       USD: prices.USD.Playground,

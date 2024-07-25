@@ -131,6 +131,7 @@ const ChatContainer = () => {
   const chatBoxRef = useRef<HTMLDivElement>(null);
   const { setters, state, submitPrompt } = useChats();
   const { query, chats, memberAccounts, model } = state;
+  console.log(model)
   const { userAttributes } = useGlobalState();
 
   useEffect(() => {
