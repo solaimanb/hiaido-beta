@@ -43,26 +43,30 @@ const PricingList = ({ convertPrice, currencySymbol }) => {
                     !item.price ? "" : ""
                   }`}
                 >
-                  {item.price && (
-                    <>
-                      <div
-                        className={`text-xl bold-title mb-4 text-cyan-500 p-1 ${
-                          item.price.INR === null ? "hidden" : ""
-                        }`}
-                      >
-                        {currencySymbol}
-                      </div>
-                      <div className="text-3xl leading-none bold-title">
-                        {convertPrice(item.price)}
-                      </div>
-                      <span
-                        className={`font-bold mt-2 text-lg ${
-                          item.price.INR === null ? "hidden" : ""
-                        }`}
-                      >
-                        /month
-                      </span>
-                    </>
+                  {item.title === "Playground" ? (
+                    <div className="text-3xl mt-3 leading-none bold-title">FREE</div>
+                  ) : (
+                    item.price && (
+                      <>
+                        <div
+                          className={`text-xl bold-title mb-4 text-cyan-500 p-1 ${
+                            item.price.INR === null ? "hidden" : ""
+                          }`}
+                        >
+                          {currencySymbol}
+                        </div>
+                        <div className="text-3xl leading-none bold-title">
+                          {convertPrice(item.price)}
+                        </div>
+                        <span
+                          className={`font-bold mt-2 text-lg ${
+                            item.price.INR === null ? "hidden" : ""
+                          }`}
+                        >
+                          /month
+                        </span>
+                      </>
+                    )
                   )}
                 </div>
 
