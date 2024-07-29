@@ -120,6 +120,15 @@ const ChatPage = () => {
                   <DropdownMenuRadioItem
                     className="flex items-center gap-1"
                     value={Model.CLAUDE_HAIKU}
+                    style={{
+                      color: subscription.plan === "PLAYGROUND" && "#999999",
+                    }}
+                    onClick={(e) => {
+                      if (subscription.plan === "PLAYGROUND") {
+                        e.preventDefault();
+                        toast.error("You need to upgrade your plan");
+                      }
+                    }}
                   >
                     <Bot className="size-4" />
                     {modelNames[Model.CLAUDE_HAIKU]}
