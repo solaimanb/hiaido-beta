@@ -38,12 +38,13 @@ export interface IDBchats {
 }
 
 export enum Model {
-  // BASE = 0,
-  // MULTI_AGENT = 1,
-  // ADVANCED = 2,
+  BASIC = 0,
+  GENERAL_PURPOSE = 1,
+  ADVANCED = 2,
   CLAUDE_HAIKU = 3,
   CLAUDE_SONNET = 4,
   GPT_4O_MINI = 5,
+  GPT_4O = 6,
 }
 
 export enum Plan {

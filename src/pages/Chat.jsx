@@ -56,12 +56,80 @@ const options = [
 ];
 
 const modelNames = [];
-modelNames[Model.GPT_4O_MINI] = "Basic";
+modelNames[Model.BASIC] = "Basic";
 // modelNames[Model.BASE] = "Normal";
-modelNames[Model.CLAUDE_HAIKU] = "General Purpose";
-modelNames[Model.CLAUDE_SONNET] = "Advanced";
+modelNames[Model.GENERAL_PURPOSE] = "General Purpose";
+modelNames[Model.ADVANCED] = "Advanced";
 // modelNames[Model.MULTI_AGENT] = "Multiagent";
 // modelNames[Model.ADVANCED] = "Advanced";
+
+const ModelSelectionDropdownMenu = () => {
+  const {
+    state: { model },
+    setters: { setModel },
+  } = useChats();
+  const { subscription } = useGlobalState();
+
+  if (!subscription) {
+    return <Loader />;
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost">
+          Model: <div className="ml-2">{modelNames[model]}</div>
+          <ChevronDown className="size-4 ml-2" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-fit">
+        <DropdownMenuLabel>Models</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
+          <DropdownMenuRadioItem
+            className="flex items-center gap-1"
+            value={Model.BASIC}
+          >
+            <Bot className="size-4" />
+            {modelNames[Model.BASIC]}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem
+            className="flex items-center gap-1"
+            value={Model.GENERAL_PURPOSE}
+            style={{
+              color: subscription.plan === "PLAYGROUND" ? "#999999" : "",
+            }}
+            onClick={(e) => {
+              if (subscription.plan === "PLAYGROUND") {
+                e.preventDefault();
+                toast.error("You need to upgrade your plan");
+              }
+            }}
+          >
+            <Bot className="size-4" />
+            {modelNames[Model.GENERAL_PURPOSE]}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem
+            className="flex items-center gap-1"
+            value={Model.ADVANCED}
+            style={{
+              color: subscription.plan === "PLAYGROUND" && "#999999",
+            }}
+            onClick={(e) => {
+              if (subscription.plan === "PLAYGROUND") {
+                e.preventDefault();
+                toast.error("You need to upgrade your plan");
+              }
+            }}
+          >
+            <Bot className="size-4" />
+            {modelNames[Model.ADVANCED]}
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const ChatPageHeader = memo(() => {
   const option = Math.floor(Math.random() * 4);
@@ -77,12 +145,9 @@ const ChatPageHeader = memo(() => {
 
 const ChatPage = () => {
   const {
-    state: { model, chats },
-    setters: { setModel },
+    state: { chats },
   } = useChats();
   const { subscription } = useGlobalState();
-  console.log(model);
-  // console.log("Chat");
 
   if (!subscription) {
     return <Loader />;
@@ -99,59 +164,7 @@ const ChatPage = () => {
             <div className="hidden md:block md:text-2xl text-3xl mt-6 text-left sticky top-0 mb-4 font-semibold text-black dark:text-neutral-300 dark:bg-[#1a1a1a] bg-neutral-50  z-10">
               {chats.length === 0 ? "" : <ChatPageHeader />}
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost">
-                  Model: <div className="ml-2">{modelNames[model]}</div>
-                  <ChevronDown className="size-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-fit">
-                <DropdownMenuLabel>Models</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={model} onValueChange={setModel}>
-                  <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    value={Model.GPT_4O_MINI}
-                  >
-                    <Bot className="size-4" />
-                    {modelNames[Model.GPT_4O_MINI]}
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    value={Model.CLAUDE_HAIKU}
-                    style={{
-                      color: subscription.plan === "PLAYGROUND" && "#999999",
-                    }}
-                    onClick={(e) => {
-                      if (subscription.plan === "PLAYGROUND") {
-                        e.preventDefault();
-                        toast.error("You need to upgrade your plan");
-                      }
-                    }}
-                  >
-                    <Bot className="size-4" />
-                    {modelNames[Model.CLAUDE_HAIKU]}
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem
-                    className="flex items-center gap-1"
-                    value={Model.CLAUDE_SONNET}
-                    style={{
-                      color: subscription.plan === "PLAYGROUND" && "#999999",
-                    }}
-                    onClick={(e) => {
-                      if (subscription.plan === "PLAYGROUND") {
-                        e.preventDefault();
-                        toast.error("You need to upgrade your plan");
-                      }
-                    }}
-                  >
-                    <Bot className="size-4" />
-                    {modelNames[Model.CLAUDE_SONNET]}
-                  </DropdownMenuRadioItem>
-                </DropdownMenuRadioGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <ModelSelectionDropdownMenu />
           </div>
           <ChatContainer />
         </div>

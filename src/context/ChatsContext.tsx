@@ -42,7 +42,7 @@ interface ChatsContextType {
 }
 const defaultChatsContextValue: ChatsContextType = {
   state: {
-    model: Model.GPT_4O_MINI,
+    model: Model.BASIC,
     chats: [],
     newChat: null,
     currentMemberAccount: null,
@@ -83,7 +83,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
   const { memberAccounts, currentMemberAccount } = useGlobalState();
   const [query, setQuery] = useState("");
   const [model, _setModel] = useState<Model>(
-    parseInt(localStorage.getItem("model") || Model.GPT_4O_MINI.toString())
+    parseInt(localStorage.getItem("model") || Model.BASIC.toString())
   );
   const [chats, setChats] = useState<Chat[]>([]);
   const [newChat, setNewChat] = useState<Chat | null>(null);
@@ -136,6 +136,36 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     }
     let url, body, configCliUrl;
     switch (model) {
+      case Model.BASIC:
+        url = `${config.baseURL}/get-response/basic`;
+        body = JSON.stringify({
+          email:
+            currentMemberAccount["email"] || currentMemberAccount["externalId"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/configure-cli`;
+        break;
+      case Model.GENERAL_PURPOSE:
+        url = `${config.baseURL}/get-response/general-purpose`;
+        body = JSON.stringify({
+          email:
+            currentMemberAccount["email"] || currentMemberAccount["externalId"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/configure-cli`;
+        break;
+      case Model.ADVANCED:
+        url = `${config.baseURL}/get-response/advanced`;
+        body = JSON.stringify({
+          email:
+            currentMemberAccount["email"] || currentMemberAccount["externalId"],
+          owner: userAttributes.email,
+          query: newChat.query,
+        });
+        configCliUrl = `${config.baseURL}/configure-cli`;
+        break;
       case Model.GPT_4O_MINI:
         url = `${config.baseURL}/get-response/gpt4o-mini`;
         body = JSON.stringify({
@@ -148,16 +178,6 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
         break;
       case Model.CLAUDE_HAIKU:
         url = `${config.baseURL}/get-response/claude-haiku`;
-        body = JSON.stringify({
-          email:
-            currentMemberAccount["email"] || currentMemberAccount["externalId"],
-          owner: userAttributes.email,
-          query: newChat.query,
-        });
-        configCliUrl = `${config.baseURL}/configure-cli`;
-        break;
-      case Model.CLAUDE_SONNET:
-        url = `${config.baseURL}/get-response/claude-sonnet`;
         body = JSON.stringify({
           email:
             currentMemberAccount["email"] || currentMemberAccount["externalId"],
