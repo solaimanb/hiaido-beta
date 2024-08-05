@@ -95,6 +95,11 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     localStorage.setItem("model", model.toString());
     _setModel(model);
   };
+  useEffect(() => {
+    if (!(model in [Model.BASIC, Model.GENERAL_PURPOSE, Model.ADVANCED])) {
+      setModel(Model.BASIC);
+    }
+  }, []);
 
   const { userAttributes } = useGlobalState();
 
