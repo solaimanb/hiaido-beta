@@ -96,6 +96,7 @@ export const ChatsContextProvider: React.FC<ChatsContextProviderProps> = ({
     _setModel(model);
   };
   useEffect(() => {
+    // older versions may have added old model values to localStorage, we need to update them
     if (!(model in [Model.BASIC, Model.GENERAL_PURPOSE, Model.ADVANCED])) {
       setModel(Model.BASIC);
     }
