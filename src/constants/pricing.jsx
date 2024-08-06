@@ -48,7 +48,7 @@ export const pricing = [
       "Email support",
       "One cloud (AWS)",
     ],
-    trigger: "Start 7-Day Free Trial",
+    trigger: "Start",
   },
   {
     id: "2",
