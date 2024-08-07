@@ -4,7 +4,7 @@ export const pricing = [
   {
     id: "0",
     title: "Playground",
-    description: "No credit card required\n",
+    description: "Get 3-Day Free Trial.\nNo credit card required\n",
     price: {
       INR: prices.INR.Playground,
       USD: prices.USD.Playground,
