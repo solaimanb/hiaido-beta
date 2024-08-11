@@ -89,7 +89,6 @@ const PricingList = ({ convertPrice, currencySymbol }) => {
                         </React.Fragment>
                       ))}
                     </p>
-
                     {/* XaaS images */}
                     <div className="flex items-center gap-3 justify-center">
                       {item.images &&
@@ -106,34 +105,8 @@ const PricingList = ({ convertPrice, currencySymbol }) => {
                 </div>
               </div>
             </div>
-
-            {/* <button
-              className="bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white bold-title p-2 rounded-lg text-lg hover:scale-105"
-              onClick={() => {
-                if (item.price && item.price.INR !== null) {
-                  handleClick(item.title, currencySymbol === '₹' ? 'INR' : 'USD');
-                } else {
-                  window.location.href = 'mailto:support@hiaido.com';
-                }
-              }}
-            >
-              {item.trigger}
-            </button> */}
             <Link
               className="bg-gradient pricing-btn w-[90%] mx-auto mt-auto text-white bold-title p-2 rounded-lg text-lg hover:scale-105"
-              // href={
-              //   item.price && item.price.INR !== null
-              //     ? generateCheckoutUrl(item.title, currencySymbol === '₹' ? 'INR' : 'USD')
-              //     : 'mailto:support@hiaido.com'
-              // }
-              // onClick={(e) => {
-              //   if (item.price && item.price.INR === null) {
-              //     e.preventDefault();
-              //     window.location.href = 'mailto:support@hiaido.com';
-              //   } else {
-              //     handleClick(item.title, currencySymbol === '₹' ? 'INR' : 'USD');
-              //   }
-              // }}
               to={"/login"}
             >
               {item.trigger}

@@ -1,3 +1,7 @@
+.pricing-card {
+  border: 1px solid #00ff00;
+}
+
 .pricing-card:hover {
   border: 1px solid #00ff00;
   transition: all 0.4s ease-in-out;

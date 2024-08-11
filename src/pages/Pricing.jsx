@@ -32,8 +32,6 @@ const Pricing = () => {
 
   const currencySymbol = currency === "USD" ? "$" : "₹";
 
-  // window.scrollTo(0, 0);
-
   return (
     <>
       {/* SEO CONTENT */}
@@ -50,7 +48,6 @@ const Pricing = () => {
         <meta name="author" content="Hiaido" />
       </Helmet> */}
 
-      {/* MAIN CONTENT */}
       <main
         className="min-h-[60vh] flex justify-center overflow-hidden"
         id="pricing"
